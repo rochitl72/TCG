@@ -4,7 +4,14 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-export DATABASE_URL="${DATABASE_URL:-postgresql://mapsr:mapsr@localhost:5433/mapsr}"
+# Database connection comes from .env (see scripts/load_env.sh) or from the
+# environment. The 5433 fallback below is the Docker case: docker-compose.yml
+# publishes PostGIS on 5433 to stay clear of a native Postgres on 5432. A
+# native install (scripts/setup_postgres_native.sh) writes DB_PORT=5432 into
+# .env, which takes precedence over this line.
+# shellcheck source=scripts/load_env.sh
+source "$ROOT/scripts/load_env.sh"
+TCGA_DEFAULT_DB_PORT=5433 tcga_load_env "$ROOT"
 
 PSQL=(psql "$DATABASE_URL" -v ON_ERROR_STOP=1)
 

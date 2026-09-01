@@ -18,15 +18,22 @@
 # Safe to re-run — every step below is idempotent.
 set -euo pipefail
 
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
 if [[ $EUID -ne 0 ]]; then
   echo "ERROR: run as root (sudo ./scripts/setup_postgres_native.sh)." >&2
   exit 1
 fi
 
 PG_VERSION="${PG_VERSION:-16}"
-DB_NAME="${DB_NAME:-mapsr}"
-DB_USER="${DB_USER:-mapsr}"
-DB_PASSWORD="${DB_PASSWORD:-mapsr}"
+
+# Connection details come from .env, the environment, or the defaults — one
+# place, shared with setup_database.sh and ecosystem.config.js. See
+# scripts/load_env.sh for the precedence rules.
+# shellcheck source=scripts/load_env.sh
+source "$ROOT/scripts/load_env.sh"
+tcga_load_env "$ROOT"
 
 echo "==> Adding the official PostgreSQL apt repository (PGDG)..."
 # Ubuntu's own repos ship Postgres 14 (22.04) or 16 (24.04, but without a
@@ -54,10 +61,10 @@ else
   pg_ctlcluster "$PG_VERSION" main start 2>/dev/null || true
 fi
 for _ in $(seq 1 15); do
-  pg_isready -h 127.0.0.1 -p 5432 >/dev/null 2>&1 && break
+  pg_isready -h "$DB_HOST" -p "$DB_PORT" >/dev/null 2>&1 && break
   sleep 1
 done
-pg_isready -h 127.0.0.1 -p 5432
+pg_isready -h "$DB_HOST" -p "$DB_PORT"
 
 # The default pg_hba.conf shipped by these packages already has
 #     host  all  all  127.0.0.1/32  scram-sha-256
@@ -79,11 +86,40 @@ echo "==> Enabling PostGIS (as superuser — ${DB_USER} does not have CREATE EXT
 sudo -u postgres psql -v ON_ERROR_STOP=1 -d "$DB_NAME" -c "CREATE EXTENSION IF NOT EXISTS postgis;"
 
 echo "==> Verifying the exact connection scripts/setup_database.sh and the app will use..."
-PGPASSWORD="$DB_PASSWORD" psql -v ON_ERROR_STOP=1 \
-  "postgresql://${DB_USER}:${DB_PASSWORD}@127.0.0.1:5432/${DB_NAME}" \
+PGPASSWORD="$DB_PASSWORD" psql -v ON_ERROR_STOP=1 "$DATABASE_URL" \
   -c "SELECT postgis_version();"
 
+echo "==> Recording the connection in .env so every other step reads the same values..."
+touch "$ROOT/.env"
+python3 - "$ROOT/.env" "$DB_NAME" "$DB_USER" "$DB_PASSWORD" "$DB_HOST" "$DB_PORT" <<'PYSET'
+import pathlib, sys
+path, name, user, password, host, port = sys.argv[1], *sys.argv[2:7]
+wanted = {"DB_NAME": name, "DB_USER": user, "DB_PASSWORD": password,
+          "DB_HOST": host, "DB_PORT": port}
+p = pathlib.Path(path)
+lines = p.read_text().splitlines() if p.exists() else []
+seen = set()
+out = []
+for line in lines:
+    key = line.split("=", 1)[0].strip() if "=" in line and not line.lstrip().startswith("#") else None
+    if key in wanted:
+        out.append(f"{key}={wanted[key]}")
+        seen.add(key)
+    else:
+        out.append(line)
+missing = [k for k in wanted if k not in seen]
+if missing:
+    if out and out[-1].strip():
+        out.append("")
+    out.append("# Database connection — written by scripts/setup_postgres_native.sh.")
+    out.append("# Read by setup_database.sh, ecosystem.config.js and docker-compose.yml.")
+    out += [f"{k}={wanted[k]}" for k in missing]
+p.write_text("\n".join(out).rstrip("\n") + "\n")
+print(f"    .env updated ({len(seen)} value(s) replaced, {len(missing)} added)")
+PYSET
+chown "$(stat -c '%U:%G' "$ROOT")" "$ROOT/.env" 2>/dev/null || true
+
 echo ""
-echo "==> PostgreSQL + PostGIS ready at 127.0.0.1:5432."
-echo "    DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@127.0.0.1:5432/${DB_NAME}"
-echo "    Next: DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@127.0.0.1:5432/${DB_NAME} ./scripts/setup_database.sh"
+echo "==> PostgreSQL + PostGIS ready at ${DB_HOST}:${DB_PORT}."
+echo "    DATABASE_URL=$DATABASE_URL"
+echo "    Next: ./scripts/setup_database.sh   (it reads .env — no need to pass DATABASE_URL)"

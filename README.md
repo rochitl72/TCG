@@ -412,16 +412,20 @@ sudo git clone https://github.com/rochitl72/TCG.git /opt/tcga
 sudo chown -R "$USER:$USER" /opt/tcga
 cd /opt/tcga
 
-# 3. PostgreSQL 16 + PostGIS, natively
+# 3. Configure the database BEFORE running anything that uses it
+cp .env.example .env
+nano .env          # set DB_PASSWORD at minimum; DB_PORT=5432 for native
+
+# 4. PostgreSQL 16 + PostGIS, natively (creates the role/db from .env)
 sudo ./scripts/setup_postgres_native.sh
 
-# 4. OSRM from source + systemd service (~15-30 min, mostly compiling)
+# 5. OSRM from source + systemd service (~15-30 min, mostly compiling)
 sudo ./scripts/setup_osrm_native.sh
 
-# 5. Load the data
-DATABASE_URL=postgresql://mapsr:mapsr@127.0.0.1:5432/mapsr ./scripts/setup_database.sh
+# 6. Load the data (reads .env — nothing to pass)
+./scripts/setup_database.sh
 
-# 6. Python environment + backend under pm2
+# 7. Python environment + backend under pm2
 python3 -m venv .venv
 .venv/bin/pip install --upgrade pip
 .venv/bin/pip install -r requirements.txt
@@ -430,10 +434,10 @@ pm2 start ecosystem.config.js
 pm2 save
 pm2 startup        # run the command it prints, once, so pm2 survives a reboot
 
-# 7. Static assets to /var/www/html
+# 8. Static assets to /var/www/html
 sudo ./scripts/deploy_static.sh
 
-# 8. nginx
+# 9. nginx
 sudo cp nginx/tcga-host.conf /etc/nginx/sites-available/tcga
 sudo ln -sf /etc/nginx/sites-available/tcga /etc/nginx/sites-enabled/tcga
 sudo nginx -t && sudo systemctl reload nginx
@@ -448,6 +452,48 @@ systemctl status osrm-routed
 curl -sI http://127.0.0.1:5050/network-analytics | head -3
 ss -tlnp | grep -E '5050|5432|5000'   # all three loopback, not 0.0.0.0
 ```
+
+### Where the database details live
+
+One file: `.env` at the repo root. Every consumer reads it, so a password is
+changed in one place and nowhere else.
+
+| Setting | Default | Notes |
+|---|---|---|
+| `DB_NAME` | `mapsr` | |
+| `DB_USER` | `mapsr` | |
+| `DB_PASSWORD` | `mapsr` | **Change this.** The default is a development convenience |
+| `DB_HOST` | `127.0.0.1` | How the *host* reaches Postgres |
+| `DB_PORT` | `5432` native, `5433` if Postgres is the container | |
+| `DB_NAME` / `DB_USER` / `DB_PASSWORD` | everything | `mapsr` | Database credentials. See *Where the database details live* |
+| `DB_HOST` / `DB_PORT` | everything | `127.0.0.1` / `5432` | How the host reaches Postgres; `5433` when it is the container |
+| `DATABASE_URL` | assembled from the five above | Set it directly only for a database whose URL does not decompose — an existing organisation server. It then overrides all five |
+
+Who reads it:
+
+- `scripts/load_env.sh` — the shared loader that `setup_postgres_native.sh` and
+  `setup_database.sh` source
+- `ecosystem.config.js` — parses `.env` itself, since pm2 does not
+- `docker-compose.yml` — via compose's own `${VAR}` substitution
+
+Precedence is the same everywhere: an exported environment variable beats
+`.env`, which beats the built-in default. So a one-off run against a different
+database needs no file edit:
+
+```bash
+DB_PASSWORD=somethingelse ./scripts/setup_database.sh
+```
+
+Passwords with awkward characters are handled: the assembled `DATABASE_URL`
+percent-encodes the user and password, so `p@ss wo/rd` becomes
+`p%40ss%20wo%2Frd` and parses back correctly. Two caveats. The shell scripts
+*source* `.env`, so a value containing `$`, a backtick, `\` or `"` needs single
+quotes around it in the file. And compose cannot percent-encode — if you run
+the Docker path with such a password, set `DATABASE_URL` explicitly.
+
+`setup_postgres_native.sh` writes the values it used back into `.env` when it
+finishes, so after the first run the file is authoritative and the later steps
+need no arguments.
 
 ### One difference between native Postgres and the container
 

@@ -14,10 +14,67 @@
  * Override any of the env values below by exporting them before `pm2 start`,
  * or by editing this file on the server — pm2 reads it at start time.
  */
+const fs = require("fs");
 const path = require("path");
 
 const ROOT = __dirname;
 const VENV = process.env.TCGA_VENV || path.join(ROOT, ".venv");
+
+/**
+ * Read the repo-root .env — the same file scripts/load_env.sh and
+ * docker-compose.yml read, so the database connection is configured in exactly
+ * one place. pm2 does not do this on its own.
+ *
+ * Deliberately hand-rolled rather than pulling in dotenv: this file has to work
+ * on a fresh server before any npm install has happened.
+ */
+function readEnvFile() {
+  const out = {};
+  const file = path.join(ROOT, ".env");
+  let text;
+  try {
+    text = fs.readFileSync(file, "utf8");
+  } catch {
+    return out; // No .env is fine — the defaults below apply.
+  }
+  for (const raw of text.split("\n")) {
+    const line = raw.trim();
+    if (!line || line.startsWith("#")) continue;
+    const eq = line.indexOf("=");
+    if (eq === -1) continue;
+    const key = line.slice(0, eq).trim();
+    let value = line.slice(eq + 1).trim();
+    // Strip one layer of matching quotes, the way a shell would.
+    if (value.length > 1 && ((value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'")))) {
+      value = value.slice(1, -1);
+    }
+    out[key] = value;
+  }
+  return out;
+}
+
+const fileEnv = readEnvFile();
+
+// Precedence matches scripts/load_env.sh: real environment, then .env, then
+// the default. An explicit DATABASE_URL beats the assembled DB_* parts, which
+// is the escape hatch for an existing database whose URL does not decompose.
+const cfg = (key, fallback) => process.env[key] || fileEnv[key] || fallback;
+
+const DB_USER = cfg("DB_USER", "mapsr");
+const DB_PASSWORD = cfg("DB_PASSWORD", "mapsr");
+const DB_HOST = cfg("DB_HOST", "127.0.0.1");
+const DB_PORT = cfg("DB_PORT", "5432");
+const DB_NAME = cfg("DB_NAME", "mapsr");
+
+// encodeURIComponent for the same reason scripts/load_env.sh does it: a
+// password containing @ : / ? # or a space would otherwise produce a URL that
+// parses to the wrong host and fails confusingly.
+const DATABASE_URL = cfg(
+  "DATABASE_URL",
+  `postgresql://${encodeURIComponent(DB_USER)}:${encodeURIComponent(DB_PASSWORD)}` +
+    `@${DB_HOST}:${DB_PORT}/${DB_NAME}`
+);
 
 module.exports = {
   apps: [
@@ -35,17 +92,11 @@ module.exports = {
       env: {
         PYTHONUNBUFFERED: "1",
         FLASK_DEBUG: "0",
-        // 5432 is native PostgreSQL's own port (scripts/setup_postgres_native.sh).
-        // If you are running Postgres as a container instead, that compose file
-        // publishes it on 5433 — export DATABASE_URL before `pm2 start` to
-        // override, or edit this line.
-        DATABASE_URL:
-          process.env.DATABASE_URL ||
-          "postgresql://mapsr:mapsr@127.0.0.1:5432/mapsr",
-        OSRM_BASE: process.env.OSRM_BASE || "http://127.0.0.1:5000",
-        OSRM_SLEEP: process.env.OSRM_SLEEP || "0",
+        DATABASE_URL,
+        OSRM_BASE: cfg("OSRM_BASE", "http://127.0.0.1:5000"),
+        OSRM_SLEEP: cfg("OSRM_SLEEP", "0"),
         // Empty unless the edge publishes the API under a prefix, e.g. /bkd.
-        API_BASE_PATH: process.env.API_BASE_PATH || "",
+        API_BASE_PATH: cfg("API_BASE_PATH", ""),
       },
       autorestart: true,
       max_restarts: 10,

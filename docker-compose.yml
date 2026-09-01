@@ -12,10 +12,13 @@ services:
   db:
     image: postgis/postgis:16-3.4
     container_name: tcga-postgis
+    # Same DB_* values scripts/load_env.sh and ecosystem.config.js read, so the
+    # credentials live in .env only. On first `up` these initialise the cluster;
+    # changing them later does NOT rewrite an existing tcga_pgdata volume.
     environment:
-      POSTGRES_USER: mapsr
-      POSTGRES_PASSWORD: mapsr
-      POSTGRES_DB: mapsr
+      POSTGRES_USER: ${DB_USER:-mapsr}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-mapsr}
+      POSTGRES_DB: ${DB_NAME:-mapsr}
     # Bound to loopback by default. Docker's port publishing writes its own
     # iptables rules and does NOT respect ufw, so "5433:5432" on a public VM
     # puts Postgres — mapsr/mapsr — on the open internet without ufw ever
@@ -26,7 +29,8 @@ services:
     volumes:
       - tcga_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U mapsr -d mapsr"]
+      test:
+        ["CMD-SHELL", "pg_isready -U ${DB_USER:-mapsr} -d ${DB_NAME:-mapsr}"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -38,7 +42,13 @@ services:
       dockerfile: dashboard/Dockerfile
     container_name: tcga-backend
     environment:
-      DATABASE_URL: postgresql://mapsr:mapsr@db:5432/mapsr
+      # Host and port are the compose network's, not .env's DB_HOST/DB_PORT —
+      # those describe how the host reaches the published port, whereas this
+      # container reaches the service directly as db:5432.
+      # A password containing @ : / ? # needs DATABASE_URL set explicitly in
+      # .env instead: compose cannot percent-encode it the way the shell and
+      # pm2 loaders do.
+      DATABASE_URL: ${DATABASE_URL:-postgresql://${DB_USER:-mapsr}:${DB_PASSWORD:-mapsr}@db:5432/${DB_NAME:-mapsr}}
       FLASK_DEBUG: "0"
       OSRM_BASE: http://osrm:5000
       OSRM_SLEEP: "0"
