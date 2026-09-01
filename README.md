@@ -238,6 +238,68 @@ the app's genuinely slow first-load operations (grid/road analyses can take up
 to ~1-2 minutes per district), and debug mode is off by default in the container
 (`FLASK_DEBUG=0`) — the Flask dev server is never used in production; gunicorn is.
 
+## Hosting the pieces separately
+
+**What the two halves actually are.** `frontend` is nginx: it serves
+`dashboard/static/` out of its own image and proxies everything else. It is not
+a standalone SPA — there is no static `index.html` and no client-side router.
+The page itself is a Jinja template rendered by Flask, so a request for `/` has
+to reach the backend either way. Splitting the two is therefore a proxy
+question, not an application rewrite: whatever sits in front routes some paths
+to nginx and some to gunicorn.
+
+### One domain, routed by path
+
+The arrangement `tcg.coers.in/` for the app and `tcg.coers.in/bkd/...` for the
+API needs two settings, and both already exist:
+
+1. `API_BASE_PATH=/bkd` in `.env`. Flask passes it to the page, and the page
+   prefixes its own API calls — every request becomes `/bkd/api/...`.
+2. `location /bkd/` in `nginx/nginx.conf`. The trailing slash on its
+   `proxy_pass` strips the prefix again, so Flask still receives
+   `/api/analytics/coverage` and no route in `app.py` changes.
+
+Because both halves answer on the same origin, there is nothing to configure
+for CORS. If the organisation's own ingress does the `/bkd` routing instead of
+this nginx, point it at the backend's `:5050` and have it strip the prefix the
+same way; the app does not care which layer does it.
+
+### Backend on its own machine
+
+Change one line — the `upstream tcga_backend` block at the top of
+`nginx/nginx.conf` — to that machine's address, and rebuild the frontend image.
+Everything below it proxies through that name. The backend still needs to reach
+PostGIS and OSRM from wherever it runs, and its `:5050` should not be open to
+the public internet; the frontend is the only thing that needs to reach it.
+
+Giving the backend a hostname of its own (`api.example.com`) works too, but then
+the browser is making cross-origin requests and Flask needs CORS headers, which
+it does not send today. Path routing under one domain avoids that entirely,
+which is why it is the recommended shape.
+
+### How OSRM fits
+
+OSRM is an HTTP API — `osrm-routed` serving `/route/v1/driving/...` and
+`/table/v1/driving/...` — but it is **called only by Python on the server**.
+Nothing in the browser talks to it: the measure tool posts to
+`/api/measure/route` and Flask makes the OSRM call. So OSRM never needs a
+domain, a TLS certificate or a public route.
+
+| Where OSRM runs | What to set |
+|---|---|
+| Same compose stack (default) | `OSRM_BASE=http://osrm:5000` — already the case |
+| Its own machine | `OSRM_BASE=http://10.0.3.20:5000` over the private network |
+| Behind the domain (only if policy demands it) | `OSRM_BASE=https://tcg.coers.in/osrm`, with an nginx `location /osrm/` restricted by IP allowlist to the backend |
+
+Publishing OSRM openly is a bad idea and worth resisting: it has no
+authentication and no rate limiting, and `--max-table-size 8000` means a single
+`/table` request can occupy a core for seconds. Anyone who finds the URL can
+flatten the server.
+
+One practical constraint if OSRM moves to its own host: it memory-maps a ~1.9 GB
+graph from local disk, so that machine needs its own `osrm-data/` built by
+`scripts/setup_osrm.sh`. It is not something to serve off a network mount.
+
 ## Environment variables
 
 | Variable | Used by | Default | Notes |
@@ -247,6 +309,7 @@ to ~1-2 minutes per district), and debug mode is off by default in the container
 | `OSRM_SLEEP` | `reach_pipeline.py`, the precompute scripts | `0` with self-hosted OSRM | Seconds between OSRM requests during precompute; use `0.1` only for the public demo server |
 | `OSRM_PLATFORM` | `docker-compose.yml`, `docker-compose.dev.yml`, `scripts/setup_osrm.sh` | `linux/arm64` | **Set to `linux/amd64` on an Intel/AMD server.** One variable drives both the graph build and the running container |
 | `TCGA_RECOMPUTE_REACH` | `scripts/setup_database.sh` | unset (skip) | Set to `1` to regenerate the legacy accident-reach artifacts; nothing in the current app reads them |
+| `API_BASE_PATH` | `app.py` -> the page's JS | empty (same origin) | Path prefix the API is published under, e.g. `/bkd`. The proxy strips it again, so Flask routes are unchanged |
 | `PORT` | `app.py` (`__main__` only) | `5050` | Only affects the local dev server; the container always binds gunicorn to 5050 |
 | `FLASK_DEBUG` | `app.py` (`__main__` only) | `1` locally, `0` in the container | Never affects the gunicorn/production path |
 

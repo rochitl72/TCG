@@ -37,6 +37,11 @@ services:
       FLASK_DEBUG: "0"
       OSRM_BASE: http://osrm:5000
       OSRM_SLEEP: "0"
+      # Path prefix the API is published under by whatever sits in front of
+      # this app. Empty = same origin, no prefix. Set API_BASE_PATH=/bkd in
+      # .env when the edge routes <domain>/bkd/* here; nginx strips the prefix
+      # again, so the routes in app.py are untouched.
+      API_BASE_PATH: ${API_BASE_PATH:-}
     ports:
       - "5050:5050"
     volumes:

@@ -44,6 +44,10 @@ app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
 
+# Path prefix the API is published under by whatever sits in front of this app.
+# "" means "same origin, no prefix" — the local and single-server case.
+API_BASE_PATH = (os.environ.get("API_BASE_PATH") or "").rstrip("/")
+
 
 @app.context_processor
 def _asset_helper():
@@ -63,7 +67,12 @@ def _asset_helper():
             return url_for("static", filename=filename)
         return url_for("static", filename=filename, v=stamp)
 
-    return {"asset": asset}
+    # Where the browser should send API requests. Empty by default, which is
+    # correct whenever the page and its API share an origin. Set API_BASE_PATH
+    # (e.g. "/bkd") when a reverse proxy publishes the API under a prefix: the
+    # browser then calls /bkd/api/..., the proxy strips /bkd, and every route
+    # in this file still matches /api/... unchanged.
+    return {"asset": asset, "api_base_path": API_BASE_PATH}
 
 
 # The accidents feed backs the optional "Accidents" overlay on Tab 1. It is the

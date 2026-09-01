@@ -1066,6 +1066,23 @@
   </div>
 
   <script>
+    /* Where API requests go. Empty by default: the page and its API share an
+       origin, so /api/... is already right. When the backend runs behind a
+       proxy that publishes it under a prefix — API_BASE_PATH=/bkd — every
+       request becomes /bkd/api/..., and the proxy strips the prefix again
+       before Flask sees it. No route in app.py changes, and because the calls
+       stay on the page's own origin there is no CORS to configure.
+
+       Defined here rather than in network_analytics.js because map_measure.js
+       loads first and needs it too. */
+    window.API_BASE_PATH = "{{ api_base_path }}";
+    window.apiUrl = function (path) {
+      var base = (window.API_BASE_PATH || "").replace(/\/+$/, "");
+      return base && path.indexOf("/api/") === 0 ? base + path : path;
+    };
+  </script>
+
+  <script>
     /* Accordion wiring. Panels keep every control they had — folding is the
        only change, so nothing becomes unreachable, it just stops competing for
        attention. Runs before the analytics bundle so a panel that opens itself

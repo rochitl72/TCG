@@ -321,7 +321,7 @@ function initMapMeasure(map) {
         lat2: String(b.lat), lon2: String(b.lng),
       });
       try {
-        const resp = await fetch(`/api/measure/route?${params}`);
+        const resp = await fetch(apiUrl(`/api/measure/route?${params}`));
         data = await resp.json();
         if (!resp.ok) throw new Error(data.error || "Route request failed");
         legCache.set(key, data);

@@ -443,7 +443,7 @@ function severityBandRange(band, p95) {
 }
 
 async function getJSON(url) {
-  const res = await fetch(url);
+  const res = await fetch(apiUrl(url));
   const body = await res.json();
   if (!res.ok) throw new Error(body.error || `Request failed (${res.status})`);
   return body;
@@ -888,7 +888,7 @@ function partnerUsable() {
 
 async function probePartner() {
   try {
-    const h = await (await fetch("/api/rbg/health")).json();
+    const h = await (await fetch(apiUrl("/api/rbg/health"))).json();
     partnerReachable = !!h.reachable;
     if (!h.reachable) {
       // Only the feeds we actually consume — marking an unwired endpoint as
@@ -4166,7 +4166,7 @@ async function loadCoverage() {
 async function downloadExport(url) {
   setStatus("Preparing download…");
   try {
-    const resp = await fetch(url);
+    const resp = await fetch(apiUrl(url));
     if (!resp.ok) {
       let msg = `Export failed (${resp.status}).`;
       try {
@@ -4996,7 +4996,7 @@ function wireEvents() {
       if ($("grids-per-hospital").value)
         p.set("top_per_hospital", $("grids-per-hospital").value);
 
-      const res = await fetch(`/api/analytics/export/hospital-grids-bundle.zip?${p}`);
+      const res = await fetch(apiUrl(`/api/analytics/export/hospital-grids-bundle.zip?${p}`));
       if (!res.ok) throw new Error((await res.json()).error || `Failed (${res.status})`);
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
@@ -6188,7 +6188,7 @@ function setLiveStatus(feed, s, reason, ms) {
 }
 
 async function rbgCall(name, body) {
-  const res = await fetch(`/api/rbg/${encodeURIComponent(name)}`, {
+  const res = await fetch(apiUrl(`/api/rbg/${encodeURIComponent(name)}`), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body || {}),
