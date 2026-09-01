@@ -136,6 +136,13 @@ services:
     # centroids as sources. That turns ~15,000 OSRM round-trips into ~230.
     # See scripts/precompute_network_analytics.py.
     command: osrm-routed --algorithm mld --max-table-size 8000 /data/haryana.osrm
+    # Published on loopback because the backend does not always share this
+    # network: in the pm2 deployment gunicorn runs on the host and reaches OSRM
+    # at 127.0.0.1:5000. Harmless when the backend is containerised — it uses
+    # the service name either way. Never widen this to 0.0.0.0: OSRM has no
+    # auth and --max-table-size 8000 makes one request expensive.
+    ports:
+      - "${OSRM_PUBLISH:-127.0.0.1:5000}:5000"
     volumes:
       - ./osrm-data:/data
     restart: unless-stopped

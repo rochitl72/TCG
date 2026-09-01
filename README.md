@@ -99,6 +99,9 @@ dashboard/              Flask app
   Dockerfile            Backend image (gunicorn)
 frontend/Dockerfile     Frontend image (nginx + baked-in config and assets)
 nginx/nginx.conf        Reverse proxy config, copied into the frontend image
+nginx/tcga-host.conf    Host nginx site for the pm2 deployment (no frontend
+                         container; assets served from /var/www/html)
+ecosystem.config.js     pm2 definition for running gunicorn on the host
 data/                   Seed data + precomputed reach JSON (see .gitignore for
                          what is excluded and why)
   analytics/            The five precomputed reach caches the app reads on boot
@@ -356,6 +359,91 @@ One practical constraint if OSRM moves to its own host: it memory-maps a ~1.9 GB
 graph from local disk, so that machine needs its own `osrm-data/` built by
 `scripts/setup_osrm.sh`. It is not something to serve off a network mount.
 
+## Running the backend under pm2 (no app containers)
+
+An alternative to the all-Docker stack: nginx on the host serves the static
+assets from `/var/www/html`, pm2 keeps gunicorn alive, and only PostGIS and OSRM
+stay as containers. OSRM has no practical non-Docker install, and running
+PostGIS as a container avoids matching PostGIS extension versions against
+whatever Postgres the distro ships.
+
+**One thing to be clear about before starting.** `/var/www/html` holds the CSS
+and JS *only*. The page itself is a Jinja template rendered by Flask — there is
+no `index.html` to drop in, and nginx must still proxy `/` to gunicorn. What
+moves to disk is the asset serving, which is worth doing on its own: this page
+pulls a dozen assets per load, and each one served by Flask occupies one of only
+four gunicorn workers for the round trip.
+
+```bash
+# 1. Prerequisites (pm2 needs node; Docker is still needed for db + osrm)
+sudo apt-get update
+sudo apt-get install -y git git-lfs postgresql-client python3 python3-venv rsync nginx nodejs npm
+sudo npm install -g pm2
+git lfs install
+
+# 2. Clone
+sudo mkdir -p /opt && cd /opt
+sudo git clone https://github.com/rochitl72/TCG.git tcga
+sudo chown -R "$USER:$USER" /opt/tcga
+cd /opt/tcga
+printf 'OSRM_PLATFORM=linux/amd64\n' > .env
+
+# 3. Infrastructure containers, one-time data load
+chmod +x scripts/setup_osrm.sh scripts/setup_database.sh scripts/deploy_static.sh
+./scripts/setup_osrm.sh                          # ~10-20 min, wants ~8 GB free RAM
+docker compose -f docker-compose.dev.yml down    # the builder leaves an OSRM running on :5000
+docker compose up -d db osrm                     # NOTE: named services only — see below
+DATABASE_URL=postgresql://mapsr:mapsr@127.0.0.1:5433/mapsr ./scripts/setup_database.sh
+
+# 4. Python environment
+python3 -m venv .venv
+.venv/bin/pip install --upgrade pip
+.venv/bin/pip install -r requirements.txt
+
+# 5. Backend under pm2
+mkdir -p logs
+pm2 start ecosystem.config.js
+pm2 save
+pm2 startup        # run the command it prints, once, so pm2 survives a reboot
+
+# 6. Static assets to /var/www/html
+sudo ./scripts/deploy_static.sh
+
+# 7. nginx
+sudo cp nginx/tcga-host.conf /etc/nginx/sites-available/tcga
+sudo ln -sf /etc/nginx/sites-available/tcga /etc/nginx/sites-enabled/tcga
+sudo nginx -t && sudo systemctl reload nginx
+sudo certbot --nginx -d tcg.coers.in            # optional but recommended
+```
+
+**Do not run a bare `docker compose up -d` on this server.** With no service
+names it starts `backend` and `frontend` as well, and you end up with two
+copies of the app — a containerised one and the pm2 one — fighting over the
+same database. Always name the two you want: `docker compose up -d db osrm`.
+
+Check what came up:
+
+```bash
+pm2 status
+curl -sI http://127.0.0.1:5050/network-analytics | head -3
+ss -tlnp | grep -E '5050|5433|5000'   # all three should be 127.0.0.1, not 0.0.0.0
+```
+
+### Updating this deployment
+
+```bash
+cd /opt/tcga
+git pull
+.venv/bin/pip install -r requirements.txt   # only if requirements.txt changed
+sudo ./scripts/deploy_static.sh             # only if dashboard/static/ changed
+pm2 restart tcga-backend
+```
+
+`deploy_static.sh` is easy to forget and fails quietly-ish: nginx keeps serving
+the old assets, so the page loads but behaves like the previous release. The
+`try_files $uri @backend` fallback in the site config covers a *missing* file by
+asking Flask for it, but it cannot help with a *stale* one.
+
 ## Environment variables
 
 | Variable | Used by | Default | Notes |
@@ -369,6 +457,8 @@ graph from local disk, so that machine needs its own `osrm-data/` built by
 | `FRONTEND_PUBLISH` | `docker-compose.yml` | `80` | Host side of the frontend's port mapping. Set to `127.0.0.1:8080` when the VM's own nginx owns port 80 |
 | `DB_PUBLISH` | `docker-compose.yml` | `127.0.0.1:5433` | Loopback so Docker's iptables rules do not expose Postgres publicly |
 | `BACKEND_PUBLISH` | `docker-compose.yml` | `127.0.0.1:5050` | Loopback; nginx reaches gunicorn over the compose network, not this port |
+| `OSRM_PUBLISH` | `docker-compose.yml`, `docker-compose.dev.yml` | `127.0.0.1:5000` | Host side of OSRM's port. Loopback-only on purpose — OSRM has no auth. Needed by the pm2 deployment, where gunicorn runs outside the compose network |
+| `TCGA_VENV` | `ecosystem.config.js` | `<repo>/.venv` | Where pm2 looks for the gunicorn executable |
 | `PORT` | `app.py` (`__main__` only) | `5050` | Only affects the local dev server; the container always binds gunicorn to 5050 |
 | `FLASK_DEBUG` | `app.py` (`__main__` only) | `1` locally, `0` in the container | Never affects the gunicorn/production path |
 

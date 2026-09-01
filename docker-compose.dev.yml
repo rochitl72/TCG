@@ -26,8 +26,11 @@ services:
     container_name: mapsr-osrm
     # See docker-compose.yml for why --max-table-size is raised from the default 100.
     command: osrm-routed --algorithm mld --max-table-size 8000 /data/haryana.osrm
+    # Loopback: start.sh and setup_osrm.sh both talk to 127.0.0.1:5000, and
+    # OSRM has no authentication, so there is no reason to answer on every
+    # interface. Same variable the production file uses.
     ports:
-      - "5000:5000"
+      - "${OSRM_PUBLISH:-127.0.0.1:5000}:5000"
     volumes:
       - ./osrm-data:/data
     restart: unless-stopped
