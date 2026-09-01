@@ -1,5 +1,12 @@
 # TCGA — Trauma Care Gap Analysis (Haryana)
 
+> **This describes the zip-based handover to a laptop running Docker Desktop.**
+> For deploying to a server from the git repository — the current path — follow
+> [README.md § Deploying to a server](README.md#deploying-to-a-server) instead.
+> The two differ: the server path clones with git-lfs, sets `OSRM_PLATFORM` for
+> the host architecture, and builds the frontend image rather than relying on
+> bind-mounted files.
+
 Handoff package. Two zips, one folder, one command.
 
 | | |
