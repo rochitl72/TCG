@@ -16,8 +16,13 @@ services:
       POSTGRES_USER: mapsr
       POSTGRES_PASSWORD: mapsr
       POSTGRES_DB: mapsr
+    # Bound to loopback by default. Docker's port publishing writes its own
+    # iptables rules and does NOT respect ufw, so "5433:5432" on a public VM
+    # puts Postgres — mapsr/mapsr — on the open internet without ufw ever
+    # reporting it open. The host-side bootstrap (setup_database.sh) reaches it
+    # on localhost either way. Override only if something off-box must connect.
     ports:
-      - "5433:5432"
+      - "${DB_PUBLISH:-127.0.0.1:5433}:5432"
     volumes:
       - tcga_pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -42,8 +47,12 @@ services:
       # .env when the edge routes <domain>/bkd/* here; nginx strips the prefix
       # again, so the routes in app.py are untouched.
       API_BASE_PATH: ${API_BASE_PATH:-}
+    # Loopback by default: nginx reaches gunicorn over the compose network, not
+    # through a published port, so nothing outside this host needs 5050. Left
+    # published on localhost because it is genuinely useful for curl-ing an
+    # endpoint while debugging a deploy.
     ports:
-      - "5050:5050"
+      - "${BACKEND_PUBLISH:-127.0.0.1:5050}:5050"
     volumes:
       - ./data:/app/data
       - "./latest data:/app/latest data:ro"
@@ -157,8 +166,12 @@ services:
       context: .
       dockerfile: frontend/Dockerfile
     container_name: tcga-frontend
+    # Defaults to owning port 80. If the VM already runs its own nginx for the
+    # domain, that port is taken and compose fails to start — publish somewhere
+    # else and let the host proxy forward to it:
+    #     FRONTEND_PUBLISH=127.0.0.1:8080
     ports:
-      - "80:80"
+      - "${FRONTEND_PUBLISH:-80}:80"
     depends_on:
       - backend
     restart: unless-stopped

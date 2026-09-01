@@ -277,6 +277,62 @@ the browser is making cross-origin requests and Flask needs CORS headers, which
 it does not send today. Path routing under one domain avoids that entirely,
 which is why it is the recommended shape.
 
+### If the VM already serves the domain with its own nginx
+
+This is the common case on an organisation server, and it needs two changes —
+one of which is a hard failure if missed.
+
+**Move the frontend off port 80.** The host's nginx already owns it, so
+`docker compose up` fails to bind. Publish the container somewhere else and let
+the host nginx forward to it:
+
+```bash
+echo 'FRONTEND_PUBLISH=127.0.0.1:8080' >> .env
+```
+
+Loopback rather than `0.0.0.0:8080` on purpose — it keeps the stack reachable
+only through the domain, instead of also answering on `<public-ip>:8080` and
+bypassing whatever the host nginx enforces.
+
+**Give the host nginx the app's timeouts.** Its defaults are wrong for this
+workload in two specific ways, and both look like application bugs when they
+bite:
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name tcg.coers.in;
+    # ssl_certificate / ssl_certificate_key as usual
+
+    # Accident CSV uploads exceed nginx's 1 MB default.
+    client_max_body_size 20m;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        # First load of a district can genuinely take 1-2 minutes. nginx's 60s
+        # default returns 504 on a request that is working perfectly.
+        proxy_read_timeout 300s;
+        proxy_send_timeout 300s;
+    }
+}
+```
+
+Nothing else changes. The frontend container still serves the static assets and
+still proxies the rest to gunicorn over the compose network — it does not care
+that a second nginx sits in front of it. `X-Forwarded-Proto` is passed through
+rather than overwritten (see the `map` at the top of `nginx/nginx.conf`), so
+Flask sees `https` even though the inner hop is plain HTTP.
+
+Leave `API_BASE_PATH` empty in this arrangement. The `/bkd` prefix is only
+needed if the edge routes API traffic separately from page traffic; when
+everything funnels through one `location /`, the default `/api/...` is correct.
+
 ### How OSRM fits
 
 OSRM is an HTTP API — `osrm-routed` serving `/route/v1/driving/...` and
@@ -310,6 +366,9 @@ graph from local disk, so that machine needs its own `osrm-data/` built by
 | `OSRM_PLATFORM` | `docker-compose.yml`, `docker-compose.dev.yml`, `scripts/setup_osrm.sh` | `linux/arm64` | **Set to `linux/amd64` on an Intel/AMD server.** One variable drives both the graph build and the running container |
 | `TCGA_RECOMPUTE_REACH` | `scripts/setup_database.sh` | unset (skip) | Set to `1` to regenerate the legacy accident-reach artifacts; nothing in the current app reads them |
 | `API_BASE_PATH` | `app.py` -> the page's JS | empty (same origin) | Path prefix the API is published under, e.g. `/bkd`. The proxy strips it again, so Flask routes are unchanged |
+| `FRONTEND_PUBLISH` | `docker-compose.yml` | `80` | Host side of the frontend's port mapping. Set to `127.0.0.1:8080` when the VM's own nginx owns port 80 |
+| `DB_PUBLISH` | `docker-compose.yml` | `127.0.0.1:5433` | Loopback so Docker's iptables rules do not expose Postgres publicly |
+| `BACKEND_PUBLISH` | `docker-compose.yml` | `127.0.0.1:5050` | Loopback; nginx reaches gunicorn over the compose network, not this port |
 | `PORT` | `app.py` (`__main__` only) | `5050` | Only affects the local dev server; the container always binds gunicorn to 5050 |
 | `FLASK_DEBUG` | `app.py` (`__main__` only) | `1` locally, `0` in the container | Never affects the gunicorn/production path |
 
