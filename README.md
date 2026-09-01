@@ -99,9 +99,13 @@ dashboard/              Flask app
   Dockerfile            Backend image (gunicorn)
 frontend/Dockerfile     Frontend image (nginx + baked-in config and assets)
 nginx/nginx.conf        Reverse proxy config, copied into the frontend image
-nginx/tcga-host.conf    Host nginx site for the pm2 deployment (no frontend
-                         container; assets served from /var/www/html)
+nginx/tcga-host.conf    Host nginx site for the no-Docker deployment (assets
+                         served from /var/www/html, rest proxied to gunicorn)
 ecosystem.config.js     pm2 definition for running gunicorn on the host
+scripts/setup_postgres_native.sh  PostgreSQL 16 + PostGIS without Docker
+scripts/setup_osrm_native.sh      Builds OSRM from source + systemd service
+scripts/deploy_static.sh          Publishes assets to /var/www/html
+scripts/systemd/                  Unit template for osrm-routed
 data/                   Seed data + precomputed reach JSON (see .gitignore for
                          what is excluded and why)
   analytics/            The five precomputed reach caches the app reads on boot
@@ -359,13 +363,11 @@ One practical constraint if OSRM moves to its own host: it memory-maps a ~1.9 GB
 graph from local disk, so that machine needs its own `osrm-data/` built by
 `scripts/setup_osrm.sh`. It is not something to serve off a network mount.
 
-## Running the backend under pm2 (no app containers)
+## Deploying without Docker
 
-An alternative to the all-Docker stack: nginx on the host serves the static
-assets from `/var/www/html`, pm2 keeps gunicorn alive, and only PostGIS and OSRM
-stay as containers. OSRM has no practical non-Docker install, and running
-PostGIS as a container avoids matching PostGIS extension versions against
-whatever Postgres the distro ships.
+nginx on the host serves the static assets from `/var/www/html`, pm2 keeps
+gunicorn alive, PostgreSQL + PostGIS is installed natively, and OSRM is built
+from source and run by systemd. No containers anywhere.
 
 **One thing to be clear about before starting.** `/var/www/html` holds the CSS
 and JS *only*. The page itself is a Jinja template rendered by Flask — there is
@@ -374,60 +376,90 @@ moves to disk is the asset serving, which is worth doing on its own: this page
 pulls a dozen assets per load, and each one served by Flask occupies one of only
 four gunicorn workers for the round trip.
 
+### What the OSRM build actually needs
+
+`scripts/setup_osrm_native.sh` handles all of this, but it is worth knowing why
+it does more than the published guides suggest. The dependency list was derived
+by compiling the pinned commit on a clean Ubuntu 24.04 box, and both the
+project's own Ubuntu wiki page and the widely-linked third-party tutorial are
+incomplete against current source:
+
+| Gap | Reality |
+|---|---|
+| `libarchive-dev` | Required; neither guide lists it |
+| `rapidjson-dev` | Required as a CMake CONFIG package |
+| `sol2` | Required; **no Ubuntu package exists** — built from source |
+| `flatbuffers` | Required as a CMake CONFIG package; Ubuntu's 2.0.8 package **ships no CMake config** — built from source |
+| `vtzero` | Required; no Ubuntu package — headers vendored in |
+| Lua 5.2 | Outdated. Current source needs **Lua >= 5.4** |
+| Ubuntu's cmake | **Cannot configure this project at all.** `CMakeLists.txt` sets `cmake_policy(SET CMP0156 NEW)`, a policy CMake only learned in 3.29; Ubuntu 24.04 ships 3.28. The script installs a newer cmake from PyPI. |
+
+That last one is the real blocker on stock Ubuntu, and it fails with a policy
+error rather than anything that reads like a missing dependency.
+
+### Steps
+
 ```bash
-# 1. Prerequisites (pm2 needs node; Docker is still needed for db + osrm)
+# 1. Prerequisites (pm2 needs node)
 sudo apt-get update
-sudo apt-get install -y git git-lfs postgresql-client python3 python3-venv rsync nginx nodejs npm
+sudo apt-get install -y git git-lfs postgresql-client python3 python3-venv \
+  rsync nginx nodejs npm
 sudo npm install -g pm2
 git lfs install
 
 # 2. Clone
-sudo mkdir -p /opt && cd /opt
-sudo git clone https://github.com/rochitl72/TCG.git tcga
+sudo git clone https://github.com/rochitl72/TCG.git /opt/tcga
 sudo chown -R "$USER:$USER" /opt/tcga
 cd /opt/tcga
-printf 'OSRM_PLATFORM=linux/amd64\n' > .env
 
-# 3. Infrastructure containers, one-time data load
-chmod +x scripts/setup_osrm.sh scripts/setup_database.sh scripts/deploy_static.sh
-./scripts/setup_osrm.sh                          # ~10-20 min, wants ~8 GB free RAM
-docker compose -f docker-compose.dev.yml down    # the builder leaves an OSRM running on :5000
-docker compose up -d db osrm                     # NOTE: named services only — see below
-DATABASE_URL=postgresql://mapsr:mapsr@127.0.0.1:5433/mapsr ./scripts/setup_database.sh
+# 3. PostgreSQL 16 + PostGIS, natively
+sudo ./scripts/setup_postgres_native.sh
 
-# 4. Python environment
+# 4. OSRM from source + systemd service (~15-30 min, mostly compiling)
+sudo ./scripts/setup_osrm_native.sh
+
+# 5. Load the data
+DATABASE_URL=postgresql://mapsr:mapsr@127.0.0.1:5432/mapsr ./scripts/setup_database.sh
+
+# 6. Python environment + backend under pm2
 python3 -m venv .venv
 .venv/bin/pip install --upgrade pip
 .venv/bin/pip install -r requirements.txt
-
-# 5. Backend under pm2
 mkdir -p logs
 pm2 start ecosystem.config.js
 pm2 save
 pm2 startup        # run the command it prints, once, so pm2 survives a reboot
 
-# 6. Static assets to /var/www/html
+# 7. Static assets to /var/www/html
 sudo ./scripts/deploy_static.sh
 
-# 7. nginx
+# 8. nginx
 sudo cp nginx/tcga-host.conf /etc/nginx/sites-available/tcga
 sudo ln -sf /etc/nginx/sites-available/tcga /etc/nginx/sites-enabled/tcga
 sudo nginx -t && sudo systemctl reload nginx
 sudo certbot --nginx -d tcg.coers.in            # optional but recommended
 ```
 
-**Do not run a bare `docker compose up -d` on this server.** With no service
-names it starts `backend` and `frontend` as well, and you end up with two
-copies of the app — a containerised one and the pm2 one — fighting over the
-same database. Always name the two you want: `docker compose up -d db osrm`.
-
 Check what came up:
 
 ```bash
 pm2 status
+systemctl status osrm-routed
 curl -sI http://127.0.0.1:5050/network-analytics | head -3
-ss -tlnp | grep -E '5050|5433|5000'   # all three should be 127.0.0.1, not 0.0.0.0
+ss -tlnp | grep -E '5050|5432|5000'   # all three loopback, not 0.0.0.0
 ```
+
+### One difference between native Postgres and the container
+
+In the `postgis/postgis` image, `POSTGRES_USER=mapsr` makes `mapsr` the
+bootstrap **superuser**, so `CREATE EXTENSION postgis` run by the app's own role
+just works. A natively created `LOGIN` role is not a superuser, and the same
+statement fails with `permission denied to create extension "postgis"`.
+
+`setup_postgres_native.sh` handles it by creating the extension once as the
+`postgres` superuser. `setup_database.sh` then runs unchanged — its
+`CREATE EXTENSION IF NOT EXISTS postgis` sees the extension already present and
+no-ops with a notice rather than failing on permissions.
 
 ### Updating this deployment
 
@@ -459,6 +491,9 @@ asking Flask for it, but it cannot help with a *stale* one.
 | `BACKEND_PUBLISH` | `docker-compose.yml` | `127.0.0.1:5050` | Loopback; nginx reaches gunicorn over the compose network, not this port |
 | `OSRM_PUBLISH` | `docker-compose.yml`, `docker-compose.dev.yml` | `127.0.0.1:5000` | Host side of OSRM's port. Loopback-only on purpose — OSRM has no auth. Needed by the pm2 deployment, where gunicorn runs outside the compose network |
 | `TCGA_VENV` | `ecosystem.config.js` | `<repo>/.venv` | Where pm2 looks for the gunicorn executable |
+| `OSRM_REF` | `scripts/setup_osrm_native.sh` | pinned commit | osrm-backend commit to build. Pinned to the one this was verified against |
+| `PG_VERSION` | `scripts/setup_postgres_native.sh` | `16` | Major PostgreSQL version to install from PGDG |
+| `STATIC_ROOT` | `scripts/deploy_static.sh` | `/var/www/html` | Where nginx serves the assets from |
 | `PORT` | `app.py` (`__main__` only) | `5050` | Only affects the local dev server; the container always binds gunicorn to 5050 |
 | `FLASK_DEBUG` | `app.py` (`__main__` only) | `1` locally, `0` in the container | Never affects the gunicorn/production path |
 

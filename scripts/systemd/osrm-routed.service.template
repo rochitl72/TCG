@@ -1,0 +1,46 @@
+# Installed to /etc/systemd/system/osrm-routed.service by
+# scripts/setup_osrm_native.sh, which substitutes the {{...}} placeholders.
+# Edit the script, not the installed copy — a re-run overwrites it.
+
+[Unit]
+Description=OSRM routing engine (Haryana road graph)
+Documentation=https://github.com/Project-OSRM/osrm-backend
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=osrm
+Group=osrm
+
+# --ip 127.0.0.1: OSRM's own default is 0.0.0.0, which would put an
+# unauthenticated routing engine on every interface. Only the backend on this
+# host calls it, so it never needs to leave loopback.
+# --max-table-size 8000 (default 100) lets the analytics precompute send all
+# 1,208 hospitals as destinations in a single /table request. That turns
+# ~15,000 OSRM round-trips into ~230. It also makes one request genuinely
+# expensive, which is the other reason this stays on loopback.
+ExecStart={{OSRM_BIN}}/osrm-routed \
+    --algorithm mld \
+    --max-table-size 8000 \
+    --ip {{OSRM_IP}} \
+    --port {{OSRM_PORT}} \
+    {{OSRM_DATA}}/haryana.osrm
+
+Restart=on-failure
+RestartSec=5
+
+# osrm-routed memory-maps a ~1.9 GB graph and holds it for the process
+# lifetime. Give systemd a generous startup window rather than letting it
+# declare failure while the kernel is still faulting pages in on a cold cache.
+TimeoutStartSec=300
+
+# It only ever reads the graph directory and answers HTTP.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths={{OSRM_DATA}}
+
+[Install]
+WantedBy=multi-user.target

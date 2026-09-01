@@ -1,11 +1,10 @@
 /**
  * pm2 process definition for the TCGA backend.
  *
- * This is the "no Docker for the app" deployment: nginx on the host serves the
- * static assets out of /var/www/html and proxies everything else to gunicorn,
- * which pm2 keeps alive. PostGIS and OSRM still run as containers — OSRM has no
- * practical non-Docker install, and PostGIS-in-Docker avoids matching extension
- * versions against whatever Postgres the distro ships.
+ * The no-Docker deployment: nginx on the host serves the static assets out of
+ * /var/www/html, pm2 keeps gunicorn alive, PostgreSQL+PostGIS is installed
+ * natively (scripts/setup_postgres_native.sh) and OSRM is built from source and
+ * run by systemd (scripts/setup_osrm_native.sh). Nothing here needs a container.
  *
  * Paths resolve from this file, so the repo can be cloned anywhere:
  *
@@ -36,10 +35,13 @@ module.exports = {
       env: {
         PYTHONUNBUFFERED: "1",
         FLASK_DEBUG: "0",
-        // Containers publish these on loopback (see docker-compose.yml).
+        // 5432 is native PostgreSQL's own port (scripts/setup_postgres_native.sh).
+        // If you are running Postgres as a container instead, that compose file
+        // publishes it on 5433 — export DATABASE_URL before `pm2 start` to
+        // override, or edit this line.
         DATABASE_URL:
           process.env.DATABASE_URL ||
-          "postgresql://mapsr:mapsr@127.0.0.1:5433/mapsr",
+          "postgresql://mapsr:mapsr@127.0.0.1:5432/mapsr",
         OSRM_BASE: process.env.OSRM_BASE || "http://127.0.0.1:5000",
         OSRM_SLEEP: process.env.OSRM_SLEEP || "0",
         // Empty unless the edge publishes the API under a prefix, e.g. /bkd.
