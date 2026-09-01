@@ -465,8 +465,6 @@ changed in one place and nowhere else.
 | `DB_PASSWORD` | `mapsr` | **Change this.** The default is a development convenience |
 | `DB_HOST` | `127.0.0.1` | How the *host* reaches Postgres |
 | `DB_PORT` | `5432` native, `5433` if Postgres is the container | |
-| `DB_NAME` / `DB_USER` / `DB_PASSWORD` | everything | `mapsr` | Database credentials. See *Where the database details live* |
-| `DB_HOST` / `DB_PORT` | everything | `127.0.0.1` / `5432` | How the host reaches Postgres; `5433` when it is the container |
 | `DATABASE_URL` | assembled from the five above | Set it directly only for a database whose URL does not decompose — an existing organisation server. It then overrides all five |
 
 Who reads it:
@@ -526,7 +524,9 @@ asking Flask for it, but it cannot help with a *stale* one.
 
 | Variable | Used by | Default | Notes |
 |---|---|---|---|
-| `DATABASE_URL` | `db.py`, `reach_pipeline.py`, `road_grid_generator.py` | `postgresql://mapsr:mapsr@localhost:5433/mapsr` | Set to `postgresql://mapsr:mapsr@db:5432/mapsr` inside docker-compose (container-to-container hostname) |
+| `DB_NAME` / `DB_USER` / `DB_PASSWORD` | `load_env.sh`, `ecosystem.config.js`, `docker-compose.yml` | `mapsr` | Database credentials — set in `.env`. See *Where the database details live* |
+| `DB_HOST` / `DB_PORT` | as above | `127.0.0.1` / `5432` | How the host reaches Postgres; `5433` when Postgres is the container |
+| `DATABASE_URL` | `db.py`, `reach_pipeline.py`, `road_grid_generator.py` | assembled from the `DB_*` parts | Set directly only for a database whose URL does not decompose; it then overrides all five. Inside docker-compose the backend uses the `db:5432` service hostname |
 | `OSRM_BASE` | `grid_ambulance.py`, `ambulance_v2.py`, the precompute scripts, measure API | `http://127.0.0.1:5000` when using `./start.sh` | Set to `http://osrm:5000` in the production backend container |
 | `OSRM_SLEEP` | `reach_pipeline.py`, the precompute scripts | `0` with self-hosted OSRM | Seconds between OSRM requests during precompute; use `0.1` only for the public demo server |
 | `OSRM_PLATFORM` | `docker-compose.yml`, `docker-compose.dev.yml`, `scripts/setup_osrm.sh` | `linux/arm64` | **Set to `linux/amd64` on an Intel/AMD server.** One variable drives both the graph build and the running container |
