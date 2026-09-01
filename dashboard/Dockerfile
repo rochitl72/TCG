@@ -21,9 +21,21 @@ RUN pip install --no-cache-dir -r requirements.txt gunicorn
 
 COPY dashboard/ ./dashboard/
 
+# The build scripts ship with the image so artifacts can be regenerated inside
+# the container. Without them a fresh deploy has no way to produce
+# data/hospital_tpl.csv or data/analytics/*.json, and the analytics pages come
+# up empty with a "run the precompute first" error. See README.md > Deploying.
+COPY scripts/ ./scripts/
+
 WORKDIR /app/dashboard
 
 EXPOSE 5050
+
+# python-slim has no curl or wget, so probe with the interpreter that is
+# already here. Hitting a real route proves the app booted AND that its
+# imports resolved, which a TCP check would not.
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD python -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:5050/api/geolocations', timeout=8).status==200 else 1)"
 
 # --timeout is generous on purpose: grid/road analyses make live OSRM calls
 # per cell and can legitimately take up to ~1-2 minutes on first load for a

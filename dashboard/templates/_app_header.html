@@ -1,3 +1,23 @@
 <header class="app-header">
-  <h1 class="app-title">Trauma Care Coverage Gap Analysis</h1>
+  <div class="app-header-row">
+    <h1 class="app-title">Trauma Care Coverage Gap Analysis</h1>
+    <!--
+      One switch, all three tabs. Recomputes grid colours/verdicts/gap counts
+      as if empanelled private hospitals did not exist when off — see
+      network_analytics.py's _verdict_index for what that actually changes.
+      Lives in the header rather than a sidebar because it has to survive a
+      tab switch; a control inside the Proximity or Gaps sidebar would reset
+      itself (or need syncing) the moment someone clicked over to the other.
+      Ambulance is unaffected — ambulance reach is about ambulance stations,
+      never hospital levels — so the note says so rather than leaving a
+      visitor to that tab wondering why flipping it did nothing.
+    -->
+    <label
+      class="toggle app-ep-toggle"
+      title="Applies to Proximity and Gaps. Ambulance reach is about ambulance stations, not hospital levels, so this toggle has no effect there."
+    >
+      <input type="checkbox" id="global-include-ep" checked />
+      <span>Include Empanelled Private (EP)</span>
+    </label>
+  </div>
 </header>

@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trauma Network Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/accident_safety.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/network_analytics.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/charts.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/popup_panes.css') }}" />
+  <!-- Loaded last: overrides the older control styles without editing them. -->
+  <link rel="stylesheet" href="{{ asset('css/controls.css') }}" />
+</head>
+<body>
+  <div class="app-shell">
+  {% include '_rail.html' %}
+  <div class="layout">
+    {% include '_app_header.html' %}
+    <div class="layout-body">
+
+    <main class="map-wrap">
+      <div id="map"></div>
+      <div id="prox-panel" class="prox-panel hidden">
+        <button type="button" id="prox-panel-close" class="prox-panel-close" aria-label="Close">&times;</button>
+        <div id="prox-panel-body" class="prox-panel-body"></div>
+      </div>
+      <div id="offline-banner" class="offline-banner hidden">
+        <strong>Straight-line data.</strong>
+        This cache was built with <code>--offline</code>, not OSRM road routing.
+        Run the precompute against OSRM before presenting these numbers.
+      </div>
+      <!-- Grid search, moved out of the sidebar on 24 Aug 2026. Leaflet adopts
+           this node into its top-right control corner (initGridSearchControl),
+           so it lands directly under the zoom buttons and inherits Leaflet's
+           own click/scroll isolation. It lives in the template rather than
+           being built in JS so the copy stays editable here, and starts
+           [hidden] purely so it does not flash in the page flow for the one
+           frame before the map adopts it. Collapsed to an icon by default —
+           expanded, it would sit on top of the map for a search that is used
+           occasionally. -->
+      <div id="grid-search-control" class="grid-search-control" hidden>
+        <button type="button" class="gs-toggle" id="grid-search-toggle"
+                aria-expanded="false" aria-controls="grid-search-body"
+                title="Find a grid by ID" aria-label="Find a grid by ID">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.1" stroke-linecap="round" aria-hidden="true">
+            <circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.4 15.4 4.1 4.1"/>
+          </svg>
+        </button>
+        <div class="gs-body" id="grid-search-body" hidden>
+          <div class="grid-search-row">
+            <input type="search" id="grid-search" class="text-input"
+                   placeholder="Grid ID, e.g. 12345" autocomplete="off"
+                   inputmode="numeric" />
+            <button type="button" class="btn-primary" id="btn-grid-search">Go</button>
+          </div>
+          <p class="panel-note" id="grid-search-note">
+            Works on every tab. The map zooms to the cell and pins it.
+          </p>
+          <div id="grid-search-result" class="grid-search-result hidden"></div>
+        </div>
+      </div>
+
+      <!-- Bottom-right dock: the map legend, and directly below it,
+           wherever a feature popup (grid/hospital/ambulance/blood bank)
+           lands once clicked -- see dockFeaturePopup() in
+           network_analytics.js. One fixed spot for every tab (Proximity,
+           Gaps, Ambulance) instead of a bubble that opens wherever you
+           happened to click. Column-flex anchored at its OWN bottom edge,
+           so a docked popup pushes the legend upward automatically; with
+           the dock empty the legend sits exactly where it always has. -->
+      <div class="map-bottom-right" id="map-bottom-right">
+        <div class="map-legend" id="map-legend"></div>
+        <div class="feature-popup-dock hidden" id="feature-popup-dock"></div>
+      </div>
+    </main>
+
+    <aside class="sidebar-panel">
+      <header class="sidebar-header">
+        <h1>Trauma Network Analytics</h1>
+        <p>Grid&ndash;hospital proximity, tier coverage gaps and ambulance reach &mdash; Haryana 2025</p>
+      </header>
+
+      <!-- The view switcher moved to the icon rail (_rail.html). What stays here
+           is a caption naming the view you are on, because the rail is 56px of
+           icons across the window and the sidebar needs to say, in words, what
+           it is showing. -->
+      <div class="view-caption" id="view-caption">
+        <span class="view-step" id="view-step">1</span>
+        <span class="view-name" id="view-name">Proximity</span>
+        <span class="view-blurb" id="view-blurb">Nearest hospital to every accident grid, by road.</span>
+      </div>
+
+      <!-- ONE control, not one per view: it governs all three, and three synced
+           copies is exactly the kind of thing that drifts. Off means every
+           section shares one map view; on means each remembers where you left
+           it. Only sections you have actually panned or re-layered are
+           remembered, so switching never moves a map you did not move. -->
+      <label class="sub-memory" title="Each sidebar section remembers where you left the map">
+        <input type="checkbox" id="sub-map-memory" checked />
+        <span>Remember map position per section</span>
+      </label>
+
+      <!-- REMOVED 24 Aug 2026 — the "Live data & grid colours" panel (palette
+           title, #palette-note, and the five per-feed #live-status rows) was
+           reference noise on every view: it described which feed answered a
+           request nobody had made yet. The Old/New palette switch it also
+           hosted was already retired on 20 Aug 2026 (see OLD_MODE_RETIRED in
+           network_analytics.js; snapshot at
+           Archived/mapsR-old-toggle-2026-08-20.zip).
+
+           The one signal worth keeping was the "Partner API unreachable"
+           warning. renderLiveStatus() now routes that to #status-line below
+           when #live-status is absent, so a real outage still surfaces instead
+           of failing silently. Every writer into the removed ids is already
+           null-guarded, so nothing else needs a change to bring this back:
+           restore this section and the rows repopulate on their own. -->
+
+      <div id="status-line" class="radar-status">Loading&hellip;</div>
+
+      <!-- MOVED 24 Aug 2026 — "Find a grid" left the sidebar for the map's own
+           top-right control stack, directly under the zoom buttons. Its markup
+           now lives in <main class="map-wrap"> so Leaflet can adopt the node;
+           see #grid-search-control there and initGridSearchControl() in
+           network_analytics.js. Every id is unchanged, so searchGridId() and
+           clearGridSearch() still find what they expect. -->
+
+      <!-- ================= TAB 1 — HOSPITAL COVERAGE ================= -->
+      <section class="tab-panel" data-panel="proximity">
+
+
+        <!-- ---- open by default: the network in one screen ---- -->
+
+        <nav class="sub-tabs" role="tablist" aria-label="Sidebar sections">
+          <button type="button" class="sub-tab{% if initial_sub['proximity'] == 'controls' %} active{% endif %}" data-view="proximity" data-sub="controls" role="tab" aria-selected="{% if initial_sub['proximity'] == 'controls' %}true{% else %}false{% endif %}" title="Controls — 2 sections"><span class="sub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h9M17 18h3"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="18" r="2"/></svg></span><span class="sub-label">Controls</span></button>
+          <button type="button" class="sub-tab{% if initial_sub['proximity'] == 'charts' %} active{% endif %}" data-view="proximity" data-sub="charts" role="tab" aria-selected="{% if initial_sub['proximity'] == 'charts' %}true{% else %}false{% endif %}" title="Charts — 3 sections"><span class="sub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4"/><path d="M4 19.5h16"/><rect x="7" y="11" width="3.2" height="5.5" rx="0.8"/><rect x="13.3" y="7" width="3.2" height="9.5" rx="0.8"/></svg></span><span class="sub-label">Charts</span></button>
+          <button type="button" class="sub-tab{% if initial_sub['proximity'] == 'data' %} active{% endif %}" data-view="proximity" data-sub="data" role="tab" aria-selected="{% if initial_sub['proximity'] == 'data' %}true{% else %}false{% endif %}" title="Data — 2 sections"><span class="sub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 9.2h17M9.4 9.2V20M3.5 14.6h17"/></svg></span><span class="sub-label">Data</span></button>
+          <button type="button" class="sub-tab{% if initial_sub['proximity'] == 'map' %} active{% endif %}" data-view="proximity" data-sub="map" role="tab" aria-selected="{% if initial_sub['proximity'] == 'map' %}true{% else %}false{% endif %}" title="Map — 3 sections"><span class="sub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 6.6 6-2.3 6 2.3 6-2.3v12.9l-6 2.3-6-2.3-6 2.3Z"/><path d="M9 4.3v15.2M15 6.6v15.2"/></svg></span><span class="sub-label">Map</span></button>
+        </nav>
+
+        <div class="sub-panel{% if initial_sub['proximity'] != 'controls' %} hidden{% endif %}" data-view="proximity" data-sub="controls" role="tabpanel">
+<section class="panel acc open" data-acc>
+          <button type="button" class="acc-head">Analysis mode<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="panel-note">
+              The same road-reach rule &mdash; <b>L1 60&nbsp;km, L2 30&nbsp;km,
+              L3 10&nbsp;km</b> &mdash; coloured either of two ways. Both read
+              one server-side verdict, so they cannot disagree with each
+              other &mdash; and routing (click a grid or a facility, then its
+              own Routes/Catchment tab) works the same either way.
+            </p>
+
+            <div class="preset-row mode-row" id="prox-mode">
+              <button type="button" data-mode="overall" class="active">
+                All levels<small>colour by all 3</small>
+              </button>
+              <button type="button" data-mode="hospital">
+                Single level<small>filter + colour by 1</small>
+              </button>
+            </div>
+            <p class="panel-note" id="prox-mode-note"></p>
+
+            <div id="prox-level-tabs" class="hidden">
+              <label>Level under analysis</label>
+              <!-- EP is a peer of L1/L2/L3 here, not a sub-option of L1
+                   (25 Aug 2026). Empanelled private hospitals were counted as
+                   L1 until then; splitting them out leaves L1 with zero
+                   facilities, which is the gap the analysis is meant to show,
+                   so the toggle must be able to select an empty level. -->
+              <div class="preset-row" id="prox-level">
+                <button type="button" data-level="L1" class="active">L1<small>60 km &middot; none exist</small></button>
+                <button type="button" data-level="L2">L2<small>30 km</small></button>
+                <button type="button" data-level="L3">L3<small>10 km</small></button>
+                <button type="button" data-level="EP">EP<small>private &middot; 60 km</small></button>
+              </div>
+              <p class="panel-note" id="prox-level-note"></p>
+            </div>
+
+            <label for="prox-district">District</label>
+            <select id="prox-district"><option value="">All districts</option></select>
+            <p class="panel-note" id="prox-district-note">
+              Pick a district to zoom to it and dim everything outside. Leave on
+              <b>All districts</b> to see the whole state.
+            </p>
+
+            <div class="stats" id="prox-verdict-stats"></div>
+            <div class="tier-key" id="prox-legend-key"></div>
+            <p class="panel-note" id="prox-routes-note"></p>
+            <!-- One row per grid with the verdict AND the nearest L1/L2/L3
+                 flattened into columns — the tab's own answer, in the form a
+                 spreadsheet can use. Carries the district filter. -->
+            <button type="button" class="btn-primary" id="btn-export-prox-verdicts">
+              Download grid verdicts CSV
+            </button>
+            <p class="panel-note">
+              Public facilities count at every level; empanelled private counts
+              at <b>L1 only</b>, because Haryana has no public MCH/SSH in the
+              facility data.
+            </p>
+          </div>
+        </section>
+
+        <!-- Shown in all three Proximity modes (23 Aug 2026 redesign). Overall
+             and Grid render the hospital-centric compliance list (every
+             facility, ranked by TPL, id/type/level/GPS/TPL per row); Hospital
+             mode keeps its own list scoped to the level under analysis and
+             ranked by grids covered. Both share this box and search input. -->
+        <section class="panel acc open hidden" data-acc id="prox-hospital-panel">
+          <button type="button" class="acc-head">Facilities<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="panel-note" id="prox-hosp-note">
+              Click a facility here or on the map to draw its catchment.
+            </p>
+            <input type="search" id="prox-hosp-search" class="text-input"
+                   placeholder="Name, district, type, ID or L1/L2/L3" autocomplete="off" />
+            <div id="prox-hosp-list" class="hosp-list"></div>
+            <button type="button" class="btn-primary" id="btn-export-prox-facilities">
+              Download facilities CSV
+            </button>
+          </div>
+        </section>
+
+        <!-- RETIRED 20 Aug 2026 — the radar rings, the Distance/TPL/TSS colour
+             radios, the flat-vs-per-level radius switch and the general hospital
+             picker left the Proximity tab when the three modes above took over
+             its colouring. They are parked here, hidden and inert, ONLY because
+             ~40 places in network_analytics.js still read these element ids;
+             deleting the nodes would turn every one of those into a null
+             dereference. prox-radar ships UNCHECKED so the radar never draws.
+             To bring any control back, move its markup out of this wrapper. -->
+        <div id="prox-retired-controls" hidden aria-hidden="true">
+          <div class="preset-row" id="prox-radius-mode">
+            <button type="button" data-perlevel="1" class="active">Per level<small>60 / 30 / 10</small></button>
+            <button type="button" data-perlevel="0">Flat<small><span id="prox-radius">60</span> km all</small></button>
+          </div>
+          <p id="prox-radius-note"></p>
+          <select id="hosp-select"><option value="">&mdash;</option></select>
+          <input type="search" id="hosp-search" autocomplete="off" />
+          <select id="hosp-type-select">
+            <option value="">All types</option>
+            <option value="DCH">District Civil Hospital (Tertiary)</option>
+            <option value="CH_SDH">Civil / Sub-District Hospital</option>
+            <option value="CHC">Community Health Centre</option>
+            <option value="PHC">Primary Health Centre</option>
+            <option value="Empanelled Private Hospital">Empanelled Private</option>
+          </select>
+          <div class="radio-group" id="prox-colour-group">
+            <label class="radio"><input type="radio" name="prox-colour" value="distance" checked /><span>Distance</span></label>
+            <label class="radio"><input type="radio" name="prox-colour" value="tpl" /><span>TPL</span></label>
+            <label class="radio"><input type="radio" name="prox-colour" value="severity" /><span>TSS</span></label>
+          </div>
+          <label class="toggle"><input type="checkbox" id="prox-private" checked /><span>Include private</span></label>
+          <label class="toggle"><input type="checkbox" id="prox-radar" /><span>Radar</span></label>
+          <label class="toggle"><input type="checkbox" id="prox-radar-sweep" /><span>Sweep</span></label>
+          <select id="prox-radar-rings"><option value="10,30,60" selected>10 / 30 / 60</option></select>
+          <p id="prox-radar-note"></p>
+        </div>
+
+        <!-- Opens itself when a hospital is picked. -->
+
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Grids in reach &mdash; L1 / L2 / L3<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="panel-note">
+              Grids that satisfy <b>all three</b> road-reach conditions at once.
+              Public facilities only. This is the positive side of the same pass
+              Tab&nbsp;2 reports the failures from.
+            </p>
+            <div class="tier-key" id="reach-level-key"></div>
+            <div class="stats" id="reach-stats"></div>
+            <label class="toggle">
+              <input type="checkbox" id="layer-in-reach" />
+              <span>Show in-reach grids only <span class="badge" id="badge-in-reach">0</span></span>
+            </label>
+            <button type="button" class="btn-primary" id="btn-export-in-reach">
+              Download in-reach grids CSV
+            </button>
+            <p class="panel-note">
+              Radii follow the spec: L1 60 km, L2 30 km, L3 10 km. Change them on
+              Tab&nbsp;2 and this panel follows.
+            </p>
+          </div>
+        </section>
+
+        </div>
+
+        <div class="sub-panel{% if initial_sub['proximity'] != 'charts' %} hidden{% endif %}" data-view="proximity" data-sub="charts" role="tabpanel">
+<section class="panel acc open" data-acc>
+          <button type="button" class="acc-head">Network by service level<span class="acc-tag viz">chart</span><span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="viz-sub">
+              Facility count, median TPL and median catchment for each level.
+              The TPL dump carries a single total score per hospital and no
+              category columns, so this is preparedness read <b>by facility
+              category</b> &mdash; the closest the supplied data supports.
+            </p>
+            <div class="viz-strip" id="viz-level-strip"></div>
+            <p class="panel-note" id="viz-level-strip-note"></p>
+            <button type="button" class="btn-primary" id="btn-export-level-reach">
+              Download level reach CSV
+            </button>
+          </div>
+        </section>
+
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Load vs preparedness<span class="acc-tag viz">chart</span><span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="viz-sub">
+              Every hospital as one mark: grids it serves against its TPL score.
+              The bottom-right is the quadrant that matters &mdash; carrying a
+              large catchment on a weak preparedness score. Hollow marks are
+              estimated TPL, not measured. Click a mark to plot that catchment.
+            </p>
+            <div id="viz-cov-tpl"></div>
+            <div class="viz-legend" id="viz-cov-tpl-legend"></div>
+            <p class="panel-note" id="viz-cov-tpl-note"></p>
+            <!-- The scatter's own marks: one row per facility with its
+                 catchment size and TPL, which is exactly the facilities export
+                 plus the coverage counts. -->
+            <button type="button" class="btn-primary" id="btn-export-cov-tpl">
+              Download facilities + TPL CSV
+            </button>
+          </div>
+        </section>
+
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">District TSS<span class="acc-tag viz">chart</span><span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="viz-sub">
+              <b>Total Severity Score</b> &mdash; each grid cell's
+              <code>severity_score</code> summed over the district's 1 km cells.
+              The two rankings below are deliberately separate charts rather than
+              one chart with two scales: a district can top the state on volume
+              alone, and only a side-by-side comparison shows when it does.
+            </p>
+            <div class="viz-card">
+              <p class="viz-title">Ranked by total TSS &mdash; the burden</p>
+              <div id="viz-tss-total"></div>
+            </div>
+            <div class="viz-card">
+              <p class="viz-title">Ranked by TSS per cell &mdash; the intensity</p>
+              <div id="viz-tss-percell"></div>
+            </div>
+            <p class="panel-note" id="viz-tss-note"></p>
+            <div class="stats" id="tss-stats"></div>
+            <div class="table-wrap" style="max-height:260px">
+              <table class="mini-table" id="tss-table"></table>
+            </div>
+            <button type="button" class="btn-primary" id="btn-export-tss">
+              Download district TSS CSV
+            </button>
+            <button type="button" class="btn-primary" id="btn-export-bs">
+              Download blood storage (BS) CSV
+            </button>
+          </div>
+        </section>
+
+        </div>
+
+        <div class="sub-panel{% if initial_sub['proximity'] != 'data' %} hidden{% endif %}" data-view="proximity" data-sub="data" role="tabpanel">
+<section class="panel acc" id="selected-hospital-panel" data-acc style="display:none;">
+          <button type="button" class="acc-head">Selected hospital<span class="acc-tag viz">chart</span><span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <div id="selected-hospital"></div>
+            <div class="viz-card">
+              <p class="viz-title">How its catchment is distributed</p>
+              <p class="viz-sub">
+                Grids per 5 km band inside the radius. A curve that leans left is
+                a hospital genuinely close to its demand; one that piles up at the
+                rule line only just reaches most of what it counts.
+              </p>
+              <div id="viz-decay"></div>
+            </div>
+            <button type="button" class="btn-ghost" id="btn-clear-hospital">Clear selection</button>
+          </div>
+        </section>
+
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Hospitals by grids served<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <div class="stats" id="hosp-coverage-stats"></div>
+            <p class="panel-note">Sorted by catchment size. Click any row to plot it.</p>
+            <div class="table-wrap" style="max-height:320px">
+              <table class="mini-table" id="hosp-coverage-table"></table>
+            </div>
+            <label for="grids-per-hospital">Grids per hospital</label>
+            <select id="grids-per-hospital">
+              <option value="" selected>All grids within 60 km</option>
+              <option value="10">Nearest 10 each</option>
+              <option value="25">Nearest 25 each</option>
+              <option value="50">Nearest 50 each</option>
+              <option value="100">Nearest 100 each</option>
+            </select>
+            <button type="button" class="btn-primary" id="btn-export-hosp-grids">
+              Download as one CSV
+            </button>
+            <button type="button" class="btn-primary" id="btn-export-hosp-zip">
+              Download as ZIP &mdash; split by district
+            </button>
+            <p class="panel-note" id="hosp-export-note"></p>
+            <p class="panel-note">
+              The ZIP splits the data into laptop-sized CSVs (one per hospital
+              district, largest ~83k rows) plus a summary telling you which file
+              each hospital is in. No hospital is ever split across files.
+            </p>
+          </div>
+        </section>
+
+<section class="panel acc open" data-acc>
+          <button type="button" class="acc-head">Download everything<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="panel-note">
+              One ZIP with <b>every hospital &rarr; grid pair</b>, the grid verdicts,
+              the facilities and district TSS. A <code>_manifest.csv</code> inside
+              records the filters and the row count of every file.
+            </p>
+            <label class="toggle">
+              <input type="checkbox" id="prox-bundle-split" checked />
+              <span>Split every table by district</span>
+            </label>
+            <p class="panel-note" id="prox-bundle-note">
+              On by default here: the hospital &rarr; grid table is ~1.48M rows for the
+              whole state and no spreadsheet opens that. Split, the largest piece is
+              about 46k rows.
+            </p>
+            <button type="button" class="btn-primary" id="btn-export-prox-bundle">
+              Download everything on this tab &mdash; ZIP
+            </button>
+          </div>
+        </section>
+
+        </div>
+
+        <div class="sub-panel{% if initial_sub['proximity'] != 'map' %} hidden{% endif %}" data-view="proximity" data-sub="map" role="tabpanel">
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Map layers<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <label class="toggle">
+              <input type="checkbox" id="layer-grids" checked />
+              <span>All grid cells <span class="badge" id="badge-grids">0</span></span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="layer-hospitals" />
+              <span>Hospitals by level <span class="badge badge-hospitals">0</span></span>
+            </label>
+            <div class="sub-filter" id="hosp-type-filter"></div>
+            <p class="panel-note">
+              Each level has its own shape and size as well as its own colour
+              &mdash; <b>star</b> for L1, <b>square</b> for L2, <b>disc</b> for
+              L3 &mdash; so they stay apart in mono or on a bad projector. A
+              dashed outline marks a mocked facility. <b>Click any icon</b> to
+              centre the proximity radar on that facility.
+            </p>
+            <p class="panel-note hosp-misplaced-note"></p>
+            <label class="toggle">
+              <input type="checkbox" id="layer-bloodbanks" />
+              <span>Blood storage (BS) <span class="badge" id="badge-bloodbanks">0</span></span>
+            </label>
+            <p class="panel-note" id="bs-note"></p>
+            <label class="toggle">
+              <input type="checkbox" id="layer-accidents" />
+              <span>Accidents <span class="badge" id="badge-accidents">0</span></span>
+            </label>
+            <div class="sub-filter" id="severity-filter"></div>
+            <p class="panel-note" id="accident-note" style="display:none;">
+              35k accident points render as a single canvas layer. Pick a district
+              above if panning feels heavy.
+            </p>
+            <div id="count-grid-cells" class="cell-count">&mdash;</div>
+            <p class="panel-note">
+              Cells exist only where accidents were recorded, so they trace the
+              highway network rather than filling the state evenly.
+            </p>
+          </div>
+        </section>
+
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Dataset totals<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="panel-note">
+              What is loaded behind the three modes. Grid colouring is set by the
+              mode above, not here.
+            </p>
+            <section class="stats">
+              <div class="stat-card">
+                <span class="stat-value" id="stat-grids">&mdash;</span>
+                <span class="stat-label">Grid cells</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-value" id="stat-hospitals">&mdash;</span>
+                <span class="stat-label">Hospitals</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-value" id="stat-tpl-real">&mdash;</span>
+                <span class="stat-label">TPL from real dump</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-value" id="stat-tpl-est">&mdash;</span>
+                <span class="stat-label">TPL estimated</span>
+              </div>
+            </section>
+          </div>
+        </section>
+
+
+
+        </div>
+
+      </section>
+
+      <!-- ================= TAB 2 — COVERAGE GAP ================= -->
+      <section class="tab-panel hidden" data-panel="gaps">
+
+
+        <nav class="sub-tabs" role="tablist" aria-label="Sidebar sections">
+          <button type="button" class="sub-tab{% if initial_sub['gaps'] == 'controls' %} active{% endif %}" data-view="gaps" data-sub="controls" role="tab" aria-selected="{% if initial_sub['gaps'] == 'controls' %}true{% else %}false{% endif %}" title="Controls — 1 section"><span class="sub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h9M17 18h3"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="18" r="2"/></svg></span><span class="sub-label">Controls</span></button>
+          <button type="button" class="sub-tab{% if initial_sub['gaps'] == 'charts' %} active{% endif %}" data-view="gaps" data-sub="charts" role="tab" aria-selected="{% if initial_sub['gaps'] == 'charts' %}true{% else %}false{% endif %}" title="Charts — 4 sections"><span class="sub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4"/><path d="M4 19.5h16"/><rect x="7" y="11" width="3.2" height="5.5" rx="0.8"/><rect x="13.3" y="7" width="3.2" height="9.5" rx="0.8"/></svg></span><span class="sub-label">Charts</span></button>
+          <button type="button" class="sub-tab{% if initial_sub['gaps'] == 'data' %} active{% endif %}" data-view="gaps" data-sub="data" role="tab" aria-selected="{% if initial_sub['gaps'] == 'data' %}true{% else %}false{% endif %}" title="Data — 2 sections"><span class="sub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 9.2h17M9.4 9.2V20M3.5 14.6h17"/></svg></span><span class="sub-label">Data</span></button>
+          <button type="button" class="sub-tab{% if initial_sub['gaps'] == 'map' %} active{% endif %}" data-view="gaps" data-sub="map" role="tab" aria-selected="{% if initial_sub['gaps'] == 'map' %}true{% else %}false{% endif %}" title="Map — 2 sections"><span class="sub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 6.6 6-2.3 6 2.3 6-2.3v12.9l-6 2.3-6-2.3-6 2.3Z"/><path d="M9 4.3v15.2M15 6.6v15.2"/></svg></span><span class="sub-label">Map</span></button>
+        </nav>
+
+        <div class="sub-panel{% if initial_sub['gaps'] != 'controls' %} hidden{% endif %}" data-view="gaps" data-sub="controls" role="tabpanel">
+<section class="panel acc open" data-acc>
+          <button type="button" class="acc-head">Grids not in reach<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="panel-note">
+              Grids that fail the road-reach rule below. Public facilities only
+              &mdash; empanelled private hospitals are excluded.
+            </p>
+            <div class="tier-key" id="level-key"></div>
+
+            <!-- REMOVED 25 Aug 2026 — the "L1 is mocked" warning. It described
+                 six fabricated government medical colleges with hand-picked
+                 coordinates, and that mock was deleted on 20 Aug: L1 is now 614
+                 REAL empanelled private hospitals, and zero rows still carry
+                 level_source="mock_mch" (checked against /api/analytics/hospitals).
+                 Leaving it up told the reader to discount L1 figures that are
+                 no longer fabricated — a stale warning is not a safe default,
+                 it just moves the error. #l1-mock-note is kept as an empty hook
+                 because renderers still address it; it stays blank unless
+                 something writes a real warning into it. -->
+            <p class="panel-note warn-note hidden" id="l1-mock-note"></p>
+
+            <!-- REMOVED 25 Aug 2026 — the "Segment by" switch. Facility-type
+                 segmentation (DCH / CHC / PHC on their own radii) is gone from
+                 the UI, so the tab always measures against the L1/L2/L3 service
+                 levels and a one-option toggle would have been furniture.
+
+                 state.gapSegment stays "level" and never changes; the type
+                 branches in the JS are now unreachable rather than deleted,
+                 because /api/analytics/type-reach and its export still exist
+                 and this is a one-line restore: put the two buttons back.
+                 #gap-segment-note is kept — setGapSegment() and boot both write
+                 the rule text into it, and it is still the line that tells the
+                 reader what the gaps are measured against. -->
+            <p class="panel-note" id="gap-segment-note"></p>
+
+            <div id="gap-level-segment">
+              <label>Analyse</label>
+              <div class="segment-toggles" id="gap-level-toggles"></div>
+              <p class="panel-note">
+                <b>All</b> applies the rule below across every level at once. Pick
+                a single level to isolate that one &mdash; &ldquo;grids with no L2
+                within 30 km&rdquo; &mdash; and the map, stats and export all follow.
+              </p>
+            </div>
+
+            <div id="gap-type-segment" class="hidden">
+              <label>Analyse</label>
+              <div class="segment-toggles" id="gap-type-toggles"></div>
+              <p class="panel-note">
+                Keyed on facility type rather than assigned level, so you can ask
+                &ldquo;where is there no CHC within 20&nbsp;km&rdquo; separately
+                from the level question. Empanelled private facilities are
+                included here; the level view is public-only.
+              </p>
+              <div id="type-sliders"></div>
+              <div class="threshold-presets">
+                <button type="button" id="btn-type-reset">Reset type radii</button>
+              </div>
+            </div>
+
+            <label>Rule</label>
+            <div class="preset-row" id="gap-mode">
+              <button type="button" data-mode="complement" class="active">
+                Complement<small>fails any selected</small>
+              </button>
+              <button type="button" data-mode="strict">
+                Strict<small>fails all selected</small>
+              </button>
+            </div>
+            <p class="panel-note" id="gap-mode-note"></p>
+
+            <div id="level-sliders"></div>
+            <div class="threshold-presets" id="level-reset">
+              <button type="button" id="btn-level-spec">Reset to spec &mdash; 60 / 30 / 10</button>
+            </div>
+
+            <label for="gap-district">District</label>
+            <select id="gap-district"><option value="">All districts</option></select>
+
+            <label>Colour cells by</label>
+            <div class="preset-row" id="gap-colour">
+              <button type="button" data-colour="levels" class="active">
+                Levels missed<small>how many fail</small>
+              </button>
+              <button type="button" data-colour="tss">
+                TSS<small>severity burden</small>
+              </button>
+            </div>
+            <p class="panel-note" id="gap-colour-note"></p>
+
+            <label class="toggle">
+              <input type="checkbox" id="gap-show-ids" checked />
+              <span>Label cells with grid ID</span>
+            </label>
+            <p class="panel-note" id="gap-label-note"></p>
+          </div>
+        </section>
+
+        <section class="stats" id="gap-stats"></section>
+        <section class="panel" id="gap-empty-note" style="display:none;"></section>
+
+        </div>
+
+        <div class="sub-panel{% if initial_sub['gaps'] != 'charts' %} hidden{% endif %}" data-view="gaps" data-sub="charts" role="tabpanel">
+<section class="panel acc open" data-acc>
+          <button type="button" class="acc-head">The headline<span class="acc-tag viz">chart</span><span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <div id="viz-gap-meter"></div>
+            <p class="panel-note" id="viz-gap-meter-note">
+              Two ratios, not one: the share of <i>grids</i> out of reach, and the
+              share of the state's total accident <i>severity</i> sitting in them.
+              When the second is larger than the first, the gaps are concentrated
+              where crashes actually happen.
+            </p>
+          </div>
+        </section>
+
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Which level fails<span class="acc-tag viz">chart</span><span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="viz-sub">
+              Grids grouped by the exact combination of levels they miss. A grid
+              missing only L1 is a very different problem from one missing all
+              three, and the single headline number hides that difference.
+            </p>
+            <div id="viz-miss-bar"></div>
+            <p class="viz-title" style="margin-top:0.8rem">Misses per level, counted separately</p>
+            <p class="viz-sub">
+              Each level on its own. These overlap &mdash; one grid can appear in
+              all three &mdash; so they do not sum to the headline.
+            </p>
+            <div id="tier-miss-breakdown" class="overlap-breakdown">&mdash;</div>
+          </div>
+        </section>
+
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">How sensitive is this to the radius?<span class="acc-tag viz">chart</span><span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="viz-sub">
+              Gap count swept across every radius, one line per level, with the
+              spec radius marked. This is what tells you which threshold is
+              actually binding: a level sitting on a steep stretch moves by
+              hundreds of grids for a few km of radius, one on a flat tail
+              barely moves at all.
+            </p>
+            <div id="viz-sens"></div>
+            <div class="viz-legend" id="viz-sens-legend"></div>
+            <p class="panel-note" id="viz-sens-note"></p>
+          </div>
+        </section>
+
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">By district<span class="acc-tag viz">chart</span><span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="viz-sub">
+              Districts by out-of-reach grid count. The figure beside each bar is
+              that district's share of the state's total severity, so a small bar
+              carrying a big share still reads as a priority.
+            </p>
+            <div id="viz-gap-districts"></div>
+            <div class="table-wrap" style="max-height:240px"><table class="mini-table" id="district-table"></table></div>
+            <button type="button" class="btn-primary" id="btn-export-gap-districts">
+              Download gaps by district CSV
+            </button>
+          </div>
+        </section>
+
+        </div>
+
+        <div class="sub-panel{% if initial_sub['gaps'] != 'data' %} hidden{% endif %}" data-view="gaps" data-sub="data" role="tabpanel">
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Affected grids<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <div class="table-wrap"><table class="mini-table" id="gap-grid-table"></table></div>
+          </div>
+        </section>
+
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Export<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <button type="button" class="btn-primary" id="btn-export-gaps">
+              Download out-of-reach grids CSV
+            </button>
+            <label class="toggle">
+              <input type="checkbox" id="gap-bundle-split" />
+              <span>Split every table by district</span>
+            </label>
+            <button type="button" class="btn-primary" id="btn-export-gap-bundle">
+              Download everything on this tab &mdash; ZIP
+            </button>
+            <p class="panel-note" id="gap-export-note"></p>
+            <p class="panel-note">
+              The ZIP answers each level on its own, because they are different
+              questions: <code>l1_not_covered</code>, <code>l2_not_covered</code>,
+              <code>l3_not_covered</code>, plus
+              <code>missing_at_least_one_level</code> for the combined rule and
+              <code>all_three_in_reach</code> for the grids that pass everything.
+              All carry the radii and district currently set.
+            </p>
+          </div>
+        </section>
+
+        </div>
+
+        <div class="sub-panel{% if initial_sub['gaps'] != 'map' %} hidden{% endif %}" data-view="gaps" data-sub="map" role="tabpanel">
+<section class="panel acc open" data-acc>
+          <button type="button" class="acc-head">Map layers<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <label class="toggle">
+              <input type="checkbox" id="gap-layer-hospitals" checked />
+              <span>Hospitals by level <span class="badge badge-hospitals">0</span></span>
+            </label>
+            <div class="sub-filter" id="gap-hosp-filter"></div>
+            <p class="panel-note">
+              Star = L1, square = L2, disc = L3. On by default, because a gap
+              cell only means something next to the facilities that were
+              supposed to cover it &mdash; a cluster with no star nearby is
+              failing on L1. <b>Click any hospital icon</b> to centre the gap
+              radar on it and see its own reach ring; the popup carries the
+              full record: ID, category, type, district and coordinates.
+            </p>
+            <p class="panel-note hosp-misplaced-note"></p>
+          </div>
+        </section>
+
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Gap radar<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="panel-note">
+              Click any gap cell <b>or hospital icon</b> to centre the radar on
+              it. Rings are the current L1/L2/L3 radii in the level colours, so
+              you can see at a glance which threshold a cell falls outside of
+              &mdash; and, on a facility, which ring is its own reach.
+            </p>
+            <label class="toggle">
+              <input type="checkbox" id="gap-radar" checked />
+              <span>Show radar rings</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="gap-radar-sweep" checked />
+              <span>Animate sweep</span>
+            </label>
+            <p class="panel-note" id="gap-radar-note">
+              Click a gap cell &mdash; or any hospital icon &mdash; on the map to
+              centre the radar.
+            </p>
+          </div>
+        </section>
+
+        </div>
+
+      </section>
+
+      <!-- ================= TAB 3 — AMBULANCES ================= -->
+      <section class="tab-panel hidden" data-panel="ambulance">
+
+
+        <nav class="sub-tabs" role="tablist" aria-label="Sidebar sections">
+          <button type="button" class="sub-tab{% if initial_sub['ambulance'] == 'controls' %} active{% endif %}" data-view="ambulance" data-sub="controls" role="tab" aria-selected="{% if initial_sub['ambulance'] == 'controls' %}true{% else %}false{% endif %}" title="Controls — 1 section"><span class="sub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h9M17 18h3"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="18" r="2"/></svg></span><span class="sub-label">Controls</span></button>
+          <button type="button" class="sub-tab{% if initial_sub['ambulance'] == 'charts' %} active{% endif %}" data-view="ambulance" data-sub="charts" role="tab" aria-selected="{% if initial_sub['ambulance'] == 'charts' %}true{% else %}false{% endif %}" title="Charts — 3 sections"><span class="sub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4"/><path d="M4 19.5h16"/><rect x="7" y="11" width="3.2" height="5.5" rx="0.8"/><rect x="13.3" y="7" width="3.2" height="9.5" rx="0.8"/></svg></span><span class="sub-label">Charts</span></button>
+          <button type="button" class="sub-tab{% if initial_sub['ambulance'] == 'data' %} active{% endif %}" data-view="ambulance" data-sub="data" role="tab" aria-selected="{% if initial_sub['ambulance'] == 'data' %}true{% else %}false{% endif %}" title="Data — 1 section"><span class="sub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 9.2h17M9.4 9.2V20M3.5 14.6h17"/></svg></span><span class="sub-label">Data</span></button>
+          <button type="button" class="sub-tab{% if initial_sub['ambulance'] == 'map' %} active{% endif %}" data-view="ambulance" data-sub="map" role="tab" aria-selected="{% if initial_sub['ambulance'] == 'map' %}true{% else %}false{% endif %}" title="Map — 1 section"><span class="sub-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 6.6 6-2.3 6 2.3 6-2.3v12.9l-6 2.3-6-2.3-6 2.3Z"/><path d="M9 4.3v15.2M15 6.6v15.2"/></svg></span><span class="sub-label">Map</span></button>
+        </nav>
+
+        <div class="sub-panel{% if initial_sub['ambulance'] != 'controls' %} hidden{% endif %}" data-view="ambulance" data-sub="controls" role="tabpanel">
+<section class="panel acc open" data-acc>
+          <button type="button" class="acc-head">Grids out of ambulance reach<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="panel-note">
+              Grid cells whose nearest ambulance is <b>10 km or more away by road</b>.
+              Road distance, not straight line &mdash; a cell 8 km away as the crow
+              flies is often 12 km once a canal or motorway median is in the way,
+              and those are exactly the cells this is meant to find.
+            </p>
+
+            <!-- DATASET SWITCH (24 Aug 2026). "old" is the fleet this tab was
+                 built on, untouched. "new" is the partner's filtered workbook
+                 (data/ambulances_v2.json, 142 stations) which carries a Day and
+                 Time Period per row instead of a vehicle type — so the two
+                 datasets expose different filters, and the blocks below are
+                 shown/hidden per dataset rather than merged into one confusing
+                 set of controls. Both run the same >= threshold road test. -->
+            <label>Dataset</label>
+            <div class="preset-row" id="amb-dataset">
+              <button type="button" data-dataset="old" class="active">
+                Old<small>current fleet</small>
+              </button>
+              <button type="button" data-dataset="new">
+                New<small>filtered workbook</small>
+              </button>
+            </div>
+            <p class="panel-note" id="amb-dataset-note"></p>
+
+            <label for="amb-threshold">Threshold (km or more = gap)</label>
+            <div class="threshold-row">
+              <input type="range" id="amb-threshold" min="2" max="30" step="1" value="10" />
+              <div class="threshold-value">
+                <input type="number" id="amb-threshold-num" min="2" max="30" step="1" value="10" />
+                <span>km</span>
+              </div>
+            </div>
+
+            <!-- OLD-only: the v2 workbook has no vehicle type to scope by. -->
+            <div id="amb-scope-wrap">
+              <label>Count which vehicles</label>
+              <div class="radio-group">
+                <label class="radio"><input type="radio" name="amb-scope" value="all" checked /><span>All 569 ambulances</span></label>
+                <label class="radio"><input type="radio" name="amb-scope" value="emergency" /><span>ALS + BLS only (308)</span></label>
+              </div>
+            </div>
+
+            <!-- NEW-only. Defaults to All/All deliberately: every station in the
+                 workbook is a single observation stamped with one day and one
+                 slot, so narrowing to one cell leaves 1-7 stations and the map
+                 goes almost entirely red. #amb-slot-warn says so when it does,
+                 rather than letting the colour imply a collapse in coverage. -->
+            <div id="amb-when-wrap" class="hidden">
+              <label for="amb-day">Day</label>
+              <select id="amb-day"><option value="">All days</option></select>
+              <label for="amb-period">Time period</label>
+              <select id="amb-period"><option value="">All time periods</option></select>
+              <p class="panel-note" id="amb-slot-note"></p>
+              <p class="panel-note warn-note hidden" id="amb-slot-warn"></p>
+            </div>
+
+            <label for="amb-district">District</label>
+            <select id="amb-district"><option value="">All districts</option></select>
+
+            <label>Colour cells by</label>
+            <div class="preset-row" id="amb-colour">
+              <button type="button" data-colour="distance" class="active">
+                Distance<small>km to ambulance</small>
+              </button>
+              <button type="button" data-colour="tss">
+                TSS<small>severity burden</small>
+              </button>
+            </div>
+            <p class="panel-note" id="amb-colour-note"></p>
+
+            <label class="toggle">
+              <input type="checkbox" id="amb-show-ids" checked />
+              <span>Label cells with grid ID</span>
+            </label>
+            <p class="panel-note" id="amb-label-note"></p>
+
+            <!-- Repeated from the Data sub-tab on purpose. The full export set
+                 lives there, but people looking at a red map want the file
+                 without first learning the sub-tab exists — so the two most
+                 used buttons also sit at the end of the controls they follow. -->
+            <hr class="panel-rule" />
+            <label>Download this analysis</label>
+            <button type="button" class="btn-primary" id="btn-amb-quick-gaps">
+              Out-of-reach grids CSV
+            </button>
+            <button type="button" class="btn-primary" id="btn-amb-quick-bundle">
+              Everything on this tab &mdash; ZIP
+            </button>
+            <p class="panel-note">
+              Both follow the filters above and carry the four reach bands
+              &mdash; <b>within reach</b>, <b>up to 2&times;</b>, <b>2&ndash;3&times;</b>,
+              <b>3&times;+ or nothing within 60&nbsp;km</b> &mdash; as columns, and
+              the ZIP also splits them into one file per band. More exports on the
+              <b>Data</b> sub-tab.
+            </p>
+          </div>
+        </section>
+
+        <section class="stats" id="amb-gap-stats"></section>
+
+        </div>
+
+        <div class="sub-panel{% if initial_sub['ambulance'] != 'charts' %} hidden{% endif %}" data-view="ambulance" data-sub="charts" role="tabpanel">
+<section class="panel acc open amb-old-only" data-acc>
+          <button type="button" class="acc-head">What is actually covering the grids<span class="acc-tag viz">chart</span><span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="viz-sub">
+              For every grid counted as covered, the type of the vehicle that
+              covers it. A grid whose nearest vehicle is a patient-transport van
+              or a neonatal unit is inside the radius but not inside an emergency
+              response &mdash; a distinction the raw gap count cannot make.
+            </p>
+            <div id="viz-amb-mix"></div>
+            <div class="viz-legend" id="viz-amb-mix-legend"></div>
+            <p class="panel-note" id="viz-amb-mix-note"></p>
+          </div>
+        </section>
+
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Worst-served grids<span class="acc-tag viz">chart</span><span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <p class="viz-sub">
+              The extreme tail by road distance. Cells with <b>no qualifying
+              vehicle at all</b> are marked in red and labelled &mdash; they are
+              not merely far, they are unreachable under the current filter.
+            </p>
+            <div id="viz-amb-worst"></div>
+            <div class="table-wrap" style="max-height:240px"><table class="mini-table" id="amb-gap-table"></table></div>
+          </div>
+        </section>
+
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Gaps by district<span class="acc-tag viz">chart</span><span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <div id="viz-amb-districts"></div>
+            <div class="table-wrap" style="max-height:240px"><table class="mini-table" id="amb-district-table"></table></div>
+          </div>
+        </section>
+
+        </div>
+
+        <div class="sub-panel{% if initial_sub['ambulance'] != 'data' %} hidden{% endif %}" data-view="ambulance" data-sub="data" role="tabpanel">
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Export<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <!-- Every button here carries the tab's live filters (dataset,
+                 threshold, district, and day/period on the new dataset) — see
+                 exportQuery() in network_analytics.js. Anything over 50k rows
+                 comes back as a ZIP of numbered parts with a manifest instead
+                 of a CSV no spreadsheet will open. -->
+            <p class="panel-note" id="amb-export-note"></p>
+            <p class="panel-note">
+              Every out-of-reach row carries its <b>reach band</b> &mdash; within
+              reach, up to 2&times; the limit, 2&ndash;3&times;, or 3&times;+ /
+              nothing within 60&nbsp;km &mdash; plus how many multiples of the
+              limit it actually sits at. The ZIPs additionally break the grids
+              out into one file per band, with a <code>band_summary</code> table
+              counting grids and severity in each.
+            </p>
+            <button type="button" class="btn-primary" id="btn-export-amb-gaps">
+              Download out-of-reach grids CSV
+            </button>
+            <button type="button" class="btn-primary amb-new-only hidden" id="btn-export-amb-stations">
+              Download sightings CSV
+            </button>
+            <button type="button" class="btn-primary amb-new-only hidden" id="btn-export-amb-districts">
+              Download gaps by district CSV
+            </button>
+            <!-- Two buttons, not one that follows the active dataset: the old
+                 fleet and the new workbook are different sources measured on
+                 different days, and one file holding both would invite adding
+                 their gap counts together. -->
+            <label class="toggle">
+              <input type="checkbox" id="amb-bundle-split" />
+              <span>Split every table by district</span>
+            </label>
+            <button type="button" class="btn-primary" id="btn-export-amb-bundle-old">
+              Download everything &mdash; OLD fleet ZIP
+            </button>
+            <button type="button" class="btn-primary" id="btn-export-amb-bundle-new">
+              Download everything &mdash; NEW workbook ZIP
+            </button>
+          </div>
+        </section>
+
+        </div>
+
+        <div class="sub-panel{% if initial_sub['ambulance'] != 'map' %} hidden{% endif %}" data-view="ambulance" data-sub="map" role="tabpanel">
+<section class="panel acc" data-acc>
+          <button type="button" class="acc-head">Map layers<span class="acc-chev"></span></button>
+          <div class="acc-body">
+            <label class="toggle"><input type="checkbox" id="amb-layer-gaps" checked /><span>Out-of-reach grids <span class="badge" id="badge-amb-gaps">0</span></span></label>
+            <label class="toggle"><input type="checkbox" id="amb-layer-covered" checked /><span>Grids within reach</span></label>
+            <label class="toggle"><input type="checkbox" id="amb-layer-current" checked /><span><span id="amb-layer-current-label">Ambulance stations</span> <span class="badge" id="badge-amb-stations">0</span></span></label>
+            <!-- OLD-only. These five counts are the 569-vehicle fleet's
+                 vehicle types and belong to that dataset alone. Left visible in
+                 NEW mode they read as a breakdown of the 142 stations above and
+                 sum to 569 instead — the contradiction reported 31 Aug 2026.
+                 syncAmbDatasetChrome() hides the whole block on NEW. -->
+            <div class="sub-filter amb-old-only" id="amb-type-filter">
+              <label class="sub-toggle"><input type="checkbox" class="amb-type-toggle" value="ALS" checked /><span class="swatch" style="background:#b91c1c"></span><span>ALS <b id="amb-n-ALS">0</b></span></label>
+              <label class="sub-toggle"><input type="checkbox" class="amb-type-toggle" value="BLS" checked /><span class="swatch" style="background:#2563eb"></span><span>BLS <b id="amb-n-BLS">0</b></span></label>
+              <label class="sub-toggle"><input type="checkbox" class="amb-type-toggle" value="PTA" /><span class="swatch" style="background:#94a3b8"></span><span>PTA <b id="amb-n-PTA">0</b></span></label>
+              <label class="sub-toggle"><input type="checkbox" class="amb-type-toggle" value="KILKARI" /><span class="swatch" style="background:#a78bfa"></span><span>Kilkari <b id="amb-n-KILKARI">0</b></span></label>
+              <label class="sub-toggle"><input type="checkbox" class="amb-type-toggle" value="NEONATE" /><span class="swatch" style="background:#f59e0b"></span><span>Neonate <b id="amb-n-NEONATE">0</b></span></label>
+            </div>
+            <!-- NEW-only. The workbook carries no vehicle type, so the
+                 breakdown that IS in the data is the time period each station
+                 was observed in. Filled by renderAmbV2Breakdown(); its rows
+                 always sum to the badge above. -->
+            <div class="sub-filter amb-new-only hidden" id="amb-slot-filter"></div>
+            <p class="panel-note amb-new-only hidden" id="amb-slot-filter-note"></p>
+          </div>
+        </section>
+
+        </div>
+
+      </section>
+
+      <!-- REMOVED 31 Aug 2026 — the "Selected feature" panel.
+           It was a literal DOM copy of the open popup (mirrorSelected() cloned
+           the popup's own node), and since every feature popup is relocated
+           into #feature-popup-dock under the legend rather than floating at the
+           click, the two sat on screen together saying the same thing. Its one
+           distinct behaviour — surviving the popup's close — did not earn a
+           permanent second copy of every record.
+           Removed with it: mirrorSelected / remirrorSelected / fpMirrorPopup,
+           and showGridDetail / showLevelDetail, which existed only to write
+           into this panel and raced the mirror for it. -->
+
+      <section class="panel acc" data-acc>
+        <button type="button" class="acc-head">Distance scale<span class="acc-chev"></span></button>
+        <div class="acc-body">
+          <p class="panel-note">
+            Click points on the map to build a path &mdash; A, B, C, D and on.
+            Every leg is measured straight-line and by road (OSRM), and the totals
+            below are cumulative across the whole path.
+          </p>
+          <label class="toggle">
+            <input type="checkbox" id="measure-toggle" />
+            <span>Measure tool</span>
+          </label>
+          <div id="measure-status" class="radar-status measure-status">Off &mdash; enable, then click points to build a path.</div>
+          <div id="measure-results" class="measure-results hidden">
+            <dl>
+              <dt>Points</dt>
+              <dd id="measure-points">0</dd>
+              <dt>Straight line</dt>
+              <dd id="measure-straight">&mdash;</dd>
+              <dt>Road distance</dt>
+              <dd id="measure-road">&mdash;</dd>
+              <dt>Drive time</dt>
+              <dd id="measure-duration">&mdash;</dd>
+            </dl>
+            <!-- Why the road distance is missing, in words. "Unavailable" alone
+                 reads as a broken feature; the cause is always the router. -->
+            <p id="measure-reason" class="measure-reason hidden"></p>
+          </div>
+          <div id="measure-legs-wrap" class="table-wrap measure-legs-wrap hidden">
+            <table class="mini-table measure-legs" id="measure-legs"></table>
+          </div>
+          <div class="measure-actions">
+            <button type="button" id="measure-undo" class="btn-ghost measure-clear" disabled>Undo last point</button>
+            <button type="button" id="measure-clear" class="btn-ghost measure-clear" disabled>Clear path</button>
+          </div>
+        </div>
+      </section>
+    </aside>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    /* Accordion wiring. Panels keep every control they had — folding is the
+       only change, so nothing becomes unreachable, it just stops competing for
+       attention. Runs before the analytics bundle so a panel that opens itself
+       (the selected-hospital card) finds the machinery already in place. */
+    (function () {
+      function toggle(panel, force) {
+        var open = force === undefined ? !panel.classList.contains("open") : force;
+        panel.classList.toggle("open", open);
+        var head = panel.querySelector(".acc-head");
+        if (head) head.setAttribute("aria-expanded", String(open));
+      }
+      document.querySelectorAll("[data-acc]").forEach(function (panel) {
+        var head = panel.querySelector(".acc-head");
+        if (!head) return;
+        head.setAttribute("aria-expanded", String(panel.classList.contains("open")));
+        head.addEventListener("click", function () {
+          toggle(panel);
+        });
+      });
+      // Let other scripts open a panel by the id of anything inside it.
+      /* Let other scripts reveal a panel by the id of anything inside it.
+         With the sidebar split into sub-tabs, "open the accordion" is no longer
+         enough — the accordion may be inside a sub-panel that is hidden. Ask the
+         analytics bundle to switch sections first, then unfold. Guarded because
+         this inline script runs BEFORE that bundle loads. */
+      window.openPanelFor = function (id) {
+        var node = document.getElementById(id);
+        if (!node) return;
+        if (window.revealSubFor) window.revealSubFor(id);
+        var panel = node.closest("[data-acc]");
+        if (panel) toggle(panel, true);
+      };
+    })();
+  </script>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="{{ asset('js/map_measure.js') }}"></script>
+  <script src="{{ asset('js/radar_overlay.js') }}"></script>
+  <script src="{{ asset('js/charts.js') }}"></script>
+  <script src="{{ asset('js/network_analytics.js') }}"></script>
+</body>
+</html>

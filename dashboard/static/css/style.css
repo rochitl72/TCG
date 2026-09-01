@@ -31,6 +31,18 @@
   --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.08);
 }
 
+/* BASE UTILITY, added 24 Aug 2026 — and it is a fix, not a tidy-up.
+   The JS toggles a `hidden` class on ~10 elements, but this rule did not
+   exist: every place that worked was carrying its own `.something.hidden
+   { display: none }`, and the elements WITHOUT such a companion rule simply
+   never hid. Two were live bugs — #prox-level-tabs (the L1/L2/L3 tabs stayed
+   on screen in Overall and Grid mode, where they mean nothing) and
+   #gap-type-segment on the Gaps tab. Every existing `.x.hidden` rule also
+   resolves to display:none, so this only ever agrees with them. */
+.hidden {
+  display: none;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -127,12 +139,33 @@ body {
   z-index: 600;
 }
 
+.app-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .app-title {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
   color: #000000;
   letter-spacing: -0.01em;
+}
+
+/* The one control that has to survive every tab switch — see the comment in
+   _app_header.html for why it lives here instead of a sidebar. Reuses the
+   pill-switch look defined in controls.css (.toggle input[type="checkbox"]),
+   so it reads as the same kind of control as every other toggle in the app
+   rather than a one-off. */
+.app-ep-toggle {
+  margin-bottom: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ctl-ink, #223049);
+  white-space: nowrap;
 }
 
 .layout-body {
@@ -398,15 +431,6 @@ select:disabled {
   vertical-align: middle;
 }
 
-.feature-details {
-  font-size: 0.88rem;
-  line-height: 1.5;
-}
-
-.feature-details.empty {
-  color: var(--muted);
-}
-
 .detail-title {
   font-size: 1.05rem;
   font-weight: 700;
@@ -420,22 +444,6 @@ select:disabled {
   color: var(--accent-strong);
   margin-bottom: 0.65rem;
   font-weight: 600;
-}
-
-.feature-details dl {
-  margin: 0;
-}
-
-.feature-details dt {
-  color: var(--muted);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  margin-top: 0.55rem;
-}
-
-.feature-details dd {
-  margin: 0.15rem 0 0;
 }
 
 .table-panel {
@@ -490,11 +498,28 @@ tbody tr:hover {
   background: #eef2f6;
 }
 
-.map-legend {
+/* Anchors BOTH the legend and, directly below it, the feature-popup dock
+   (see dockFeaturePopup() in network_analytics.js). Column-flex growing
+   from its own bottom edge: an empty dock (display:none, the default)
+   means this box is exactly as tall as the legend and sits where the
+   legend always has; a docked popup adds its height below the legend and
+   pushes the whole column up -- which is what visually "moves the legend
+   up a bit" without any JS repositioning it. */
+.map-bottom-right {
   position: absolute;
   bottom: 16px;
   right: 16px;
   z-index: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  max-width: calc(100% - 32px);
+  max-height: calc(100% - 32px);
+}
+
+.map-legend {
+  flex: none;
   width: 205px;
   max-height: calc(100% - 32px);
   overflow-y: auto;
@@ -507,6 +532,24 @@ tbody tr:hover {
   flex-direction: column;
   gap: 0.55rem;
   font-size: 0.82rem;
+}
+
+/* Holds whichever feature popup is currently open (grid, hospital,
+   ambulance, blood bank -- every kind, every tab). Leaflet's own popup
+   element is relocated here on open by dockFeaturePopup(); this box just
+   makes room for it and hides itself when nothing is docked. Width and
+   position overrides for the popup's own content live in controls.css,
+   which loads after popup_panes.css and needs to win against its
+   .fp-wide rule. */
+.feature-popup-dock {
+  flex: none;
+  width: 340px;
+  max-width: min(340px, calc(100vw - 32px));
+}
+
+.feature-popup-dock.hidden,
+.feature-popup-dock:empty {
+  display: none;
 }
 
 .legend-title {
@@ -530,6 +573,103 @@ tbody tr:hover {
   font-size: 0.74rem;
   margin-top: 0.15rem;
   line-height: 1.4;
+}
+
+/* (i) toggle that collapses the legend's explanatory prose -- see
+   attachLegendInfo() in network_analytics.js. The hint text is hidden by
+   default so the legend stays compact; one click brings it back. */
+.legend-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0 0 0.1rem;
+}
+
+.legend-title-row .legend-title {
+  margin: 0;
+}
+
+.legend-info-btn {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--panel-hover, rgba(127, 127, 127, 0.12));
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+
+.legend-info-btn:hover,
+.legend-info-btn[aria-expanded="true"] {
+  background: var(--accent, #2563eb);
+  border-color: var(--accent, #2563eb);
+  color: #fff;
+}
+
+.legend-info-btn:focus-visible {
+  outline: 2px solid var(--accent, #2563eb);
+  outline-offset: 1px;
+}
+
+.map-legend:not(.legend-info-open) .legend-hint,
+.map-legend:not(.legend-info-open) .legend-item.muted {
+  display: none;
+}
+
+/* Clickable legend rows. Every legend that keys a colour to a category uses
+   these (31 Aug 2026) — reach bands, severity bands, hospital levels, vehicle
+   types. Real <button>s so a keyboard user can reach the filter, unlike the
+   plain <span> rows that are pure key. Full width with the count pushed to the
+   right edge, so a column of them reads as a list of counts rather than
+   ragged text. */
+button.legend-item.legend-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  text-align: left;
+  border: 1px solid transparent;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  transition: opacity 0.12s ease, background 0.12s ease;
+}
+
+/* Counts right-align into a column and use tabular figures so the digits line
+   up between rows. */
+button.legend-item.legend-filter b {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The swatch, pin or hospital glyph must not shrink when the label wraps. */
+button.legend-item.legend-filter > :first-child {
+  flex: 0 0 auto;
+}
+button.legend-item.legend-filter:hover {
+  background: var(--panel-hover, rgba(127, 127, 127, 0.12));
+}
+button.legend-item.legend-filter:focus-visible {
+  outline: 2px solid var(--accent, #2563eb);
+  outline-offset: 1px;
+}
+button.legend-item.legend-filter.is-off {
+  opacity: 0.4;
+  text-decoration: line-through;
 }
 
 .swatch {
@@ -723,6 +863,52 @@ tbody tr:hover {
   padding: 0.1rem 0.35rem !important;
   box-shadow: none !important;
 }
+
+/* Per-leg distance label sitting ON the drawn leg (24 Aug 2026). Straight and
+   road are shown together because the gap between them is the reading the tool
+   exists for. Tabular numerals so the two figures line up when several legs
+   stack down a path, and the whole thing is click-through — it sits over the
+   map and must never eat a click meant for the next measure point. */
+.measure-leg-label {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border: 1px solid rgba(15, 23, 42, 0.18) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 1px 6px rgba(15, 23, 42, 0.18) !important;
+  padding: 3px 7px !important;
+  pointer-events: none !important;
+  white-space: nowrap;
+  font-size: 0.68rem;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+/* Leaflet draws a little callout arrow on tooltips; centred on a line it just
+   reads as a smudge. */
+.measure-leg-label::before { display: none !important; }
+
+.measure-leg-label .ml-leg {
+  display: block;
+  font-weight: 700;
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+
+.measure-leg-label .ml-straight,
+.measure-leg-label .ml-road,
+.measure-leg-label .ml-wait,
+.measure-leg-label .ml-none {
+  display: block;
+  font-weight: 650;
+}
+
+/* Same slate as the dashed straight-line polyline, and the same teal as the
+   road polyline — the label colour-keys to the line it is quoting. */
+.measure-leg-label .ml-straight { color: #64748b; }
+.measure-leg-label .ml-road { color: #0d9488; }
+.measure-leg-label .ml-wait { color: var(--muted-soft); font-style: italic; }
+.measure-leg-label .ml-none { color: #b45309; }
 
 .measure-popup .leaflet-popup-content {
   margin: 0.55rem 0.75rem;

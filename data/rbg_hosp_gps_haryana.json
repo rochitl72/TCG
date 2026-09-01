@@ -1,0 +1,6578 @@
+{
+ "1": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC SHAHZADPUR",
+  "latitude": 30.44736882,
+  "longitude": 77.03068718
+ },
+ "10": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BOH",
+  "latitude": 30.38000458,
+  "longitude": 76.88267913
+ },
+ "1000": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "KHANNA ENT AND DENTAL HOSPITAL",
+  "latitude": 29.5389988,
+  "longitude": 75.0312417
+ },
+ "1001": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PARUL ENT SKIN AND LASER CENTRE",
+  "latitude": 29.81469,
+  "longitude": 76.42052
+ },
+ "1002": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JAIPUR CHILDREN HOSPITAL",
+  "latitude": 28.35754,
+  "longitude": 77.29634
+ },
+ "1003": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL PATAUDI",
+  "latitude": 28.32487678,
+  "longitude": 76.78214318
+ },
+ "1005": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AABHARI PLASTIC SURGERY CENTRE",
+  "latitude": 29.36408,
+  "longitude": 75.90678
+ },
+ "1006": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GOSWAMI HOSPITAL",
+  "latitude": 28.5937027,
+  "longitude": 76.2787836
+ },
+ "1007": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHREE BALAJI HOSPITAL",
+  "latitude": 28.45,
+  "longitude": 77.02
+ },
+ "1008": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "BHALE RAM HOSPITAL",
+  "latitude": 29.13516,
+  "longitude": 75.74186
+ },
+ "1010": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SURYA HOSPITAL",
+  "latitude": 30.372,
+  "longitude": 76.817
+ },
+ "1011": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SAPRA MULTISPECIALITY HOSPITAL",
+  "latitude": 28.7975,
+  "longitude": 76.1322
+ },
+ "1014": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "RAVINDRA HOSPITAL AND HEART CENTRE",
+  "latitude": 29.36163332,
+  "longitude": 75.906838
+ },
+ "1015": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JAIN ORTHOPAEDIC HOSPITAL",
+  "latitude": 29.1690724,
+  "longitude": 75.7208419
+ },
+ "1019": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SANJIVANI MULTISPECIALITY HOSPITAL",
+  "latitude": 28.47,
+  "longitude": 77.02
+ },
+ "1020": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "KHALSA HOSPITAL MANAGEMENT",
+  "latitude": 29.536535,
+  "longitude": 75.025505
+ },
+ "1024": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MEDICITY MULTISPECIALITY HOSPITAL AND NEURO CARE CENTER",
+  "latitude": 28.32841,
+  "longitude": 77.33111
+ },
+ "103": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC SORKHI",
+  "latitude": 29.05291971,
+  "longitude": 76.12143318
+ },
+ "105": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KHANDA KHERI",
+  "latitude": 29.18900941,
+  "longitude": 76.22640798
+ },
+ "106": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC SISAI BOLA",
+  "latitude": 29.1730646,
+  "longitude": 76.01338864
+ },
+ "107": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC UKLANA",
+  "latitude": 29.49839322,
+  "longitude": 75.87840894
+ },
+ "108": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC MIRCHPUR",
+  "latitude": 29.31662007,
+  "longitude": 76.18068821
+ },
+ "11": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MAJARI",
+  "latitude": 30.26838351,
+  "longitude": 76.77728498
+ },
+ "110": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Hisar",
+  "latitude": 28.45734918,
+  "longitude": 76.9974123
+ },
+ "1101": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "civil hospital palwal",
+  "latitude": 4.8,
+  "longitude": 5.6
+ },
+ "111": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC LANDHRI",
+  "latitude": 29.30106337,
+  "longitude": 75.65635819
+ },
+ "112": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC Mangali",
+  "latitude": 29.08394404,
+  "longitude": 75.72391303
+ },
+ "113": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KAIMARI",
+  "latitude": 29.08361883,
+  "longitude": 75.72405152
+ },
+ "114": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC LADWA",
+  "latitude": 29.07015513,
+  "longitude": 75.79811532
+ },
+ "115": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NALWA",
+  "latitude": 28.94743033,
+  "longitude": 75.8254377
+ },
+ "116": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC TALWANDI RUKKA",
+  "latitude": 28.94779377,
+  "longitude": 75.71205348
+ },
+ "117": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC CHOUDHARYWAS",
+  "latitude": 29.01651625,
+  "longitude": 75.57915136
+ },
+ "118": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SATROAD KALAN",
+  "latitude": 29.11215026,
+  "longitude": 75.79318106
+ },
+ "1180": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CoERS (Testing)",
+  "latitude": 28.14327,
+  "longitude": 77.32698
+ },
+ "119": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BHANBHORI",
+  "latitude": 29.40772229,
+  "longitude": 76.04400635
+ },
+ "1192": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "Sub-Divisional Hospital, Hodal",
+  "latitude": 27.89528079,
+  "longitude": 77.3667634
+ },
+ "1199": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "Aurangabad Hospital",
+  "latitude": 28.0215208,
+  "longitude": 77.3350565
+ },
+ "12": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NAGGAL",
+  "latitude": 30.23954357,
+  "longitude": 76.70947695
+ },
+ "120": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DAULATPUR",
+  "latitude": 29.44152983,
+  "longitude": 75.8618879
+ },
+ "1200": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC Alawalpur",
+  "latitude": 28.02152084,
+  "longitude": 77.33505656
+ },
+ "1202": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC Soundh Palwal",
+  "latitude": 27.912935,
+  "longitude": 77.316628
+ },
+ "1203": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC Badoli",
+  "latitude": 29.4697682,
+  "longitude": 76.9556643
+ },
+ "1204": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "phc solra",
+  "latitude": 28.186148,
+  "longitude": 77.512998
+ },
+ "1205": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Mandkola",
+  "latitude": 28.13210408,
+  "longitude": 77.17509338
+ },
+ "1208": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC Hathin",
+  "latitude": 28.043295,
+  "longitude": 77.230865
+ },
+ "1209": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Bhulwana",
+  "latitude": 27.878733,
+  "longitude": 77.387277
+ },
+ "121": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC HASANGARH",
+  "latitude": 28.83375326,
+  "longitude": 76.84488925
+ },
+ "1210": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Hasanpur",
+  "latitude": 27.970231,
+  "longitude": 77.493087
+ },
+ "1211": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Khambi",
+  "latitude": 27.96355,
+  "longitude": 77.4095
+ },
+ "1212": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Rasulpur",
+  "latitude": 28.092208,
+  "longitude": 77.399766
+ },
+ "1213": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Amarpur",
+  "latitude": 28.18909494,
+  "longitude": 77.44573995
+ },
+ "1214": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Sihol",
+  "latitude": 28.129069,
+  "longitude": 77.428874
+ },
+ "1215": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Kalsada",
+  "latitude": 28.06941181,
+  "longitude": 77.2
+ },
+ "1216": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Nangal Jaat",
+  "latitude": 27.939609,
+  "longitude": 77.280099
+ },
+ "1217": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Kot",
+  "latitude": 27.962555,
+  "longitude": 77.231786
+ },
+ "1218": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC Dudhola",
+  "latitude": 28.209164,
+  "longitude": 77.27278
+ },
+ "1219": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Deeghot",
+  "latitude": 28.035238,
+  "longitude": 77.369272
+ },
+ "122": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC AGROHA",
+  "latitude": 29.33234824,
+  "longitude": 75.62945138
+ },
+ "1220": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Allika",
+  "latitude": 28.159345,
+  "longitude": 77.2512
+ },
+ "1221": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Chhainsa",
+  "latitude": 28.060839,
+  "longitude": 77.168855
+ },
+ "1222": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Uttawar",
+  "latitude": 27.988106,
+  "longitude": 77.182236
+ },
+ "1223": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Tappa",
+  "latitude": 28.034488,
+  "longitude": 77.488988
+ },
+ "123": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BICHPARI",
+  "latitude": 29.22301008,
+  "longitude": 75.78066085
+ },
+ "124": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHANSU",
+  "latitude": 29.21648285,
+  "longitude": 75.80104773
+ },
+ "126": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GAWAR",
+  "latitude": 28.98246496,
+  "longitude": 75.55836604
+ },
+ "127": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BALSAMAND",
+  "latitude": 29.07851308,
+  "longitude": 75.48787356
+ },
+ "128": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DATTA",
+  "latitude": 29.26075772,
+  "longitude": 75.99641984
+ },
+ "129": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GURANA",
+  "latitude": 29.30424351,
+  "longitude": 75.9544376
+ },
+ "13": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NANEOLA",
+  "latitude": 30.34620872,
+  "longitude": 76.75253784
+ },
+ "130": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC UMRA",
+  "latitude": 29.01996664,
+  "longitude": 75.89491744
+ },
+ "131": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KHERI LACHAB",
+  "latitude": 29.33748333,
+  "longitude": 76.09430245
+ },
+ "132": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC CHULI BAGRIAN",
+  "latitude": 29.29065593,
+  "longitude": 75.38581623
+ },
+ "133": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DOBHI",
+  "latitude": 29.13226641,
+  "longitude": 75.50907279
+ },
+ "134": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KAJLAN",
+  "latitude": 29.23682255,
+  "longitude": 75.61636494
+ },
+ "135": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NEOLI KALAN",
+  "latitude": 29.18822021,
+  "longitude": 75.62991028
+ },
+ "136": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BASS",
+  "latitude": 29.11464159,
+  "longitude": 76.156291
+ },
+ "137": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PUTHI SAMIN",
+  "latitude": 29.0800377,
+  "longitude": 76.26774192
+ },
+ "138": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC THURANA",
+  "latitude": 29.13073403,
+  "longitude": 76.13011954
+ },
+ "139": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PUTHI MANGAL KAHAN",
+  "latitude": 29.03045724,
+  "longitude": 75.94444898
+ },
+ "14": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NURPUR",
+  "latitude": 30.2414278,
+  "longitude": 76.7924799
+ },
+ "140": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SINDHAR",
+  "latitude": 29.26286884,
+  "longitude": 75.9288724
+ },
+ "141": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GEETANJALI HOPITAL",
+  "latitude": 29.17401257,
+  "longitude": 75.71342745
+ },
+ "142": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AAROGYA HOSPITAL",
+  "latitude": 28.88058,
+  "longitude": 76.62747
+ },
+ "145": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GINNI ORTHOPAEDIC CENTRE",
+  "latitude": 29.70853,
+  "longitude": 75.90777
+ },
+ "146": {
+  "category": "Private",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "VK NEUROCARE AND TRAUMA RESEARCH HOSPITAL",
+  "latitude": 29.19001,
+  "longitude": 75.47228
+ },
+ "147": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SAI HOSPITAL",
+  "latitude": 29.13458,
+  "longitude": 75.74219
+ },
+ "148": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHAKTI NEURO SCIENCE CENTRE",
+  "latitude": 29.134803,
+  "longitude": 75.747797
+ },
+ "149": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GUPTA HOSPITAL",
+  "latitude": 29.69673,
+  "longitude": 76.99307
+ },
+ "15": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PANJOKHRA",
+  "latitude": 30.40711295,
+  "longitude": 76.849787
+ },
+ "150": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DELHI MULTISPECIALITY HOSPITAL",
+  "latitude": 29.5201,
+  "longitude": 76.6142
+ },
+ "151": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SARVODAYA MULTISPECIALITY & CANCER HOSPITAL",
+  "latitude": 29.39123,
+  "longitude": 76.97124
+ },
+ "152": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MRS PRANAMI HOSPITAL",
+  "latitude": 30.15728,
+  "longitude": 77.31266
+ },
+ "153": {
+  "category": "Private",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "MAHATMA GANDHI INSTITUTE OF MEDICAL SCIENCES",
+  "latitude": 29.71631,
+  "longitude": 75.90568
+ },
+ "154": {
+  "category": "Private",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "GOBIND NURSING HOME",
+  "latitude": 29.14143,
+  "longitude": 76.13079
+ },
+ "155": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SATIJA HEALTH CARE",
+  "latitude": 30.47371954,
+  "longitude": 77.12174552
+ },
+ "157": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ARORA ORTHOPAEDIC HOSPITAL",
+  "latitude": 28.88486,
+  "longitude": 76.61642
+ },
+ "158": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MALIK HOSPITAL",
+  "latitude": 28.45,
+  "longitude": 77.02
+ },
+ "159": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SUKHDA MULTISPECIALITY HOSPITAL",
+  "latitude": 30.68175,
+  "longitude": 76.84845
+ },
+ "16": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BIHTA",
+  "latitude": 30.27187756,
+  "longitude": 76.95417162
+ },
+ "160": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "CMC HOSPITAL",
+  "latitude": 28.67775,
+  "longitude": 76.17808
+ },
+ "161": {
+  "category": "Private",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "VARDAAN HOSPITAL",
+  "latitude": 30.1290485,
+  "longitude": 77.2673901
+ },
+ "162": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL HANSI",
+  "latitude": 29.09374266,
+  "longitude": 75.9560233
+ },
+ "163": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL ADAMPUR",
+  "latitude": 31.42966383,
+  "longitude": 75.71429595
+ },
+ "17": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KESRI",
+  "latitude": 30.23225618,
+  "longitude": 76.9018544
+ },
+ "171": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SDH Narnaund",
+  "latitude": 29.22451244,
+  "longitude": 76.14546797
+ },
+ "176": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC CHHACHHAULI",
+  "latitude": 30.24111892,
+  "longitude": 77.35911004
+ },
+ "177": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BILASPUR",
+  "latitude": 30.30174623,
+  "longitude": 77.30387723
+ },
+ "178": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC SADHAURA",
+  "latitude": 30.38223268,
+  "longitude": 77.22615711
+ },
+ "18": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC UGALA",
+  "latitude": 30.20843099,
+  "longitude": 77.04976475
+ },
+ "180": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC NAHARPUR",
+  "latitude": 30.05741435,
+  "longitude": 77.27563862
+ },
+ "181": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KHIZRABAD",
+  "latitude": 30.28721787,
+  "longitude": 77.49739714
+ },
+ "182": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL YANUNANAGAR",
+  "latitude": 30.17209367,
+  "longitude": 77.29133073
+ },
+ "183": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KHADRI",
+  "latitude": 29.48097224,
+  "longitude": 75.77501248
+ },
+ "185": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC HAIBATPUR",
+  "latitude": 30.30230966,
+  "longitude": 77.27821286
+ },
+ "186": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MUGALWALI",
+  "latitude": 30.40099704,
+  "longitude": 77.32901894
+ },
+ "187": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC ALAHAR",
+  "latitude": 30.03469011,
+  "longitude": 77.20929757
+ },
+ "188": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC ANTAWA",
+  "latitude": 30.03401636,
+  "longitude": 77.14386925
+ },
+ "189": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BURIA",
+  "latitude": 30.15725549,
+  "longitude": 77.3572308
+ },
+ "190": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KALANAUR",
+  "latitude": 30.08310931,
+  "longitude": 77.33640387
+ },
+ "191": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SABAPUR",
+  "latitude": 30.1138652,
+  "longitude": 77.36707444
+ },
+ "192": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KOT",
+  "latitude": 30.62387961,
+  "longitude": 76.94586031
+ },
+ "193": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC RASULPUR",
+  "latitude": 30.44555326,
+  "longitude": 77.2160017
+ },
+ "194": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC ARNAULI",
+  "latitude": 30.2237094,
+  "longitude": 77.28589716
+ },
+ "195": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BHAMBHOL",
+  "latitude": 30.18161304,
+  "longitude": 77.21778644
+ },
+ "196": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVIONAL CIVIL HOSPITAL JAGADHRI",
+  "latitude": 30.17077559,
+  "longitude": 77.29149515
+ },
+ "197": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL RADAUR",
+  "latitude": 30.03258521,
+  "longitude": 77.15268964
+ },
+ "199": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC DHIGAL",
+  "latitude": 28.76376549,
+  "longitude": 76.62639324
+ },
+ "2": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC MULLANA",
+  "latitude": 30.27554462,
+  "longitude": 77.04760145
+ },
+ "20": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BHUREWALA",
+  "latitude": 30.5376902,
+  "longitude": 77.08610828
+ },
+ "200": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC JAMALPUR",
+  "latitude": 28.47842706,
+  "longitude": 76.47087275
+ },
+ "202": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC CHHUHHAKWAS",
+  "latitude": 28.60542199,
+  "longitude": 76.5166729
+ },
+ "203": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JAHAZGARH",
+  "latitude": 28.63911161,
+  "longitude": 76.56233418
+ },
+ "204": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MAJRA",
+  "latitude": 28.16308334,
+  "longitude": 76.68613399
+ },
+ "205": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BADSA",
+  "latitude": 28.50997209,
+  "longitude": 76.87527202
+ },
+ "206": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC CHHUDANI",
+  "latitude": 28.65909011,
+  "longitude": 76.75416497
+ },
+ "207": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PATODA",
+  "latitude": 28.41022883,
+  "longitude": 76.67365347
+ },
+ "208": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC TUMBAHERI",
+  "latitude": 28.41457844,
+  "longitude": 76.54129603
+ },
+ "209": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BARHANA",
+  "latitude": 28.76109601,
+  "longitude": 76.67648283
+ },
+ "21": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC CHANDSAULI",
+  "latitude": 30.36961707,
+  "longitude": 77.0804393
+ },
+ "211": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BAHU JHOLARI",
+  "latitude": 28.46043815,
+  "longitude": 76.32453599
+ },
+ "212": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JASSOURKHERI",
+  "latitude": 28.78700882,
+  "longitude": 76.86027636
+ },
+ "213": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NUNA MAJRA",
+  "latitude": 28.67537491,
+  "longitude": 76.86487753
+ },
+ "214": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BHAMBEVA",
+  "latitude": 28.82868906,
+  "longitude": 76.64666291
+ },
+ "215": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "OMKAR MULTISPECIALITY HOSPITAL",
+  "latitude": 28.192,
+  "longitude": 76.6191
+ },
+ "216": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AASHIRWAD MULTISPECIALITY HOSPITAL AND TRAUMA CENTRE",
+  "latitude": 28.690119,
+  "longitude": 76.93808
+ },
+ "219": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MEDICARE SUPERSPECIALITY HOSPITAL AND TRAUMA CENTRE A UNIT OF COMFORTPLUS DISTRIBUTION PVT LTD",
+  "latitude": 28.04214,
+  "longitude": 76.11381
+ },
+ "22": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHANANA",
+  "latitude": 30.44508076,
+  "longitude": 76.98070399
+ },
+ "220": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL MATANHAIL",
+  "latitude": 28.57149851,
+  "longitude": 76.46444417
+ },
+ "221": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL KHARHAR",
+  "latitude": 28.69462046,
+  "longitude": 76.72565908
+ },
+ "222": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL BAHADURGARH",
+  "latitude": 28.69715634,
+  "longitude": 76.92471492
+ },
+ "225": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KANDELA",
+  "latitude": 27.60068433,
+  "longitude": 75.50084916
+ },
+ "226": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC MUANA",
+  "latitude": 29.10777809,
+  "longitude": 77.92335364
+ },
+ "227": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC ALEWA",
+  "latitude": 29.46509377,
+  "longitude": 76.4544575
+ },
+ "229": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC UJHANA",
+  "latitude": 29.47050041,
+  "longitude": 76.18106074
+ },
+ "23": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PATHREHRI",
+  "latitude": 30.41033708,
+  "longitude": 77.02928153
+ },
+ "230": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Jind",
+  "latitude": 29.31203196,
+  "longitude": 76.33012024
+ },
+ "232": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC CHATTAR",
+  "latitude": 29.51535043,
+  "longitude": 76.31155342
+ },
+ "233": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHMERKHA KALAN",
+  "latitude": 29.55899122,
+  "longitude": 76.15221047
+ },
+ "234": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DURJANPUR",
+  "latitude": 29.0408608,
+  "longitude": 76.00216467
+ },
+ "235": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SINSAR",
+  "latitude": 29.60104197,
+  "longitude": 76.20585894
+ },
+ "236": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC UCHANA KHURD",
+  "latitude": 29.46949077,
+  "longitude": 76.12496419
+ },
+ "237": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KINANA",
+  "latitude": 29.23633837,
+  "longitude": 76.34666081
+ },
+ "238": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC LAJWANA KALAN",
+  "latitude": 29.14953677,
+  "longitude": 76.46986651
+ },
+ "239": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NINDANA",
+  "latitude": 29.00678976,
+  "longitude": 76.36373822
+ },
+ "24": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "M.M. COLLEGE OF MEDICAL SCIENCES & RESEARCH",
+  "latitude": 29.59,
+  "longitude": 76.11
+ },
+ "240": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SHAMLO KALAN",
+  "latitude": 29.21308413,
+  "longitude": 76.39300331
+ },
+ "241": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JAI JAIWANTI",
+  "latitude": 29.16933409,
+  "longitude": 76.50341286
+ },
+ "243": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC RAJANA KALAN",
+  "latitude": 29.40502095,
+  "longitude": 76.62300585
+ },
+ "244": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC AMARGARH",
+  "latitude": 29.61846676,
+  "longitude": 76.0011375
+ },
+ "245": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DANODA KALAN",
+  "latitude": 29.53092371,
+  "longitude": 76.01969659
+ },
+ "246": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHAMTAN SAHIB",
+  "latitude": 29.69854497,
+  "longitude": 76.01464165
+ },
+ "247": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHANOURI",
+  "latitude": 29.77375898,
+  "longitude": 76.17814492
+ },
+ "248": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KARAMGARH",
+  "latitude": 29.6334672,
+  "longitude": 76.04075801
+ },
+ "249": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DARIYAWALA",
+  "latitude": 29.35028245,
+  "longitude": 76.23812299
+ },
+ "250": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC RAMRAI",
+  "latitude": 29.27934305,
+  "longitude": 76.23637804
+ },
+ "251": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DAULHA",
+  "latitude": 28.25308757,
+  "longitude": 77.10256438
+ },
+ "252": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC HATT",
+  "latitude": 29.40451162,
+  "longitude": 76.66235852
+ },
+ "253": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHARTHRAT",
+  "latitude": 29.38163916,
+  "longitude": 76.45200596
+ },
+ "255": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GOEL ORTHOPAEDIC CENTRE",
+  "latitude": 28.69,
+  "longitude": 76.92
+ },
+ "256": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL UCHANA",
+  "latitude": 29.47721192,
+  "longitude": 76.18766251
+ },
+ "26": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AGGARWAL HEART AND SURGICAL HOSPITAL",
+  "latitude": 28.89779,
+  "longitude": 76.58275
+ },
+ "266": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SDCH SAFIDON",
+  "latitude": 29.40489554,
+  "longitude": 76.66530368
+ },
+ "267": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC RAJOUND",
+  "latitude": 29.57645463,
+  "longitude": 76.48263218
+ },
+ "268": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC PUNDRI",
+  "latitude": 29.47869822,
+  "longitude": 77.02803618
+ },
+ "269": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KAUL",
+  "latitude": 29.84890703,
+  "longitude": 76.65999428
+ },
+ "27": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ANEJA HOSPITAL AND NURSING HOME",
+  "latitude": 30.38929,
+  "longitude": 76.77009
+ },
+ "270": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHAND",
+  "latitude": 29.38922315,
+  "longitude": 75.45855361
+ },
+ "271": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC RASINA",
+  "latitude": 29.7582739,
+  "longitude": 76.67622551
+ },
+ "272": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC TEEK",
+  "latitude": 29.84556727,
+  "longitude": 76.51954933
+ },
+ "273": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JAKHOLI",
+  "latitude": 29.77659544,
+  "longitude": 76.4065457
+ },
+ "274": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KARORA",
+  "latitude": 29.65645879,
+  "longitude": 76.54173703
+ },
+ "275": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KITHANA",
+  "latitude": 29.54671805,
+  "longitude": 76.3887511
+ },
+ "276": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC HABRI",
+  "latitude": 29.70108037,
+  "longitude": 76.63134252
+ },
+ "277": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MUNDRI",
+  "latitude": 29.78499476,
+  "longitude": 76.50215857
+ },
+ "278": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PHARAL",
+  "latitude": 29.8385932,
+  "longitude": 76.59076663
+ },
+ "279": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL KALAYAT",
+  "latitude": 29.67340439,
+  "longitude": 76.24980145
+ },
+ "28": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "SANJIVNI EYE AND MEDICARE CENTRE",
+  "latitude": 29.74431,
+  "longitude": 76.95773
+ },
+ "280": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC SAMBHALI",
+  "latitude": 29.76701856,
+  "longitude": 76.79841395
+ },
+ "281": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC GHARAUNDA",
+  "latitude": 29.53485841,
+  "longitude": 76.97402784
+ },
+ "282": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC TARAORI",
+  "latitude": 29.80202679,
+  "longitude": 76.92993073
+ },
+ "283": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC PADHA",
+  "latitude": 29.59650767,
+  "longitude": 76.88236177
+ },
+ "284": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC NIGHDU",
+  "latitude": 29.83590464,
+  "longitude": 76.73605516
+ },
+ "285": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KUNJPURA",
+  "latitude": 29.71915997,
+  "longitude": 77.07784429
+ },
+ "286": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BALLAH",
+  "latitude": 29.49338652,
+  "longitude": 76.79086355
+ },
+ "287": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC NISSING",
+  "latitude": 29.69136609,
+  "longitude": 76.76041784
+ },
+ "288": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL KARNAL",
+  "latitude": 29.69637006,
+  "longitude": 76.99347158
+ },
+ "289": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JALMANA",
+  "latitude": 29.5898208,
+  "longitude": 76.70593811
+ },
+ "29": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "SRI ONKAR EYE AND ENT CARE CENTRE",
+  "latitude": 30.36549,
+  "longitude": 76.76692
+ },
+ "290": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC POPRA",
+  "latitude": 29.4469173,
+  "longitude": 76.49653171
+ },
+ "291": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC UPLANA",
+  "latitude": 29.59237113,
+  "longitude": 76.66631286
+ },
+ "292": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BARSAT",
+  "latitude": 29.50423842,
+  "longitude": 77.04912007
+ },
+ "293": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC CHOURA",
+  "latitude": 29.55885423,
+  "longitude": 77.03899945
+ },
+ "294": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GAGSINA",
+  "latitude": 29.55442051,
+  "longitude": 76.87804824
+ },
+ "295": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KUTAIL",
+  "latitude": 29.59566782,
+  "longitude": 77.01005475
+ },
+ "296": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BHADSON",
+  "latitude": 29.91786857,
+  "longitude": 76.96094806
+ },
+ "297": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KHUKHNI",
+  "latitude": 29.95757446,
+  "longitude": 77.17759246
+ },
+ "298": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SAGGA",
+  "latitude": 29.75746462,
+  "longitude": 76.84502174
+ },
+ "299": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KACHHWA",
+  "latitude": 29.73210987,
+  "longitude": 76.89371287
+ },
+ "3": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC CHARMASTPUR",
+  "latitude": 30.28108825,
+  "longitude": 76.69618056
+ },
+ "30": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ROTARY Ambala CANCER AND GENERAL HOSPITAL",
+  "latitude": 28.6487828,
+  "longitude": 77.316096
+ },
+ "300": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC RAMBA",
+  "latitude": 29.79414465,
+  "longitude": 76.98698548
+ },
+ "301": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BAROTA",
+  "latitude": 29.62017379,
+  "longitude": 76.93450405
+ },
+ "302": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JUNDLA",
+  "latitude": 29.65163558,
+  "longitude": 76.86962666
+ },
+ "303": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SALWAN",
+  "latitude": 29.5123197,
+  "longitude": 76.72130957
+ },
+ "304": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GHEER",
+  "latitude": 29.77859696,
+  "longitude": 77.11396324
+ },
+ "305": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MADHUBAN",
+  "latitude": 29.60305292,
+  "longitude": 76.97671681
+ },
+ "306": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SH MOOLCHAND KIDNEY HOSPITAL AND UROLOGICAL INSTITUTE",
+  "latitude": 29.68809,
+  "longitude": 76.99176
+ },
+ "307": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "UTTAM CLINIC CUM HOSPITAL",
+  "latitude": 28.759992,
+  "longitude": 76.626644
+ },
+ "308": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "NP RAWAL HOSPITALS PRIVATE LIMITED",
+  "latitude": 29.46623,
+  "longitude": 75.478923
+ },
+ "309": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "RAMA SUPERSPECIALITY AND CRITICAL CARE HOSPITAL",
+  "latitude": 28.43333,
+  "longitude": 77.0594
+ },
+ "310": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SANJIV BANSAL CYGNUS HOSPITAL",
+  "latitude": 29.69577,
+  "longitude": 76.99306
+ },
+ "311": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "BALAJI HOSPITAL",
+  "latitude": 29.6921,
+  "longitude": 76.97445
+ },
+ "312": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MIMANI HOSPITAL",
+  "latitude": 29.30666,
+  "longitude": 76.31687
+ },
+ "313": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DR KC SACHDEVA HOSPITAL",
+  "latitude": 29.69402,
+  "longitude": 76.98926
+ },
+ "314": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "MIGLANI NURSING HOME",
+  "latitude": 28.4645425,
+  "longitude": 77.0912742
+ },
+ "315": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SUSHIL GARG HOSPITAL",
+  "latitude": 29.4673123,
+  "longitude": 75.0684334
+ },
+ "316": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SARASWATI NETHRALAYA",
+  "latitude": 29.13255,
+  "longitude": 75.73809
+ },
+ "317": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PARK HOSPITAL A UNIT OF DMR HOSPITALS PVT LTD",
+  "latitude": 29.69381,
+  "longitude": 76.98728
+ },
+ "318": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "BHATNAGAR EYE CARE CENTRE",
+  "latitude": 28.25378,
+  "longitude": 76.14419
+ },
+ "319": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SURYA HOSPITAL",
+  "latitude": 29.31445,
+  "longitude": 76.32369
+ },
+ "32": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "PC SHARMA EYE HOSPITAL",
+  "latitude": 30.68898696,
+  "longitude": 76.8501266
+ },
+ "320": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHREE HARI HOSPITAL",
+  "latitude": 29.69198,
+  "longitude": 76.9909
+ },
+ "321": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "HARYANA HOSPITAL",
+  "latitude": 29.68569,
+  "longitude": 76.99048
+ },
+ "322": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "THAKUR EYE AND MATERNITY HOSPITAL",
+  "latitude": 29.68748,
+  "longitude": 77.00824
+ },
+ "323": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ARPANA HOSPITAL",
+  "latitude": 29.06787,
+  "longitude": 75.4909
+ },
+ "324": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SETH HOSPITAL",
+  "latitude": 29.60637,
+  "longitude": 76.9775
+ },
+ "325": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "HARYANA NURSING HOME",
+  "latitude": 28.69229793,
+  "longitude": 76.93162098
+ },
+ "327": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GLOBAL CRADLE HOSPITAL",
+  "latitude": 29.6949931,
+  "longitude": 76.9916018
+ },
+ "328": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AMRITDHARA MY HOSPITAL",
+  "latitude": 29.692878,
+  "longitude": 76.974828
+ },
+ "329": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DR DHARAM DEV MEMORIAL HOSPITAL",
+  "latitude": 30.706848,
+  "longitude": 76.84615
+ },
+ "33": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "MANOCHA EYE HOSPITAL",
+  "latitude": 28.45915,
+  "longitude": 77.08462
+ },
+ "331": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PARVEEN HOSPITAL PVT LTD Karnal",
+  "latitude": 29.31202,
+  "longitude": 76.32828
+ },
+ "332": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "ARORA EYE AND LASIK LASER CENTRE",
+  "latitude": 29.69336,
+  "longitude": 76.99028
+ },
+ "333": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "PARAS NURSING HOME",
+  "latitude": 29.68295,
+  "longitude": 77.00834
+ },
+ "334": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AASHIRWAD ADVANCED HEART LUNG AND CRITICAL CARE CENTRE",
+  "latitude": 29.4115013,
+  "longitude": 76.9704386
+ },
+ "335": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PRP HOSPITAL KIDNEY CENTRE & BLOOD BANK",
+  "latitude": 28.325514,
+  "longitude": 76.7782182
+ },
+ "336": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DUA MULTI SPECIALTY HOSPITAL",
+  "latitude": 28.26835,
+  "longitude": 76.15093
+ },
+ "337": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SATYAM HOSPITAL",
+  "latitude": 29.12906,
+  "longitude": 75.73391
+ },
+ "338": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ROHIT KATHPALIA UROLOGY CENTER",
+  "latitude": 28.79206,
+  "longitude": 76.13064
+ },
+ "34": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "KAPIL EYE HOSPITAL",
+  "latitude": 30.3803936,
+  "longitude": 76.7803279
+ },
+ "341": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JAGDAMBA BABY CARE CENTRE",
+  "latitude": 29.69412,
+  "longitude": 76.99102
+ },
+ "342": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GURU NANAK HOSPITAL",
+  "latitude": 29.68274607,
+  "longitude": 76.99988594
+ },
+ "343": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "BHATIA ORTHOPAEDIC CENTRE Karnal",
+  "latitude": 29.99151,
+  "longitude": 76.58886
+ },
+ "344": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "DR.RISHI EYE INSTITUTE",
+  "latitude": 29.16587,
+  "longitude": 75.71942
+ },
+ "345": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHRI RAM CHAND MEMORIAL HOSPITAL PVT. LTD.",
+  "latitude": 29.13686,
+  "longitude": 75.72112
+ },
+ "346": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHRI SANATAN DHARAM MAHABIR DAL HOSPITAL",
+  "latitude": 29.14034,
+  "longitude": 75.74247
+ },
+ "347": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "THAKUR HOSPITAL",
+  "latitude": 29.592957,
+  "longitude": 76.119247
+ },
+ "348": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "VIRK HOSPITAL PVT LTD",
+  "latitude": 29.68242,
+  "longitude": 76.99413
+ },
+ "349": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL ASSANDH",
+  "latitude": 29.65234873,
+  "longitude": 76.86893668
+ },
+ "35": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "BANSAL EYE HOSPITAL",
+  "latitude": 28.36799529,
+  "longitude": 77.33597041
+ },
+ "350": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL INDRI",
+  "latitude": 29.87901054,
+  "longitude": 77.05619764
+ },
+ "351": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL NILOKHERI",
+  "latitude": 29.84382212,
+  "longitude": 76.93313243
+ },
+ "352": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BARNA",
+  "latitude": 29.91057448,
+  "longitude": 76.7306524
+ },
+ "353": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BABAIN",
+  "latitude": 30.07814173,
+  "longitude": 76.98983254
+ },
+ "354": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC JHANSA",
+  "latitude": 30.11487662,
+  "longitude": 76.73589697
+ },
+ "355": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC LADWA",
+  "latitude": 29.99673066,
+  "longitude": 77.04449141
+ },
+ "356": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC MATHANA",
+  "latitude": 29.98365556,
+  "longitude": 76.95304893
+ },
+ "357": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Kurukshetra",
+  "latitude": 29.97043651,
+  "longitude": 76.82032699
+ },
+ "358": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC AMIN",
+  "latitude": 29.91217959,
+  "longitude": 76.86536652
+ },
+ "359": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHURALA",
+  "latitude": 30.03148594,
+  "longitude": 76.80981799
+ },
+ "36": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "LEELAWATI HOSPITAL",
+  "latitude": 30.66117,
+  "longitude": 76.88239
+ },
+ "360": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KIRMACH",
+  "latitude": 29.90014031,
+  "longitude": 76.78397877
+ },
+ "361": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DEEG",
+  "latitude": 30.13568599,
+  "longitude": 76.91180507
+ },
+ "362": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC TATKA",
+  "latitude": 30.04122927,
+  "longitude": 76.95335175
+ },
+ "363": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC ISMAILABAD",
+  "latitude": 30.11631335,
+  "longitude": 76.66651847
+ },
+ "364": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KALSANA",
+  "latitude": 30.15694879,
+  "longitude": 76.81690176
+ },
+ "365": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC THOL",
+  "latitude": 30.16412945,
+  "longitude": 76.70925786
+ },
+ "366": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GUDHA",
+  "latitude": 30.07459039,
+  "longitude": 77.05043083
+ },
+ "367": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC RAMGARH ROR",
+  "latitude": 29.99631831,
+  "longitude": 76.4609894
+ },
+ "368": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SAINA SAIDA",
+  "latitude": 30.01437575,
+  "longitude": 76.5486988
+ },
+ "369": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC THASKA MIRA JI",
+  "latitude": 30.11474263,
+  "longitude": 76.69387495
+ },
+ "37": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL Ambala CANTT",
+  "latitude": 30.38315844,
+  "longitude": 76.77991748
+ },
+ "370": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KHANPUR KOLIAN",
+  "latitude": 30.03550771,
+  "longitude": 76.88328483
+ },
+ "371": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PIPLI",
+  "latitude": 29.97755574,
+  "longitude": 76.89867333
+ },
+ "373": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SIDHARTH HOSPITAL",
+  "latitude": 28.60791,
+  "longitude": 76.65718
+ },
+ "374": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "CYGNUS SUPER SPECIALTY HOSPITAL Kurukshetra",
+  "latitude": 30.15828,
+  "longitude": 76.87482
+ },
+ "375": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "ADESH MEDICAL COLLEGE AND HOSPITAL",
+  "latitude": 29.97168,
+  "longitude": 76.8369
+ },
+ "376": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SARASWATI MISSION HOSPITAL",
+  "latitude": 29.96951,
+  "longitude": 76.87828
+ },
+ "377": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "BS HEART CARE AND MULTISPECIALITY HOSPITAL",
+  "latitude": 29.96674073,
+  "longitude": 76.83010491
+ },
+ "378": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHRI BALAJI AAROGYAM HOSPITAL",
+  "latitude": 29.97445,
+  "longitude": 76.87665
+ },
+ "379": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "KURUKSHETRA NURSING HOME",
+  "latitude": 30.1523063,
+  "longitude": 77.3083235
+ },
+ "38": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL NARAINGARH",
+  "latitude": 30.48361044,
+  "longitude": 77.12575283
+ },
+ "380": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "BHASKAR HOSPITAL",
+  "latitude": 28.928774,
+  "longitude": 77.091278
+ },
+ "381": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "VIRK HOSPITAL",
+  "latitude": 28.040007,
+  "longitude": 76.109993
+ },
+ "382": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "MIRI PIRI INSTITUTE OF MEDICAL SCIENCES AND RESEARCH",
+  "latitude": 28.7868622,
+  "longitude": 76.1308021
+ },
+ "385": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "HAYER HOSPITAL",
+  "latitude": 28.7975,
+  "longitude": 76.1322
+ },
+ "386": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL SHAHABAD",
+  "latitude": 30.17000259,
+  "longitude": 76.86729637
+ },
+ "39": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GMC SUNRISE HOSPITAL A UNIT OF GIRIRAJ SUNRISE HEALTHCARE PRIVATE LIMITED",
+  "latitude": 29.685629,
+  "longitude": 76.990547
+ },
+ "393": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL NARNAUL",
+  "latitude": 28.06601378,
+  "longitude": 76.10136006
+ },
+ "394": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MADHOGARH",
+  "latitude": 28.30849085,
+  "longitude": 76.03557634
+ },
+ "395": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PALI",
+  "latitude": 28.33773388,
+  "longitude": 76.13101062
+ },
+ "396": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MALRA BASS",
+  "latitude": 28.34489703,
+  "longitude": 76.17217149
+ },
+ "397": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC ANTRI",
+  "latitude": 27.91839374,
+  "longitude": 76.15870753
+ },
+ "398": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BAMANWAS",
+  "latitude": 27.93854628,
+  "longitude": 75.94784589
+ },
+ "399": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BAYAL",
+  "latitude": 27.86339379,
+  "longitude": 75.98303161
+ },
+ "4": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BARARA",
+  "latitude": 30.20580406,
+  "longitude": 77.04356255
+ },
+ "40": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DHIR HOSPITAL",
+  "latitude": 29.14034,
+  "longitude": 75.74247
+ },
+ "400": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BUDHWAL",
+  "latitude": 27.81651666,
+  "longitude": 76.16317485
+ },
+ "401": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MANDHANA",
+  "latitude": 28.01239984,
+  "longitude": 76.16121126
+ },
+ "402": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SIROHI BAHALI",
+  "latitude": 27.92628429,
+  "longitude": 76.13147158
+ },
+ "403": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BHOJAWAS",
+  "latitude": 28.23438506,
+  "longitude": 76.29600582
+ },
+ "404": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DONGRA AHIR",
+  "latitude": 28.19486704,
+  "longitude": 76.21005569
+ },
+ "405": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MUNDIA KHERA",
+  "latitude": 28.19447752,
+  "longitude": 76.23269028
+ },
+ "406": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHANUNDA",
+  "latitude": 28.35118501,
+  "longitude": 76.25385038
+ },
+ "407": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BALAHA KALAN",
+  "latitude": 28.09947223,
+  "longitude": 75.97686809
+ },
+ "408": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BIGOPUR",
+  "latitude": 27.940822,
+  "longitude": 76.06153812
+ },
+ "409": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC CHHILRO",
+  "latitude": 27.97161202,
+  "longitude": 76.00821667
+ },
+ "41": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "CITY NURSING HOME",
+  "latitude": 28.594,
+  "longitude": 76.2593
+ },
+ "410": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC RAMPURA",
+  "latitude": 28.1335264,
+  "longitude": 76.12546884
+ },
+ "411": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BACHHOD",
+  "latitude": 28.09726861,
+  "longitude": 76.1931861
+ },
+ "412": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KANTI",
+  "latitude": 28.04844359,
+  "longitude": 76.30956181
+ },
+ "413": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL MAHENDERGARH",
+  "latitude": 28.27449101,
+  "longitude": 76.14842648
+ },
+ "419": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "AL AFIA HOSPITAL MANDIKHERA",
+  "latitude": 27.90022844,
+  "longitude": 76.99380718
+ },
+ "42": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GIRDHAR MULTISPECIALITY HOSPITAL",
+  "latitude": 29.118,
+  "longitude": 75.69924
+ },
+ "420": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BIWAN",
+  "latitude": 28.14234753,
+  "longitude": 76.98917242
+ },
+ "421": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MARORA",
+  "latitude": 27.91066551,
+  "longitude": 77.05864448
+ },
+ "422": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NAGINA",
+  "latitude": 27.9143555,
+  "longitude": 76.98444935
+ },
+ "423": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BAI",
+  "latitude": 30.07816958,
+  "longitude": 76.990487
+ },
+ "424": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GHASERA",
+  "latitude": 28.11814588,
+  "longitude": 77.07974877
+ },
+ "425": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KALIYAKI",
+  "latitude": 28.19906507,
+  "longitude": 77.14997072
+ },
+ "426": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SUDAKA",
+  "latitude": 28.07600856,
+  "longitude": 77.0963869
+ },
+ "427": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC UJINA",
+  "latitude": 28.04478326,
+  "longitude": 77.08312678
+ },
+ "428": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BICHHOR",
+  "latitude": 27.84732556,
+  "longitude": 77.3060711
+ },
+ "429": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BISRU",
+  "latitude": 27.91681664,
+  "longitude": 77.20405479
+ },
+ "43": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DHAMIJA CHEST HOSPITAL",
+  "latitude": 29.706829,
+  "longitude": 75.9052628
+ },
+ "430": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JAMAL GARH",
+  "latitude": 27.82011145,
+  "longitude": 77.1523657
+ },
+ "431": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SIKRAWA",
+  "latitude": 27.94937433,
+  "longitude": 77.15466284
+ },
+ "432": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SINGAR",
+  "latitude": 27.86656183,
+  "longitude": 77.2438278
+ },
+ "433": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC TIGAON",
+  "latitude": 28.35653188,
+  "longitude": 77.39409648
+ },
+ "434": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JAURASI",
+  "latitude": 28.23667302,
+  "longitude": 76.91051016
+ },
+ "435": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MP AHIR",
+  "latitude": 28.27679432,
+  "longitude": 76.96906488
+ },
+ "436": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PADHENI",
+  "latitude": 28.23180672,
+  "longitude": 76.97714035
+ },
+ "438": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC NANAKPUR",
+  "latitude": 30.87846435,
+  "longitude": 76.85336823
+ },
+ "44": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SMSG HOSPITAL",
+  "latitude": 29.39075,
+  "longitude": 76.96202
+ },
+ "440": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL PANCHKULA",
+  "latitude": 30.70513428,
+  "longitude": 76.85509579
+ },
+ "442": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MORNI",
+  "latitude": 30.68820278,
+  "longitude": 77.08864512
+ },
+ "443": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SURAJPUR",
+  "latitude": 30.76146092,
+  "longitude": 76.90296419
+ },
+ "444": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BARWALA",
+  "latitude": 30.5575814,
+  "longitude": 76.93697858
+ },
+ "445": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC HANGOLA",
+  "latitude": 30.53201912,
+  "longitude": 77.03487757
+ },
+ "447": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "INSTITUTE OF REPRODUCATION & CHILD CARES",
+  "latitude": 29.8061,
+  "longitude": 76.40501
+ },
+ "448": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "DRISHTI EYE HOSPITAL",
+  "latitude": 28.98765,
+  "longitude": 77.00418
+ },
+ "449": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "DR BAKSHI GUPTA EYE CARE CENTRE",
+  "latitude": 29.5437622,
+  "longitude": 75.0289993
+ },
+ "45": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHARMA HOSPITAL",
+  "latitude": 28.8098,
+  "longitude": 76.1439
+ },
+ "450": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "A ONE CREATIONS PVT LTD",
+  "latitude": 28.47197,
+  "longitude": 77.02091
+ },
+ "452": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DHAWAN HOSPITAL",
+  "latitude": 30.3805381,
+  "longitude": 76.7804581
+ },
+ "453": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "RAFFELS HOSPITAL",
+  "latitude": 28.98123,
+  "longitude": 77.01677
+ },
+ "454": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "NETRA EYE HOSPITAL",
+  "latitude": 29.16728,
+  "longitude": 75.72456
+ },
+ "455": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "NAVDEEP HOSPITAL",
+  "latitude": 29.39005,
+  "longitude": 76.96949
+ },
+ "456": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL KALKA",
+  "latitude": 30.83855828,
+  "longitude": 76.93812395
+ },
+ "457": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BAPOLI",
+  "latitude": 29.35870327,
+  "longitude": 77.05968409
+ },
+ "458": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC AHAR",
+  "latitude": 29.30357323,
+  "longitude": 76.74139021
+ },
+ "459": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC DADLANA",
+  "latitude": 29.49730839,
+  "longitude": 76.90375057
+ },
+ "46": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "JEEVAN NURSING HOME Bhiwani",
+  "latitude": 29.54429,
+  "longitude": 75.02805
+ },
+ "460": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC NAULTHA",
+  "latitude": 29.31347043,
+  "longitude": 76.90761816
+ },
+ "461": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC NARAINA",
+  "latitude": 29.26876572,
+  "longitude": 76.95189911
+ },
+ "462": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KHOTPURA",
+  "latitude": 29.4521667,
+  "longitude": 77.00967411
+ },
+ "464": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Panipat",
+  "latitude": 29.40008701,
+  "longitude": 76.96988467
+ },
+ "465": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SEWAH",
+  "latitude": 29.33417178,
+  "longitude": 76.97911478
+ },
+ "466": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC UGRAKHERI",
+  "latitude": 29.37768817,
+  "longitude": 77.01242372
+ },
+ "467": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SEENK",
+  "latitude": 29.31248158,
+  "longitude": 76.65218994
+ },
+ "468": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC URLANA KALAN",
+  "latitude": 29.34756477,
+  "longitude": 76.71155366
+ },
+ "469": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KABRI",
+  "latitude": 29.42602489,
+  "longitude": 76.93906889
+ },
+ "47": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "Bhiwani HEART HOSPITAL",
+  "latitude": 28.4830628,
+  "longitude": 77.0178569
+ },
+ "470": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC ISRANA",
+  "latitude": 29.27934362,
+  "longitude": 76.84867624
+ },
+ "471": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MANDI",
+  "latitude": 29.28087351,
+  "longitude": 76.84875133
+ },
+ "472": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC ATTA",
+  "latitude": 29.25254722,
+  "longitude": 77.09658169
+ },
+ "473": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC CHUKLANA",
+  "latitude": 29.20789941,
+  "longitude": 76.98884274
+ },
+ "474": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PATTI KALYANA",
+  "latitude": 29.20956514,
+  "longitude": 77.02779683
+ },
+ "475": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BARANA",
+  "latitude": 29.91038848,
+  "longitude": 76.73137123
+ },
+ "476": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC UJHA",
+  "latitude": 29.36916706,
+  "longitude": 77.02300254
+ },
+ "477": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KAWI",
+  "latitude": 29.43068609,
+  "longitude": 76.78594777
+ },
+ "478": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC RAIR KALAN",
+  "latitude": 29.49012169,
+  "longitude": 76.83101935
+ },
+ "48": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JB GUPTA HOSPITAL",
+  "latitude": 30.33721,
+  "longitude": 76.86785
+ },
+ "481": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "LALA HARBHAGWAN DASS MEMORIAL DR PREM HOSPITAL",
+  "latitude": 29.38068,
+  "longitude": 76.97701
+ },
+ "482": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "APEX HOSPITAL",
+  "latitude": 28.91351,
+  "longitude": 76.60804
+ },
+ "483": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "Jatindera Hospital Panipat",
+  "latitude": 29.38887,
+  "longitude": 76.99055
+ },
+ "484": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PAWANANJALI HOSPITAL",
+  "latitude": 29.39719,
+  "longitude": 76.97037
+ },
+ "485": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "rainbow hospital",
+  "latitude": 29.38887,
+  "longitude": 76.99064
+ },
+ "486": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "IBM HOSPITAL AND TRAUMA CENTRE",
+  "latitude": 29.17015,
+  "longitude": 75.72119
+ },
+ "487": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "CYGNUS MAHARAJA AGGERSSAIN HOSPITAL",
+  "latitude": 29.38728,
+  "longitude": 76.97639
+ },
+ "488": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "GUPTA EYE HOSPITAL",
+  "latitude": 29.3996,
+  "longitude": 76.97351
+ },
+ "489": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "R M ANAND HOSPITAL",
+  "latitude": 29.39152,
+  "longitude": 76.95676
+ },
+ "49": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "CHUGH HOSPITAL Bhiwani",
+  "latitude": 30.13671,
+  "longitude": 76.86869
+ },
+ "490": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "saiprasann medicentre and satya clinic",
+  "latitude": 30.67325,
+  "longitude": 76.85098
+ },
+ "491": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHOBHIT HOSPITAL",
+  "latitude": 29.69507,
+  "longitude": 76.99747
+ },
+ "494": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "JINDAL NURSING HOME",
+  "latitude": 29.4036647,
+  "longitude": 76.9708978
+ },
+ "495": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DR HAWA SINGH CHILDREN HOSPITAL",
+  "latitude": 28.47836,
+  "longitude": 76.90387
+ },
+ "497": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "dev eye care",
+  "latitude": 30.75604483,
+  "longitude": 76.90718118
+ },
+ "499": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MALIK HOSPITAL",
+  "latitude": 29.39591,
+  "longitude": 76.95945
+ },
+ "5": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC AMBLI",
+  "latitude": 30.41551065,
+  "longitude": 77.15000296
+ },
+ "50": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JANGRA HOSPITAL AND MATERNITY CENTRE",
+  "latitude": 29.97321,
+  "longitude": 76.85757
+ },
+ "500": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GALAXY HOSPITAL AND TRAUMA CENTRE",
+  "latitude": 29.11971,
+  "longitude": 75.71944
+ },
+ "501": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "A.R. Mittal Hospital",
+  "latitude": 29.5330892,
+  "longitude": 75.0346875
+ },
+ "502": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "NC MEDICAL COLLEGE AND HOSPITAL ISRANA",
+  "latitude": 29.36512,
+  "longitude": 75.90619
+ },
+ "503": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "Bajaj Eye Centre",
+  "latitude": 28.19217,
+  "longitude": 76.61933
+ },
+ "504": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "Madaan Hospital",
+  "latitude": 29.39753,
+  "longitude": 76.97088
+ },
+ "505": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DISHA CHILDRENS HOSPITAL & DENTAL CARE CENTER",
+  "latitude": 29.39423,
+  "longitude": 76.95692
+ },
+ "506": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "Soni Burns & Plastic Surgery Centre",
+  "latitude": 29.3881896,
+  "longitude": 76.9529062
+ },
+ "507": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "Malhotra Mother and Child Hospital",
+  "latitude": 28.65346,
+  "longitude": 77.12377
+ },
+ "508": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DR.RAVINDERA MATERNITY & GENERAL HOSPITAL",
+  "latitude": 28.85122,
+  "longitude": 76.66676
+ },
+ "509": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "THE KIDNEY HOSPITAL",
+  "latitude": 30.1371381,
+  "longitude": 77.2961438
+ },
+ "51": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "ANCHAL MATERNITY & NURSING HOME",
+  "latitude": 28.1463271,
+  "longitude": 77.3354376
+ },
+ "510": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DR SUMIT BONE & JOINT CENTER",
+  "latitude": 28.7952811,
+  "longitude": 76.1536508
+ },
+ "511": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DR PRITAM ARORA ENT CARE CENTRE",
+  "latitude": 28.8815,
+  "longitude": 76.6276
+ },
+ "512": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "hyderabadi general hospital & nursing home",
+  "latitude": 29.4809,
+  "longitude": 77.7068
+ },
+ "513": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "D N HOSPITAL",
+  "latitude": 28.7989,
+  "longitude": 76.1433
+ },
+ "515": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHRI GURU NANAK HOSPITAL",
+  "latitude": 30.69886,
+  "longitude": 76.83605
+ },
+ "516": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MAX PLUS HOSPITAL",
+  "latitude": 29.53302,
+  "longitude": 68.7
+ },
+ "517": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "Aman Hospital",
+  "latitude": 29.80597,
+  "longitude": 76.3963
+ },
+ "518": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "Dr. Narayan Datt Hospital",
+  "latitude": 30.3752,
+  "longitude": 76.7821
+ },
+ "519": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ANGEL CARE HOSPITAL",
+  "latitude": 30.160249,
+  "longitude": 76.871468
+ },
+ "52": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AMAN HOSPITAL",
+  "latitude": 29.12982,
+  "longitude": 75.74151
+ },
+ "520": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SANKALP HOSPITAL",
+  "latitude": 28.0693736,
+  "longitude": 76.1055916
+ },
+ "521": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DEVI MURTI HOSPITAL",
+  "latitude": 30.1728046,
+  "longitude": 76.862395
+ },
+ "522": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "HEART AND MOTHER CARE HOSPITAL",
+  "latitude": 29.361,
+  "longitude": 75.8976
+ },
+ "523": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "Oscar Super Speciality & Trauma Centre A unit of Oscar Health Services",
+  "latitude": 29.718954,
+  "longitude": 75.906815
+ },
+ "524": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "Vardaan Stone and Kidney Hospital",
+  "latitude": 30.33634,
+  "longitude": 76.84403
+ },
+ "525": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PANIPAT HEART HOSPITAL",
+  "latitude": 28.5041073,
+  "longitude": 76.5895494
+ },
+ "526": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "CITY HOSPITAL",
+  "latitude": 29.7163,
+  "longitude": 75.9057
+ },
+ "529": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL SAMALKHA",
+  "latitude": 29.26088704,
+  "longitude": 77.00926786
+ },
+ "53": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SPES HOSPITAL",
+  "latitude": 29.12173,
+  "longitude": 75.74227
+ },
+ "531": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC MEERPUR",
+  "latitude": 28.24341217,
+  "longitude": 76.69278152
+ },
+ "532": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KHOL",
+  "latitude": 28.21272276,
+  "longitude": 76.38204345
+ },
+ "533": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC NAHAR",
+  "latitude": 28.41157827,
+  "longitude": 76.40135651
+ },
+ "534": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BAWAL",
+  "latitude": 28.09768641,
+  "longitude": 76.58940974
+ },
+ "535": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Rewari",
+  "latitude": 28.20232019,
+  "longitude": 76.61980093
+ },
+ "536": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GANGICHA AHIR",
+  "latitude": 28.26187788,
+  "longitude": 76.61179277
+ },
+ "537": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BASS DUDHA",
+  "latitude": 28.17102477,
+  "longitude": 76.3607779
+ },
+ "538": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BOHATWAS AHIR",
+  "latitude": 28.21408701,
+  "longitude": 76.51987961
+ },
+ "539": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SIHA",
+  "latitude": 28.27562251,
+  "longitude": 76.42283465
+ },
+ "54": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "KADDAM MULTISPECIALITY HOSPITAL",
+  "latitude": 28.21173,
+  "longitude": 76.94984
+ },
+ "540": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GUDIYANI",
+  "latitude": 28.3601483,
+  "longitude": 76.53440248
+ },
+ "542": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC RANIA",
+  "latitude": 29.52841376,
+  "longitude": 74.83723094
+ },
+ "543": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC MADHOSINGHANA",
+  "latitude": 29.42754376,
+  "longitude": 74.92880701
+ },
+ "544": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BARAGUDHA",
+  "latitude": 29.69916655,
+  "longitude": 75.01239638
+ },
+ "546": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KALANWALI",
+  "latitude": 29.82215025,
+  "longitude": 74.96504403
+ },
+ "547": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Sirsa",
+  "latitude": 29.53949264,
+  "longitude": 75.01452304
+ },
+ "548": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DESUJODHA",
+  "latitude": 29.95397101,
+  "longitude": 74.83654949
+ },
+ "549": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PANNIWALA MOTTA",
+  "latitude": 29.70330596,
+  "longitude": 74.90926993
+ },
+ "550": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BANI",
+  "latitude": 28.84733373,
+  "longitude": 76.50948342
+ },
+ "551": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHOTTAR",
+  "latitude": 29.57521112,
+  "longitude": 74.89669556
+ },
+ "552": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KEHARWALA",
+  "latitude": 29.66370248,
+  "longitude": 74.70325166
+ },
+ "553": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BHAVDEEN",
+  "latitude": 29.53678747,
+  "longitude": 75.2298965
+ },
+ "554": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DARBI",
+  "latitude": 29.57556935,
+  "longitude": 75.15928447
+ },
+ "555": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BANSUDHAR",
+  "latitude": 29.59570642,
+  "longitude": 74.97935459
+ },
+ "557": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GANGA",
+  "latitude": 29.78047987,
+  "longitude": 74.67774018
+ },
+ "558": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GORIWALA",
+  "latitude": 29.78320114,
+  "longitude": 74.74546246
+ },
+ "559": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JOTTANWALI",
+  "latitude": 29.92707829,
+  "longitude": 74.52882808
+ },
+ "56": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SINGLA HOSPITAL",
+  "latitude": 30.1488818,
+  "longitude": 77.3058665
+ },
+ "560": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KALUANA",
+  "latitude": 29.71166793,
+  "longitude": 74.62896825
+ },
+ "561": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JALMALERA",
+  "latitude": 29.59029877,
+  "longitude": 76.70376929
+ },
+ "562": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MALLEKAN",
+  "latitude": 29.43237881,
+  "longitude": 74.88851487
+ },
+ "563": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DARBA KALAN",
+  "latitude": 29.40481696,
+  "longitude": 75.11516151
+ },
+ "564": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DING",
+  "latitude": 29.45912442,
+  "longitude": 75.26230714
+ },
+ "565": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JAMAL",
+  "latitude": 28.96678624,
+  "longitude": 75.95476368
+ },
+ "566": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KAGDANA",
+  "latitude": 29.2910746,
+  "longitude": 75.16937147
+ },
+ "567": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC RANDHAWA",
+  "latitude": 29.42226189,
+  "longitude": 75.07345415
+ },
+ "568": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DADU",
+  "latitude": 29.83782234,
+  "longitude": 75.04778798
+ },
+ "569": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC RORI",
+  "latitude": 29.73440975,
+  "longitude": 75.20422648
+ },
+ "57": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PANWAR HOSPITAL",
+  "latitude": 29.685629,
+  "longitude": 76.990547
+ },
+ "570": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL DABWALI",
+  "latitude": 29.9569076,
+  "longitude": 74.6981084
+ },
+ "571": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL CHAUTALA",
+  "latitude": 29.78555691,
+  "longitude": 74.52686197
+ },
+ "572": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL ELLANABAD",
+  "latitude": 29.54021084,
+  "longitude": 75.01642043
+ },
+ "574": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "RAMA HOSPITAL",
+  "latitude": 29.54256,
+  "longitude": 75.03009
+ },
+ "575": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SITA HOSPITAL",
+  "latitude": 28.80023,
+  "longitude": 76.14238
+ },
+ "576": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MAHARAJA AGAR SAIN HOSPITAL",
+  "latitude": 29.38056,
+  "longitude": 76.97131
+ },
+ "577": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "SMT JAI DEVI MEMORIAL NURSING HOME",
+  "latitude": 29.27698,
+  "longitude": 76.85191
+ },
+ "578": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "RAI MULTISPECIALITY HOSPITAL",
+  "latitude": 28.39939,
+  "longitude": 77.30602
+ },
+ "579": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "BHAGWAN DAS HOSPITAL",
+  "latitude": 30.38186,
+  "longitude": 76.78523
+ },
+ "58": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "LIFE LINE MULTI SPECIALITY HOSPITAL",
+  "latitude": 29.748,
+  "longitude": 76.42
+ },
+ "580": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MAHENDRA HOSPITAL",
+  "latitude": 30.12947,
+  "longitude": 77.28914
+ },
+ "581": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GOEL HOSPITAL",
+  "latitude": 29.97194,
+  "longitude": 76.84361
+ },
+ "582": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "KAPIL HOSPITAL",
+  "latitude": 30.16809,
+  "longitude": 77.29692
+ },
+ "583": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AGGARWAL HOSPITAL",
+  "latitude": 29.38883,
+  "longitude": 76.98404
+ },
+ "585": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "KOHLI HOSPITAL",
+  "latitude": 29.6824,
+  "longitude": 76.9965
+ },
+ "586": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "VARDAAN HOSPITAL",
+  "latitude": 28.70513,
+  "longitude": 76.93787
+ },
+ "587": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "SHREE MEDICAL CARE CENTRE",
+  "latitude": 28.2742825,
+  "longitude": 76.9694435
+ },
+ "588": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JindAL HOSPITAL A UNIT OF JindAL LIFECARE P",
+  "latitude": 28.5140991,
+  "longitude": 75.9455155
+ },
+ "589": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SP INFERTILITY AND SURGICAL CENTER PVT LTD",
+  "latitude": 29.53711,
+  "longitude": 75.03259
+ },
+ "59": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "RAHUL GOYAL TRAUMA AND JOINT REPLACEMENT CENTER",
+  "latitude": 28.895515,
+  "longitude": 76.606613
+ },
+ "590": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHARMA HOSPITAL",
+  "latitude": 30.15966494,
+  "longitude": 77.31454475
+ },
+ "591": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ISHAAN HOSPITAL",
+  "latitude": 29.536594,
+  "longitude": 75.0241967
+ },
+ "593": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SABBARWAL HOSPITAL",
+  "latitude": 28.8356,
+  "longitude": 76.544
+ },
+ "594": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "K B GUPTA HOSPITAL",
+  "latitude": 28.607111,
+  "longitude": 76.656914
+ },
+ "595": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "VIGHNESH HOSPITAL",
+  "latitude": 29.4275038,
+  "longitude": 76.9752159
+ },
+ "596": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "VIKRAM HOSPITAL",
+  "latitude": 29.138407,
+  "longitude": 76.693245
+ },
+ "597": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SUDHIR HOSPITAL",
+  "latitude": 30.1290485,
+  "longitude": 77.2673901
+ },
+ "598": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "RAJ HOSPITAL",
+  "latitude": 29.151861,
+  "longitude": 75.721123
+ },
+ "599": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SWAMI VIVEKANAND MULTISPECIALITY HOSPITAL",
+  "latitude": 28.97839,
+  "longitude": 77.02639
+ },
+ "6": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Ambala CITY",
+  "latitude": 30.37899258,
+  "longitude": 76.77975198
+ },
+ "600": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "N K UROLOGY CENTRE AND STONE CLINIC",
+  "latitude": 28.97848,
+  "longitude": 77.02688
+ },
+ "601": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GARG ENT HOSPITAL",
+  "latitude": 30.14722326,
+  "longitude": 77.29009398
+ },
+ "602": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GULATI HOSPITAL",
+  "latitude": 29.39874,
+  "longitude": 76.97427
+ },
+ "603": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "VISHAL HOSPITAL",
+  "latitude": 30.13727,
+  "longitude": 77.27776
+ },
+ "604": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SANTOSH HOSPITAL",
+  "latitude": 28.89552,
+  "longitude": 76.60661
+ },
+ "605": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DABRA HOSPITAL",
+  "latitude": 29.16122,
+  "longitude": 75.77766
+ },
+ "606": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AASHIRWAD HOSPITAL",
+  "latitude": 29.13133,
+  "longitude": 75.74259
+ },
+ "607": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "NEO MEDICARE",
+  "latitude": 29.13514,
+  "longitude": 75.74157
+ },
+ "609": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "RK GUPTA HOSPITAL",
+  "latitude": 28.6073516,
+  "longitude": 76.6533238
+ },
+ "61": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC FARRUKH NAGAR",
+  "latitude": 28.44521215,
+  "longitude": 76.81931128
+ },
+ "610": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "ADVANCED EYE HOSPITAL",
+  "latitude": 30.1688416,
+  "longitude": 77.2900317
+ },
+ "611": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "CHADHA HOSPITAL",
+  "latitude": 29.3280732,
+  "longitude": 76.3016558
+ },
+ "612": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GABA HOSPITAL",
+  "latitude": 30.1477,
+  "longitude": 77.3047
+ },
+ "618": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PADHANA",
+  "latitude": 29.57508257,
+  "longitude": 76.77937064
+ },
+ "619": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC GURAWARA",
+  "latitude": 28.41387586,
+  "longitude": 76.7633775
+ },
+ "62": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC GHANGOLA",
+  "latitude": 28.25870723,
+  "longitude": 77.20270904
+ },
+ "620": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MASANI",
+  "latitude": 28.20151452,
+  "longitude": 76.72930969
+ },
+ "621": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DAHINA",
+  "latitude": 28.29591409,
+  "longitude": 76.39530024
+ },
+ "622": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC FATEHPURI",
+  "latitude": 28.33152516,
+  "longitude": 76.43351538
+ },
+ "623": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JATUSANA",
+  "latitude": 28.33401146,
+  "longitude": 76.53751652
+ },
+ "624": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BAWWA",
+  "latitude": 28.39068673,
+  "longitude": 76.32254361
+ },
+ "625": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC RATHANTHAL",
+  "latitude": 28.39824091,
+  "longitude": 76.59207269
+ },
+ "626": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KASOLA",
+  "latitude": 28.12517017,
+  "longitude": 76.65042173
+ },
+ "627": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SANGWARI",
+  "latitude": 28.16366676,
+  "longitude": 76.68446203
+ },
+ "628": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC TANKRI",
+  "latitude": 28.08289585,
+  "longitude": 76.48974102
+ },
+ "629": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHARUHERA",
+  "latitude": 28.20583072,
+  "longitude": 76.79231146
+ },
+ "63": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Gurugram",
+  "latitude": 28.46198986,
+  "longitude": 77.03384742
+ },
+ "630": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BHARAWAS",
+  "latitude": 28.15624096,
+  "longitude": 76.55934745
+ },
+ "631": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC SAMPLA",
+  "latitude": 28.76862252,
+  "longitude": 76.76661307
+ },
+ "632": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KAHNAUR",
+  "latitude": 28.75822447,
+  "longitude": 76.48784544
+ },
+ "633": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC CHIRI",
+  "latitude": 29.07372429,
+  "longitude": 76.55690282
+ },
+ "634": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC MADINA",
+  "latitude": 28.94117632,
+  "longitude": 76.43212346
+ },
+ "635": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC LAKHANMAJRA",
+  "latitude": 29.05253537,
+  "longitude": 76.47454615
+ },
+ "636": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KILOI",
+  "latitude": 28.91926881,
+  "longitude": 76.71007897
+ },
+ "637": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Rohtak",
+  "latitude": 29.0592719,
+  "longitude": 76.08593561
+ },
+ "638": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BALAND",
+  "latitude": 28.79671295,
+  "longitude": 76.57770171
+ },
+ "639": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BANIYANI",
+  "latitude": 28.84732434,
+  "longitude": 76.50986966
+ },
+ "64": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GURGAON VILLAGE",
+  "latitude": 28.47704473,
+  "longitude": 77.02655542
+ },
+ "640": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KARONTHA",
+  "latitude": 28.80123421,
+  "longitude": 76.61497571
+ },
+ "641": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PILANA",
+  "latitude": 28.71244614,
+  "longitude": 76.38857412
+ },
+ "642": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC HASSANGARH",
+  "latitude": 28.83379085,
+  "longitude": 76.84454593
+ },
+ "643": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC ISMAILA",
+  "latitude": 30.11635047,
+  "longitude": 76.66714074
+ },
+ "644": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KHARAWAR",
+  "latitude": 28.83321836,
+  "longitude": 76.68444426
+ },
+ "646": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GHILLOUR KALAN",
+  "latitude": 29.03910161,
+  "longitude": 76.66056425
+ },
+ "648": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SANGHI",
+  "latitude": 29.02839196,
+  "longitude": 76.60969547
+ },
+ "649": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SAMAR GOPAL PUR",
+  "latitude": 28.96699568,
+  "longitude": 76.50717034
+ },
+ "65": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DAULATABAD",
+  "latitude": 28.49248511,
+  "longitude": 76.99597355
+ },
+ "650": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BAHLBA",
+  "latitude": 28.93864143,
+  "longitude": 76.32875045
+ },
+ "651": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MOKHRA",
+  "latitude": 28.89371757,
+  "longitude": 76.43664833
+ },
+ "652": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC FARMANA",
+  "latitude": 28.98335623,
+  "longitude": 76.81455316
+ },
+ "653": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GIRAWAR",
+  "latitude": 28.98391205,
+  "longitude": 76.45984044
+ },
+ "654": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NINDANA",
+  "latitude": 29.00844666,
+  "longitude": 76.36391503
+ },
+ "655": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SIWACH SANJEEVANI HOSPITAL",
+  "latitude": 29.4061,
+  "longitude": 76.6615
+ },
+ "656": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHREE HOSPITAL Rohtak",
+  "latitude": 30.3796532,
+  "longitude": 76.7833993
+ },
+ "658": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MK SUPER SPECIALITY HOSPITAL PRIVATE LIMITED",
+  "latitude": 28.9869307,
+  "longitude": 76.1566899
+ },
+ "659": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ADVANTA SUPER SPECIALITY HOSPITAL",
+  "latitude": 29.96443,
+  "longitude": 74.71077
+ },
+ "66": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GARHI HARSARU",
+  "latitude": 28.44707862,
+  "longitude": 76.94345909
+ },
+ "661": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "NOBLE HEART AND SUPER SPECIALTY HOSPITAL",
+  "latitude": 29.13745,
+  "longitude": 75.73856
+ },
+ "662": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "OSCARSUPER SPECIALITY HOSPITAL & TRAUMA CENTER",
+  "latitude": 28.18506,
+  "longitude": 77.28024
+ },
+ "663": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "ARS HOLY HEART ADVANCED CARDIAC CARE & RESEARCH CENTRE",
+  "latitude": 28.86432,
+  "longitude": 76.59212
+ },
+ "666": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MANN MULTISPECIALITY HOSPITAL",
+  "latitude": 28.89504,
+  "longitude": 76.60331
+ },
+ "667": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "HOODA HOSPITAL",
+  "latitude": 28.59116,
+  "longitude": 76.27733
+ },
+ "668": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MANSAROVER HOSPITAL",
+  "latitude": 28.90165,
+  "longitude": 76.58286
+ },
+ "67": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC HAZIPUR",
+  "latitude": 28.20304703,
+  "longitude": 77.15080685
+ },
+ "670": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JOYLINE MULTISPECIALITY HOSPITAL",
+  "latitude": 28.52003,
+  "longitude": 75.94635
+ },
+ "671": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ISHWAR ORTHOPEADIC AND JOINT REPLACEMENT HOSPITAL",
+  "latitude": 29.9718,
+  "longitude": 76.8433
+ },
+ "672": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "KAINOS SUPER SPECIALITY HOSPITAL",
+  "latitude": 29.80521,
+  "longitude": 76.40544
+ },
+ "673": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "M.R. MEMORIAL NAV JEVAN HOSPITAL",
+  "latitude": 29.68569,
+  "longitude": 76.99048
+ },
+ "675": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "WE CARE MULTISPECIALITY HOSPITAL",
+  "latitude": 30.40206,
+  "longitude": 76.78658
+ },
+ "677": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PRAGATI HOSPITAL",
+  "latitude": 28.8931704,
+  "longitude": 76.6086243
+ },
+ "678": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "HOLY HEART SUPER SPECIALITY & TRAUMA CENTRE",
+  "latitude": 28.895515,
+  "longitude": 76.606613
+ },
+ "68": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC WAZIRABAD",
+  "latitude": 28.4322806,
+  "longitude": 77.08854319
+ },
+ "680": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "HRIDAYA NILAYAM",
+  "latitude": 29.534419,
+  "longitude": 75.033586
+ },
+ "681": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL KALANAUR",
+  "latitude": 28.82855916,
+  "longitude": 76.4024217
+ },
+ "682": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL MEHAM",
+  "latitude": 28.96235098,
+  "longitude": 76.2958217
+ },
+ "685": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC TIGAON",
+  "latitude": 28.34975195,
+  "longitude": 77.38812778
+ },
+ "686": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KHERI KALAN",
+  "latitude": 28.41987432,
+  "longitude": 77.32581343
+ },
+ "687": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KURALI",
+  "latitude": 28.35089666,
+  "longitude": 77.38856835
+ },
+ "688": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Faridabad",
+  "latitude": 28.39232125,
+  "longitude": 77.29843594
+ },
+ "689": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHOJ",
+  "latitude": 28.685474,
+  "longitude": 76.62634904
+ },
+ "69": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MANDPURA",
+  "latitude": 28.33405211,
+  "longitude": 76.73757845
+ },
+ "691": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PALLA",
+  "latitude": 28.47230994,
+  "longitude": 77.32024081
+ },
+ "692": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC FATEHPUR BILLOCH",
+  "latitude": 28.25617344,
+  "longitude": 77.37196113
+ },
+ "693": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MOHNA",
+  "latitude": 28.22219674,
+  "longitude": 77.44149322
+ },
+ "694": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PANHERA KHURD",
+  "latitude": 28.26440768,
+  "longitude": 77.40017757
+ },
+ "695": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SIKRI",
+  "latitude": 28.27978742,
+  "longitude": 77.28830322
+ },
+ "696": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC ANANDPUR",
+  "latitude": 28.02131276,
+  "longitude": 76.5411413
+ },
+ "697": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SUPREME HOSPITAL PRIVATE LIMITED",
+  "latitude": 28.45502,
+  "longitude": 76.9739
+ },
+ "698": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AL FALAH HOSPITAL",
+  "latitude": 28.40807,
+  "longitude": 77.32238
+ },
+ "699": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "APURVA NURSING HOME",
+  "latitude": 30.3807,
+  "longitude": 76.781539
+ },
+ "7": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SAHA",
+  "latitude": 30.33038274,
+  "longitude": 77.06556266
+ },
+ "700": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHANTI DEVI MEMORIAL HOSPITAL",
+  "latitude": 28.38927,
+  "longitude": 77.28986
+ },
+ "701": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GOYAL HOSPITAL",
+  "latitude": 30.33186,
+  "longitude": 76.84654
+ },
+ "702": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "R K HOSPITAL",
+  "latitude": 28.80381,
+  "longitude": 76.14278
+ },
+ "703": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "KEDAR HOSPITAL",
+  "latitude": 29.13737,
+  "longitude": 75.71491
+ },
+ "704": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MANAVTA HOSPITALS PRIVATE LIMITED",
+  "latitude": 28.5956784,
+  "longitude": 76.2659419
+ },
+ "708": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "CENTRE FOR SIGHT Faridabad",
+  "latitude": 28.51824,
+  "longitude": 77.03878
+ },
+ "709": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PAWAN HOSPITAL",
+  "latitude": 28.45591,
+  "longitude": 77.03738
+ },
+ "71": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BHONDSI",
+  "latitude": 28.35159102,
+  "longitude": 77.06542255
+ },
+ "710": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "HANDA MEDICAL CENTRE",
+  "latitude": 28.39148,
+  "longitude": 77.29276
+ },
+ "711": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "AMRITA INSTITUTE OF MEDICAL SCIENCES AND RESEARCH CENTRE",
+  "latitude": 28.8006,
+  "longitude": 76.1394
+ },
+ "712": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SURYA ORTHO AND TRAUMA CENTRE",
+  "latitude": 30.15210185,
+  "longitude": 77.30773295
+ },
+ "713": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "SARVODAYA HOSPITAL AND RESEARCH CENTRE A UNIT OF ANSHU HOSPITALS LTD",
+  "latitude": 28.46386,
+  "longitude": 77.06542
+ },
+ "714": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ARSH HOSPITAL",
+  "latitude": 28.41856,
+  "longitude": 77.36749
+ },
+ "715": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL BALLABHGARH",
+  "latitude": 28.38652939,
+  "longitude": 77.29549592
+ },
+ "718": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Kaithal",
+  "latitude": 29.84947509,
+  "longitude": 76.66198378
+ },
+ "719": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BALU",
+  "latitude": 29.66161892,
+  "longitude": 76.3926683
+ },
+ "72": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PALRA",
+  "latitude": 28.37712064,
+  "longitude": 77.02412251
+ },
+ "721": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DEOBAN",
+  "latitude": 29.68818058,
+  "longitude": 76.41421205
+ },
+ "722": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SAJUMA",
+  "latitude": 29.73299343,
+  "longitude": 76.27101611
+ },
+ "723": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC AGONDH",
+  "latitude": 29.99510055,
+  "longitude": 76.25278229
+ },
+ "724": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC ARNOLI",
+  "latitude": 30.17475058,
+  "longitude": 76.41610871
+ },
+ "725": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BHAGAL",
+  "latitude": 30.06457791,
+  "longitude": 76.41774979
+ },
+ "726": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KANGTHALI",
+  "latitude": 29.95508125,
+  "longitude": 76.35590178
+ },
+ "727": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KHARAKAN",
+  "latitude": 28.82321544,
+  "longitude": 76.30710365
+ },
+ "728": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KEORAK",
+  "latitude": 29.87188155,
+  "longitude": 76.47347514
+ },
+ "729": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PADLA",
+  "latitude": 29.79908278,
+  "longitude": 76.28523992
+ },
+ "73": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KASAN",
+  "latitude": 28.35854774,
+  "longitude": 76.90674486
+ },
+ "730": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PAI",
+  "latitude": 29.69910517,
+  "longitude": 76.52491944
+ },
+ "731": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHAH HOSPITAL",
+  "latitude": 30.15495,
+  "longitude": 77.30894
+ },
+ "734": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHRI JAI PARKASH HOSPITAL",
+  "latitude": 28.89552,
+  "longitude": 76.60661
+ },
+ "736": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JAIN HOSPITAL",
+  "latitude": 29.80665,
+  "longitude": 76.40539
+ },
+ "737": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "KIRTI HOSPITAL",
+  "latitude": 29.51178,
+  "longitude": 75.45522
+ },
+ "738": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JANTA MULTISPECIALITY HOSPITAL",
+  "latitude": 28.69002,
+  "longitude": 76.94776
+ },
+ "739": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SOOD HOSPITAL",
+  "latitude": 30.66694,
+  "longitude": 76.856241
+ },
+ "74": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NAKHROLA",
+  "latitude": 28.38127767,
+  "longitude": 76.95577007
+ },
+ "740": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GUPTA MULTI SPECIALITY HOSPITAL",
+  "latitude": 28.4786,
+  "longitude": 77.0536
+ },
+ "741": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "LIFE CARE HOSPITAL",
+  "latitude": 29.53942,
+  "longitude": 75.03158
+ },
+ "743": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL GULHA",
+  "latitude": 30.03785868,
+  "longitude": 76.30951168
+ },
+ "744": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ISHWAR HOSPITAL Ambala CITY",
+  "latitude": 28.98263823,
+  "longitude": 77.02132572
+ },
+ "745": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GUARDIAN HOSPITAL",
+  "latitude": 30.0,
+  "longitude": 77.0
+ },
+ "746": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC SIWAN",
+  "latitude": 29.88337171,
+  "longitude": 76.35176873
+ },
+ "747": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SADBHAVNA HOSPITAL",
+  "latitude": 30.13715,
+  "longitude": 77.29699
+ },
+ "748": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "LAMBA MULTISPECIALTY HOSPITAL",
+  "latitude": 27.0,
+  "longitude": 74.0
+ },
+ "749": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JEEVANSHREE HOSPITAL",
+  "latitude": 29.13627,
+  "longitude": 75.72026
+ },
+ "75": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "THE SIGNATURE HOSPITAL A UNIT OF PARK MEDICITY NORTH PVT LTD",
+  "latitude": 30.37714,
+  "longitude": 76.78616
+ },
+ "750": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AMANDEEP HOSPITAL",
+  "latitude": 28.689411,
+  "longitude": 76.890816
+ },
+ "752": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "Aakash Hospital",
+  "latitude": 29.4992175,
+  "longitude": 76.6313206
+ },
+ "753": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MAHARAJA AGRASEN HOSPITAL",
+  "latitude": 28.06146,
+  "longitude": 76.10716
+ },
+ "754": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL SARASWATI KHERA BHATMAJRA PEHOWA",
+  "latitude": 29.97503638,
+  "longitude": 76.58144537
+ },
+ "757": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MUNAK",
+  "latitude": 29.52117761,
+  "longitude": 76.84779696
+ },
+ "758": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AMAR HOSPITAL",
+  "latitude": 29.51177,
+  "longitude": 75.45522
+ },
+ "76": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PARK HOSPITAL A UNIT OF PARK MEDICENTERS AND INSTITUTIONS PVT LTD",
+  "latitude": 29.80131,
+  "longitude": 76.41324
+ },
+ "767": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PANCHAL HOSPITAL",
+  "latitude": 29.716312,
+  "longitude": 75.905678
+ },
+ "770": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DR. SUNIL GUPTA HOSPITAL",
+  "latitude": 29.96351,
+  "longitude": 74.70632
+ },
+ "773": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BHUNA",
+  "latitude": 29.53884346,
+  "longitude": 75.7073215
+ },
+ "774": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BHUTHAN KALAN",
+  "latitude": 29.55308516,
+  "longitude": 75.54943153
+ },
+ "775": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC JAKHAL",
+  "latitude": 29.80588573,
+  "longitude": 75.82467558
+ },
+ "776": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BHATTU KALAN",
+  "latitude": 29.4055354,
+  "longitude": 75.33980633
+ },
+ "777": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BADOPAL",
+  "latitude": 29.42027462,
+  "longitude": 75.54326988
+ },
+ "778": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Fatehabad",
+  "latitude": 29.51701183,
+  "longitude": 75.44931787
+ },
+ "779": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC AHERWAN",
+  "latitude": 29.60547878,
+  "longitude": 75.54982269
+ },
+ "78": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "EYE Q VISION PVT LTD",
+  "latitude": 28.45626,
+  "longitude": 77.03719
+ },
+ "780": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BHIRDANA",
+  "latitude": 29.54358294,
+  "longitude": 75.54960396
+ },
+ "781": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC HASSINGA",
+  "latitude": 29.59581505,
+  "longitude": 75.6142509
+ },
+ "782": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MEHMARA",
+  "latitude": 29.73413612,
+  "longitude": 75.64807522
+ },
+ "783": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NAGPUR",
+  "latitude": 29.65660511,
+  "longitude": 75.43047128
+ },
+ "784": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC INDACHHOI",
+  "latitude": 29.66532678,
+  "longitude": 75.74193173
+ },
+ "786": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NEHLA",
+  "latitude": 29.4364327,
+  "longitude": 75.73691331
+ },
+ "787": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PIRTHLA",
+  "latitude": 29.60043443,
+  "longitude": 75.85872364
+ },
+ "789": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MAMUPUR",
+  "latitude": 29.74700766,
+  "longitude": 75.83034343
+ },
+ "79": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "CHIRAG HOSPITAL",
+  "latitude": 29.13497,
+  "longitude": 77.01803
+ },
+ "790": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MEYOND KALAN",
+  "latitude": 29.75073768,
+  "longitude": 75.77648175
+ },
+ "791": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SAMIAN",
+  "latitude": 29.61864605,
+  "longitude": 75.93769312
+ },
+ "792": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BANGAON",
+  "latitude": 21.37201381,
+  "longitude": 80.38162333
+ },
+ "793": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KHABRAKALAN",
+  "latitude": 29.34529342,
+  "longitude": 75.3825189
+ },
+ "794": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KHAIRATI KHERA",
+  "latitude": 29.49794363,
+  "longitude": 75.36681763
+ },
+ "795": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PILIMANDORI",
+  "latitude": 29.39221065,
+  "longitude": 75.25636583
+ },
+ "796": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BIGHAR",
+  "latitude": 29.45189521,
+  "longitude": 75.46480147
+ },
+ "797": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC HIJRAWANKALAN",
+  "latitude": 29.61971123,
+  "longitude": 75.35263712
+ },
+ "798": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MP ROHI",
+  "latitude": 29.4744088,
+  "longitude": 75.59021569
+ },
+ "8": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NAHONI",
+  "latitude": 30.4356985,
+  "longitude": 77.14773609
+ },
+ "80": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "KAMLA HOSPITAL",
+  "latitude": 28.27419,
+  "longitude": 76.14137
+ },
+ "802": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "WADHWA SURGICAL HOSPITAL",
+  "latitude": 28.1986334,
+  "longitude": 76.6092582
+ },
+ "803": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SADBHAVNA HOSPITAL",
+  "latitude": 28.053646,
+  "longitude": 76.105111
+ },
+ "804": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL RATIA",
+  "latitude": 29.68540828,
+  "longitude": 75.5703582
+ },
+ "805": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL TOHANA",
+  "latitude": 29.70531258,
+  "longitude": 75.90758997
+ },
+ "807": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JEEVAN JYOTI HOSPITAL",
+  "latitude": 29.685629,
+  "longitude": 76.990547
+ },
+ "808": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DUDI HOSPITAL",
+  "latitude": 29.7163,
+  "longitude": 75.9057
+ },
+ "809": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JAI BALAJI MULTISPECIALTY HOSPITAL",
+  "latitude": 29.531069,
+  "longitude": 75.035264
+ },
+ "81": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "UMKAL HOSPITAL PVT LTD",
+  "latitude": 28.195435,
+  "longitude": 76.628865
+ },
+ "810": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ASHIRWAD MULTI SPECIALITY HOSPITAL",
+  "latitude": 29.9701,
+  "longitude": 74.7043
+ },
+ "812": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JAIN ORTHOPEDIC AND MULTISPECIALTY HOSPITAL",
+  "latitude": 28.8855,
+  "longitude": 76.6139
+ },
+ "813": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SANJIVANI HOSPITAL",
+  "latitude": 28.43333,
+  "longitude": 77.0594
+ },
+ "815": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHREE HOSPITAL",
+  "latitude": 29.53447,
+  "longitude": 75.04122
+ },
+ "816": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "APEX HOSPITAL AND RESEARCH CENTRE",
+  "latitude": 29.53451,
+  "longitude": 75.03367
+ },
+ "817": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHREE BALAJI HOSPITAL",
+  "latitude": 28.66162,
+  "longitude": 76.68499
+ },
+ "818": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHAH SATNAM JI SPECIALITY HOSPITALS",
+  "latitude": 29.53745,
+  "longitude": 75.03316
+ },
+ "819": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "BANSAL HOSPITAL",
+  "latitude": 29.39952,
+  "longitude": 76.97097
+ },
+ "82": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "K K HEALTH CARE CENTRE",
+  "latitude": 29.12495,
+  "longitude": 75.74419
+ },
+ "820": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MOHAR SINGH SURGICAL AND MATERNITY HOSPITAL",
+  "latitude": 30.15500297,
+  "longitude": 77.30831854
+ },
+ "821": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHREE SWASTIK HOSPITAL",
+  "latitude": 28.87,
+  "longitude": 75.91
+ },
+ "822": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SURAKSHA MULTISPECIALITY HOSPITAL",
+  "latitude": 28.607111,
+  "longitude": 76.656914
+ },
+ "823": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ORTHOHEAL HOSPITAL",
+  "latitude": 29.0,
+  "longitude": 75.0
+ },
+ "824": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "CITY HEALTHCARE & NEURO RESEARCH CENTRE",
+  "latitude": 29.707354,
+  "longitude": 77.003295
+ },
+ "826": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "RAKSHIT HOSPITAL",
+  "latitude": 29.1492,
+  "longitude": 75.7217
+ },
+ "827": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PARAS BONE JOINT AND GENERAL HOSPITAL",
+  "latitude": 29.6857,
+  "longitude": 76.9905
+ },
+ "828": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHIVAM HOSPITAL",
+  "latitude": 29.39747486,
+  "longitude": 76.96659982
+ },
+ "829": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "ASTHA HOSPITAL",
+  "latitude": 28.68020706,
+  "longitude": 76.94001073
+ },
+ "83": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "KRITI HOSPITAL",
+  "latitude": 29.3266851,
+  "longitude": 76.0952548
+ },
+ "830": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MEDICITI A MULTISPECIALITY HOSPITAL",
+  "latitude": 29.32328,
+  "longitude": 76.45758
+ },
+ "831": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SPS HOSPITAL",
+  "latitude": 29.54257,
+  "longitude": 75.02998
+ },
+ "832": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SIGMA HOSPITAL",
+  "latitude": 28.268347,
+  "longitude": 76.150932
+ },
+ "833": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MD VARDAAN HOSPITAL",
+  "latitude": 29.5341041,
+  "longitude": 75.0398353
+ },
+ "834": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "CARE HOSPITAL",
+  "latitude": 29.5354906,
+  "longitude": 75.0333598
+ },
+ "835": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MANDEEP HEART HOSPITAL",
+  "latitude": 29.53685,
+  "longitude": 75.02352
+ },
+ "837": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "NEERAJ HOSPITAL",
+  "latitude": 29.9741,
+  "longitude": 76.8786
+ },
+ "838": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "GILL HOSPITAL",
+  "latitude": 29.132502,
+  "longitude": 75.74097
+ },
+ "839": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SUKHMANI HOSPITAL",
+  "latitude": 28.393024,
+  "longitude": 77.304042
+ },
+ "84": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "AHOOJA EYE AND DENTAL INSTITUTE",
+  "latitude": 30.25145,
+  "longitude": 77.04447
+ },
+ "842": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KHARIAN",
+  "latitude": 29.62142532,
+  "longitude": 74.85704385
+ },
+ "85": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "DAYAL EYE CENTRE",
+  "latitude": 29.39152,
+  "longitude": 76.95676
+ },
+ "86": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SUDARSHAN POLY DENTAL CENTRE",
+  "latitude": 28.39603,
+  "longitude": 77.30667
+ },
+ "864": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "NATIONAL INSTITUTE OF MEDICAL SCIENCES",
+  "latitude": 29.52011,
+  "longitude": 76.61418
+ },
+ "865": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PAWAN HOSPITAL UNIT 2",
+  "latitude": 28.59909,
+  "longitude": 76.27253
+ },
+ "87": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "CENTRE FOR SIGHT GURGAON",
+  "latitude": 28.45915,
+  "longitude": 77.08462
+ },
+ "874": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "JINDAL ORTHO SURGICAL & DENTAL HOSPITAL",
+  "latitude": 30.3372711,
+  "longitude": 76.8626267
+ },
+ "875": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MITTAL SURGICAL AND MATERNITY HOSPITAL",
+  "latitude": 28.12812,
+  "longitude": 76.60156
+ },
+ "879": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC Batta",
+  "latitude": 29.70517043,
+  "longitude": 76.32330465
+ },
+ "88": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SWAMI AMARDEV HOSPITAL",
+  "latitude": 28.899179,
+  "longitude": 76.583504
+ },
+ "880": {
+  "category": "PRIVATE",
+  "hosp_level": "",
+  "hosp_type": "Private",
+  "hospname": "CoERS (Testing)",
+  "latitude": 12.99329,
+  "longitude": 80.23044
+ },
+ "884": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "HOLY NURSING HOME",
+  "latitude": 28.8807505,
+  "longitude": 76.626768
+ },
+ "885": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "D.M.C. HOSPITAL",
+  "latitude": 29.0971845,
+  "longitude": 75.9637413
+ },
+ "886": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "BIKANER NURSING HOME",
+  "latitude": 29.53849,
+  "longitude": 75.03229
+ },
+ "89": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "BHARAT VIKAS PARISHAD MAHARANAPRATAP NYAS",
+  "latitude": 29.532173,
+  "longitude": 75.035084
+ },
+ "893": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHRI SHYAM HOSPITAL & MATERNITY HOME",
+  "latitude": 29.543072,
+  "longitude": 75.028231
+ },
+ "898": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "JJ INSTITUTE OF MEDICAL SCIENCES PVT.LTD",
+  "latitude": 29.31519154,
+  "longitude": 76.32157248
+ },
+ "9": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SAMLEHRI",
+  "latitude": 30.33238159,
+  "longitude": 76.94766687
+ },
+ "90": {
+  "category": "PRIVATE",
+  "hosp_level": "NA",
+  "hosp_type": "Private",
+  "hospname": "VIAAN EYE AND RETINA CENTRE",
+  "latitude": 29.316668,
+  "longitude": 76.316666
+ },
+ "900": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC MACHROLI",
+  "latitude": 28.47695846,
+  "longitude": 76.65289138
+ },
+ "901": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JAHANGIRPUR",
+  "latitude": 28.58566373,
+  "longitude": 76.75191573
+ },
+ "902": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KANNODA",
+  "latitude": 28.76820185,
+  "longitude": 76.92489763
+ },
+ "903": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "RS GAUR GLOBAL MULTISPECIALITY HOSPITAL PVT LTD",
+  "latitude": 29.98477,
+  "longitude": 76.58223
+ },
+ "904": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MONGA HOSPITAL AND STONE CENTER",
+  "latitude": 30.37047,
+  "longitude": 76.78392
+ },
+ "906": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC BADLI",
+  "latitude": 28.57858097,
+  "longitude": 76.80579944
+ },
+ "907": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC LILODH",
+  "latitude": 28.45640495,
+  "longitude": 76.40026971
+ },
+ "908": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC AKERA",
+  "latitude": 28.23021229,
+  "longitude": 76.84996067
+ },
+ "909": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DR S P YADAV MULTISPECIALITY HOSPITAL",
+  "latitude": 28.98422,
+  "longitude": 77.01511
+ },
+ "91": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MAYOM HOSPITAL",
+  "latitude": 30.379764,
+  "longitude": 76.7831494
+ },
+ "910": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MEDICARE HOSPITAL",
+  "latitude": 28.6001,
+  "longitude": 76.2711
+ },
+ "911": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHRI BALAJI HOSPITAL",
+  "latitude": 29.531069,
+  "longitude": 75.035264
+ },
+ "912": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "CYGNUS SUPERSPECIALITY HOSPITAL",
+  "latitude": 28.18884,
+  "longitude": 76.61411
+ },
+ "913": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DR R B YADAV HOSPITAL",
+  "latitude": 28.43333,
+  "longitude": 77.0594
+ },
+ "914": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "YADUVANSHI HOSPITAL",
+  "latitude": 29.9681,
+  "longitude": 76.8902
+ },
+ "915": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MATRIKA HOSPITAL PVT LTD",
+  "latitude": 28.1895019,
+  "longitude": 76.6142542
+ },
+ "916": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "VEDANTA HOSPITAL",
+  "latitude": 28.4714198,
+  "longitude": 77.0728565
+ },
+ "917": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PUSHPANJALI HOSPITAL",
+  "latitude": 29.9695,
+  "longitude": 76.8783
+ },
+ "918": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "CAPT NANDLAL YADAV HOSPITAL",
+  "latitude": 29.16252,
+  "longitude": 75.70812
+ },
+ "919": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SAVITRI DEVI HOSPITAL",
+  "latitude": 28.80015,
+  "longitude": 76.14134
+ },
+ "92": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PUSHPANJALI HOSPITAL",
+  "latitude": 28.5981744,
+  "longitude": 76.2742882
+ },
+ "921": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "DEV JYOTI HOSPITAL",
+  "latitude": 30.16809,
+  "longitude": 77.29692
+ },
+ "923": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL KOSLI",
+  "latitude": 28.39617967,
+  "longitude": 76.48503341
+ },
+ "924": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PHILADELPHIA HOSPITAL",
+  "latitude": 29.53227,
+  "longitude": 75.034696
+ },
+ "926": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "N.P SINGH HOSPITAL",
+  "latitude": 28.1817608,
+  "longitude": 76.7229255
+ },
+ "927": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "NARAIN HOSPITAL",
+  "latitude": 29.68163,
+  "longitude": 77.0103
+ },
+ "928": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PANKAJ GARG HOSPITAL",
+  "latitude": 29.2447,
+  "longitude": 76.04185
+ },
+ "929": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SARWAL HOSPITAL",
+  "latitude": 30.33651,
+  "longitude": 76.86528
+ },
+ "93": {
+  "category": "PRIVATE",
+  "hosp_level": "L1",
+  "hosp_type": "Private",
+  "hospname": "SGT MEDICAL COLLEGE HOSPITAL AND RESEARCH INSTITUTE",
+  "latitude": 29.8005907,
+  "longitude": 76.4028874
+ },
+ "930": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "AAROGYA HOSPITAL",
+  "latitude": 28.89649,
+  "longitude": 76.60926
+ },
+ "932": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC MANHERU",
+  "latitude": 28.70688964,
+  "longitude": 76.21446768
+ },
+ "933": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC DHANANA",
+  "latitude": 28.93115482,
+  "longitude": 76.16293365
+ },
+ "934": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC KAIRU",
+  "latitude": 28.69915199,
+  "longitude": 75.87767572
+ },
+ "935": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC JAMALPUR",
+  "latitude": 28.47848365,
+  "longitude": 76.47082984
+ },
+ "937": {
+  "category": "DCH",
+  "hosp_level": "L2",
+  "hosp_type": "Govt",
+  "hospname": "DISTRICT CIVIL HOSPITAL Bhiwani",
+  "latitude": 28.79917894,
+  "longitude": 76.13351156
+ },
+ "939": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BUSAN",
+  "latitude": 28.76691439,
+  "longitude": 75.77034978
+ },
+ "94": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL HAILY MANDI",
+  "latitude": 28.34583904,
+  "longitude": 76.76151604
+ },
+ "940": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SANDWA",
+  "latitude": 28.75441623,
+  "longitude": 75.82010502
+ },
+ "941": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BAMLA",
+  "latitude": 28.80521394,
+  "longitude": 76.25176514
+ },
+ "942": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KHARAK KALAN",
+  "latitude": 28.83148127,
+  "longitude": 76.33490298
+ },
+ "943": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NANDGAON",
+  "latitude": 28.67802502,
+  "longitude": 76.11655624
+ },
+ "944": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BEHAL",
+  "latitude": 28.62730746,
+  "longitude": 75.62309054
+ },
+ "945": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHIGAWA JATAN",
+  "latitude": 28.57790541,
+  "longitude": 75.81295716
+ },
+ "946": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC NAKIPUR",
+  "latitude": 28.57063462,
+  "longitude": 75.73564898
+ },
+ "947": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SOHANSARA",
+  "latitude": 28.41138268,
+  "longitude": 75.8700232
+ },
+ "948": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BARWA",
+  "latitude": 30.55748906,
+  "longitude": 76.93700005
+ },
+ "949": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GURERA",
+  "latitude": 28.91978435,
+  "longitude": 75.51342724
+ },
+ "95": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL SOHANA",
+  "latitude": 28.24978336,
+  "longitude": 77.06847714
+ },
+ "950": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JHUMPA KALAN",
+  "latitude": 28.43286058,
+  "longitude": 75.80853742
+ },
+ "951": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC LILAS",
+  "latitude": 28.84998853,
+  "longitude": 75.53419129
+ },
+ "952": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC CHANG",
+  "latitude": 32.99379905,
+  "longitude": 75.92287596
+ },
+ "953": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC SUI",
+  "latitude": 28.86248755,
+  "longitude": 76.06171521
+ },
+ "954": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC TALU",
+  "latitude": 28.97819385,
+  "longitude": 76.14556661
+ },
+ "955": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DHANIMAHU",
+  "latitude": 28.76607837,
+  "longitude": 75.96361996
+ },
+ "956": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC DINOD",
+  "latitude": 28.79790983,
+  "longitude": 76.05226404
+ },
+ "957": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JUI KALAN",
+  "latitude": 28.64241535,
+  "longitude": 75.9592513
+ },
+ "958": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC ALAKHPURA",
+  "latitude": 29.01548648,
+  "longitude": 76.04845502
+ },
+ "959": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC PUR",
+  "latitude": 28.95047041,
+  "longitude": 76.10435404
+ },
+ "96": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL SECTOR 10 Gurugram",
+  "latitude": 28.45655967,
+  "longitude": 76.99731622
+ },
+ "960": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "KALYAN HOSPITAL",
+  "latitude": 28.895515,
+  "longitude": 76.606613
+ },
+ "961": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "PARAM HOSPITAL",
+  "latitude": 28.799046,
+  "longitude": 76.133514
+ },
+ "963": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SKP MULTISPECIALITY HOSPITAL",
+  "latitude": 29.53654,
+  "longitude": 75.02551
+ },
+ "964": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "MALIK MULTISPECIALITY HOSPITAL & TRAUMA CENTRE",
+  "latitude": 29.5373,
+  "longitude": 75.03277
+ },
+ "965": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SHREE GANESHA HOSPITAL",
+  "latitude": 28.8975,
+  "longitude": 76.6044
+ },
+ "966": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "RPS HOSPITAL MATERNITY & TRAUMA CENTRE",
+  "latitude": 29.1462,
+  "longitude": 75.727
+ },
+ "967": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL TOSHAM",
+  "latitude": 28.87374084,
+  "longitude": 75.91822398
+ },
+ "968": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL LOHARU",
+  "latitude": 28.59200155,
+  "longitude": 76.25231828
+ },
+ "969": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL SIWANI",
+  "latitude": 28.93708075,
+  "longitude": 75.60417034
+ },
+ "970": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CIVIL HOSPITAL DEVRALA",
+  "latitude": 28.68802855,
+  "longitude": 75.81809897
+ },
+ "971": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL BAWANI KHERA",
+  "latitude": 28.94472063,
+  "longitude": 76.03423829
+ },
+ "976": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC GHOGRIAN",
+  "latitude": 29.4592784,
+  "longitude": 76.28499383
+ },
+ "977": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "SARVODYA HOSPITAL Jind",
+  "latitude": 29.283745,
+  "longitude": 75.472216
+ },
+ "978": {
+  "category": "SDH",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "SUB DIVISIONAL CIVIL HOSPITAL NARWANA",
+  "latitude": 29.60245029,
+  "longitude": 76.12815327
+ },
+ "980": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "DHILLON NURSING HOME",
+  "latitude": 30.36333,
+  "longitude": 76.79141
+ },
+ "981": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "VIRAT HOSPITALS",
+  "latitude": 28.20018,
+  "longitude": 76.6104
+ },
+ "983": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "BANSAL GLOBAL HOSPITAL",
+  "latitude": 29.3885507,
+  "longitude": 76.997571
+ },
+ "984": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "SHARMA NURSING AND MATERNITY HOME",
+  "latitude": 29.364075,
+  "longitude": 75.906776
+ },
+ "985": {
+  "category": "CHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "CHC MIRAN",
+  "latitude": 28.84251104,
+  "longitude": 75.73825408
+ },
+ "986": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC BIRAN",
+  "latitude": 28.82999101,
+  "longitude": 76.0087558
+ },
+ "988": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC KULLAN",
+  "latitude": 29.66092729,
+  "longitude": 75.72568673
+ },
+ "990": {
+  "category": "PHC",
+  "hosp_level": "L3",
+  "hosp_type": "Govt",
+  "hospname": "PHC JHALANIA",
+  "latitude": 29.51054547,
+  "longitude": 75.55577832
+ },
+ "995": {
+  "category": "PRIVATE",
+  "hosp_level": "L2",
+  "hosp_type": "Private",
+  "hospname": "OXYGEN HOSPITAL",
+  "latitude": 28.19889,
+  "longitude": 76.62416
+ },
+ "999": {
+  "category": "PRIVATE",
+  "hosp_level": "L3",
+  "hosp_type": "Private",
+  "hospname": "KAKKAR NURSING HOME",
+  "latitude": 30.37818,
+  "longitude": 76.776695
+ }
+}

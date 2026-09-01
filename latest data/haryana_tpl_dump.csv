@@ -1,0 +1,1071 @@
+recid,hospid,hosp_level,statecode,state,districtcode,district,overall_prep_score
+1344,755,L2,13,Haryana,009,Jind,36.05
+1138,440,L2,13,Haryana,016,Panchkula,24.88
+458,548,L3,13,Haryana,020,Sirsa,17.73
+464,551,L3,13,Haryana,020,Sirsa,17.48
+632,417,L3,13,Haryana,014,Nuh,25.93
+1181,880,L2,13,Haryana,001,Ambala,70.68
+771,16,L3,13,Haryana,001,Ambala,15.6
+315,176,L3,13,Haryana,022,Yamuna Nagar,7.28
+981,948,L3,13,Haryana,002,Bhiwani,9.95
+1355,246,L3,13,Haryana,009,Jind,13.63
+641,835,L2,13,Haryana,020,Sirsa,36.85
+1301,880,L2,13,Haryana,001,Ambala,55.8
+886,106,L3,13,Haryana,007,Hisar,16.53
+548,772,L2,13,Haryana,022,Yamuna Nagar,18.95
+823,203,L3,13,Haryana,008,Jhajjar,0
+1113,635,L3,13,Haryana,019,Rohtak,17.93
+878,53,L2,13,Haryana,002,Bhiwani,32.33
+552,565,L3,13,Haryana,020,Sirsa,17.03
+779,870,L2,13,Haryana,006,Gurugram,29.6
+991,201,L3,13,Haryana,008,Jhajjar,9.3
+1180,880,L2,13,Haryana,001,Ambala,70.68
+310,148,L2,13,Haryana,007,Hisar,28.4
+682,476,L3,13,Haryana,017,Panipat,8.73
+1054,138,L3,13,Haryana,007,Hisar,18.65
+493,557,L3,13,Haryana,020,Sirsa,11.68
+827,733,L2,13,13,010,010,51.68
+299,360,L3,13,Haryana,012,Kurukshetra,13.13
+1008,504,L2,13,Haryana,017,Panipat,0
+1004,119,L3,13,Haryana,007,Hisar,12.68
+782,529,L3,13,Haryana,017,Panipat,37
+642,815,L2,13,Haryana,020,Sirsa,44.55
+1026,935,L3,13,Haryana,002,Bhiwani,13.98
+538,273,L3,13,Haryana,010,Kaithal,17.8
+453,688,L2,13,Haryana,004,Faridabad,44.13
+1408,880,L2,13,Haryana,001,Ambala,48.2
+1273,1222,L3,13,Haryana,015,Palwal,1.4
+1193,880,L2,13,Haryana,001,Ambala,50.65
+638,871,L2,13,Haryana,006,Gurugram,41.13
+945,959,L3,13,Haryana,002,Bhiwani,5.2
+1139,94,L3,13,Haryana,006,Gurugram,14.85
+1302,1301,L1,32,West Bengal,194,Purba mednipur,48.05
+1074,672,L2,13,Haryana,019,Rohtak,0
+398,38,L3,13,Haryana,001,Ambala,36.4
+460,563,L3,13,Haryana,020,Sirsa,14.63
+374,711,L1,13,Haryana,004,Faridabad,57.28
+803,47,L3,13,Haryana,002,Bhiwani,7.38
+1412,1384,L2,31,Uttar Pradesh,207,Ambedkar Nagar,14.45
+1312,1294,L3,29,Tamil Nadu,036,Karur,6.28
+1014,126,L3,13,Haryana,007,Hisar,16.68
+481,754,L3,13,Haryana,012,Kurukshetra,11.55
+972,109,L3,13,Haryana,007,Hisar,22.13
+500,475,L3,13,Haryana,017,Panipat,1.8
+387,191,L3,13,Haryana,022,Yamuna Nagar,8.33
+919,962,L1,13,Haryana,002,Bhiwani,36.23
+1368,880,L2,13,Haryana,001,Ambala,46.08
+316,483,L2,13,Haryana,017,Panipat,33.43
+832,121,L3,13,Haryana,007,Hisar,3.55
+301,366,L3,13,Haryana,012,Kurukshetra,6.03
+1385,976,L3,13,Haryana,009,Jind,7.03
+859,51,L3,13,Haryana,002,Bhiwani,36.4
+1137,94,L3,13,Haryana,006,Gurugram,14.85
+486,554,L3,13,Haryana,020,Sirsa,24.2
+1035,356,L3,13,Haryana,012,Kurukshetra,16.58
+976,204,L3,13,Haryana,008,Jhajjar,0
+750,20,L3,13,Haryana,001,Ambala,11.3
+1166,904,L2,13,Haryana,001,Ambala,30.9
+580,420,L3,13,Haryana,014,Nuh,9.58
+1232,1080,L3,29,Tamil Nadu,033,Kallakurichi,5.3
+565,662,L2,13,Haryana,019,Rohtak,51.05
+920,937,L2,13,Haryana,002,Bhiwani,0
+1392,254,L3,13,Haryana,009,Jind,22.58
+715,535,L2,13,Haryana,018,Rewari,38.48
+904,11,L3,13,Haryana,001,Ambala,15.53
+1207,1075,L3,29,Tamil Nadu,033,Kallakurichi,15.85
+659,838,L2,13,Haryana,020,Sirsa,43.6
+407,218,L2,13,Haryana,008,Jhajjar,52.68
+879,53,L2,13,Haryana,002,Bhiwani,29.15
+439,695,L3,13,Haryana,004,Faridabad,9.15
+345,460,L3,13,Haryana,017,Panipat,21.25
+590,434,L3,13,Haryana,014,Nuh,11.85
+793,556,L3,13,Haryana,020,Sirsa,23.38
+679,288,L2,13,Haryana,011,Karnal,54.8
+1070,393,L2,13,Haryana,013,Mahendragarh,19.85
+741,882,L3,13,Haryana,020,Sirsa,32.43
+869,916,L2,13,Haryana,018,Rewari,53.23
+1108,382,L1,13,Haryana,012,Kurukshetra,37.2
+1274,1212,L3,13,Haryana,015,Palwal,0.43
+881,53,L2,13,Haryana,002,Bhiwani,29.15
+578,724,L3,13,Haryana,010,Kaithal,4.63
+390,499,L2,13,Haryana,017,Panipat,27.1
+457,506,L2,13,Haryana,017,Panipat,17.35
+801,723,L3,13,Haryana,010,Kaithal,16.73
+399,492,L2,13,Haryana,017,Panipat,0
+997,945,L3,13,Haryana,002,Bhiwani,12.53
+1088,781,L3,13,Haryana,005,Fatehabad,11.85
+1224,1099,L3,29,Tamil Nadu,033,Kallakurichi,9.9
+1305,1291,L3,32,West Bengal,194,Purba mednipur,14.35
+1328,262,L3,13,Haryana,009,Jind,9.58
+1170,1020,L2,13,Haryana,007,Hisar,0
+465,544,L3,13,Haryana,020,Sirsa,5.45
+488,472,L3,13,Haryana,017,Panipat,9.63
+911,14,L3,13,Haryana,001,Ambala,9.43
+498,560,L3,13,Haryana,020,Sirsa,12.63
+394,353,L3,13,Haryana,012,Kurukshetra,27.9
+1021,735,L2,13,Haryana,010,Kaithal,40.58
+639,670,L2,13,Haryana,019,Rohtak,35.1
+456,177,L3,13,Haryana,022,Yamuna Nagar,15.8
+894,818,L2,13,Haryana,020,Sirsa,55.9
+915,48,L2,13,Haryana,002,Bhiwani,27.68
+806,54,L2,13,Haryana,002,Bhiwani,51.73
+1171,880,L2,13,Haryana,001,Ambala,70.68
+612,585,L2,13,Haryana,022,Yamuna Nagar,26.7
+1099,904,L2,13,Haryana,001,Ambala,30.9
+536,678,L2,13,Haryana,019,Rohtak,56.05
+296,352,L3,13,Haryana,012,Kurukshetra,5.85
+441,219,L2,13,Haryana,008,Jhajjar,38.43
+1396,880,L2,13,Haryana,001,Ambala,47.2
+623,844,NA,13,Haryana,006,Gurugram,NULL
+601,612,L2,13,Haryana,022,Yamuna Nagar,53.28
+291,286,L3,13,Haryana,011,Karnal,29.38
+1214,1074,L3,29,Tamil Nadu,033,Kallakurichi,14.7
+1253,1203,L3,13,Haryana,015,Palwal,11.35
+1261,1042,L3,19,Maharashtra,154,Satara,17.15
+525,700,L2,13,Haryana,004,Faridabad,33.6
+1240,1082,L3,29,Tamil Nadu,033,Kallakurichi,6.7
+982,985,L3,13,Haryana,002,Bhiwani,5.88
+799,53,L2,13,Haryana,002,Bhiwani,44.33
+704,621,L3,13,Haryana,018,Rewari,17.73
+797,895,L2,13,Haryana,012,Kurukshetra,30.58
+1153,747,L2,13,Haryana,007,Hisar,0
+666,281,L3,13,Haryana,011,Karnal,33.63
+1124,438,L3,13,Haryana,016,Panchkula,36.85
+1296,1269,L3,32,West Bengal,194,Purba mednipur,11.28
+1175,137,L3,13,Haryana,007,Hisar,6.9
+1157,1009,L2,13,Haryana,007,Hisar,0
+1156,1005,L2,13,Haryana,007,Hisar,0
+1025,68,L3,13,Haryana,006,Gurugram,0
+1374,1303,L3,32,West Bengal,194,Purba mednipur,35.88
+556,605,L2,13,Haryana,022,Yamuna Nagar,37.73
+678,875,L2,13,Haryana,010,Kaithal,39.65
+1147,94,L3,13,Haryana,006,Gurugram,16.18
+1367,880,L2,13,Haryana,001,Ambala,47.08
+998,961,L2,13,Haryana,002,Bhiwani,0
+378,486,L2,13,Haryana,017,Panipat,0
+653,110,L2,13,Haryana,007,Hisar,52.53
+756,534,L3,13,Haryana,018,Rewari,26.9
+1283,1210,L3,13,Haryana,015,Palwal,10.83
+853,56,L2,13,Haryana,002,Bhiwani,48.35
+1162,1007,L2,13,Haryana,007,Hisar,0
+925,979,L2,13,Haryana,001,Ambala,16.73
+702,280,L3,13,Haryana,011,Karnal,6.63
+1334,1304,L3,32,West Bengal,194,Purba mednipur,11.63
+707,624,L3,13,Haryana,018,Rewari,14.45
+610,587,L1,13,Haryana,022,Yamuna Nagar,23.8
+758,8,L3,13,Haryana,001,Ambala,15.3
+336,512,L3,13,Haryana,017,Panipat,61.53
+939,941,L3,13,Haryana,002,Bhiwani,10.63
+752,539,L3,13,Haryana,018,Rewari,8.53
+518,596,L2,13,Haryana,022,Yamuna Nagar,20.18
+1062,136,L3,13,Haryana,007,Hisar,11.9
+877,53,L2,13,Haryana,002,Bhiwani,32.33
+1123,132,L3,13,Haryana,007,Hisar,3.4
+1264,1221,L3,13,Haryana,015,Palwal,8.38
+892,927,L2,13,Haryana,001,Ambala,32.63
+1150,72,L3,13,Haryana,006,Gurugram,0.73
+665,811,L2,13,Haryana,020,Sirsa,32.05
+740,778,L2,13,Haryana,005,Fatehabad,27.38
+323,295,L3,13,Haryana,011,Karnal,19.8
+1066,140,L3,13,Haryana,007,Hisar,8.83
+662,821,L2,13,Haryana,020,Sirsa,30.28
+485,352,L3,13,Haryana,012,Kurukshetra,5.85
+1315,1316,L2,32,West Bengal,194,Purba mednipur,42.05
+561,865,L2,13,Haryana,004,Faridabad,41.9
+964,971,L3,13,Haryana,002,Bhiwani,17.28
+429,186,L3,13,Haryana,022,Yamuna Nagar,3.2
+1276,1223,L3,13,Haryana,015,Palwal,2.48
+814,153,L1,13,Haryana,007,Hisar,46.68
+742,2,L3,13,Haryana,001,Ambala,18.8
+628,80,L2,13,Haryana,006,Gurugram,38.13
+300,362,L3,13,Haryana,012,Kurukshetra,1.4
+502,566,L3,13,Haryana,020,Sirsa,28.23
+717,809,L2,13,Haryana,020,Sirsa,44.9
+1238,1083,L3,29,Tamil Nadu,033,Kallakurichi,12.35
+897,57,L2,13,Haryana,002,Bhiwani,1.1
+348,185,L3,13,Haryana,022,Yamuna Nagar,16.35
+651,838,L2,13,Haryana,020,Sirsa,44.85
+1407,1370,L2,19,Maharashtra,159,Nanded,22.03
+1090,782,L3,13,Haryana,005,Fatehabad,4.68
+1047,134,L3,13,Haryana,007,Hisar,19.18
+562,743,L3,13,Haryana,010,Kaithal,44.9
+1227,1055,L3,29,Tamil Nadu,033,Kallakurichi,38.53
+947,966,L2,13,Haryana,002,Bhiwani,19.88
+1027,213,L3,13,Haryana,008,Jhajjar,4.8
+885,905,L2,13,Haryana,001,Ambala,1
+519,746,L3,13,Haryana,010,Kaithal,23.63
+383,515,L2,13,Haryana,017,Panipat,0
+800,13,L3,13,Haryana,001,Ambala,6.35
+1043,958,L3,13,Haryana,002,Bhiwani,7.38
+914,445,L3,13,Haryana,016,Panchkula,0
+1401,1372,L2,19,Maharashtra,159,Nanded,27.65
+1298,1267,L3,32,West Bengal,194,Purba mednipur,37.28
+546,660,L2,13,Haryana,019,Rohtak,30.4
+936,416,L3,13,Haryana,014,Nuh,37.18
+1080,370,L3,13,Haryana,012,Kurukshetra,10.83
+1196,880,L2,13,Haryana,001,Ambala,49.65
+944,954,L3,13,Haryana,002,Bhiwani,10.83
+890,43,L2,13,Haryana,002,Bhiwani,14.05
+846,543,L3,13,Haryana,020,Sirsa,21.65
+600,278,L3,13,Haryana,010,Kaithal,3.93
+907,12,L3,13,Haryana,001,Ambala,16.08
+874,567,L3,13,Haryana,020,Sirsa,0
+294,422,L3,13,Haryana,014,Nuh,4.8
+1388,1319,L3,32,West Bengal,194,Purba mednipur,14.33
+513,586,L2,13,Haryana,022,Yamuna Nagar,37.35
+1393,239,L3,13,Haryana,009,Jind,3.45
+1161,1013,L2,13,Haryana,007,Hisar,0
+957,939,L3,13,Haryana,002,Bhiwani,12.95
+697,338,L2,13,Haryana,011,Karnal,0
+1103,329,L2,13,Haryana,011,Karnal,28.58
+884,114,L3,13,Haryana,007,Hisar,7.18
+996,957,L3,13,Haryana,002,Bhiwani,16.9
+701,727,L3,13,Haryana,010,Kaithal,11.68
+749,21,L3,13,Haryana,001,Ambala,6.38
+1093,795,L3,13,Haryana,005,Fatehabad,27.25
+1246,1097,L3,29,Tamil Nadu,033,Kallakurichi,20.53
+445,701,L2,13,Haryana,004,Faridabad,47.95
+342,518,L2,13,Haryana,017,Panipat,44.45
+811,302,L3,13,Haryana,011,Karnal,14.35
+385,180,L3,13,Haryana,022,Yamuna Nagar,19.8
+1250,1207,L3,19,Maharashtra,155,Kolhapur,26.08
+1109,796,L3,13,Haryana,005,Fatehabad,16.18
+930,923,L3,13,Haryana,018,Rewari,32.35
+854,53,L2,13,Haryana,002,Bhiwani,44.33
+1243,1068,L3,29,Tamil Nadu,033,Kallakurichi,15.33
+979,794,L3,13,Haryana,005,Fatehabad,4.15
+1119,1000,L2,13,Haryana,005,Fatehabad,23.73
+290,92,L2,13,Haryana,006,Gurugram,45.28
+288,329,L2,13,Haryana,011,Karnal,28.58
+1049,920,L2,13,Haryana,018,Rewari,42.78
+615,603,L2,13,Haryana,022,Yamuna Nagar,31.98
+910,964,L2,13,Haryana,002,Bhiwani,33.88
+1129,209,L3,13,Haryana,008,Jhajjar,0
+908,518,L2,13,Haryana,017,Panipat,44.45
+1178,880,L2,13,Haryana,001,Ambala,70.68
+1233,1079,L3,29,Tamil Nadu,033,Kallakurichi,29.4
+1006,119,L3,13,Haryana,007,Hisar,12.68
+657,832,L2,13,Haryana,020,Sirsa,24.18
+1084,799,L2,13,Haryana,005,Fatehabad,52.68
+835,118,L3,13,Haryana,007,Hisar,4.1
+584,428,L3,13,Haryana,014,Nuh,25.2
+1040,125,L3,13,Haryana,007,Hisar,8.55
+1024,736,L2,13,Haryana,010,Kaithal,49.93
+1096,554,L3,13,Haryana,020,Sirsa,24.2
+887,113,L3,13,Haryana,007,Hisar,24.95
+499,467,L3,13,Haryana,017,Panipat,4.38
+332,84,NA,13,Haryana,006,Gurugram,NULL
+762,536,L3,13,Haryana,018,Rewari,10.18
+1116,632,L3,13,Haryana,019,Rohtak,16.2
+671,841,L2,13,Haryana,020,Sirsa,33.98
+594,824,L1,13,Haryana,020,Sirsa,50.8
+672,469,L3,13,Haryana,017,Panipat,10.08
+988,859,L3,13,Haryana,004,Faridabad,2.48
+955,967,L3,13,Haryana,002,Bhiwani,29.18
+430,699,L3,13,Haryana,004,Faridabad,32.25
+1285,1209,L3,13,Haryana,015,Palwal,6.6
+334,357,L2,13,Haryana,012,Kurukshetra,49.7
+416,547,L2,13,Haryana,020,Sirsa,17.15
+419,546,L3,13,Haryana,020,Sirsa,19.28
+1247,1037,L2,19,Maharashtra,154,Satara,32.93
+1347,251,L3,13,Haryana,009,Jind,10.2
+1104,998,L3,13,Haryana,005,Fatehabad,0
+295,526,L2,13,Haryana,017,Panipat,0
+558,582,L2,13,Haryana,022,Yamuna Nagar,23.43
+1112,1001,L2,13,Haryana,005,Fatehabad,0
+570,424,L3,13,Haryana,014,Nuh,5.18
+462,561,L3,13,Haryana,020,Sirsa,11.03
+435,706,L2,13,Haryana,004,Faridabad,47.6
+1359,253,L3,13,Haryana,009,Jind,9.53
+817,202,L3,13,Haryana,008,Jhajjar,0
+409,616,L2,13,13,001,001,0
+1230,1096,L3,29,Tamil Nadu,033,Kallakurichi,16.15
+459,690,L3,13,Haryana,004,Faridabad,11.33
+1389,247,L3,13,Haryana,009,Jind,15.93
+747,5,L3,13,Haryana,001,Ambala,10.8
+937,952,L3,13,Haryana,002,Bhiwani,7.53
+417,612,L2,13,Haryana,022,Yamuna Nagar,53.28
+1241,1092,L3,29,Tamil Nadu,033,Kallakurichi,16.55
+1338,880,L2,13,Haryana,001,Ambala,47.65
+1313,1310,L2,32,West Bengal,194,Purba mednipur,27.73
+476,606,L2,13,Haryana,022,Yamuna Nagar,29.5
+970,906,L3,13,Haryana,008,Jhajjar,0
+591,430,L3,13,Haryana,014,Nuh,17.68
+821,198,L3,13,Haryana,008,Jhajjar,0
+1089,800,L2,13,Haryana,005,Fatehabad,53.38
+618,679,L1,13,Haryana,019,Rohtak,49.3
+1260,1211,L3,13,Haryana,015,Palwal,0.55
+1236,1082,L3,29,Tamil Nadu,033,Kallakurichi,6.7
+1127,297,L3,13,Haryana,011,Karnal,22.98
+560,849,L2,13,Haryana,004,Faridabad,33.9
+511,674,L2,13,Haryana,019,Rohtak,0
+968,113,L3,13,Haryana,007,Hisar,24.95
+1353,232,L3,13,Haryana,009,Jind,10.65
+1390,238,L3,13,Haryana,009,Jind,4.53
+1325,880,L2,13,Haryana,001,Ambala,47.65
+1167,794,L3,13,Haryana,005,Fatehabad,4.15
+349,181,L3,13,Haryana,022,Yamuna Nagar,22.83
+656,127,L3,13,Haryana,007,Hisar,13.75
+696,629,L3,13,Haryana,018,Rewari,19.68
+528,696,L3,13,Haryana,004,Faridabad,9.05
+530,685,L3,13,Haryana,004,Faridabad,33.18
+411,216,L2,13,Haryana,008,Jhajjar,38.83
+844,899,L2,13,Haryana,007,Hisar,51.1
+1404,1367,L2,19,Maharashtra,159,Nanded,23.23
+901,928,L2,13,Haryana,001,Ambala,25.28
+372,517,L2,13,Haryana,017,Panipat,11.23
+1280,1200,L3,13,Haryana,015,Palwal,22.73
+780,79,L2,13,Haryana,006,Gurugram,0
+1220,1097,L3,29,Tamil Nadu,033,Kallakurichi,20.53
+862,547,L2,13,Haryana,020,Sirsa,17.15
+1158,1011,L2,13,Haryana,007,Hisar,0
+515,738,L2,13,Haryana,010,Kaithal,51.85
+455,580,L2,13,Haryana,022,Yamuna Nagar,25.03
+1179,880,L2,13,Haryana,001,Ambala,70.68
+1078,135,L3,13,Haryana,007,Hisar,13.83
+503,60,L1,13,Haryana,004,Faridabad,44.63
+1327,263,L2,13,Haryana,009,Jind,4.45
+935,416,L3,13,Haryana,014,Nuh,37.18
+1189,880,L2,13,Haryana,001,Ambala,50.65
+1215,1085,L3,29,Tamil Nadu,033,Kallakurichi,22.2
+577,423,L3,13,Haryana,014,Nuh,0.28
+893,368,L3,13,Haryana,012,Kurukshetra,15.45
+1278,1050,L3,19,Maharashtra,154,Satara,2.78
+338,507,L2,13,Haryana,017,Panipat,0
+539,277,L3,13,Haryana,010,Kaithal,38.65
+1330,255,L2,13,Haryana,009,Jind,29.03
+1332,1311,L3,32,West Bengal,194,Purba mednipur,8.78
+621,433,L3,13,Haryana,014,Nuh,27.98
+655,588,L2,13,Haryana,022,Yamuna Nagar,35.4
+1282,1202,L3,13,Haryana,015,Palwal,13.98
+831,115,L3,13,Haryana,007,Hisar,25.45
+798,59,L2,13,Haryana,002,Bhiwani,43.33
+1145,94,L3,13,Haryana,006,Gurugram,14.85
+510,271,L3,13,Haryana,010,Kaithal,21.05
+738,2,L3,13,Haryana,001,Ambala,18.8
+677,328,L2,13,Haryana,011,Karnal,57.33
+314,177,L3,13,Haryana,022,Yamuna Nagar,11.8
+317,481,L2,13,Haryana,017,Panipat,59.43
+953,222,L3,13,Haryana,008,Jhajjar,0
+995,207,L3,13,Haryana,008,Jhajjar,9.53
+985,436,L3,13,Haryana,014,Nuh,12.68
+856,893,L2,13,Haryana,020,Sirsa,0
+318,377,L2,13,Haryana,012,Kurukshetra,54.55
+506,689,L3,13,Haryana,004,Faridabad,11.03
+1371,241,L3,13,Haryana,009,Jind,11.65
+1304,1305,L3,32,West Bengal,194,Purba mednipur,10.93
+753,37,L3,13,Haryana,001,Ambala,25.48
+1002,119,L3,13,Haryana,007,Hisar,12.68
+899,15,L3,13,Haryana,001,Ambala,8.98
+938,942,L3,13,Haryana,002,Bhiwani,0
+1050,133,L3,13,Haryana,007,Hisar,6.8
+1048,989,L3,13,Haryana,005,Fatehabad,2.48
+795,889,L2,13,Haryana,012,Kurukshetra,45.38
+840,547,L2,13,Haryana,020,Sirsa,17.15
+574,427,L3,13,Haryana,014,Nuh,0
+1350,245,L3,13,Haryana,009,Jind,5.95
+585,421,L3,13,Haryana,014,Nuh,14
+1308,1281,L3,32,West Bengal,194,Purba mednipur,23.9
+794,382,L1,13,Haryana,012,Kurukshetra,37.2
+1245,1077,L3,29,Tamil Nadu,033,Kallakurichi,6.8
+1105,997,L2,13,Haryana,007,Hisar,24.88
+1144,94,L3,13,Haryana,006,Gurugram,14.85
+533,702,L2,13,Haryana,004,Faridabad,47.43
+1226,1087,L3,29,Tamil Nadu,033,Kallakurichi,17.8
+784,25,L2,13,Haryana,001,Ambala,44.23
+337,508,L2,13,Haryana,017,Panipat,53.73
+764,846,L2,13,Haryana,006,Gurugram,61.15
+1128,292,L3,13,Haryana,011,Karnal,19.8
+975,425,L3,13,Haryana,014,Nuh,6.35
+1191,880,L2,13,Haryana,001,Ambala,50.65
+311,159,L2,13,Haryana,007,Hisar,0
+21,880,L2,999,Test State,NULL,Test District,44.48
+1376,880,L2,13,Haryana,001,Ambala,47.2
+444,503,NA,13,Haryana,017,Panipat,NULL
+1365,265,L2,13,Haryana,009,Jind,35.55
+906,891,L2,13,Haryana,012,Kurukshetra,48.58
+1384,224,L3,13,Haryana,009,Jind,20.4
+326,351,L3,13,Haryana,011,Karnal,25.3
+1164,1022,L2,13,Haryana,007,Hisar,0
+1114,652,L3,13,Haryana,019,Rohtak,0
+304,363,L3,13,Haryana,012,Kurukshetra,0
+1306,1280,L3,32,West Bengal,194,Purba mednipur,15.45
+1000,864,L1,13,Haryana,004,Faridabad,0
+1211,1098,L3,29,Tamil Nadu,033,Kallakurichi,11.68
+1225,1094,L3,29,Tamil Nadu,033,Kallakurichi,13.13
+1141,293,L3,13,Haryana,011,Karnal,26.78
+818,221,L3,13,Haryana,008,Jhajjar,5.98
+984,964,L2,13,Haryana,002,Bhiwani,33.88
+520,268,L3,13,Haryana,010,Kaithal,12.75
+647,873,L2,13,Haryana,006,Gurugram,0
+739,886,L3,13,Haryana,020,Sirsa,35.55
+855,56,L2,13,Haryana,002,Bhiwani,48.35
+414,187,L3,13,Haryana,022,Yamuna Nagar,5.8
+614,269,L3,13,Haryana,010,Kaithal,27
+1133,94,L3,13,Haryana,006,Gurugram,15.43
+393,178,L3,13,Haryana,022,Yamuna Nagar,19.18
+851,474,L3,13,Haryana,017,Panipat,8.4
+1251,1214,L3,13,Haryana,015,Palwal,0
+905,10,L3,13,Haryana,001,Ambala,22.4
+1077,371,L3,13,Haryana,012,Kurukshetra,2.4
+912,9,L3,13,Haryana,001,Ambala,15
+344,524,L2,13,Haryana,017,Panipat,20.33
+1151,151,L2,13,Haryana,007,Hisar,56.88
+1094,784,L3,13,Haryana,005,Fatehabad,44.73
+841,902,L3,13,Haryana,008,Jhajjar,6.58
+559,658,L2,13,Haryana,019,Rohtak,58.03
+1097,993,L1,13,Haryana,007,Hisar,53.88
+868,103,L3,13,Haryana,007,Hisar,36.4
+400,523,L2,13,Haryana,017,Panipat,53.1
+660,810,L2,13,Haryana,020,Sirsa,47.3
+1318,1306,L3,32,West Bengal,194,Purba mednipur,15.2
+990,776,L3,13,Haryana,005,Fatehabad,18.33
+830,367,L3,13,Haryana,012,Kurukshetra,10.78
+926,3,L3,13,Haryana,001,Ambala,20.75
+1017,955,L3,13,Haryana,002,Bhiwani,10.85
+1045,132,L3,13,Haryana,007,Hisar,3.4
+783,721,L3,13,Haryana,010,Kaithal,25
+993,856,L3,13,Haryana,004,Faridabad,3.18
+443,692,L3,13,Haryana,004,Faridabad,8.23
+1284,1218,L3,13,Haryana,015,Palwal,4.63
+745,722,L3,13,Haryana,010,Kaithal,8.4
+522,691,L3,13,Haryana,004,Faridabad,5.83
+847,162,L3,13,Haryana,007,Hisar,29.33
+857,43,L2,13,Haryana,002,Bhiwani,13.65
+646,639,L3,13,Haryana,019,Rohtak,14.68
+875,53,L2,13,Haryana,002,Bhiwani,32.33
+693,336,L2,13,Haryana,011,Karnal,47.55
+1163,45,L2,13,Haryana,002,Bhiwani,39.18
+1256,1217,L3,13,Haryana,015,Palwal,5.5
+863,53,L2,13,Haryana,002,Bhiwani,42.33
+870,909,L2,13,Haryana,018,Rewari,30.58
+1213,1059,L3,29,Tamil Nadu,033,Kallakurichi,11.9
+850,904,L2,13,Haryana,001,Ambala,30.9
+809,549,L3,13,Haryana,020,Sirsa,18.63
+582,416,L3,13,Haryana,014,Nuh,37.18
+1034,200,L3,13,Haryana,008,Jhajjar,0
+1372,229,L3,13,Haryana,009,Jind,13.78
+711,870,L2,13,Haryana,006,Gurugram,29.6
+698,628,L3,13,Haryana,018,Rewari,8.98
+1011,505,L2,13,Haryana,017,Panipat,14.68
+606,825,L2,13,Haryana,020,Sirsa,30.35
+663,821,L2,13,Haryana,020,Sirsa,30.28
+980,855,L3,13,Haryana,004,Faridabad,0
+292,422,L3,13,Haryana,014,Nuh,0
+1337,1315,L3,32,West Bengal,194,Purba mednipur,12.55
+838,545,L3,13,Haryana,020,Sirsa,36.8
+1087,774,L3,13,Haryana,005,Fatehabad,39.98
+1169,120,L3,13,Haryana,007,Hisar,8.13
+589,813,L2,13,Haryana,020,Sirsa,48.48
+948,953,L3,13,Haryana,002,Bhiwani,9.63
+1117,387,L3,13,Haryana,013,Mahendragarh,0
+1340,259,L2,13,Haryana,009,Jind,0
+421,571,L3,13,Haryana,020,Sirsa,19.38
+1254,1101,L2,13,Haryana,015,Palwal,29.08
+725,881,L2,13,Haryana,020,Sirsa,36.3
+1217,1086,L3,29,Tamil Nadu,033,Kallakurichi,8.23
+848,745,L2,13,Haryana,001,Ambala,40.55
+468,463,L3,13,13,017,017,4.98
+791,358,L3,13,Haryana,012,Kurukshetra,14.5
+564,729,L3,13,Haryana,010,Kaithal,7.9
+1209,1065,L3,29,Tamil Nadu,033,Kallakurichi,13.2
+1016,422,L3,13,Haryana,014,Nuh,4.8
+872,50,L2,13,Haryana,002,Bhiwani,33.25
+943,983,L2,13,Haryana,001,Ambala,33.3
+983,951,L3,13,Haryana,002,Bhiwani,0.28
+333,363,L3,13,Haryana,012,Kurukshetra,10.88
+865,883,L3,13,Haryana,012,Kurukshetra,15.73
+960,984,L3,13,Haryana,002,Bhiwani,31.85
+770,880,L2,13,Haryana,001,Ambala,44.18
+505,661,L2,13,Haryana,019,Rohtak,52.85
+284,283,L3,13,Haryana,011,Karnal,15.28
+508,676,L2,13,Haryana,019,Rohtak,42.43
+376,494,L3,13,Haryana,017,Panipat,55.7
+367,522,L2,13,Haryana,017,Panipat,36
+346,457,L3,13,Haryana,017,Panipat,7.08
+828,897,L2,13,Haryana,001,Ambala,36.1
+903,17,L3,13,Haryana,001,Ambala,7.58
+361,304,L3,13,Haryana,011,Karnal,11.98
+802,804,L3,13,Haryana,005,Fatehabad,29
+808,386,L3,13,13,012,012,40.88
+613,228,L3,13,Haryana,009,Jind,14.9
+368,521,L2,13,Haryana,017,Panipat,53.15
+946,932,L3,13,Haryana,002,Bhiwani,12.65
+391,184,L3,13,Haryana,022,Yamuna Nagar,24.73
+654,839,L2,13,Haryana,020,Sirsa,19.88
+927,922,L2,13,Haryana,018,Rewari,47.58
+825,221,L3,13,Haryana,008,Jhajjar,5.98
+1101,797,L3,13,Haryana,005,Fatehabad,4.95
+667,473,L3,13,Haryana,017,Panipat,1.13
+1339,977,L2,13,Haryana,009,Jind,42.33
+734,97,L2,13,Haryana,006,Gurugram,56.53
+775,538,L3,13,Haryana,018,Rewari,12.85
+579,415,L3,13,Haryana,014,Nuh,13.83
+616,257,L2,13,Haryana,009,Jind,29.73
+1351,234,L3,13,Haryana,009,Jind,13.63
+973,933,L3,13,Haryana,002,Bhiwani,11.68
+1192,880,L2,13,Haryana,001,Ambala,50.65
+669,739,L2,13,Haryana,010,Kaithal,35.2
+483,768,L3,13,Haryana,017,Panipat,6.98
+643,831,L2,13,Haryana,020,Sirsa,52.15
+611,270,L3,13,Haryana,010,Kaithal,12.98
+1409,1376,L2,19,Maharashtra,159,Nanded,30.03
+644,809,L2,13,Haryana,020,Sirsa,44.9
+406,459,L3,13,Haryana,017,Panipat,3.7
+909,929,L2,13,Haryana,001,Ambala,46.28
+916,837,L2,13,Haryana,020,Sirsa,32.75
+353,615,L2,13,Haryana,001,Ambala,0
+1343,261,L2,13,Haryana,009,Jind,7.48
+1391,249,L3,13,Haryana,009,Jind,2.53
+1237,1084,L3,29,Tamil Nadu,033,Kallakurichi,8.7
+1311,1277,L3,32,West Bengal,194,Purba mednipur,19.53
+542,659,L2,13,Haryana,019,Rohtak,49.53
+1118,1000,L2,13,Haryana,005,Fatehabad,23.73
+1037,981,L2,13,Haryana,018,Rewari,54.33
+608,597,L2,13,Haryana,022,Yamuna Nagar,38.43
+9,880,L2,13,Haryana,001,Ambala,0
+588,426,L3,13,Haryana,014,Nuh,14.43
+1271,1205,L3,13,Haryana,015,Palwal,3.93
+365,523,L2,13,Haryana,017,Panipat,53.1
+1160,960,L2,13,Haryana,002,Bhiwani,0
+1154,748,L2,13,Haryana,007,Hisar,0
+340,500,L2,13,Haryana,017,Panipat,54.63
+1336,1315,L3,32,West Bengal,194,Purba mednipur,12.55
+1126,175,L2,13,Haryana,007,Hisar,38.08
+471,708,L2,13,Haryana,004,Faridabad,7.45
+864,547,L2,13,Haryana,020,Sirsa,10.63
+1307,1282,L3,32,West Bengal,194,Purba mednipur,15.73
+895,49,L2,13,Haryana,002,Bhiwani,20.98
+931,533,L3,13,Haryana,018,Rewari,24.13
+723,478,L3,13,Haryana,017,Panipat,7.28
+433,713,L1,13,Haryana,004,Faridabad,59.58
+1248,1192,L3,13,Haryana,015,Palwal,25.13
+1019,422,L3,13,Haryana,014,Nuh,14.25
+812,293,L3,13,Haryana,011,Karnal,26.78
+721,6,L2,13,Haryana,001,Ambala,37.8
+992,220,L3,13,Haryana,008,Jhajjar,14.25
+1018,946,L3,13,Haryana,002,Bhiwani,10.73
+1219,1078,L3,29,Tamil Nadu,033,Kallakurichi,18.18
+475,519,L2,13,Haryana,017,Panipat,0
+1322,880,L2,13,Haryana,001,Ambala,46.65
+1015,422,L3,13,Haryana,014,Nuh,4.8
+1184,880,L2,13,Haryana,001,Ambala,70.53
+567,591,L2,13,Haryana,022,Yamuna Nagar,5.38
+766,83,L2,13,Haryana,006,Gurugram,29.15
+463,553,L3,13,Haryana,020,Sirsa,24.6
+523,730,L3,13,Haryana,010,Kaithal,19.15
+1060,140,L3,13,Haryana,007,Hisar,8.83
+900,852,L3,13,Haryana,004,Faridabad,6.95
+1063,118,L3,13,Haryana,007,Hisar,4.1
+891,930,L2,13,Haryana,001,Ambala,26.45
+563,657,L2,13,Haryana,019,Rohtak,51.4
+744,828,L2,13,Haryana,020,Sirsa,47.93
+1091,779,L3,13,Haryana,005,Fatehabad,15.2
+466,488,NA,13,Haryana,017,Panipat,NULL
+1255,1199,L3,13,Haryana,015,Palwal,11.48
+507,698,L2,13,Haryana,004,Faridabad,64.73
+1176,880,L2,13,Haryana,001,Ambala,70.68
+941,921,L2,13,Haryana,018,Rewari,51.43
+971,206,L3,13,Haryana,008,Jhajjar,0
+1032,950,L3,13,Haryana,002,Bhiwani,13.5
+1234,1089,L3,29,Tamil Nadu,033,Kallakurichi,11.55
+1352,248,L3,13,Haryana,009,Jind,10.2
+860,53,L2,13,Haryana,002,Bhiwani,42.33
+674,470,L3,13,Haryana,017,Panipat,3.03
+587,436,L3,13,Haryana,014,Nuh,12.68
+737,471,L3,13,Haryana,017,Panipat,6.85
+967,122,L3,13,Haryana,007,Hisar,16.25
+472,552,L3,13,Haryana,020,Sirsa,19.08
+330,464,L2,13,Haryana,017,Panipat,54
+474,562,L3,13,Haryana,020,Sirsa,10.63
+751,533,L3,13,Haryana,018,Rewari,24.13
+683,326,L2,13,Haryana,011,Karnal,55.65
+627,225,L3,13,Haryana,009,Jind,15.23
+566,675,L2,13,Haryana,019,Rohtak,51.53
+1061,118,L3,13,Haryana,007,Hisar,4.1
+1125,446,L3,13,Haryana,016,Panchkula,31.13
+573,431,L3,13,Haryana,014,Nuh,9.8
+341,525,L2,13,Haryana,017,Panipat,43.6
+633,583,L2,13,Haryana,022,Yamuna Nagar,54.58
+810,305,L3,13,Haryana,011,Karnal,24.08
+966,130,L3,13,Haryana,007,Hisar,13.2
+640,823,L2,13,Haryana,020,Sirsa,38.18
+1146,161,L2,13,Haryana,007,Hisar,37.45
+313,529,L3,13,Haryana,017,Panipat,37
+620,98,L2,13,Haryana,006,Gurugram,35.6
+774,299,L3,13,Haryana,011,Karnal,18.23
+1405,880,L2,13,Haryana,001,Ambala,46.2
+529,276,L3,13,Haryana,010,Kaithal,15.8
+531,712,L2,13,Haryana,004,Faridabad,28.88
+1067,994,L2,13,Haryana,007,Hisar,51.13
+1348,235,L3,13,Haryana,009,Jind,11.73
+1400,1366,,19,Maharashtra,159,Nanded,NULL
+1386,1305,L3,32,West Bengal,194,Purba mednipur,10.93
+883,926,L2,13,Haryana,001,Ambala,41.15
+636,868,L2,13,Haryana,006,Gurugram,43.38
+1198,880,L2,13,Haryana,001,Ambala,51.65
+1201,1029,L3,02,Andhra Pradesh ,123,Guntur,6.53
+373,491,L2,13,Haryana,017,Panipat,35.75
+484,100,L2,13,Haryana,006,Gurugram,54.78
+1135,67,L3,13,Haryana,006,Gurugram,2.68
+408,192,L3,13,Haryana,022,Yamuna Nagar,12.25
+1068,369,L3,13,Haryana,012,Kurukshetra,8.53
+1085,780,L3,13,Haryana,005,Fatehabad,12.9
+535,705,L1,13,Haryana,004,Faridabad,61.25
+366,509,L2,13,Haryana,017,Panipat,0
+418,542,L3,13,Haryana,020,Sirsa,25.18
+940,502,L1,13,Haryana,017,Panipat,56.2
+932,907,L3,13,Haryana,018,Rewari,0.55
+496,715,L3,13,Haryana,004,Faridabad,29.43
+788,465,L3,13,Haryana,017,Panipat,31.78
+1092,779,L3,13,Haryana,005,Fatehabad,15.2
+815,210,L3,13,Haryana,008,Jhajjar,7.4
+922,744,L2,13,Haryana,001,Ambala,23.78
+680,323,L2,13,Haryana,011,Karnal,51.83
+1165,479,L2,13,Haryana,017,Panipat,51.3
+1036,894,L3,13,Haryana,012,Kurukshetra,0
+599,592,L2,13,Haryana,022,Yamuna Nagar,53.13
+917,439,L3,13,Haryana,016,Panchkula,37.78
+625,590,L2,13,Haryana,022,Yamuna Nagar,47.13
+1056,910,L2,13,Haryana,018,Rewari,46.6
+661,814,L2,13,Haryana,020,Sirsa,43.13
+765,532,L3,13,Haryana,018,Rewari,13.4
+1044,919,L2,13,Haryana,018,Rewari,31.85
+524,697,L2,13,Haryana,004,Faridabad,56.38
+1361,236,L3,13,Haryana,009,Jind,2.18
+754,629,L3,13,Haryana,018,Rewari,19.68
+956,777,L3,13,Haryana,005,Fatehabad,23
+933,834,L2,13,Haryana,020,Sirsa,36.03
+461,570,L3,13,Haryana,020,Sirsa,25.48
+1095,792,L3,13,Haryana,005,Fatehabad,4.98
+1303,1296,L3,32,West Bengal,194,Purba mednipur,7.3
+1231,1091,L3,29,Tamil Nadu,033,Kallakurichi,16.03
+866,53,L2,13,Haryana,002,Bhiwani,42.33
+778,24,L1,13,Haryana,001,Ambala,60.63
+527,714,L2,13,Haryana,004,Faridabad,38.68
+961,139,L3,13,Haryana,007,Hisar,5.68
+712,874,L2,13,Haryana,010,Kaithal,43.13
+404,197,L3,13,Haryana,022,Yamuna Nagar,19.78
+1360,256,L3,13,Haryana,009,Jind,34.5
+1010,485,L2,13,Haryana,017,Panipat,43.98
+571,728,L3,13,Haryana,010,Kaithal,16.3
+388,350,L3,13,Haryana,011,Karnal,22.6
+763,531,L3,13,Haryana,018,Rewari,18.2
+1257,1041,L3,19,Maharashtra,154,Satara,22.88
+1177,880,L2,13,Haryana,001,Ambala,70.68
+1277,1213,L3,13,Haryana,015,Palwal,10.85
+477,541,L3,13,Haryana,020,Sirsa,32.38
+969,111,L3,13,Haryana,007,Hisar,21.83
+843,124,L3,13,Haryana,007,Hisar,9.28
+789,890,L2,13,Haryana,012,Kurukshetra,0
+532,686,L3,13,Haryana,004,Faridabad,25
+350,462,L3,13,Haryana,017,Panipat,24.95
+434,190,L3,13,Haryana,022,Yamuna Nagar,15.55
+720,879,L3,13,Haryana,010,Kaithal,12.6
+743,19,L3,13,Haryana,001,Ambala,12.38
+896,925,L2,13,Haryana,001,Ambala,0
+1375,880,L2,13,Haryana,001,Ambala,47.08
+1316,1303,L3,32,West Bengal,194,Purba mednipur,36.03
+450,193,L3,13,Haryana,022,Yamuna Nagar,8.63
+849,741,L2,13,Haryana,010,Kaithal,32.18
+705,623,L3,13,Haryana,018,Rewari,13.98
+813,301,L3,13,Haryana,011,Karnal,16.83
+1106,999,L3,13,Haryana,005,Fatehabad,48.45
+1136,94,L3,13,Haryana,006,Gurugram,14.85
+446,183,L3,13,Haryana,022,Yamuna Nagar,13.15
+1210,1066,L3,29,Tamil Nadu,033,Kallakurichi,22.75
+867,53,L2,13,Haryana,002,Bhiwani,42.33
+1038,120,L3,13,Haryana,007,Hisar,8.13
+1346,226,L3,13,Haryana,009,Jind,18.85
+1410,1207,L3,19,Maharashtra,155,Kolhapur,25.8
+1268,1219,L3,13,Haryana,015,Palwal,5.85
+786,568,L3,13,Haryana,020,Sirsa,14.5
+681,303,L3,13,Haryana,011,Karnal,21.8
+602,666,L2,13,Haryana,019,Rohtak,49.88
+1098,39,L2,13,Haryana,002,Bhiwani,4.85
+547,842,L3,13,Haryana,020,Sirsa,25.13
+1394,252,L3,13,Haryana,009,Jind,11.75
+668,282,L3,13,Haryana,011,Karnal,24.85
+685,315,L2,13,Haryana,011,Karnal,1.4
+622,502,L1,13,Haryana,017,Panipat,56.2
+1041,123,L3,13,Haryana,007,Hisar,5.35
+1007,781,L3,13,Haryana,005,Fatehabad,11.85
+635,869,L2,13,Haryana,006,Gurugram,39.95
+593,436,L3,13,Haryana,014,Nuh,12.68
+746,1,L3,13,Haryana,001,Ambala,16.13
+364,767,L2,13,Haryana,017,Panipat,43.98
+1270,1216,L3,13,Haryana,015,Palwal,1.68
+858,112,L3,13,Haryana,007,Hisar,21.3
+339,520,L2,13,Haryana,017,Panipat,52
+1172,458,L3,13,Haryana,017,Panipat,12.25
+306,164,L2,13,Haryana,007,Hisar,55.13
+1082,801,L1,13,Haryana,005,Fatehabad,49.03
+733,364,L3,13,Haryana,012,Kurukshetra,16.4
+691,878,L2,13,Haryana,006,Gurugram,0
+882,50,L2,13,Haryana,002,Bhiwani,33.25
+1031,965,L2,13,Haryana,002,Bhiwani,15.4
+703,630,L3,13,Haryana,018,Rewari,22.5
+819,618,L3,13,Haryana,011,Karnal,11.53
+757,298,L3,13,Haryana,011,Karnal,15.73
+1287,1214,L3,13,Haryana,015,Palwal,0
+1186,880,L2,13,Haryana,001,Ambala,50.65
+1262,1052,L3,19,Maharashtra,154,Satara,23.08
+1065,947,L3,13,Haryana,002,Bhiwani,17.4
+923,812,L2,13,Haryana,020,Sirsa,32.48
+1053,992,L1,13,Haryana,007,Hisar,47.25
+1195,880,L2,13,Haryana,001,Ambala,50.65
+1399,880,L2,13,Haryana,001,Ambala,47.2
+719,830,L2,13,Haryana,020,Sirsa,47.05
+586,432,L3,13,Haryana,014,Nuh,17.63
+965,958,L3,13,Haryana,002,Bhiwani,7.38
+401,686,L3,13,Haryana,004,Faridabad,25
+1168,880,L2,13,Haryana,001,Ambala,70.68
+690,737,L2,13,Haryana,010,Kaithal,41.7
+516,806,L2,13,Haryana,004,Faridabad,48.2
+1046,128,L3,13,Haryana,007,Hisar,14.13
+889,365,L3,13,Haryana,012,Kurukshetra,20.4
+958,940,L3,13,Haryana,002,Bhiwani,16.9
+379,345,L2,13,Haryana,011,Karnal,45
+1149,65,L3,13,Haryana,006,Gurugram,22.23
+716,625,L3,13,Haryana,018,Rewari,7.58
+572,608,L2,13,Haryana,022,Yamuna Nagar,43.13
+1406,1364,L2,19,Maharashtra,159,Nanded,25.05
+1083,803,L2,13,Haryana,005,Fatehabad,56.08
+517,735,L2,13,Haryana,010,Kaithal,40.58
+1148,70,L3,13,Haryana,006,Gurugram,0
+320,357,L2,13,Haryana,012,Kurukshetra,0
+994,858,L3,13,Haryana,004,Faridabad,4.98
+772,775,L3,13,Haryana,005,Fatehabad,21.35
+777,18,L3,13,Haryana,001,Ambala,14.25
+1366,880,L2,13,Haryana,001,Ambala,46.65
+951,950,L3,13,Haryana,002,Bhiwani,13.5
+480,544,L3,13,Haryana,020,Sirsa,5.45
+469,687,L3,13,Haryana,004,Faridabad,24.58
+554,594,L2,13,Haryana,022,Yamuna Nagar,40.15
+687,348,L2,13,Haryana,011,Karnal,58.28
+837,163,L3,13,Haryana,007,Hisar,31.85
+921,931,L2,13,Haryana,001,Ambala,25.43
+796,550,L3,13,Haryana,020,Sirsa,11.98
+1218,1088,L3,29,Tamil Nadu,033,Kallakurichi,14.05
+492,91,L2,13,Haryana,006,Gurugram,44.33
+1259,1204,L3,13,Haryana,015,Palwal,5.95
+1029,969,L3,13,Haryana,002,Bhiwani,17.63
+1028,968,L3,13,Haryana,002,Bhiwani,10.78
+829,151,L2,13,Haryana,007,Hisar,56.88
+790,805,L3,13,Haryana,005,Fatehabad,22.3
+422,463,L3,13,13,017,017,4.98
+1354,231,L3,13,Haryana,009,Jind,7.68
+604,825,L2,13,Haryana,020,Sirsa,30.35
+898,827,L2,13,Haryana,020,Sirsa,40.5
+1356,250,L3,13,Haryana,009,Jind,10
+816,212,L3,13,Haryana,008,Jhajjar,11.15
+1395,880,L2,13,Haryana,001,Ambala,47.2
+1086,783,L3,13,Haryana,005,Fatehabad,15.2
+526,272,L3,13,Haryana,010,Kaithal,19.2
+684,326,L2,13,Haryana,011,Karnal,55.65
+876,53,L2,13,Haryana,002,Bhiwani,32.33
+637,611,L2,13,Haryana,022,Yamuna Nagar,32.48
+1335,1314,L3,32,West Bengal,194,Purba mednipur,18.03
+543,656,L2,13,Haryana,019,Rohtak,29.7
+514,712,L2,13,Haryana,004,Faridabad,28.88
+949,934,L3,13,Haryana,002,Bhiwani,10.2
+785,880,L2,13,Haryana,001,Ambala,54.58
+1297,880,L2,13,Haryana,001,Ambala,55.8
+448,693,L3,13,Haryana,004,Faridabad,22.48
+1373,265,L2,13,Haryana,009,Jind,35.55
+1130,96,L3,13,Haryana,006,Gurugram,50.35
+436,703,L2,13,Haryana,004,Faridabad,49.73
+1398,880,L2,13,Haryana,001,Ambala,47.2
+918,3,L3,13,Haryana,001,Ambala,20.75
+913,442,L3,13,Haryana,016,Panchkula,26.03
+569,425,L3,13,Haryana,014,Nuh,6.35
+929,884,L3,13,Haryana,020,Sirsa,18.4
+1320,1309,L3,32,West Bengal,194,Purba mednipur,17.63
+631,101,L2,13,Haryana,006,Gurugram,24.43
+928,917,L2,13,Haryana,018,Rewari,57.05
+427,196,L3,13,13,022,022,39.98
+630,590,L2,13,Haryana,022,Yamuna Nagar,47.13
+652,817,L2,13,Haryana,020,Sirsa,42.6
+447,495,L2,13,Haryana,017,Panipat,8.43
+1206,1060,L3,29,Tamil Nadu,033,Kallakurichi,11.18
+924,30,L2,13,Haryana,001,Ambala,48.33
+537,598,L2,13,Haryana,022,Yamuna Nagar,38.63
+380,194,L3,13,Haryana,022,Yamuna Nagar,1.88
+650,807,L2,13,Haryana,020,Sirsa,51.33
+675,467,L3,13,Haryana,017,Panipat,4.38
+1182,880,L2,13,Haryana,001,Ambala,70.53
+343,497,NA,13,Haryana,017,Panipat,NULL
+1294,1300,L3,29,Tamil Nadu,036,Karur,0.7
+540,684,L3,13,Haryana,004,Faridabad,10.78
+1071,901,L3,13,Haryana,008,Jhajjar,0
+392,355,L3,13,Haryana,012,Kurukshetra,15.65
+699,626,L3,13,Haryana,018,Rewari,15.1
+1244,1093,L3,29,Tamil Nadu,033,Kallakurichi,38.7
+1051,911,L2,13,Haryana,018,Rewari,24.75
+355,284,L3,13,Haryana,011,Karnal,27.1
+357,275,L3,13,Haryana,010,Kaithal,4.35
+437,694,L3,13,Haryana,004,Faridabad,8.5
+1033,950,L3,13,Haryana,002,Bhiwani,13.5
+658,833,L2,13,Haryana,020,Sirsa,51.93
+695,620,L3,13,Haryana,018,Rewari,4.68
+324,315,L2,13,Haryana,011,Karnal,1.4
+319,487,L2,13,Haryana,017,Panipat,51.4
+954,793,L3,13,Haryana,005,Fatehabad,2.33
+1326,255,L2,13,Haryana,009,Jind,29.03
+609,581,L2,13,Haryana,022,Yamuna Nagar,32.88
+426,732,L2,13,Haryana,010,Kaithal,47.45
+1079,891,L2,13,Haryana,012,Kurukshetra,48.58
+442,719,L3,13,Haryana,010,Kaithal,5.6
+1111,1002,L2,13,Haryana,005,Fatehabad,0
+581,414,L3,13,Haryana,014,Nuh,26.08
+1293,1214,L3,13,Haryana,015,Palwal,9.9
+592,829,L2,13,Haryana,020,Sirsa,54.7
+509,674,L2,13,Haryana,019,Rohtak,45.73
+521,267,L3,13,Haryana,010,Kaithal,24.95
+467,558,L3,13,Haryana,020,Sirsa,19.4
+1102,796,L3,13,Haryana,005,Fatehabad,16.18
+1076,996,L2,13,Haryana,004,Faridabad,0
+1300,1302,L1,32,West Bengal,194,Purba mednipur,40.53
+624,867,L2,13,Haryana,004,Faridabad,40.45
+708,619,L3,13,Haryana,018,Rewari,18.9
+934,913,L2,13,Haryana,018,Rewari,48.55
+673,285,L3,13,Haryana,011,Karnal,26.43
+999,857,L3,13,Haryana,004,Faridabad,6.8
+735,38,L3,13,Haryana,001,Ambala,36.4
+963,104,L3,13,Haryana,007,Hisar,17.98
+555,595,L2,13,Haryana,022,Yamuna Nagar,31.2
+1387,1313,L3,32,West Bengal,194,Purba mednipur,9.8
+424,179,L3,13,13,022,022,26.25
+1187,880,L2,13,Haryana,001,Ambala,50.65
+607,808,L2,13,Haryana,020,Sirsa,30.28
+629,829,L2,13,Haryana,020,Sirsa,54.7
+402,737,L2,13,Haryana,010,Kaithal,0
+491,564,L3,13,Haryana,020,Sirsa,18.6
+978,215,L2,13,Haryana,008,Jhajjar,0
+369,493,L2,13,Haryana,017,Panipat,36.4
+1286,1208,L3,13,Haryana,015,Palwal,12.15
+710,349,L3,13,Haryana,011,Karnal,23.6
+1200,1100,L3,29,Tamil Nadu,033,Kallakurichi,15.25
+322,343,L2,13,Haryana,011,Karnal,15.15
+308,77,L2,13,Haryana,006,Gurugram,0
+1291,1295,L3,29,Tamil Nadu,036,Karur,11.93
+1295,1290,L3,32,West Bengal,194,Purba mednipur,18.78
+1267,1046,L3,19,Maharashtra,154,Satara,15.95
+551,602,L2,13,Haryana,022,Yamuna Nagar,29.35
+489,663,L1,13,Haryana,019,Rohtak,49.55
+1310,1292,L3,32,West Bengal,194,Purba mednipur,13.05
+688,731,L2,13,Haryana,010,Kaithal,61.78
+1341,617,L2,13,Haryana,009,Jind,37.53
+1052,131,L3,13,Haryana,007,Hisar,8
+1199,1027,L2,02,Andhra Pradesh ,123,Guntur,28.6
+395,740,L2,13,Haryana,010,Kaithal,21.28
+1155,300,L3,13,Haryana,011,Karnal,4.7
+781,721,L3,13,Haryana,010,Kaithal,25
+1152,141,L2,13,Haryana,007,Hisar,52.85
+986,779,L3,13,Haryana,005,Fatehabad,15.2
+626,604,L2,13,Haryana,022,Yamuna Nagar,46.08
+1221,1081,L3,29,Tamil Nadu,033,Kallakurichi,16.78
+645,816,L1,13,Haryana,020,Sirsa,29.3
+1064,908,L3,13,Haryana,018,Rewari,16.93
+370,514,L2,13,Haryana,017,Panipat,0
+759,726,L3,13,Haryana,010,Kaithal,21.08
+1345,264,L2,13,Haryana,009,Jind,31.85
+438,608,L2,13,Haryana,022,Yamuna Nagar,43.13
+718,822,L2,13,Haryana,020,Sirsa,50.9
+363,668,L2,13,Haryana,019,Rohtak,0
+709,622,L3,13,Haryana,018,Rewari,16.13
+1228,1094,L3,29,Tamil Nadu,033,Kallakurichi,13.95
+1005,119,L3,13,Haryana,007,Hisar,12.68
+381,195,L3,13,Haryana,022,Yamuna Nagar,10.38
+689,733,L2,13,13,010,010,51.68
+553,607,L2,13,Haryana,022,Yamuna Nagar,43.9
+1258,1043,L3,19,Maharashtra,154,Satara,19.05
+1100,798,L3,13,Haryana,005,Fatehabad,13.73
+755,537,L3,13,Haryana,018,Rewari,17.43
+1057,129,L3,13,Haryana,007,Hisar,16.55
+568,599,L2,13,Haryana,022,Yamuna Nagar,53.28
+736,466,L3,13,Haryana,017,Panipat,17.28
+648,664,L2,13,Haryana,019,Rohtak,41.8
+557,609,L2,13,Haryana,022,Yamuna Nagar,37.15
+377,279,L3,13,Haryana,010,Kaithal,25.35
+959,936,L3,13,Haryana,002,Bhiwani,0
+1272,880,L2,13,Haryana,001,Ambala,52.65
+1020,949,L3,13,Haryana,002,Bhiwani,5.65
+1075,368,L3,13,Haryana,012,Kurukshetra,15.45
+575,435,L3,13,Haryana,014,Nuh,18.4
+1120,639,L3,13,Haryana,019,Rohtak,14.68
+634,337,L2,13,Haryana,011,Karnal,0
+1279,880,L2,13,Haryana,001,Ambala,55.8
+389,501,L2,13,Haryana,017,Panipat,22.25
+1134,94,L3,13,Haryana,006,Gurugram,14.85
+664,826,L2,13,Haryana,020,Sirsa,30.98
+287,217,L1,13,Haryana,008,Jhajjar,0
+676,309,L2,13,Haryana,011,Karnal,0
+1364,880,L2,13,Haryana,001,Ambala,46.65
+1358,242,L3,13,Haryana,009,Jind,10.45
+598,725,L3,13,Haryana,010,Kaithal,15.15
+1203,1058,L3,29,Tamil Nadu,033,Kallakurichi,0
+1239,1070,L3,29,Tamil Nadu,033,Kallakurichi,11.7
+950,970,L3,13,Haryana,002,Bhiwani,0.58
+1411,1207,L3,19,Maharashtra,155,Kolhapur,26.08
+1202,1100,L3,29,Tamil Nadu,033,Kallakurichi,15.25
+761,22,L3,13,Haryana,001,Ambala,4.08
+1333,1315,L3,32,West Bengal,194,Purba mednipur,12.55
+952,956,L3,13,Haryana,002,Bhiwani,12.55
+1208,1064,L3,29,Tamil Nadu,033,Kallakurichi,12.05
+285,613,L3,00,Test state,001,Test district,0
+820,212,L3,13,Haryana,008,Jhajjar,11.15
+396,294,L3,13,Haryana,011,Karnal,28.53
+836,105,L3,13,Haryana,007,Hisar,22.48
+549,850,L2,13,Haryana,019,Rohtak,52.68
+1142,74,L3,13,Haryana,006,Gurugram,9.4
+1042,135,L3,13,Haryana,007,Hisar,13.83
+787,887,L2,13,Haryana,012,Kurukshetra,35.6
+724,885,L2,13,Haryana,020,Sirsa,27.03
+1289,1212,L3,13,Haryana,015,Palwal,4.78
+420,572,L3,13,Haryana,020,Sirsa,50.9
+773,540,L3,13,Haryana,018,Rewari,10.8
+512,668,L2,13,Haryana,019,Rohtak,47.13
+297,45,L2,13,Haryana,002,Bhiwani,39.18
+1012,510,L2,13,Haryana,017,Panipat,0
+362,320,L2,13,Haryana,011,Karnal,46.83
+1183,880,L2,13,Haryana,001,Ambala,70.53
+371,498,L2,13,Haryana,017,Panipat,25
+1081,978,L3,13,Haryana,009,Jind,42.45
+1252,1215,L3,13,Haryana,015,Palwal,12.08
+714,880,L2,13,Haryana,001,Ambala,32.18
+748,1,L3,13,Haryana,001,Ambala,16.13
+989,856,L3,13,Haryana,004,Faridabad,3.18
+544,345,L2,13,Haryana,011,Karnal,45
+880,53,L2,13,Haryana,002,Bhiwani,29.15
+1309,1279,L3,32,West Bengal,194,Purba mednipur,18.78
+1314,1278,L3,32,West Bengal,194,Purba mednipur,15.68
+1265,1054,L3,19,Maharashtra,154,Satara,19.1
+302,361,L3,13,Haryana,012,Kurukshetra,15.58
+842,44,L2,13,Haryana,002,Bhiwani,2
+1174,991,L2,13,Haryana,007,Hisar,24.88
+732,468,L3,13,Haryana,017,Panipat,1.13
+576,418,L3,13,Haryana,014,Nuh,20.65
+1362,233,L3,13,Haryana,009,Jind,5.38
+452,709,L2,13,Haryana,004,Faridabad,55.05
+307,81,L2,13,Haryana,006,Gurugram,50.13
+1140,94,L3,13,Haryana,006,Gurugram,14.85
+327,511,L2,13,Haryana,017,Panipat,29.48
+942,943,L3,13,Haryana,002,Bhiwani,14.05
+861,547,L2,13,Haryana,020,Sirsa,17.15
+1013,790,L3,13,Haryana,005,Fatehabad,2.18
+694,287,L3,13,Haryana,011,Karnal,27.33
+405,189,L3,13,Haryana,022,Yamuna Nagar,-0.28
+822,171,L3,13,Haryana,007,Hisar,25.3
+1058,137,L3,13,Haryana,007,Hisar,6.9
+1073,918,L2,13,Haryana,018,Rewari,56.1
+769,880,L2,13,Haryana,001,Ambala,40.08
+335,529,L3,13,Haryana,017,Panipat,37
+824,199,L3,13,Haryana,008,Jhajjar,27.63
+692,311,L2,13,Haryana,011,Karnal,29.1
+1383,237,L3,13,Haryana,009,Jind,4.78
+1194,1055,L3,29,Tamil Nadu,033,Kallakurichi,38.53
+706,325,L3,13,Haryana,011,Karnal,36.13
+534,274,L3,13,Haryana,010,Kaithal,15.23
+1188,880,L2,13,Haryana,001,Ambala,50.65
+776,299,L3,13,Haryana,011,Karnal,18.23
+1269,1041,L3,19,Maharashtra,154,Satara,14.63
+1030,117,L3,13,Haryana,007,Hisar,22.63
+833,58,L2,13,Haryana,002,Bhiwani,17.53
+1235,1063,L3,29,Tamil Nadu,033,Kallakurichi,5.53
+428,571,L3,13,Haryana,020,Sirsa,19.1
+1357,243,L3,13,Haryana,009,Jind,11.45
+839,102,L3,13,Haryana,007,Hisar,28.25
+1121,69,L3,13,Haryana,006,Gurugram,24.45
+760,23,L3,13,Haryana,001,Ambala,23.23
+1055,914,L2,13,Haryana,018,Rewari,50.85
+1329,260,L2,13,Haryana,009,Jind,30.03
+1370,258,L2,13,Haryana,009,Jind,15.6
+375,718,L2,13,Haryana,010,Kaithal,54.5
+1173,880,L2,13,Haryana,001,Ambala,70.68
+440,710,L1,13,Haryana,004,Faridabad,43.43
+713,622,L3,13,Haryana,018,Rewari,16.13
+700,627,L3,13,Haryana,018,Rewari,6.3
+1003,419,L2,13,Haryana,014,Nuh,0
+1323,1291,L3,32,West Bengal,194,Purba mednipur,14.35
+1197,880,L2,13,Haryana,001,Ambala,49.65
+494,704,L2,13,Haryana,004,Faridabad,45.53
+1009,479,L2,13,Haryana,017,Panipat,51.3
+977,214,L3,13,Haryana,008,Jhajjar,5.7
+603,593,L2,13,Haryana,022,Yamuna Nagar,21.65
+1204,1077,L3,29,Tamil Nadu,033,Kallakurichi,6.8
+1107,987,L2,13,Haryana,007,Hisar,59.13
+1059,947,L3,13,Haryana,002,Bhiwani,18
+1223,1083,L3,29,Tamil Nadu,033,Kallakurichi,12.35
+619,820,L2,13,Haryana,020,Sirsa,40.33
+1281,1257,L3,29,Tamil Nadu,051,Theni,4.35
+852,42,L2,13,Haryana,002,Bhiwani,27.98
+902,12,L3,13,Haryana,001,Ambala,16.08
+1039,107,L3,13,Haryana,007,Hisar,14.9
+1190,880,L2,13,Haryana,001,Ambala,50.65
+1022,944,L3,13,Haryana,002,Bhiwani,6.33
+1349,242,L3,13,Haryana,009,Jind,10.45
+545,584,NA,13,Haryana,022,Yamuna Nagar,NULL
+550,477,L3,13,Haryana,017,Panipat,0
+768,880,L2,13,Haryana,001,Ambala,47.33
+826,211,L3,13,Haryana,008,Jhajjar,13.05
+583,429,L3,13,Haryana,014,Nuh,2.63
+1299,1298,L3,29,Tamil Nadu,036,Karur,12.83
+1242,1072,L3,29,Tamil Nadu,033,Kallakurichi,1.08
+403,520,L2,13,Haryana,017,Panipat,52
+1216,1061,L3,29,Tamil Nadu,033,Kallakurichi,17.93
+1222,1067,L3,29,Tamil Nadu,033,Kallakurichi,14.28
+1159,1014,L2,13,Haryana,007,Hisar,0
+293,182,L2,13,Haryana,022,Yamuna Nagar,28.93
+328,458,L3,13,Haryana,017,Panipat,12.25
+805,197,L3,13,Haryana,022,Yamuna Nagar,19.78
+1369,880,L2,13,Haryana,001,Ambala,47.08
+595,432,L3,13,Haryana,014,Nuh,17.63
+1317,1307,L3,32,West Bengal,194,Purba mednipur,10.13
+1110,789,L3,13,Haryana,005,Fatehabad,11.23
+1131,1004,L3,13,Haryana,016,Panchkula,19.63
+386,489,L2,13,Haryana,017,Panipat,12.88
+1001,853,L3,13,Haryana,004,Faridabad,0
+670,840,L2,13,Haryana,020,Sirsa,40.73
+501,75,L2,13,Haryana,006,Gurugram,54.95
+649,829,L2,13,Haryana,020,Sirsa,54.7
+482,476,L3,13,Haryana,017,Panipat,8.73
+1069,900,L3,13,Haryana,008,Jhajjar,3.7
+987,863,L2,13,Haryana,004,Faridabad,0
+1072,667,L2,13,Haryana,019,Rohtak,0
+1266,1038,L3,19,Maharashtra,154,Satara,2.35
+1397,288,L2,13,Haryana,011,Karnal,54.8
+1363,244,L3,13,Haryana,009,Jind,5.1
+974,986,L3,13,Haryana,002,Bhiwani,15.98
+1115,988,L3,13,Haryana,005,Fatehabad,12.68
+1143,94,L3,13,Haryana,006,Gurugram,14.85
+792,880,L2,13,Haryana,001,Ambala,70.68
+888,53,L2,13,Haryana,002,Bhiwani,29.15
+1122,94,L3,13,Haryana,006,Gurugram,15.43
+605,836,L2,13,Haryana,020,Sirsa,51.83
+1,880,L2,13,Haryana,001,Ambala,0
+871,116,L3,13,Haryana,007,Hisar,6.18
+325,141,L2,13,Haryana,007,Hisar,52.85
+1331,1322,L3,32,West Bengal,194,Purba mednipur,23.28
+1132,94,L3,13,Haryana,006,Gurugram,15.43
+1288,1266,L3,32,West Bengal,194,Purba mednipur,40.05
+845,359,L3,13,Haryana,012,Kurukshetra,15.15
+1275,1220,L3,13,Haryana,015,Palwal,15.5
+1023,736,L2,13,Haryana,010,Kaithal,49.93
+617,669,L2,13,Haryana,019,Rohtak,0
+1185,880,L2,13,Haryana,001,Ambala,50.65
+804,188,L3,13,Haryana,022,Yamuna Nagar,3.03
+767,4,L3,13,Haryana,001,Ambala,25.43
+329,159,L2,13,Haryana,007,Hisar,57.18
+1205,1071,L3,29,Tamil Nadu,033,Kallakurichi,18.25
+286,503,NA,13,Haryana,017,Panipat,NULL
+1321,976,L3,13,Haryana,009,Jind,7.03
+807,896,L2,13,Haryana,001,Ambala,37.43
+596,608,L2,13,Haryana,022,Yamuna Nagar,43.13
+1229,1073,L3,29,Tamil Nadu,033,Kallakurichi,12.3
+834,569,L3,13,Haryana,020,Sirsa,13.2
+962,108,L3,13,Haryana,007,Hisar,17.48
+873,924,L2,13,Haryana,001,Ambala,38.68
+731,461,L3,13,Haryana,017,Panipat,16.53
+478,559,L3,13,Haryana,020,Sirsa,7.08
+412,354,L3,13,Haryana,012,Kurukshetra,22.1

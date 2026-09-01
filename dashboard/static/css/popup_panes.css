@@ -1,0 +1,919 @@
+/* ==========================================================================
+   Feature popups — soft-colour cards
+   ==========================================================================
+   REVISION (2026-08-18, second pass). The first pass was deliberately
+   desaturated — white paper, hairline greys, hue only as a 12% chip tint —
+   on the theory that a popup sitting on a dense choropleth must not compete
+   with it. That was half right and half over-corrected: it stopped competing
+   by having almost no colour at all, so every popup looked identical and the
+   sheet read as a grey form pinned to a colourful map.
+
+   This pass keeps the light, papery surface and the "colour is never the only
+   channel" rule, and adds hue back as SOFT STRUCTURE rather than as fill:
+
+   - One hue per feature kind (--k), declared on the .fp root in JS. The head
+     band, the tab rail, the table header, the rank badges and the row hover
+     all derive from it. You can tell a hospital popup from an ambulance popup
+     across the room, before reading a word.
+   - Sections are tinted cards on a white sheet, not rules on a flat plane.
+     Depth comes from a 5-8% wash plus a hairline, never from a solid block.
+   - Entity hues (L1 violet / L2 orange / L3 teal, ALS red / BLS blue) are
+     unchanged and still carry identity through a letter, not colour alone.
+
+   Everything tints via color-mix(), so the hues stay declared once in JS and
+   CSS derives every soft variant. Changing a hue in LEVEL_COLOR / VEHICLE_STYLE
+   / FP_KIND_HUE updates this entire sheet.
+   ========================================================================== */
+
+.feature-popup {
+  --fp-surface: #ffffff;
+  --fp-line: #eef2f7;
+  --fp-line-strong: #dde5ee;
+  --fp-track: #f5f8fb;
+  --fp-ink: #1e2b42;
+  --fp-ink-2: #5f7392;
+  --fp-ink-3: #93a3ba;
+  /* Darkened from #0f7a6c / #c8453f. The verdict pills put these on their own
+     12%/11% tint, which cost ~1.4:1 versus sitting on plain white and dropped
+     both under WCAG AA for the ~0.6rem text they carry. Measured, not guessed:
+     these read 5.10:1 and 5.13:1 on their pills. */
+  --fp-good: #0d6f62;
+  --fp-bad: #b3352f;
+  /* Fallback: JS always sets --k on .fp, but a popup rendered without it
+     should degrade to the house teal rather than to an unset variable. */
+  --k: #0f766e;
+}
+
+.feature-popup .leaflet-popup-content-wrapper {
+  border-radius: 15px;
+  box-shadow: 0 12px 38px rgba(24, 39, 64, 0.17), 0 2px 6px rgba(24, 39, 64, 0.07);
+  border: 1px solid var(--fp-line-strong);
+  background: var(--fp-surface);
+  /* The head band is a full-bleed tinted strip; without this it would square
+     off the top two corners of the sheet. */
+  overflow: hidden;
+  padding: 0;
+}
+
+.feature-popup .leaflet-popup-content {
+  margin: 0;
+  width: 336px !important;
+  line-height: 1.45;
+  color: var(--fp-ink);
+}
+
+.feature-popup .leaflet-popup-tip {
+  box-shadow: none;
+  border: 1px solid var(--fp-line-strong);
+}
+
+/* 30px, not 22px (25 Aug 2026). This is the only way out of a popup that does
+   not involve clicking the map — and clicking the map on the Proximity tab
+   just opens a different popup — so it has to be an easy target. 22px with a
+   17px glyph was below the 24px minimum for a touch/pointer target and sat
+   right under the map's top-right controls. */
+.feature-popup a.leaflet-popup-close-button {
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  /* Sits on the tinted head band, so it takes the kind hue rather than grey. */
+  color: color-mix(in srgb, var(--k) 55%, #7b8ba4);
+  font: 400 20px/28px system-ui, sans-serif;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.feature-popup a.leaflet-popup-close-button:focus-visible {
+  outline: 2px solid var(--k);
+  outline-offset: 2px;
+}
+
+.feature-popup a.leaflet-popup-close-button:hover {
+  background: color-mix(in srgb, var(--k) 14%, #fff);
+  color: var(--k);
+}
+
+.fp {
+  padding: 0;
+}
+
+/* ---------- head band -----------------------------------------------------
+   Full-bleed, hue-washed, with a hairline rule underneath in the same hue.
+   This is the single biggest change from the first pass: the popup now names
+   its subject with colour before the eye reaches the text. */
+
+.fp-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.7rem 2.1rem 0.7rem 0.85rem;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--k) 13%, #fff) 0%,
+    color-mix(in srgb, var(--k) 7%, #fff) 100%
+  );
+  border-bottom: 1px solid color-mix(in srgb, var(--k) 22%, #fff);
+}
+
+/* The one saturated object in the sheet. It is 28px, so a solid fill here
+   reads as a badge rather than as a block of colour. */
+.fp-ico {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: var(--h, var(--k));
+  color: #fff;
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--h, var(--k)) 34%, transparent);
+}
+
+.fp-ico svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+.fp-titles {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.fp-kind {
+  display: block;
+  font-size: 0.585rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--k) 78%, #47566d);
+  margin-bottom: 0.06rem;
+}
+
+.fp-title {
+  display: block;
+  font-size: 0.865rem;
+  font-weight: 650;
+  line-height: 1.25;
+  color: var(--fp-ink);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- body ---------------------------------------------------------- */
+
+.fp-body,
+.fp > .fp-tabs,
+.fp > .fp-pane {
+  margin-left: 0.85rem;
+  margin-right: 0.85rem;
+}
+
+/* ---------- segmented tabs -----------------------------------------------
+   The track is hue-tinted; the active pill is white with hue text and a hue
+   shadow. Same segmented-control grammar as the sidebar (controls.css), so a
+   popup tab and a sidebar tab teach the same gesture. */
+
+.fp-tabs {
+  display: flex;
+  gap: 0.22rem;
+  margin-top: 0.7rem;
+  margin-bottom: 0.65rem;
+  padding: 0.2rem;
+  background: color-mix(in srgb, var(--k) 8%, #fff);
+  border: 1px solid color-mix(in srgb, var(--k) 17%, #fff);
+  border-radius: 10px;
+}
+
+.fp-tab {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.36rem 0.4rem;
+  font: inherit;
+  font-size: 0.715rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: color-mix(in srgb, var(--k) 62%, #55657f);
+  background: none;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.14s ease, color 0.14s ease, box-shadow 0.14s ease;
+}
+
+.fp-tab svg {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 auto;
+  opacity: 0.8;
+}
+
+.fp-tab:hover {
+  background: color-mix(in srgb, var(--k) 10%, #fff);
+  color: var(--k);
+}
+
+.fp-tab.active {
+  background: var(--fp-surface);
+  color: var(--k);
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--k) 26%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--k) 16%, #fff);
+}
+
+.fp-tab.active svg {
+  opacity: 1;
+}
+
+.fp-tab:focus-visible {
+  outline: 2px solid var(--k);
+  outline-offset: -2px;
+}
+
+/* ---------- panes -------------------------------------------------------- */
+
+/* Both panes are capped. The popup used to grow past the bottom of the map on
+   a dense cell, which clipped the last rows with no way to reach them. */
+.fp-pane {
+  max-height: 384px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: 0.9rem;
+}
+
+.fp-pane.hidden {
+  display: none;
+}
+
+.fp-pane::-webkit-scrollbar {
+  width: 8px;
+}
+
+.fp-pane::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--k) 26%, #fff);
+  border-radius: 8px;
+}
+
+.fp-pane::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--k) 40%, #fff);
+}
+
+/* ---------- record list --------------------------------------------------
+   Now a tinted card with zebra rows instead of a bare dl on white. The label
+   column takes the kind hue at reading weight, which makes the record scan as
+   a table without needing borders on every cell. */
+
+.fp-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0;
+  margin: 0;
+  font-size: 0.745rem;
+  border: 1px solid color-mix(in srgb, var(--k) 15%, #fff);
+  border-radius: 11px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--k) 3.5%, #fff);
+}
+
+.fp-list dt {
+  color: color-mix(in srgb, var(--k) 66%, #56657d);
+  font-weight: 600;
+  padding: 0.32rem 0.3rem 0.32rem 0.6rem;
+  white-space: nowrap;
+}
+
+.fp-list dd {
+  margin: 0;
+  padding: 0.32rem 0.6rem 0.32rem 0.3rem;
+  font-weight: 550;
+  overflow-wrap: anywhere;
+}
+
+/* Zebra by PAIR, not by cell — nth-of-type counts dt and dd separately, so
+   striping each of them on odd() keeps label and value in step. */
+.fp-list dt:nth-of-type(odd),
+.fp-list dd:nth-of-type(odd) {
+  background-color: color-mix(in srgb, var(--k) 6.5%, #fff);
+}
+
+.fp-list code {
+  font-size: 0.71rem;
+  padding: 0.06rem 0.32rem;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--k) 13%, #fff);
+  color: color-mix(in srgb, var(--k) 88%, #000);
+  border: 1px solid color-mix(in srgb, var(--k) 22%, #fff);
+}
+
+.coord {
+  font-variant-numeric: tabular-nums;
+}
+
+.fp-note {
+  margin: 0 0 0.5rem;
+  font-size: 0.705rem;
+  line-height: 1.45;
+  color: var(--fp-ink-2);
+}
+
+.fp-note.error {
+  color: var(--fp-bad);
+  background: color-mix(in srgb, var(--fp-bad) 8%, #fff);
+  border: 1px solid color-mix(in srgb, var(--fp-bad) 22%, #fff);
+  border-radius: 9px;
+  padding: 0.5rem 0.6rem;
+}
+
+/* The footer carries the counts and the caveats — the sentences a judge reads
+   last and quotes back. A tinted card holds it instead of a hairline rule. */
+.fp-foot {
+  margin: 0.6rem 0 0;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid color-mix(in srgb, var(--k) 15%, #fff);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--k) 5.5%, #fff);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  color: var(--fp-ink-2);
+}
+
+.fp-foot b {
+  color: var(--fp-ink);
+}
+
+/* A caveat, not an error: mocked coordinates, straight-line distances. */
+.fp-warn {
+  margin: 0.55rem 0 0;
+  padding: 0.42rem 0.55rem;
+  border-radius: 9px;
+  font-size: 0.665rem;
+  line-height: 1.4;
+  color: #8a5a10;
+  background: #fdf6e7;
+  border: 1px solid #f3e2bd;
+}
+
+.fp-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 1.5rem 0;
+  font-size: 0.72rem;
+  color: color-mix(in srgb, var(--k) 60%, #7b8ba4);
+}
+
+.fp-spin {
+  width: 13px;
+  height: 13px;
+  border: 2px solid color-mix(in srgb, var(--k) 18%, #fff);
+  border-top-color: var(--k);
+  border-radius: 50%;
+  animation: fp-spin 0.7s linear infinite;
+}
+
+@keyframes fp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fp-spin {
+    animation-duration: 2.4s;
+  }
+}
+
+.fp-tiny {
+  font-size: 0.63rem;
+}
+
+.fp-miss {
+  color: var(--fp-bad);
+}
+
+/* ---------- ranked table --------------------------------------------------
+   The header is a hue band rather than white-with-a-rule, which also means the
+   sticky header stays legible over rows as the pane scrolls under it. */
+
+.fp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0 0 0.15rem;
+  font-size: 0.725rem;
+  border: 1px solid color-mix(in srgb, var(--k) 15%, #fff);
+  border-radius: 11px;
+  overflow: hidden;
+}
+
+.fp-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 0.34rem 0.36rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--k) 80%, #3d4c63);
+  text-align: left;
+  background: color-mix(in srgb, var(--k) 12%, #fff);
+  border-bottom: 1px solid color-mix(in srgb, var(--k) 24%, #fff);
+}
+
+.fp-table td {
+  padding: 0.38rem 0.36rem;
+  vertical-align: middle;
+  border-bottom: 1px solid color-mix(in srgb, var(--k) 10%, #fff);
+  line-height: 1.3;
+}
+
+.fp-table tbody tr:nth-child(even) td {
+  /* background-COLOR, not the shorthand: the shorthand resets background-image
+     and would erase the rank disc, which is painted as a radial-gradient. */
+  background-color: color-mix(in srgb, var(--k) 4%, #fff);
+}
+
+.fp-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.fp-table tbody tr:hover td {
+  background-color: color-mix(in srgb, var(--k) 11%, #fff);
+}
+
+.fp-table .num,
+.fp-table th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.fp-name {
+  font-weight: 600;
+  color: var(--fp-ink);
+}
+
+.fp-sub {
+  display: block;
+  margin-top: 0.06rem;
+  font-size: 0.645rem;
+  color: var(--fp-ink-3);
+}
+
+.fp-sub code {
+  font-size: 0.62rem;
+  padding: 0 0.16rem;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--k) 10%, #fff);
+  color: color-mix(in srgb, var(--k) 78%, #000);
+}
+
+/* Rank sits in a tinted disc so the eye can find "3rd" without reading, and
+   the top three deepen — rank is ordinal, and the first three are the answer
+   to "which is nearest". Text stays hue-dark on a tint in every case; a white
+   numeral on a light disc would be invisible. */
+.fp-table td.fp-rank {
+  width: 1.5rem;
+  padding: 0.38rem 0.16rem;
+  text-align: center;
+}
+
+.fp-rank {
+  font-size: 0.63rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--k) 85%, #000);
+}
+
+.fp-table td.fp-rank {
+  position: relative;
+}
+
+.fp-table tbody td.fp-rank {
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--k) 13%, #fff) 0 8.5px,
+    transparent 8.5px
+  );
+}
+
+.fp-table tbody tr:nth-child(-n + 3) td.fp-rank {
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--k) 26%, #fff) 0 8.5px,
+    transparent 8.5px
+  );
+}
+
+/* ---------- tinted chips -------------------------------------------------
+   Raised from 12% to 17% with a stronger border. Ten of these stacked in a
+   table still read as a table, but a single one now reads as coloured. */
+
+.fp-chip {
+  display: inline-block;
+  min-width: 1.7rem;
+  padding: 0.11rem 0.36rem;
+  border-radius: 6px;
+  font-size: 0.615rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-align: center;
+  white-space: nowrap;
+  /* 68%, not 88%. Raising the chip tint from 12% to 17% pushed the two light
+     hues under AA — L2 orange measured 3.33:1 and L3 teal 3.83:1 at 88%. At 68%
+     the worst pair is 5.3:1 and every chip still reads as its own hue. */
+  color: color-mix(in srgb, var(--h, #64748b) 68%, #000);
+  background: color-mix(in srgb, var(--h, #64748b) 17%, #fff);
+  border: 1px solid color-mix(in srgb, var(--h, #64748b) 34%, #fff);
+}
+
+.fp-chip-none {
+  --h: #9aa9bd;
+}
+
+/* ---------- verdicts ------------------------------------------------------
+   Now soft pills. A bare coloured word was the weakest signal in the first
+   pass; a pill makes in-reach / out-of-reach findable at a glance, and the
+   tick or cross still carries the meaning without colour. */
+
+.fp-ok,
+.fp-bad {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.22rem;
+  padding: 0.08rem 0.34rem;
+  border-radius: 999px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.fp-ok {
+  color: var(--fp-good);
+  background: color-mix(in srgb, var(--fp-good) 12%, #fff);
+  border: 1px solid color-mix(in srgb, var(--fp-good) 26%, #fff);
+}
+
+.fp-bad {
+  color: var(--fp-bad);
+  background: color-mix(in srgb, var(--fp-bad) 11%, #fff);
+  border: 1px solid color-mix(in srgb, var(--fp-bad) 25%, #fff);
+}
+
+/* Inside running prose the pill would break the line rhythm — there the
+   coloured word alone is right. */
+.fp-foot .fp-bad,
+.fp-foot .fp-ok,
+.fp-note .fp-bad,
+.fp-note .fp-ok {
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 0;
+}
+
+.fp-ok svg,
+.fp-bad svg {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+}
+
+/* ---------- nearest-per-level strip ---------------------------------------
+   The strip is the headline answer — "is there an L1 / L2 / L3 in reach" — so
+   it gets the strongest colour in the sheet after the head band. Each cell is
+   washed in ITS OWN level hue (not the kind hue), with a solid hue cap on top,
+   because here the three cells sit side by side and must be told apart. */
+
+.fp-lv-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.34rem;
+  margin: 0 0 0.65rem;
+}
+
+.fp-lv-cell {
+  position: relative;
+  padding: 0.5rem 0.42rem 0.48rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--h, #94a3b8) 11%, #fff);
+  border: 1px solid color-mix(in srgb, var(--h, #94a3b8) 26%, #fff);
+  overflow: hidden;
+}
+
+/* The cap: 3px of the level's actual hue, undiluted. */
+.fp-lv-cell::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--h, #94a3b8);
+}
+
+.fp-lv-k {
+  display: block;
+  font-size: 0.585rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--h, #64748b) 68%, #000);
+}
+
+.fp-lv-v {
+  display: block;
+  margin: 0.16rem 0 0.12rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--fp-ink);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.fp-lv-s {
+  display: block;
+  font-size: 0.6rem;
+  line-height: 1.25;
+}
+
+.fp-lv-s .fp-ok,
+.fp-lv-s .fp-bad {
+  font-size: 0.6rem;
+  padding: 0.05rem 0.26rem;
+}
+
+/* ---------- TPL provenance chip ------------------------------------------
+   Carried over from the sidebar so "measured" vs "imputed" reads the same in
+   both places. Colour is a tint; the word does the naming. */
+
+.fp .tpl-chip {
+  display: inline-block;
+  margin-left: 0.24rem;
+  padding: 0.04rem 0.32rem;
+  border-radius: 5px;
+  font-size: 0.585rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #4a5a72;
+  background: #eef2f7;
+  border: 1px solid #dde5ee;
+}
+
+.fp .tpl-chip.measured,
+.fp .tpl-chip.exact {
+  color: #0f7a6c;
+  background: color-mix(in srgb, #0f7a6c 12%, #fff);
+  border-color: color-mix(in srgb, #0f7a6c 26%, #fff);
+}
+
+.fp .tpl-chip.imputed,
+.fp .tpl-chip.district_median,
+.fp .tpl-chip.mock {
+  color: #8a5a10;
+  background: #fdf6e7;
+  border-color: #f3e2bd;
+}
+
+/* ---------- reduced transparency / forced colours -------------------------
+   color-mix tints vanish under forced-colors, so restore explicit borders —
+   otherwise the cards collapse into one undifferentiated block. */
+
+@media (forced-colors: active) {
+  .fp-list,
+  .fp-table,
+  .fp-foot,
+  .fp-lv-cell,
+  .fp-tabs {
+    border: 1px solid CanvasText;
+  }
+
+  .fp-tab.active {
+    outline: 2px solid Highlight;
+  }
+}
+
+/* ---------- clickable ranked rows -----------------------------------------
+   Rows in the Top 10 pane point at something real on the map. They have to
+   look pressable without turning the table into a wall of buttons, so the
+   affordance is a cursor plus a hover wash, and the SELECTED row gets a hue
+   bar down its leading edge — the same hue family as the pin drawn on the map,
+   which is what ties the row to the thing it just revealed. */
+
+.fp-row {
+  cursor: pointer;
+}
+
+.fp-row:hover td {
+  background-color: color-mix(in srgb, var(--k) 14%, #fff);
+}
+
+.fp-row:focus-visible {
+  outline: 2px solid var(--k);
+  outline-offset: -2px;
+}
+
+.fp-row.picked td {
+  background-color: color-mix(in srgb, var(--k) 17%, #fff);
+}
+
+.fp-row.picked td:first-child {
+  box-shadow: inset 3px 0 0 var(--k);
+}
+
+/* Say once, above the table, that the rows lead somewhere — rather than
+   hanging a "view" button off all ten. */
+.fp-pick-hint {
+  margin: 0 0 0.45rem;
+  font-size: 0.66rem;
+  color: var(--fp-ink-3);
+}
+
+/* .fp-mirror and .feature-details removed 31 Aug 2026 with the
+   "Selected feature" sidebar card — see the note in network_analytics.js.
+   The docked popup (.feature-popup in #feature-popup-dock) carries its own
+   --fp-* custom properties, so nothing here was serving it. */
+
+/* ==========================================================================
+   Grid popups: Statistics + Charts
+   ==========================================================================
+   Four tabs need room, and the partner app's grid popup is 600x600 against our
+   336. We widen toward theirs for grid popups only — a hospital record is a
+   short list and does not earn 600px. The width lives on .fp-wide (set by
+   fpShell) rather than on the Leaflet wrapper, because the wrapper is shared by
+   every popup class. */
+
+.feature-popup:has(.fp-wide) .leaflet-popup-content {
+  width: 560px !important;
+}
+
+/* :has() is well supported now, but a popup silently staying narrow is a bad
+   failure. This fallback keys off the kind class instead, which is on the same
+   node, so the two rules agree. */
+@supports not selector(:has(*)) {
+  .feature-popup .leaflet-popup-content {
+    width: 560px !important;
+  }
+}
+
+.fp-wide .fp-tab span {
+  font-size: 0.7rem;
+}
+
+/* ---------- the four stat cards ------------------------------------------
+   Their layout: one row, equal widths, big number over a small label. Their
+   fill is rgba(222,235,255,1); we tint from the popup's own kind hue so the
+   card belongs to this sheet rather than importing a second blue. */
+
+.fp-stat-row {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 0 0.7rem;
+}
+
+.fp-stat {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  padding: 0.6rem 0.35rem 0.5rem;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--k) 9%, #fff);
+  border: 1px solid color-mix(in srgb, var(--k) 18%, #fff);
+}
+
+.fp-stat b {
+  display: block;
+  font-size: 1.32rem;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--fp-ink);
+}
+
+.fp-stat span {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.63rem;
+  line-height: 1.2;
+  color: var(--fp-ink-2);
+}
+
+/* A card with no data must not look like a card with a zero in it. Muted, and
+   the note underneath says why. */
+.fp-stat.na {
+  background: #f7f9fc;
+  border-color: #e6ecf4;
+}
+
+.fp-stat.na b {
+  color: var(--fp-ink-3);
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
+}
+
+.fp-stat-note {
+  margin: 0 0 0.75rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 9px;
+  font-size: 0.665rem;
+  line-height: 1.4;
+  color: #8a5a10;
+  background: #fdf6e7;
+  border: 1px solid #f3e2bd;
+}
+
+/* ---------- one card per category, as in their file ---------------------- */
+
+.fp-cat {
+  margin: 0 0 0.7rem;
+  padding: 0.6rem 0.65rem 0.5rem;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--k) 5%, #fff);
+  border: 1px solid color-mix(in srgb, var(--k) 14%, #fff);
+}
+
+.fp-cat:last-child {
+  margin-bottom: 0;
+}
+
+.fp-cat-title {
+  margin: 0 0 0.45rem;
+  font-size: 0.735rem;
+  font-weight: 650;
+  color: var(--fp-ink);
+}
+
+.fp-cat .fp-table {
+  background: #fff;
+}
+
+.fp-cat .viz-host {
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.3rem 0.2rem;
+}
+
+/* ---------- live-feed markers inside popups ------------------------------ */
+
+.fp-live-note {
+  margin: 0 0 0.75rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 9px;
+  font-size: 0.665rem;
+  color: #0d6f62;
+  background: color-mix(in srgb, #0d6f62 8%, #fff);
+  border: 1px solid color-mix(in srgb, #0d6f62 22%, #fff);
+}
+
+.fp-prep:empty { display: none; }
+
+.fp-prep-title {
+  margin: 0.7rem 0 0.35rem;
+}
+
+/* The wide grid popup needs the sidebar's width plus its own beside it. Below
+   roughly 1180px of viewport there is not room for both, and autoPan cannot
+   solve a popup that is simply too wide for the free space — so shrink it
+   rather than let it slide under the panel. */
+@media (max-width: 1180px) {
+  .feature-popup:has(.fp-wide) .leaflet-popup-content {
+    width: 420px !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .feature-popup:has(.fp-wide) .leaflet-popup-content {
+    width: 330px !important;
+  }
+  /* Four labelled tabs do not fit at that width; drop to icons with the
+     accessible name carried by aria-label on the button. */
+  .fp-wide .fp-tab span {
+    display: none;
+  }
+}
+
+/* ---------- New mode: partner-only popups --------------------------------
+   In New mode the popup carries their content and nothing of ours, so a few
+   small things change shape. */
+
+.fp-centroid {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.66rem;
+  font-weight: 400;
+  color: var(--fp-ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Their hospital popup has no tab bar — it is a single table. Without a bar the
+   record would butt straight into the head band. */
+.fp-partner[data-fp-kind="hospital"] > .fp-pane {
+  margin-top: 0.7rem;
+}
+
+.fp-na {
+  color: var(--fp-ink-3);
+}

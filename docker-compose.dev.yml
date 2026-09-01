@@ -16,5 +16,46 @@ services:
       timeout: 5s
       retries: 10
 
+  osrm:
+    image: ghcr.io/project-osrm/osrm-backend
+    platform: linux/arm64
+    container_name: mapsr-osrm
+    # See docker-compose.yml for why --max-table-size is raised from the default 100.
+    command: osrm-routed --algorithm mld --max-table-size 8000 /data/haryana.osrm
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./osrm-data:/data
+    restart: unless-stopped
+    # A healthcheck whose PROBE is missing fails exactly like a server that is
+    # down. This one called `wget`, and the osrm-backend image ships no wget and
+    # no curl — checked inside the running container, not assumed: bash, grep,
+    # perl and timeout are all it has. So it exited 1 on every run and this
+    # container reported "unhealthy" for its whole life while happily serving
+    # routes. An alarm that is always red tells you nothing, and it costs
+    # whoever is chasing a real OSRM outage a detour. docker-compose.yml had
+    # already been fixed for exactly this; the dev file had not.
+    #
+    # Probe order is most-informative-first and ends at bash's /dev/tcp, which
+    # needs no extra tooling and is a REAL request rather than prod's
+    # pass-by-default — verified in this image against a live port and, as a
+    # negative control, a dead one. The grep pattern carries no quote characters
+    # (code.:.Ok matches code":"Ok) purely to stay legible through three layers
+    # of YAML, sh and bash quoting.
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "URL='http://127.0.0.1:5000/route/v1/driving/76.78,29.95;76.79,29.96?overview=false'; if command -v curl >/dev/null 2>&1; then curl -sf \"$$URL\" | grep -q '\"code\":\"Ok\"'; elif command -v wget >/dev/null 2>&1; then wget -qO- \"$$URL\" | grep -q '\"code\":\"Ok\"'; elif command -v bash >/dev/null 2>&1; then timeout 5 bash -c 'exec 3<>/dev/tcp/127.0.0.1/5000; printf \"GET /route/v1/driving/76.78,29.95;76.79,29.96?overview=false HTTP/1.0\\r\\n\\r\\n\" >&3; grep -q code.:.Ok <&3'; else exit 0; fi",
+        ]
+      # The Haryana MLD graph is ~1.9 GB across cell_metrics, mldgr, geometry
+      # and fileIndex, and osrm-routed memory-maps all of it before it answers
+      # anything. A cold start on a laptop is minutes, not the 20s this allowed
+      # — matched to docker-compose.yml so dev and prod agree on the timings.
+      interval: 15s
+      timeout: 15s
+      retries: 20
+      start_period: 180s
+
 volumes:
   mapsr_pgdata:

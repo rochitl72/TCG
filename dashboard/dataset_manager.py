@@ -1,9 +1,9 @@
 """Tracks which accidents CSV is 'active' for every accident/reach view.
 
-The shipped demo file (haryana_synthetic_accidents.csv) is never modified.
-Uploading a replacement writes to accidents_active.csv instead, and a small
-JSON marker records which one is currently in use. Removing the upload
-deletes that override and reports back to the default.
+Canonical source of truth: ``latest data/haryana latest.csv``.
+Uploading a replacement writes to ``data/accidents_active.csv`` instead, and a
+small JSON marker records which one is currently in use. Removing the upload
+deletes that override and reports back to the latest-data default.
 """
 
 from __future__ import annotations
@@ -13,12 +13,13 @@ import io
 import json
 import os
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, Iterator
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
-DATA_DIR = os.path.abspath(DATA_DIR)
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+DATA_DIR = os.path.join(ROOT_DIR, "data")
+LATEST_DATA_DIR = os.path.join(ROOT_DIR, "latest data")
 
-DEFAULT_CSV = os.path.join(DATA_DIR, "haryana_synthetic_accidents.csv")
+DEFAULT_CSV = os.path.join(LATEST_DATA_DIR, "haryana latest.csv")
 ACTIVE_CSV = os.path.join(DATA_DIR, "accidents_active.csv")
 STATE_FILE = os.path.join(DATA_DIR, "dataset_state.json")
 
@@ -36,9 +37,20 @@ REQUIRED_COLUMNS = [
     "station_code",
 ]
 
+# Labels in the original latest CSV → labels used by the UI / scorecard weights.
+SEVERITY_ALIASES = {
+    "No Injury": "Non-Injury",
+    "Minor Injury Non Hospitalized": "Minor Injury Non-Hospitalized",
+}
+
 
 class DatasetValidationError(Exception):
     pass
+
+
+def normalize_severity(value: str | None) -> str:
+    v = (value or "").strip()
+    return SEVERITY_ALIASES.get(v, v)
 
 
 def _default_state() -> dict[str, Any]:
@@ -55,7 +67,6 @@ def get_dataset_state() -> dict[str, Any]:
         return _default_state()
 
     if state.get("source") == "custom" and not os.path.exists(ACTIVE_CSV):
-        # Marker says custom but the file's gone missing — fall back safely.
         return _default_state()
     return state
 
@@ -65,6 +76,15 @@ def get_active_accidents_path() -> str:
     if state.get("source") == "custom" and os.path.exists(ACTIVE_CSV):
         return ACTIVE_CSV
     return DEFAULT_CSV
+
+
+def iter_active_accidents() -> Iterator[dict[str, str]]:
+    """Yield accident rows from the active CSV with severity labels normalized."""
+    path = get_active_accidents_path()
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        for row in csv.DictReader(f):
+            row["severity"] = normalize_severity(row.get("severity"))
+            yield row
 
 
 def _validate_csv_bytes(raw: bytes) -> int:
@@ -86,8 +106,6 @@ def _validate_csv_bytes(raw: bytes) -> int:
 
     row_count = 0
     for row_count, row in enumerate(reader, start=1):
-        # Spot-check lat/lon parse cleanly — the most common way a "same schema"
-        # file quietly isn't.
         try:
             float(row["latitude_sp"])
             float(row["longitude_sp"])

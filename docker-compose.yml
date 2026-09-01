@@ -35,23 +35,125 @@ services:
     environment:
       DATABASE_URL: postgresql://mapsr:mapsr@db:5432/mapsr
       FLASK_DEBUG: "0"
+      OSRM_BASE: http://osrm:5000
+      OSRM_SLEEP: "0"
     ports:
       - "5050:5050"
     volumes:
       - ./data:/app/data
+      - "./latest data:/app/latest data:ro"
       - tcga_osmnx_cache:/app/dashboard/cache
     depends_on:
       db:
         condition: service_healthy
+      # service_started, NOT service_healthy. OSRM's readiness is genuinely
+      # slow and its healthcheck depends on tooling the upstream image may not
+      # ship, so gating the whole stack on it means one probe quirk takes
+      # everything down. The app already polls OSRM itself and reports a clear
+      # message when it is still loading (grid_ambulance.preflight), so a
+      # backend that starts early degrades gracefully instead of not starting.
+      osrm:
+        condition: service_started
     restart: unless-stopped
 
+  # One-shot artifact builder. Does NOT run by default — bring it up explicitly
+  # after the database is seeded, on a fresh deploy or whenever the hospital
+  # data changes:
+  #
+  #   docker compose run --rm artifacts
+  #
+  # Order matters: fetch_hosp_gps_cache resolves the TPL dump's hospid ->
+  # coordinates against the partner's live API (needs network egress to
+  # rbg.iitm.ac.in; the result is cached to data/rbg_hosp_gps_haryana.json so
+  # this is the only step that needs it), build_tpl assigns L1/L2/L3 and TPL
+  # scores using that cache, and precompute builds the grid x hospital road
+  # matrix. There is no merge step after precompute any more — the six
+  # fabricated "mock" L1 medical colleges this used to bolt on were removed
+  # 20 Aug 2026; L1 now comes from real private hospitals that were already
+  # in the base table and go through the normal precompute like everything
+  # else. See scripts/build_tpl.py for the full history.
+  #
+  # precompute_grid_routes runs AFTER precompute_network_analytics because it
+  # reads that artifact to decide which grid<->facility pairs need geometry.
+  # It is the Proximity tab's route branches (modes 2 and 3) and it needs the
+  # OSRM service, not the partner API. Skipping it does not break the tab —
+  # branches degrade to dashed straight lines and say so — so it is safe to
+  # leave out of a quick rebuild and add later.
+  artifacts:
+    build:
+      context: .
+      dockerfile: dashboard/Dockerfile
+    profiles: ["tools"]
+    environment:
+      DATABASE_URL: postgresql://mapsr:mapsr@db:5432/mapsr
+      OSRM_BASE: http://osrm:5000
+    volumes:
+      - ./data:/app/data
+      - "./latest data:/app/latest data:ro"
+    depends_on:
+      db:
+        condition: service_healthy
+      # service_started, NOT service_healthy. OSRM's readiness is genuinely
+      # slow and its healthcheck depends on tooling the upstream image may not
+      # ship, so gating the whole stack on it means one probe quirk takes
+      # everything down. The app already polls OSRM itself and reports a clear
+      # message when it is still loading (grid_ambulance.preflight), so a
+      # backend that starts early degrades gracefully instead of not starting.
+      osrm:
+        condition: service_started
+    working_dir: /app
+    command: >
+      sh -c "python scripts/fetch_hosp_gps_cache.py &&
+             python scripts/build_tpl.py &&
+             python scripts/precompute_network_analytics.py --year 2025 &&
+             python scripts/precompute_grid_routes.py --year 2025 &&
+             python scripts/precompute_ambulance_reach.py --year 2025"
+
+  osrm:
+    image: ghcr.io/project-osrm/osrm-backend
+    container_name: tcga-osrm
+    # Defaults to arm64 because that is what the demo machines are. Under QEMU
+    # emulation OSRM loads the 1.9 GB graph several times slower, which is what
+    # made the healthcheck give up. On an amd64 server, override in .env:
+    #     OSRM_PLATFORM=linux/amd64
+    platform: ${OSRM_PLATFORM:-linux/arm64}
+    # --max-table-size 8000 (default 100) lets the analytics precompute send all
+    # 1,208 hospitals as destinations in a single /table request, batching grid
+    # centroids as sources. That turns ~15,000 OSRM round-trips into ~230.
+    # See scripts/precompute_network_analytics.py.
+    command: osrm-routed --algorithm mld --max-table-size 8000 /data/haryana.osrm
+    volumes:
+      - ./osrm-data:/data
+    restart: unless-stopped
+    # Try curl, then wget. The osrm-backend image is a slim Debian that does
+    # not guarantee either one, and a healthcheck whose PROBE is missing fails
+    # identically to a server that is down — which is exactly the trap this hit:
+    # OSRM was serving fine, `wget` did not exist, the check could never pass,
+    # and 8 minutes later compose declared the container unhealthy and refused
+    # to start the backend. If neither tool is present the check reports healthy
+    # rather than blocking the stack; the app does its own OSRM preflight
+    # anyway (see grid_ambulance.preflight).
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "URL='http://127.0.0.1:5000/route/v1/driving/76.78,29.95;76.79,29.96?overview=false'; if command -v curl >/dev/null 2>&1; then curl -sf \"$$URL\" | grep -q '\"code\":\"Ok\"'; elif command -v wget >/dev/null 2>&1; then wget -qO- \"$$URL\" | grep -q '\"code\":\"Ok\"'; else exit 0; fi",
+        ]
+      # The Haryana MLD graph is ~1.9 GB across cell_metrics, mldgr, geometry
+      # and fileIndex, and osrm-routed memory-maps all of it before answering.
+      # Cold cache on a laptop can take minutes.
+      interval: 15s
+      timeout: 15s
+      retries: 20
+      start_period: 180s
+
   frontend:
-    image: nginx:1.27-alpine
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
     container_name: tcga-frontend
     ports:
       - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - backend
     restart: unless-stopped

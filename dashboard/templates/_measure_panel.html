@@ -1,20 +1,32 @@
       <section class="panel measure-panel">
         <h2>Distance scale</h2>
-        <p class="panel-note">Click two points on the map to measure straight-line and road distance (OSRM).</p>
+        <p class="panel-note">
+          Click points on the map to build a path &mdash; A, B, C, D and on.
+          Every leg is measured straight-line and by road (OSRM), and the totals
+          below are cumulative across the whole path.
+        </p>
         <label class="toggle">
           <input type="checkbox" id="measure-toggle" />
           <span>Measure tool</span>
         </label>
-        <div id="measure-status" class="radar-status measure-status">Off — enable, then click two points.</div>
+        <div id="measure-status" class="radar-status measure-status">Off &mdash; enable, then click points to build a path.</div>
         <div id="measure-results" class="measure-results hidden">
           <dl>
+            <dt>Points</dt>
+            <dd id="measure-points">0</dd>
             <dt>Straight line</dt>
-            <dd id="measure-straight">—</dd>
+            <dd id="measure-straight">&mdash;</dd>
             <dt>Road distance</dt>
-            <dd id="measure-road">—</dd>
+            <dd id="measure-road">&mdash;</dd>
             <dt>Drive time</dt>
-            <dd id="measure-duration">—</dd>
+            <dd id="measure-duration">&mdash;</dd>
           </dl>
         </div>
-        <button type="button" id="measure-clear" class="btn-ghost measure-clear" disabled>Clear measurement</button>
+        <div id="measure-legs-wrap" class="table-wrap measure-legs-wrap hidden">
+          <table class="mini-table measure-legs" id="measure-legs"></table>
+        </div>
+        <div class="measure-actions">
+          <button type="button" id="measure-undo" class="btn-ghost measure-clear" disabled>Undo last point</button>
+          <button type="button" id="measure-clear" class="btn-ghost measure-clear" disabled>Clear path</button>
+        </div>
       </section>

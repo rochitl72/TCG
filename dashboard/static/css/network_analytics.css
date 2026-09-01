@@ -1,0 +1,990 @@
+/* Trauma Network Analytics — additions on top of style.css / accident_safety.css */
+
+.tab-bar {
+  display: flex;
+  gap: 4px;
+  padding: 0 16px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tab-bar .tab {
+  flex: 1;
+  padding: 8px 6px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--panel-alt);
+  border: 1px solid transparent;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tab-bar .tab:hover { color: var(--text); }
+
+.tab-bar .tab.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.tab-panel.hidden { display: none; }
+
+/* --- buttons ----------------------------------------------------------- */
+.btn-primary {
+  width: 100%;
+  margin-top: 10px;
+  padding: 9px 12px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover { background: var(--accent-strong); }
+.btn-primary:disabled { background: var(--muted-soft); cursor: not-allowed; }
+
+/* --- tier sliders ------------------------------------------------------ */
+.tier-slider { margin-bottom: 14px; }
+
+.tier-slider-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.tier-slider-name { font-size: 12px; font-weight: 600; color: var(--text); }
+.tier-slider-gap { font-size: 12px; font-weight: 600; }
+
+.tier-slider-row { display: flex; align-items: center; gap: 8px; }
+.tier-slider-row input[type="range"] { flex: 1; }
+
+.tier-slider-row input[type="number"] {
+  width: 56px;
+  padding: 4px 6px;
+  font: inherit;
+  font-size: 12px;
+  text-align: right;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+}
+
+.unit-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* --- corridors --------------------------------------------------------- */
+.corridor-list { margin-top: 8px; font-size: 12px; }
+
+.corridor-item {
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  background: var(--panel-alt);
+  border-left: 3px solid var(--danger);
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.corridor-item:hover { background: #e3e9f0; }
+
+.corridor-rank { font-weight: 700; color: var(--danger); }
+.corridor-meta { margin-top: 2px; color: var(--muted); font-size: 11px; }
+
+/* --- compact tables ---------------------------------------------------- */
+.mini-table {
+  width: 100%;
+  font-size: 11.5px;
+  border-collapse: collapse;
+}
+
+.mini-table th {
+  position: sticky;
+  top: 0;
+  padding: 6px 6px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.mini-table td {
+  padding: 5px 6px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.mini-table tbody tr:hover { background: var(--panel-alt); }
+.mini-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* --- provenance + banners --------------------------------------------- */
+.tpl-chip {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.tpl-chip.real { color: #166534; background: rgba(22, 163, 74, 0.14); }
+.tpl-chip.estimated { color: #9a3412; background: rgba(234, 144, 16, 0.16); }
+
+.offline-banner {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 700;
+  max-width: 560px;
+  padding: 9px 14px;
+  font-size: 12px;
+  color: #7c2d12;
+  background: #fff7ed;
+  border: 1px solid #fdba74;
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+}
+
+.offline-banner.hidden { display: none; }
+.offline-banner code {
+  padding: 1px 4px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 3px;
+}
+
+/* --- map legend -------------------------------------------------------- */
+.legend-scale { display: flex; margin: 6px 0 4px; }
+
+.legend-scale span {
+  flex: 1;
+  height: 9px;
+}
+
+.legend-scale span:first-child { border-radius: 3px 0 0 3px; }
+.legend-scale span:last-child { border-radius: 0 3px 3px 0; }
+
+.legend-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* Tick values sit ON the band boundaries, so each label lines up with the edge
+   between two colours rather than floating over the middle of one. */
+.legend-ticks {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+  font-size: 9.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.legend-ticks span {
+  flex: 1;
+  text-align: center;
+}
+
+.legend-ticks span:first-child { text-align: left; }
+.legend-ticks span:last-child { text-align: right; }
+
+.legend-unit {
+  margin-top: 1px;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted-soft);
+}
+
+.amb-move-line { stroke-dasharray: 4 3; }
+
+/* --- threshold presets -------------------------------------------------- */
+.preset-row {
+  display: flex;
+  gap: 5px;
+  margin: 4px 0 12px;
+}
+
+.preset-row button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 6px 4px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--panel-alt);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.preset-row button small {
+  font-size: 9.5px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.preset-row button:hover { color: var(--text); }
+
+.preset-row button.active {
+  color: #fff;
+  background: var(--accent);
+}
+
+/* --- multi-tier gap breakdown ------------------------------------------ */
+.overlap-breakdown { margin-top: 8px; font-size: 12px; }
+
+.overlap-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.overlap-row:last-child { border-bottom: none; }
+.overlap-row b { margin-left: auto; font-variant-numeric: tabular-nums; }
+.overlap-row i {
+  min-width: 42px;
+  text-align: right;
+  font-style: normal;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ov-dot {
+  flex: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.ov-dot.ov-ring { box-shadow: 0 0 0 1.6px #111827; }
+
+.gap-callout {
+  margin: 8px 0;
+  padding: 7px 10px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text);
+  background: var(--panel-alt);
+  border-left: 3px solid var(--danger);
+  border-radius: 0 6px 6px 0;
+}
+
+/* --- nested layer filters ---------------------------------------------- */
+.sub-filter {
+  margin: 2px 0 10px 22px;
+  padding-left: 10px;
+  border-left: 2px solid var(--border);
+}
+
+.sub-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 0;
+  font-size: 11.5px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.sub-toggle input[type="checkbox"] {
+  width: 13px;
+  height: 13px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.sub-toggle .swatch {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.sub-toggle b {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* --- hospital search + selection --------------------------------------- */
+.text-input {
+  width: 100%;
+  padding: 7px 10px;
+  margin-bottom: 4px;
+  font: inherit;
+  font-size: 12.5px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.mini-table tr[data-hid] { cursor: pointer; }
+
+.mini-table tr.row-selected td {
+  background: var(--accent-soft);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.cell-count {
+  margin-top: 10px;
+  padding: 6px 9px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--accent-strong);
+  background: var(--accent-soft);
+  border-radius: 6px;
+}
+
+/* --- optimiser summary block ------------------------------------------- */
+.opt-summary { margin-top: 10px; font-size: 12px; }
+
+.opt-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.opt-row span { color: var(--muted); }
+.opt-row b { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+/* Kept in the DOM so shared export code can read it, but never shown — the
+   grid -> hospital export was removed to leave exactly one export shape. */
+.hidden-control { display: none; }
+
+/* --- tier key (deliverable 2) ------------------------------------------- */
+.tier-key { margin: 8px 0; font-size: 11.5px; }
+.tier-key span { display: flex; align-items: center; gap: 7px; padding: 2px 0; }
+.tier-key i { flex: none; width: 10px; height: 10px; border-radius: 2px; }
+.tier-key b { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* Mode C export buttons stack; keep them tight. */
+#gap-export-split .btn-primary { margin-top: 6px; }
+#gap-export-split .badge { margin-left: 6px; }
+.radio-group b { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* --- hospital pins, coloured by level ----------------------------------- */
+.hosp-icon { pointer-events: none; }
+
+/* Every facility is the same pin; only its colour changes with the level —
+   see hospIconHtml(). divIcon has no intrinsic size, so the SVG positions
+   itself against the coordinate with a transform rather than by icon anchoring.
+
+   The anchor is the pin's TIP, not its middle. The whole point of a teardrop
+   is that it points at something; centring it would put the facility's real
+   coordinate halfway up the pin's body and leave the tip stabbing a spot
+   ~12 px south of the hospital. At Haryana's latitude that is a few hundred
+   metres at zoom 13 — enough to sit the pin in the wrong village. */
+.hosp-svg {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+  pointer-events: auto;
+  cursor: pointer;
+  overflow: visible;
+}
+
+/* Inline in a legend or filter row, where absolute positioning would tear it
+   out of flow. Must stay AFTER the rule above: same specificity, so source
+   order is what makes it win. */
+.hosp-svg-legend {
+  position: static;
+  transform: none;
+  flex: none;
+  filter: none;
+}
+
+.sub-toggle .hosp-svg-legend { margin: -2px 0; }
+
+/* --- route endpoints ----------------------------------------------------- */
+/* The two ends of a drawn route: a filled target disc on the ORIGIN grid cell,
+   an open halo ring on the DESTINATION facility. divIcon has no intrinsic
+   size, so both children are absolutely positioned and pulled back by half
+   their own box to centre on the coordinate.
+
+   Everything here is deliberately drawn in DOM rather than on the Leaflet
+   canvas: the map runs preferCanvas, and canvas discards the className that
+   the pulse animation below hangs off. */
+.route-end { pointer-events: none; }
+
+.route-end-mark,
+.route-end-pulse {
+  position: absolute;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+/* ORIGIN — solid, so it holds its own under the route line that starts on top
+   of it. White collar first, then a dark hairline, so it stays separable from
+   the route whatever colour the route is. */
+.route-end-grid .route-end-mark {
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  background: var(--c);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1.5px rgba(15, 23, 42, 0.55), 0 1px 4px rgba(15, 23, 42, 0.4);
+}
+
+/* A white pip in the middle reads as a target rather than a blob, and marks
+   the exact centroid at any zoom. */
+.route-end-grid .route-end-mark::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+/* DESTINATION — open ring. The facility pin sits inside it and stays visible;
+   a filled disc here would hide the very thing being pointed at. */
+.route-end-facility .route-end-mark {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 3px solid var(--c);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.95), 0 0 0 4.5px rgba(15, 23, 42, 0.28);
+}
+
+/* One expanding ring per end. Slow and low-contrast on purpose: this runs for
+   as long as a route is on screen, and anything faster turns a reference map
+   into something that twitches at you while you are trying to read a table. */
+.route-end-pulse {
+  border: 2.5px solid var(--c);
+  opacity: 0;
+  animation: routeEndPulse 2.2s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+.route-end-grid .route-end-pulse {
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+}
+.route-end-facility .route-end-pulse {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+}
+
+@keyframes routeEndPulse {
+  0% { transform: scale(1); opacity: 0.75; }
+  70% { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* Respect a stated preference for less motion — the static rings above already
+   carry the whole message, so this loses nothing but the animation. */
+@media (prefers-reduced-motion: reduce) {
+  .route-end-pulse { animation: none; }
+}
+
+/* --- blood storage droplets --------------------------------------------- */
+/* A droplet silhouette, so blood storage is never confused with the square
+   hospital badges or the round ambulance pins. */
+.bs-icon { pointer-events: none; }
+
+.bs-svg {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+  pointer-events: auto;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.bs-svg-legend {
+  position: static;
+  transform: none;
+  flex: none;
+  filter: none;
+}
+
+/* --- ambulance station pins (deliverable 3) ----------------------------- */
+/* divIcon has no intrinsic size, so the pin centres itself on the coordinate
+   with a transform rather than by icon anchoring — same trick as the grid
+   labels below. */
+.amb-icon { pointer-events: none; }
+
+.amb-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  font: 700 9px/1 Inter, system-ui, sans-serif;
+  color: #fff;
+  border: 1.5px solid;
+  border-radius: 50% 50% 50% 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Inline in the legend, where absolute positioning would tear it out of flow. */
+.amb-pin-legend {
+  position: static;
+  transform: none;
+  flex: none;
+  width: 13px;
+  height: 13px;
+  font-size: 8px;
+  font-style: normal;
+  box-shadow: none;
+}
+
+/* --- grid ID labels (deliverable 2) ------------------------------------- */
+/* divIcon has no intrinsic size, so the span is centred on the cell with a
+   transform rather than by icon anchoring. */
+.grid-id-label { pointer-events: none; }
+
+.grid-id-label span {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 1px 5px;
+  font: 600 10px/1.3 Inter, system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: #450a0a;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(127, 29, 29, 0.5);
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+/* ======================================================================== */
+/* Grid ID search — shared by all three tabs                                */
+/* ======================================================================== */
+
+/* POPUPS SIT ABOVE THE MAP CONTROLS (25 Aug 2026).
+   Leaflet puts the control corners at z-index 1000 and the popup pane at 700,
+   so the grid-search button — which lives in the top-right corner alongside
+   zoom — was painted over the popup's × and its tooltip covered the popup
+   header. A popup you cannot close is a trap: the reader has to click the map
+   to escape, and on the Proximity tab that opens a different popup.
+
+   A popup is transient and always the thing the user just asked for, so it
+   wins while it is open. It can still be dismissed by its own ×, by Escape, or
+   by clicking the map, and the controls come straight back underneath. */
+.leaflet-popup-pane { z-index: 1100; }
+
+/* The × button's own size/hit-area lives in popup_panes.css, which already
+   styles it at a higher specificity (`a.leaflet-popup-close-button`) and loads
+   after this file. Two rules for one button is how it ends up looking like the
+   change did not apply. */
+
+/* MAP CONTROL, 24 Aug 2026 — moved out of the sidebar. Leaflet drops this into
+   .leaflet-top.leaflet-right immediately after the zoom control, so the icon
+   sits under the +/- stack. Collapsed it is one button the same size as a zoom
+   button; open it becomes a panel hanging off the same corner.
+
+   Sizing and skin are taken from THIS APP's restyled zoom control (style.css
+   .leaflet-control-zoom), not from stock Leaflet: 32px button inside a 1px
+   border, 10px radius, --shadow-md, 16px clear of the map edge. Matching the
+   stock 30px/4px/2px-black defaults instead left the icon 6px proud of the
+   +/- stack and visibly a different component. */
+.grid-search-control {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  margin-right: 16px !important;   /* same gutter as .leaflet-control-zoom */
+  margin-top: 8px !important;      /* gap below the zoom stack */
+}
+
+.gs-toggle {
+  width: 34px;                     /* 32px + 1px border each side */
+  height: 34px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--shadow-md);
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.gs-toggle svg { width: 17px; height: 17px; display: block; }
+
+/* Same hover as the zoom buttons, so the whole corner behaves as one group. */
+.gs-toggle:hover {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.gs-toggle:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+/* Open: filled accent, so it is obvious which control the panel belongs to. */
+.grid-search-control.is-open .gs-toggle {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: #fff;
+}
+
+.gs-body {
+  width: 268px;
+  max-width: min(268px, calc(100vw - 96px));
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel, #fff);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.16);
+  font: inherit;
+}
+
+.gs-body[hidden] { display: none; }
+
+.gs-body .grid-search-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.gs-body .grid-search-row .text-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+}
+
+.gs-body .grid-search-row .btn-primary {
+  flex: none;
+  width: auto;
+  margin: 0;
+  padding: 0 14px;
+  white-space: nowrap;
+}
+
+/* The hint is guidance for a first use, not something to re-read every time —
+   it stays, but it does not compete with the field or the result. */
+.gs-body .panel-note {
+  margin: 8px 0 0;
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+
+.grid-search-panel .grid-search-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.grid-search-panel .grid-search-row .text-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+}
+
+.grid-search-panel .grid-search-row .btn-primary {
+  flex: none;
+  width: auto;
+  margin: 0;
+  padding: 0 14px;
+  white-space: nowrap;
+}
+
+.grid-search-result {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--panel-alt);
+  font-size: 12.5px;
+}
+
+.grid-search-result.hidden { display: none; }
+
+/* Found: a calm confirmation. Missing: unmistakable, because "grid id doesn't
+   exist" is the whole point of the control. */
+.grid-search-result.ok {
+  border-color: rgba(13, 148, 136, 0.45);
+  background: rgba(13, 148, 136, 0.07);
+}
+
+.grid-search-result.error {
+  border-color: rgba(185, 28, 28, 0.5);
+  background: rgba(185, 28, 28, 0.07);
+  color: #7f1d1d;
+  font-weight: 600;
+}
+
+.grid-search-result dl {
+  margin: 6px 0 8px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 10px;
+}
+
+.grid-search-result dt { color: var(--muted); }
+.grid-search-result dd { margin: 0; font-weight: 600; }
+
+.grid-search-result .btn-ghost {
+  width: auto;
+  margin: 0 6px 0 0;
+  padding: 4px 10px;
+  font-size: 11.5px;
+}
+
+/* The located cell pulses briefly so the eye catches it after the fly-to. */
+.grid-search-pin {
+  animation: gridSearchPulse 1.4s ease-out 3;
+}
+
+@keyframes gridSearchPulse {
+  0%   { stroke-opacity: 1;   stroke-width: 3; }
+  70%  { stroke-opacity: 0.15; stroke-width: 11; }
+  100% { stroke-opacity: 1;   stroke-width: 3; }
+}
+
+/* ======================================================================== */
+/* Radar overlay                                                            */
+/* ======================================================================== */
+.radar-ring-label { pointer-events: none; }
+
+.radar-ring-label span {
+  display: inline-block;
+  padding: 1px 6px;
+  font: 600 10px/1.4 Inter, system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+}
+
+.radar-bearing { pointer-events: none; }
+
+.radar-bearing span {
+  display: inline-block;
+  font: 700 9.5px/1.4 Inter, system-ui, sans-serif;
+  letter-spacing: 0.06em;
+  color: #475569;
+  text-shadow:
+     0 0 3px #fff,  0 0 3px #fff,
+     1px 1px 0 #fff, -1px -1px 0 #fff;
+}
+
+/* The sweep is decorative; never let it intercept a click meant for a cell. */
+.radar-sweep { pointer-events: none !important; }
+
+/* The outward pulse. Radius and opacity are animated in JS (radar_overlay.js)
+   because they are geographic, not CSS lengths — this only softens the edge so
+   the travelling ring reads as light rather than as a drawn circle. */
+.radar-pulse {
+  pointer-events: none !important;
+  filter: blur(0.4px);
+}
+
+/* The cell glow that travels outward with the pulse lives in JS, not here —
+   the map runs preferCanvas:true, so grid cells are canvas drawings with no
+   DOM node for a class or a keyframe to attach to. See glowGrids() in
+   radar_overlay.js, which restyles the Leaflet layers directly and honours
+   prefers-reduced-motion itself. */
+
+@media (prefers-reduced-motion: reduce) {
+  .radar-pulse { display: none; }
+}
+
+.radar-panel .panel-note { margin-top: 4px; }
+
+/* ======================================================================== */
+/* Feature popups — every icon carries its full record                      */
+/* ======================================================================== */
+.feature-popup .leaflet-popup-content {
+  margin: 10px 12px;
+  min-width: 220px;
+}
+
+.fp-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 7px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.fp-kind {
+  flex: none;
+  padding: 1px 7px;
+  border-radius: 9px;
+  font: 700 9.5px/1.6 Inter, system-ui, sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.fp-grid      { background: #7f1d1d; }
+.fp-hospital  { background: #1d4ed8; }
+.fp-ambulance { background: #0d9488; }
+
+.fp-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3px 12px;
+  margin: 0;
+  font-size: 12px;
+}
+
+.fp-list dt {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.fp-list dd {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.fp-list .fp-miss { color: #b91c1c; }
+
+/* Coordinates are the field people copy out, so they get a selectable mono
+   treatment rather than being folded into prose. */
+.fp-list code.coord {
+  padding: 0 4px;
+  font: 600 11px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  user-select: all;
+}
+
+.fp-warn {
+  margin: 7px 0 0;
+  padding: 5px 7px;
+  font-size: 11.5px;
+  color: #7c2d12;
+  background: rgba(180, 83, 9, 0.1);
+  border-left: 3px solid #b45309;
+  border-radius: 0 4px 4px 0;
+}
+
+.fp-table {
+  margin-top: 8px;
+  font-size: 11.5px;
+}
+
+.fp-table th { font-size: 10px; }
+
+/* ======================================================================== */
+/* Gaps segmentation — level vs facility type                               */
+/* ======================================================================== */
+.segment-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 8px;
+}
+
+.seg-btn {
+  --seg: var(--accent);
+  flex: 1 1 auto;
+  min-width: 54px;
+  padding: 6px 9px;
+  font: 600 11.5px/1.3 Inter, system-ui, sans-serif;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+
+.seg-btn:hover {
+  border-color: var(--seg);
+  background: var(--panel-alt);
+}
+
+.seg-btn.active {
+  color: #fff;
+  background: var(--seg);
+  border-color: var(--seg);
+}
+
+/* ======================================================================== */
+/* Multi-point measurement                                                  */
+/* ======================================================================== */
+.measure-legs-wrap {
+  max-height: 220px;
+  margin-top: 8px;
+}
+
+.measure-legs-wrap.hidden { display: none; }
+
+.measure-legs tfoot th {
+  position: sticky;
+  bottom: 0;
+  background: var(--panel-alt);
+  border-top: 1.5px solid var(--border);
+  font-weight: 700;
+}
+
+.measure-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.measure-actions .btn-ghost {
+  flex: 1 1 0;
+  margin: 0;
+}
+
+/* The measure panel's own styles predate the accordion refactor and assumed
+   the panel padding they now sit inside. */
+.panel.acc .measure-actions {
+  margin-top: 0.6rem;
+}
+
+/* Divider inside a control panel, for the download block appended below the
+   controls it follows. Deliberately lighter than the panel border so it reads
+   as "and also" rather than as the start of another panel. */
+.acc-body .panel-rule {
+  border: 0;
+  border-top: 1px solid var(--border, #e5e7eb);
+  margin: 18px 0 12px;
+  opacity: 0.7;
+}

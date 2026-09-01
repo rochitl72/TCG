@@ -1,0 +1,355 @@
+/* ==========================================================================
+   charts.css — chart chrome + the accordion sidebar
+   ==========================================================================
+   Light surface only: the dashboard has no dark mode, so every colour here was
+   validated against the white panel it actually renders on rather than against
+   a theoretical dark surface it will never see.
+   ========================================================================== */
+
+/* ---------- chart chrome -------------------------------------------------- */
+
+.viz-card {
+  margin: 0 0 0.85rem;
+}
+
+.viz-card:last-child {
+  margin-bottom: 0;
+}
+
+.viz-title {
+  margin: 0 0 0.15rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+
+.viz-sub {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.viz {
+  display: block;
+  overflow: visible;
+}
+
+/* Text wears ink tokens, never a series colour. */
+.viz-lab {
+  font-size: 9.5px;
+  font-family: inherit;
+}
+
+.viz-note {
+  font-size: 9px;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.viz-tick {
+  font-size: 8.5px;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.viz-axis-title {
+  font-size: 8.5px;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+}
+
+.viz-inbar {
+  font-size: 9.5px;
+  font-weight: 600;
+  fill: #ffffff;
+  font-family: inherit;
+}
+
+.viz-mark {
+  cursor: default;
+  transition: opacity 0.12s ease;
+}
+
+.viz-mark:hover,
+.viz-mark:focus {
+  opacity: 1;
+  outline: none;
+}
+
+.viz-dot:focus {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.viz-hit {
+  cursor: default;
+}
+
+.viz-empty {
+  margin: 0.35rem 0;
+  padding: 0.7rem 0.6rem;
+  font-size: 0.74rem;
+  color: var(--muted);
+  background: var(--panel-alt);
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* ---------- tooltip ------------------------------------------------------- */
+
+.viz-tip {
+  position: fixed;
+  z-index: 9999;
+  max-width: 230px;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: #f8fafc;
+  background: rgba(15, 23, 42, 0.94);
+  border-radius: 7px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.25);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+.viz-tip.on {
+  opacity: 1;
+}
+
+.viz-tip-key {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  margin-right: 5px;
+  vertical-align: baseline;
+}
+
+/* ---------- legend -------------------------------------------------------- */
+
+.viz-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.75rem;
+  margin: 0.45rem 0 0;
+  font-size: 0.71rem;
+  color: var(--muted);
+}
+
+.viz-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.viz-swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  flex: 0 0 auto;
+}
+
+.viz-swatch.hollow {
+  background: #ffffff;
+  border: 1.5px solid currentColor;
+}
+
+/* ---------- meter --------------------------------------------------------- */
+
+.viz-meter + .viz-meter {
+  margin-top: 0.6rem;
+}
+
+.viz-meter-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
+.viz-meter-head b {
+  font-size: 1.02rem;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.viz-meter-track {
+  height: 9px;
+  border-radius: 5px;
+  background: var(--panel-alt);
+  overflow: hidden;
+}
+
+.viz-meter-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.25s ease;
+}
+
+.viz-meter-note {
+  margin-top: 0.28rem;
+  font-size: 0.7rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+/* ---------- hero figure --------------------------------------------------- */
+
+.viz-hero {
+  display: block;
+  font-size: 2.05rem;
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--text);
+  /* Proportional figures: tabular-nums makes a large standalone number loose. */
+}
+
+.viz-hero-label {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.74rem;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+/* ---------- KPI strip ----------------------------------------------------- */
+
+.viz-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+}
+
+.viz-strip-cell {
+  padding: 0.5rem 0.45rem;
+  background: var(--panel-alt);
+  border-radius: 8px;
+  border-top: 3px solid var(--cell-accent, var(--border));
+}
+
+.viz-strip-cell .k {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.viz-strip-cell .v {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.15;
+}
+
+.viz-strip-cell .s {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.66rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+/* ==========================================================================
+   Accordion sidebar
+   ==========================================================================
+   Every panel keeps its controls — nothing is removed, it is folded. Two
+   panels per tab open by default so the tab still reads as a working surface
+   rather than a list of closed drawers. */
+
+.panel.acc {
+  padding: 0;
+  overflow: hidden;
+}
+
+.panel.acc > .acc-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.72rem 0.85rem;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.panel.acc > .acc-head:hover {
+  background: var(--panel-alt);
+}
+
+.panel.acc > .acc-head:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.acc-chev {
+  flex: 0 0 auto;
+  width: 9px;
+  height: 9px;
+  border-right: 1.8px solid var(--muted-soft);
+  border-bottom: 1.8px solid var(--muted-soft);
+  transform: rotate(-45deg);
+  transition: transform 0.16s ease;
+  margin-left: auto;
+}
+
+.panel.acc.open > .acc-head .acc-chev {
+  transform: rotate(45deg);
+}
+
+.acc-tag {
+  flex: 0 0 auto;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.1rem 0.34rem;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.acc-tag.viz {
+  background: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
+}
+
+.panel.acc > .acc-body {
+  display: none;
+  padding: 0 0.85rem 0.85rem;
+}
+
+.panel.acc.open > .acc-body {
+  display: block;
+}
+
+.panel.acc > .acc-body > :first-child {
+  margin-top: 0;
+}
+
+/* Panels that are pure output (charts, meters) read better without the
+   surrounding card when they sit directly under a heading. */
+.panel.acc.flush > .acc-body {
+  padding-bottom: 0.7rem;
+}
+
+@media (max-width: 900px) {
+  .viz-strip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

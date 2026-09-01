@@ -25,6 +25,12 @@ Live deployment target: **tcg.coers.in**
   grid cells (hex or circle) for a selected district, not just accident
   points — lets you see coverage gaps across an entire area, not only where
   an accident happened to occur.
+- **Trauma Network Analytics** — three analytics deliverables behind one
+  sidebar entry: (1) every 2025 grid cell with the hospitals within 60 km,
+  including type, GPS and TPL (Trauma Preparedness Level) score; (2) coverage
+  gaps and underserved corridors per service tier (Tertiary/Secondary/Primary),
+  by drive time or road distance; (3) dynamic ambulance repositioning, showing
+  which vehicles to move and what gaps remain. See **README_ANALYTICS.md**.
 - **Distance scale** (available on every map) — click two points to measure
   straight-line and real road-route distance/drive time.
 
@@ -54,17 +60,13 @@ PostGIS (db container, :5433 host-mapped)
 ```
 
 Road-route distances (reach analyses, the district scorecard, grid analysis,
-and the distance-measure tool) come from the **public OSRM demo server**
-(`router.project-osrm.org`) — it's free but has real limitations worth
-knowing before you rely on it in production:
+and the distance-measure tool) use **self-hosted OSRM** against an India
+**northern-zone** OpenStreetMap extract (covers Haryana and neighbouring states).
+~35k accident dataset. `./start.sh` builds and starts it automatically via
+`scripts/setup_osrm.sh` (first run downloads ~210 MB and builds the graph in
+~10–20 minutes). The public demo server (`router.project-osrm.org`) is only
+used as a fallback if `OSRM_BASE` is not set.
 
-- No uptime/latency/data-freshness guarantees, and access can be withdrawn
-  at any time — it's explicitly not meant for production traffic.
-- Documented rate limit is 1 request/second; this app's precompute jobs
-  (`reach_pipeline.py`, `grid_reach.py`) run closer to ~10/sec under load,
-  which is over that limit and could get throttled if usage grows. If this
-  becomes a problem, self-hosting OSRM (open source, straightforward to run
-  as its own container against a Haryana OSM extract) is the fix.
 - Distances/times are free-flow estimates from a static OSM snapshot — no
   live traffic.
 
@@ -81,6 +83,9 @@ dashboard/              Flask app
   dataset_manager.py    Active accidents CSV (default vs. uploaded)
   reach_pipeline.py     Background OSRM recompute (accident-level reach)
   grid_reach.py         On-demand OSRM recompute (grid-cell-level reach)
+  network_analytics.py  Grid-hospital proximity, tier coverage gaps, corridors
+  ambulance_optimizer.py  Dynamic ambulance positioning (greedy MCLP)
+  tpl.py                Trauma Preparedness Level lookup + provenance
   road_grid_generator.py  OSM road-network grid cells (osmnx)
   templates/            Jinja2 pages + shared partials (_rail, _app_header, _measure_panel)
   static/{css,js}/       Per-page JS, shared reach_view.js, map_measure.js
@@ -90,7 +95,8 @@ data/                   Seed data + precomputed reach JSON (small — see .gitig
 scripts/                One-time DB setup + grid generation
 nginx/nginx.conf         Reverse proxy config for the frontend container
 docker-compose.yml       Production stack: db + backend + frontend
-docker-compose.dev.yml   Local dev: just the db (start.sh runs Flask directly)
+docker-compose.dev.yml   Local dev: PostGIS + OSRM (start.sh runs Flask on host)
+osrm-data/               Northern-zone OSM extract + OSRM graph (gitignored)
 ```
 
 A few files are intentionally **not** in this repo (see `.gitignore` for the
@@ -121,10 +127,17 @@ cp .env.example .env   # optional — start.sh has the same default baked in
 ./start.sh
 ```
 
-This brings up PostGIS via `docker-compose.dev.yml`, runs the one-time DB
-bootstrap (`scripts/setup_database.sh` — needs `district.sql`, `state 1.sql`,
-and `geolocations.sql` in the repo root), then runs the Flask dev server
-directly at `http://127.0.0.1:5050`.
+This brings up PostGIS + self-hosted OSRM via `docker-compose.dev.yml`, runs
+the one-time DB bootstrap (`scripts/setup_database.sh` — needs `district.sql`,
+`state 1.sql`, and `latest data/` with geolocations + accidents), kicks off
+reach/scorecard recompute in the background for large datasets, then runs the
+Flask dev server at `http://127.0.0.1:5050`.
+
+Monitor recompute progress:
+
+```bash
+tail -f data/recompute.log
+```
 
 ## Deploying (tcg.coers.in)
 
@@ -146,18 +159,19 @@ bootstrap step below can reach it from the host).
    installed *before* cloning. (If you already cloned without it: install
    git-lfs, then run `git lfs pull`.)
 
-2. **Bring up the database and load it (one-time).**
+2. **Bring up the database, OSRM, and load data (one-time).**
    ```bash
-   docker compose up -d db
-   sudo apt-get install -y postgresql-client   # if psql isn't already present
-   DATABASE_URL=postgresql://mapsr:mapsr@localhost:5433/mapsr ./scripts/setup_database.sh
+   chmod +x scripts/setup_osrm.sh scripts/setup_database.sh
+   ./scripts/setup_osrm.sh
+   OSRM_BASE=http://127.0.0.1:5000 OSRM_SLEEP=0 DATABASE_URL=postgresql://mapsr:mapsr@localhost:5433/mapsr ./scripts/setup_database.sh
    ```
    This is idempotent — safe to re-run; it skips any table that's already
-   loaded.
+   loaded. Reach/scorecard recompute for ~35k accidents runs in the background;
+   monitor with `tail -f data/recompute.log`.
 
 3. **Bring up the backend and frontend.**
    ```bash
-   docker compose up -d backend frontend
+   docker compose up -d backend frontend osrm
    ```
 
 4. **Point DNS.** `tcg.coers.in` → this server's IP, A record. nginx is
@@ -185,14 +199,14 @@ server used for local development is never used in production; gunicorn is.
 | Variable | Used by | Default | Notes |
 |---|---|---|---|
 | `DATABASE_URL` | `db.py`, `reach_pipeline.py`, `road_grid_generator.py` | `postgresql://mapsr:mapsr@localhost:5433/mapsr` | Set to `postgresql://mapsr:mapsr@db:5432/mapsr` inside docker-compose (container-to-container hostname) |
+| `OSRM_BASE` | `reach_pipeline.py`, `grid_reach.py`, measure API | `http://127.0.0.1:5000` when using `./start.sh` | Set to `http://osrm:5000` in the production backend container |
+| `OSRM_SLEEP` | `reach_pipeline.py`, `grid_reach.py` | `0` with self-hosted OSRM | Seconds between OSRM requests during precompute; use `0.1` only for the public demo server |
 | `PORT` | `app.py` (`__main__` only) | `5050` | Only affects the local dev server; the container always binds gunicorn to 5050 |
 | `FLASK_DEBUG` | `app.py` (`__main__` only) | `1` locally, `0` in the container | Never affects the gunicorn/production path |
 
 ## Known limitations
 
-- Uses the public OSRM demo server — see Architecture above.
-- Synthetic accident data by default; real data can be uploaded but isn't
-  bundled (privacy/scope).
+- Accident + facility data must live under `latest data/`; reach/scorecard JSON is generated locally via OSRM precompute.
 - No authentication on the dataset upload/reset endpoints — anyone who can
   reach the site can replace the active dataset. Fine for an internal/demo
   deployment; add auth in front of `/api/accidents/*` before wider release.

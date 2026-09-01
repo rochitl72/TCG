@@ -258,6 +258,9 @@ def _district_match_sql(column: str = "district_name") -> str:
         OR LOWER(TRIM(%(district)s)) IN ('yamunanagar', 'yamuna nagar') AND LOWER(TRIM({column})) IN ('yamunanagar', 'yamuna nagar', 'jagadhari')
         OR LOWER(TRIM(%(district)s)) = 'mahendragarh' AND LOWER(TRIM({column})) IN ('mahendragarh', 'narnaul')
         OR LOWER(TRIM(%(district)s)) = 'narnaul' AND LOWER(TRIM({column})) IN ('mahendragarh', 'narnaul')
+        OR LOWER(TRIM(%(district)s)) IN ('nuh', 'mewat') AND LOWER(TRIM({column})) IN ('nuh', 'mewat')
+        OR LOWER(TRIM(%(district)s)) IN ('charkhi dadri', 'charki dadri', 'dadri')
+            AND LOWER(TRIM({column})) IN ('charkhi dadri', 'charki dadri', 'dadri')
     )"""
 
 
@@ -382,6 +385,6 @@ def geolocation_geojson(
         "layer": layer,
         "count": row["cnt"] if row else 0,
         "state": "Haryana",
-        "source": "geolocations.sql",
+        "source": "latest data/geolocations latest.sql",
     }
     return collection
