@@ -18,7 +18,11 @@ services:
 
   osrm:
     image: ghcr.io/project-osrm/osrm-backend
-    platform: linux/arm64
+    # Same override as docker-compose.yml, and for the same reason: this file
+    # is what scripts/setup_osrm.sh brings the routing container up with, so a
+    # hardcoded arch here means an x86 server cannot build its graph no matter
+    # what .env says. On an amd64 server: OSRM_PLATFORM=linux/amd64
+    platform: ${OSRM_PLATFORM:-linux/arm64}
     container_name: mapsr-osrm
     # See docker-compose.yml for why --max-table-size is raised from the default 100.
     command: osrm-routed --algorithm mld --max-table-size 8000 /data/haryana.osrm

@@ -19,13 +19,33 @@ MARKER="$OSRM_DATA/.built"
 ZONE_URL="${OSRM_ZONE_URL:-https://download.geofabrik.de/asia/india/northern-zone-latest.osm.pbf}"
 OSRM_IMAGE="${OSRM_IMAGE:-ghcr.io/project-osrm/osrm-backend}"
 OSMIUM_IMAGE="${OSMIUM_IMAGE:-iboates/osmium:latest}"
-# On Apple Silicon, the amd64 OSRM image runs under emulation and often OOMs during
-# graph build. Prefer the native arm64 image when available.
-if [[ "$(uname -m)" == "arm64" ]]; then
+# Image architecture, in precedence order:
+#   DOCKER_PLATFORM  explicit, this script only
+#   OSRM_PLATFORM    environment or .env — the SAME variable docker-compose.yml
+#                    reads, so a server declares its architecture in one place
+#                    and both the graph build and the running container agree
+#   host architecture
+# On Apple Silicon the amd64 image runs under emulation and often OOMs during
+# the graph build, so the native arm64 default matters there. On an x86 server
+# that default is exactly backwards and the container never becomes healthy,
+# which is why .env wins over the guess below.
+if [[ -z "${OSRM_PLATFORM:-}" && -f .env ]]; then
+  OSRM_PLATFORM="$(sed -n 's/^[[:space:]]*OSRM_PLATFORM[[:space:]]*=[[:space:]]*//p' .env \
+    | tail -1 | tr -d '"' | tr -d "'" | tr -d '[:space:]')"
+fi
+if [[ -n "${OSRM_PLATFORM:-}" ]]; then
+  DOCKER_PLATFORM="${DOCKER_PLATFORM:-$OSRM_PLATFORM}"
+elif [[ "$(uname -m)" == "arm64" || "$(uname -m)" == "aarch64" ]]; then
   DOCKER_PLATFORM="${DOCKER_PLATFORM:-linux/arm64}"
 else
   DOCKER_PLATFORM="${DOCKER_PLATFORM:-linux/amd64}"
 fi
+# Exported so the `docker compose up -d osrm` below substitutes the same value
+# into the compose file's ${OSRM_PLATFORM} rather than falling back to arm64.
+# Always DOCKER_PLATFORM, so the graph is built and served by the same arch.
+export OSRM_PLATFORM="$DOCKER_PLATFORM"
+echo "==> OSRM image platform: $DOCKER_PLATFORM"
+
 DOCKER_RUN=(docker run --platform "$DOCKER_PLATFORM")
 COMPOSE_FILE="${OSRM_COMPOSE_FILE:-docker-compose.dev.yml}"
 OSRM_PORT="${OSRM_PORT:-5000}"

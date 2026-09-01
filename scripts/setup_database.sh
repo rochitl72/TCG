@@ -96,7 +96,21 @@ if [[ "$OSRM_HOST" != *"router.project-osrm.org"* ]]; then
   SELF_HOSTED=1
 fi
 
-if [[ "$GEO_RELOADED" == "1" || ! -f data/accident_hospital_safety_v2.json ]]; then
+# The accident-reach artifacts (data/accident_*_safety_v2.json and
+# district_scorecard_v2.json) fed the accident-safety, severity-heatmap and
+# district-scorecard pages. Those pages were removed when the app was
+# consolidated into the single Network Analytics view, and nothing in the
+# running code reads the files any more — grep dashboard/ and scripts/ for
+# "safety" and the only hits are comments.
+#
+# This used to run whenever the file was simply absent, which on a fresh clone
+# is always. That silently launched one OSRM request per accident across ~35k
+# rows — hours of work on a new server, for output nobody consumes. It now
+# runs only when asked for:
+#
+#     TCGA_RECOMPUTE_REACH=1 ./scripts/setup_database.sh
+#
+if [[ "${TCGA_RECOMPUTE_REACH:-0}" == "1" ]]; then
   if [[ "$SELF_HOSTED" == "0" && "$ACC_ROWS" -gt 3000 ]]; then
     echo "==> NOTE: $ACC_ROWS accidents is too many for the public OSRM demo server."
     echo "    Run ./start.sh (includes self-hosted OSRM) or:"
@@ -118,6 +132,9 @@ if [[ "$GEO_RELOADED" == "1" || ! -f data/accident_hospital_safety_v2.json ]]; t
     echo "==> Recomputing reach/scorecard for $ACC_ROWS accidents via $OSRM_HOST (resumable)..."
     python3 scripts/recompute_reach.py || echo "!! Recompute failed — re-run manually: python3 scripts/recompute_reach.py"
   fi
+else
+  echo "==> Skipping accident-reach/scorecard recompute (nothing in the app reads it)."
+  echo "    To regenerate anyway: TCGA_RECOMPUTE_REACH=1 ./scripts/setup_database.sh"
 fi
 
 echo "==> Database ready."

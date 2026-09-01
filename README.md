@@ -80,23 +80,34 @@ actual roads, per district, on first request.
 dashboard/              Flask app
   app.py                Routes (pages + JSON API)
   db.py                 All PostGIS queries
-  dataset_manager.py    Active accidents CSV (default vs. uploaded)
-  reach_pipeline.py     Background OSRM recompute (accident-level reach)
-  grid_reach.py         On-demand OSRM recompute (grid-cell-level reach)
+  districts.py          District name normalisation (one spelling, everywhere)
   network_analytics.py  Grid-hospital proximity, tier coverage gaps, corridors
+  grid_ambulance.py     Ambulance reach per grid cell (Old dataset, 569 vehicles)
+  ambulance_v2.py       Ambulance reach for the New workbook dataset (sightings)
   ambulance_optimizer.py  Dynamic ambulance positioning (greedy MCLP)
+  grid_routes.py        Cached OSRM route geometry for grid -> facility branches
+  rbg_grids.py          Accident grid cells fetched from the partner API
+  rbg_live.py           Live facility lookups against the same API
   tpl.py                Trauma Preparedness Level lookup + provenance
+  reach_pipeline.py     Accident-level OSRM reach (legacy; see note in step 4)
   road_grid_generator.py  OSM road-network grid cells (osmnx)
-  templates/            Jinja2 pages + shared partials (_rail, _app_header, _measure_panel)
-  static/{css,js}/       Per-page JS, shared reach_view.js, map_measure.js
-  Dockerfile             Backend image (gunicorn)
-data/                   Seed data + precomputed reach JSON (small — see .gitignore
-                         for what's excluded and why)
-scripts/                One-time DB setup + grid generation
-nginx/nginx.conf         Reverse proxy config for the frontend container
-docker-compose.yml       Production stack: db + backend + frontend
-docker-compose.dev.yml   Local dev: PostGIS + OSRM (start.sh runs Flask on host)
-osrm-data/               Northern-zone OSM extract + OSRM graph (gitignored)
+  dataset_manager.py    Active accidents CSV (default vs. uploaded)
+  templates/            network_analytics.html + partials (_rail, _app_header,
+                         _measure_panel) — the app is one page with three tabs
+  static/{css,js}/      network_analytics.js is the whole client; charts.js,
+                         radar_overlay.js and map_measure.js support it
+  Dockerfile            Backend image (gunicorn)
+frontend/Dockerfile     Frontend image (nginx + baked-in config and assets)
+nginx/nginx.conf        Reverse proxy config, copied into the frontend image
+data/                   Seed data + precomputed reach JSON (see .gitignore for
+                         what is excluded and why)
+  analytics/            The five precomputed reach caches the app reads on boot
+latest data/            Canonical facility + accident dumps (read-only mount)
+scripts/                One-time setup, precompute and data-build scripts
+docker-compose.yml      Production stack: db + backend + frontend + osrm
+docker-compose.dev.yml  Local dev: PostGIS + OSRM (start.sh runs Flask on host)
+osrm-data/              OSM extract + compiled OSRM graph (gitignored, built
+                         per machine by scripts/setup_osrm.sh)
 ```
 
 A few files are intentionally **not** in this repo (see `.gitignore` for the
@@ -118,7 +129,7 @@ GitHub. That means:
   git-lfs is installed — no separate step needed.
 - They're still excluded from the **Docker build context** (`.dockerignore`)
   and the container image itself, since they're only needed once, for the
-  host-side DB bootstrap in step 2 below — not by the running app.
+  host-side DB bootstrap in step 4 below — not by the running app.
 
 ## Local development
 
@@ -139,68 +150,103 @@ Monitor recompute progress:
 tail -f data/recompute.log
 ```
 
-## Deploying (tcg.coers.in)
+## Deploying to a server
 
-The production stack is a separate `docker-compose.yml` with three
-containers: `frontend` (nginx, port 80, proxies everything to `backend`),
-`backend` (this Flask app under gunicorn, port 5050 — unchanged from local
-dev), and `db` (PostGIS, port 5433 — unchanged, kept open so the one-time
-bootstrap step below can reach it from the host).
+The production stack is four containers, all defined in `docker-compose.yml`:
+`frontend` (nginx on port 80 — serves static assets, proxies everything else),
+`backend` (this Flask app under gunicorn on 5050), `db` (PostGIS on 5433 — the
+port stays published so the one-time data load can reach it from the host), and
+`osrm` (self-hosted routing, reachable only inside the compose network). A fifth
+service, `artifacts`, sits behind the `tools` profile and never starts on its own.
 
-1. **Get the code onto the server.**
+Both images are self-contained: `dashboard/Dockerfile` builds the backend and
+`frontend/Dockerfile` bakes `nginx/nginx.conf` and `dashboard/static/` into the
+nginx image, so neither one depends on files being present on the host at run
+time. (Editing CSS/JS therefore needs a `docker compose build frontend` to show
+up in the production stack; the dev stack runs Flask directly and is unaffected.)
+
+1. **Install the host prerequisites.** Docker Engine and the Compose plugin, plus
+   the three tools the one-time bootstrap scripts shell out to. `git-lfs` must be
+   installed *before* cloning — `district.sql` and `state 1.sql` are LFS objects
+   and a clone without it fetches pointer files instead of data.
    ```bash
-   sudo apt-get install -y git-lfs   # required — district.sql / state 1.sql are LFS objects
+   sudo apt-get update
+   sudo apt-get install -y git git-lfs postgresql-client python3
    git lfs install
-   git clone https://github.com/rochitl72/Trauma-Care-Gap-Analysis.git
-   cd Trauma-Care-Gap-Analysis
    ```
-   `district.sql`, `state 1.sql`, and `geolocations.sql` all come down as
-   part of the clone — no separate transfer step, as long as git-lfs was
-   installed *before* cloning. (If you already cloned without it: install
-   git-lfs, then run `git lfs pull`.)
 
-2. **Bring up the database, OSRM, and load data (one-time).**
+2. **Get the code onto the server.**
+   ```bash
+   git clone https://github.com/rochitl72/TCG.git
+   cd TCG
+   ```
+   (Already cloned without git-lfs? Install it, then `git lfs pull`.)
+
+3. **Declare the server's architecture.**
+   ```bash
+   printf 'OSRM_PLATFORM=linux/amd64\n' > .env
+   ```
+   The OSRM image defaults to `linux/arm64` because the development machines are
+   Apple Silicon. On an x86 server, skipping this means the routing container
+   runs under emulation, loads its 1.9 GB graph several times slower and never
+   passes its healthcheck. Both `docker-compose.yml` and `scripts/setup_osrm.sh`
+   read this one variable, so it only needs saying once.
+
+4. **Build the road graph and load the database (one-time).**
    ```bash
    chmod +x scripts/setup_osrm.sh scripts/setup_database.sh
+
+   # downloads a ~210 MB OSM extract, clips it to Haryana, compiles the graph
    ./scripts/setup_osrm.sh
-   OSRM_BASE=http://127.0.0.1:5000 OSRM_SLEEP=0 DATABASE_URL=postgresql://mapsr:mapsr@localhost:5433/mapsr ./scripts/setup_database.sh
-   ```
-   This is idempotent — safe to re-run; it skips any table that's already
-   loaded. Reach/scorecard recompute for ~35k accidents runs in the background;
-   monitor with `tail -f data/recompute.log`.
 
-3. **Bring up the backend and frontend.**
+   docker compose up -d db
+   DATABASE_URL=postgresql://mapsr:mapsr@localhost:5433/mapsr ./scripts/setup_database.sh
+   ```
+   The graph build wants ~8 GB of free RAM and takes 10–20 minutes; `osrm-data/`
+   is deliberately not in the repository because it is machine-specific build
+   output. Both scripts are idempotent — safe to re-run, they skip work already
+   done.
+
+   `setup_database.sh` no longer auto-launches the accident-reach recompute. That
+   artifact fed pages which no longer exist, and regenerating it costs one OSRM
+   request per accident across ~35k rows. If you genuinely need it back:
+   `TCGA_RECOMPUTE_REACH=1 ./scripts/setup_database.sh`.
+
+5. **Build the images and bring the stack up.** This is also the only step that
+   repeats on future deploys.
    ```bash
-   docker compose up -d backend frontend osrm
+   docker compose build
+   docker compose up -d
    ```
 
-4. **Point DNS.** `tcg.coers.in` → this server's IP, A record. nginx is
-   already configured with `server_name tcg.coers.in` in `nginx/nginx.conf`.
+6. **Point DNS** at the server's IP with an A record. No nginx edit is needed —
+   `server_name _` accepts any `Host`, so the same container works on a bare IP,
+   a hostname or behind a load balancer.
 
-5. **(Recommended) put TLS in front of it.** The frontend container only
-   serves plain HTTP on 80. For HTTPS, either put another reverse proxy /
-   load balancer in front that terminates TLS and forwards to this host's
-   port 80, or swap the nginx container for one running certbot. Either way,
-   the app already trusts `X-Forwarded-Proto`/`X-Forwarded-Host` (see
-   `ProxyFix` in `dashboard/app.py`), so it'll report the correct scheme/host
-   once you do.
+7. **(Recommended) put TLS in front of it.** The frontend container serves plain
+   HTTP on 80. Either terminate TLS at a reverse proxy / load balancer that
+   forwards to this host's port 80, or swap the nginx container for one running
+   certbot. The app already trusts `X-Forwarded-Proto` / `X-Forwarded-Host` (see
+   `ProxyFix` in `dashboard/app.py`), so it reports the correct scheme and host
+   once that is in place.
 
 No API base URL needs changing anywhere in the frontend JS — every request
-already uses a relative path (`/api/...`), so the same code works at
-`tcg.coers.in` with zero edits. What *did* need changing for hosting behind
-a domain: the app now trusts proxy headers (`ProxyFix`), gunicorn/nginx
-timeouts are raised to match the app's genuinely slow first-load operations
-(grid/road analyses can take up to ~1-2 minutes per district), and debug
-mode is off by default in the container (`FLASK_DEBUG=0`) — the Flask dev
-server used for local development is never used in production; gunicorn is.
+already uses a relative path (`/api/...`), so the same code works on any domain
+with zero edits. What *did* need changing for hosting behind a domain: the app
+trusts proxy headers (`ProxyFix`), gunicorn/nginx timeouts are raised to match
+the app's genuinely slow first-load operations (grid/road analyses can take up
+to ~1-2 minutes per district), and debug mode is off by default in the container
+(`FLASK_DEBUG=0`) — the Flask dev server is never used in production; gunicorn is.
 
 ## Environment variables
 
 | Variable | Used by | Default | Notes |
 |---|---|---|---|
 | `DATABASE_URL` | `db.py`, `reach_pipeline.py`, `road_grid_generator.py` | `postgresql://mapsr:mapsr@localhost:5433/mapsr` | Set to `postgresql://mapsr:mapsr@db:5432/mapsr` inside docker-compose (container-to-container hostname) |
-| `OSRM_BASE` | `reach_pipeline.py`, `grid_reach.py`, measure API | `http://127.0.0.1:5000` when using `./start.sh` | Set to `http://osrm:5000` in the production backend container |
-| `OSRM_SLEEP` | `reach_pipeline.py`, `grid_reach.py` | `0` with self-hosted OSRM | Seconds between OSRM requests during precompute; use `0.1` only for the public demo server |
+| `OSRM_BASE` | `grid_ambulance.py`, `ambulance_v2.py`, the precompute scripts, measure API | `http://127.0.0.1:5000` when using `./start.sh` | Set to `http://osrm:5000` in the production backend container |
+| `OSRM_SLEEP` | `reach_pipeline.py`, the precompute scripts | `0` with self-hosted OSRM | Seconds between OSRM requests during precompute; use `0.1` only for the public demo server |
+| `OSRM_PLATFORM` | `docker-compose.yml`, `docker-compose.dev.yml`, `scripts/setup_osrm.sh` | `linux/arm64` | **Set to `linux/amd64` on an Intel/AMD server.** One variable drives both the graph build and the running container |
+| `TCGA_RECOMPUTE_REACH` | `scripts/setup_database.sh` | unset (skip) | Set to `1` to regenerate the legacy accident-reach artifacts; nothing in the current app reads them |
 | `PORT` | `app.py` (`__main__` only) | `5050` | Only affects the local dev server; the container always binds gunicorn to 5050 |
 | `FLASK_DEBUG` | `app.py` (`__main__` only) | `1` locally, `0` in the container | Never affects the gunicorn/production path |
 
