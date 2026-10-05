@@ -2957,6 +2957,12 @@ def _polyline_for_pair(
         return poly
     if glat is None or glon is None or hlat is None or hlon is None:
         return None
+    # The live OSRM server holds Haryana's road graph only. For any other
+    # region a live call would snap both ends onto Haryana roads and return a
+    # nonsense route, so other regions rely on their precomputed route file
+    # (scripts/precompute_region_routes.py), which covers every pair.
+    if regions.current_id() != "haryana":
+        return None
     ck = f"{year}:{grid_id}-{s_no}"
     hit = _live_polyline_cache.get(ck)
     if hit is not None:

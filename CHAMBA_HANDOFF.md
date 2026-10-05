@@ -144,3 +144,17 @@ cross-checks each file against the on-screen numbers (out/in counts, district
 sums, grid counts, hospital-grid pairs, ZIP parts vs single CSV), checks no
 file contains another state's districts, and that Haryana-only exports refuse
 for Himachal. Output goes to `export_check/` (gitignored).
+
+## Road routes on the map (grid <-> hospital)
+
+Production's live OSRM holds Haryana's road graph only, so Chamba routes are
+precomputed for EVERY grid x hospital pair (64 x 13 = 832) into
+`data/analytics/grid_routes_himachal_chamba_2025.json` and served from that
+file; outside Haryana the app never makes a live OSRM call (it would snap onto
+Haryana roads). Rebuild with the Chamba OSRM running:
+
+```
+bash scripts/setup_osrm_chamba.sh
+OSRM_BASE=http://127.0.0.1:5001 python3 scripts/precompute_region_routes.py --year 2025 --region himachal_chamba
+docker rm -f osrm-chamba
+```

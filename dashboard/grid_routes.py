@@ -36,30 +36,43 @@ import os
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
 ANALYTICS_DIR = os.path.join(DATA_DIR, "analytics")
 
-_cache: dict[str, tuple[float, dict]] = {}
+_cache: dict[tuple, tuple[float, dict]] = {}
 
 
-def routes_path(year: str = "2025") -> str:
-    return os.path.join(ANALYTICS_DIR, f"grid_routes_{year}.json")
+def _rid(region_id: str | None = None) -> str:
+    import regions  # noqa: PLC0415
+
+    return regions._norm(region_id) if region_id else regions.current_id()
 
 
-def available(year: str = "2025") -> bool:
-    return os.path.exists(routes_path(year))
+def routes_path(year: str = "2025", region_id: str | None = None) -> str:
+    """Per-region route file. Haryana keeps grid_routes_<year>.json; another
+    region (e.g. Chamba) uses grid_routes_<suffix>_<year>.json, built by
+    scripts/precompute_region_routes.py against that region's own OSRM graph."""
+    import regions  # noqa: PLC0415
+
+    suffix = regions.get(_rid(region_id))["artifact_suffix"]
+    return os.path.join(ANALYTICS_DIR, f"grid_routes{suffix}_{year}.json")
 
 
-def load_routes(year: str = "2025") -> dict:
+def available(year: str = "2025", region_id: str | None = None) -> bool:
+    return os.path.exists(routes_path(year, region_id))
+
+
+def load_routes(year: str = "2025", region_id: str | None = None) -> dict:
     """Return {"<grid_id>-<s_no>": "<encoded polyline>"}; {} when not built."""
-    path = routes_path(year)
+    rid = _rid(region_id)
+    path = routes_path(year, rid)
     if not os.path.exists(path):
         return {}
     mtime = os.path.getmtime(path)
-    hit = _cache.get(year)
+    hit = _cache.get((rid, year))
     if hit and hit[0] == mtime:
         return hit[1]
     with open(path) as fh:
         payload = json.load(fh)
     routes = payload.get("routes") or {}
-    _cache[year] = (mtime, routes)
+    _cache[(rid, year)] = (mtime, routes)
     return routes
 
 
@@ -73,7 +86,7 @@ def route_for(year: str, grid_id, s_no) -> str | None:
 
 
 def stats(year: str = "2025") -> dict:
-    path = routes_path(year)
+    path = routes_path(year)  # current request's region
     if not os.path.exists(path):
         return {"available": False, "count": 0, "path": path}
     with open(path) as fh:
