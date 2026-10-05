@@ -1128,17 +1128,20 @@ def _normalize_radii(radii) -> dict[str, float]:
 # artifact, which is why a facility further out still reads as "none".
 LEVEL_INDEX_MAX_KM = 60.0
 
-_level_nearest_cache: dict[str, tuple[tuple, dict]] = {}
+_level_nearest_cache: dict[tuple, tuple[tuple, dict]] = {}
 
 
 def _nearest_by_level(year: str) -> dict[int, dict[str, dict]]:
     """grid_index -> {level: nearest facility record}, exact within 60 km."""
+    # Region is part of the key: Chamba and Haryana share years, and a
+    # year-only key would hand one region the other's cached answer.
+    rid = regions.current_id()
     stamp = (
-        os.path.getmtime(hospital_grid_path(year)),
-        os.path.getmtime(artifact_path(year)),
-        _tpl_mtime(),
+        os.path.getmtime(hospital_grid_path(year, rid)),
+        os.path.getmtime(artifact_path(year, rid)),
+        _tpl_mtime(rid),
     )
-    hit = _level_nearest_cache.get(year)
+    hit = _level_nearest_cache.get((rid, year))
     if hit and hit[0] == stamp:
         return hit[1]
 
@@ -1185,7 +1188,7 @@ def _nearest_by_level(year: str) -> dict[int, dict[str, dict]]:
                     "drive_min": None,
                 }
 
-    _level_nearest_cache[year] = (stamp, best)
+    _level_nearest_cache[(rid, year)] = (stamp, best)
     return best
 
 
@@ -2753,8 +2756,9 @@ def _verdict_index(year: str, radii: dict[str, float], include_ep: bool = True) 
     dropped so nothing downstream — a popup, an export — can surface EP data
     while the toggle is off.
     """
-    ck = (year, _radii_key(radii), include_ep)
-    stamp = (os.path.getmtime(artifact_path(year)), _tpl_mtime())
+    rid = regions.current_id()
+    ck = (rid, year, _radii_key(radii), include_ep)
+    stamp = (os.path.getmtime(artifact_path(year, rid)), _tpl_mtime(rid))
     hit = _verdict_cache.get(ck)
     if hit and hit[0] == stamp:
         return hit[1]
