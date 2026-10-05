@@ -40,6 +40,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "dashboard"))
 
 import network_analytics as na  # noqa: E402
+import regions  # noqa: E402
 
 OSRM_BASE = os.environ.get("OSRM_BASE", "http://127.0.0.1:5000").rstrip("/")
 REQUEST_TIMEOUT = 180
@@ -81,7 +82,12 @@ def preflight() -> None:
     import grid_ambulance  # noqa: PLC0415 — only needed on the OSRM path
 
     grid_ambulance.OSRM_BASE = OSRM_BASE
-    grid_ambulance.preflight()
+    if regions.current_id() == "haryana":
+        grid_ambulance.preflight()  # unchanged Haryana probe
+        return
+    # Probe inside the current region (its graph may not cover Haryana).
+    lat_min, lat_max, lon_min, lon_max = regions.current()["bbox"]
+    grid_ambulance.preflight(probe=((lon_min + lon_max) / 2, (lat_min + lat_max) / 2))
 
 
 def probe_batch_size(grids: list[dict], hospitals: list[dict]) -> int:
@@ -102,6 +108,13 @@ def probe_batch_size(grids: list[dict], hospitals: list[dict]) -> int:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--year", default="2025")
+    ap.add_argument(
+        "--region",
+        default="haryana",
+        help="Data region to precompute (regions.py id), e.g. haryana or "
+        "himachal_chamba. Selects which grids/hospitals load and which "
+        "artifact filenames are written. Default: haryana (unchanged).",
+    )
     ap.add_argument("--radius-km", type=float, default=na.PROXIMITY_KM)
     ap.add_argument("--keep-per-type", type=int, default=na.KEEP_PER_TYPE)
     ap.add_argument(
@@ -113,6 +126,13 @@ def main() -> int:
         "banner — never present offline output as road-route analysis.",
     )
     args = ap.parse_args()
+
+    # Select the data region for this whole run. load_grids / load_hospitals /
+    # artifact_path / hospital_grid_path all consult the current region, so
+    # this one call routes the entire precompute at the right dataset and the
+    # right output filenames.
+    rid = regions.set_current(args.region)
+    print(f"==> Region: {rid} ({regions.current()['state_name']})")
 
     if args.offline:
         print("==> OFFLINE MODE — straight-line distances, NOT road routes")
@@ -300,7 +320,7 @@ def main() -> int:
             "uncovered_grids": len(uncovered),
         },
     }
-    hg_path = os.path.join(na.ANALYTICS_DIR, f"hospital_grid_{args.year}.json")
+    hg_path = na.hospital_grid_path(args.year)
     tmp = hg_path + ".tmp"
     with open(tmp, "w") as f:
         json.dump(hg_payload, f)

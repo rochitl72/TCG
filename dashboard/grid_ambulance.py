@@ -88,7 +88,7 @@ class OSRMUnavailable(RuntimeError):
     """OSRM is not reachable — raised with actionable guidance, not a traceback."""
 
 
-def preflight(timeout: int = 5, wait_s: int = 90) -> None:
+def preflight(timeout: int = 5, wait_s: int = 90, probe: tuple[float, float] = (76.78, 29.95)) -> None:
     """Confirm OSRM is up and answering, waiting for it to finish loading.
 
     Two distinct failures, which need opposite advice:
@@ -106,7 +106,13 @@ def preflight(timeout: int = 5, wait_s: int = 90) -> None:
     """
     import time as _time
 
-    url = f"{OSRM_BASE}/route/v1/driving/76.78,29.95;76.79,29.96?overview=false"
+    # probe = (lon, lat) of a point inside the routing graph. Defaults to the
+    # original Haryana point; other regions pass a point inside their own bbox.
+    plon, plat = probe
+    url = (
+        f"{OSRM_BASE}/route/v1/driving/"
+        f"{plon},{plat};{plon + 0.01},{plat + 0.01}?overview=false"
+    )
     deadline = _time.time() + wait_s
     announced = False
     last: Exception | None = None

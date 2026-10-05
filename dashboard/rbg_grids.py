@@ -20,6 +20,7 @@ from typing import Any
 from shapely.geometry import Point, shape
 
 from db import districts_geojson
+import regions
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA_DIR = os.path.join(ROOT, "data")
@@ -28,13 +29,16 @@ CACHE_DIR = os.path.join(DATA_DIR, "rbg_grids")
 RBG_GRID_URL = os.environ.get(
     "RBG_GRID_URL", "https://rbg.iitm.ac.in/one_pager/acc_grid_data"
 )
-RBG_STATE_CODE = os.environ.get("RBG_STATE_CODE", "13")  # Haryana
+RBG_STATE_CODE = os.environ.get("RBG_STATE_CODE", "13")  # Haryana (default/fallback)
 DEFAULT_YEAR = "2025"
 AVAILABLE_YEARS = ("2023", "2024", "2025")
 
 
-def _cache_path(year: str) -> str:
-    return os.path.join(CACHE_DIR, f"haryana_{year}.json")
+def _cache_path(year: str, region_id: str | None = None) -> str:
+    """Per-region grid cache. Haryana keeps the original haryana_<year>.json
+    name so nothing about the live Haryana deployment changes on disk."""
+    r = regions.get(region_id) if region_id else regions.current()
+    return os.path.join(CACHE_DIR, f"{r['grid_cache_basename']}_{year}.json")
 
 
 def _normalize_year(year: str | None) -> str:
@@ -94,7 +98,10 @@ def _fetch_raw(year: str) -> list[dict]:
         method="POST",
     )
     try:
-        with urllib.request.urlopen(req, timeout=180) as resp:
+        # 180 s suits the one-off setup fetch. On a server that cannot reach the feed
+        # a request-time call would otherwise pin a gunicorn worker until it is
+        # killed; set RBG_FETCH_TIMEOUT=10 there to fail fast instead.
+        with urllib.request.urlopen(req, timeout=float(os.environ.get("RBG_FETCH_TIMEOUT", "180"))) as resp:
             data = json.loads(resp.read())
     except urllib.error.HTTPError as exc:
         raise RuntimeError(f"RBG grid API HTTP {exc.code}: {exc.reason}") from exc
@@ -167,14 +174,25 @@ def _normalize_feature(raw: dict, year: str, district: str) -> dict[str, Any] | 
     }
 
 
-def build_collection(year: str, force: bool = False) -> dict[str, Any]:
+def build_collection(year: str, force: bool = False, region_id: str | None = None) -> dict[str, Any]:
     year = _normalize_year(year)
+    rid = regions._norm(region_id) if region_id else regions.current_id()
     os.makedirs(CACHE_DIR, exist_ok=True)
-    path = _cache_path(year)
+    path = _cache_path(year, rid)
 
     if not force and os.path.exists(path):
         with open(path) as f:
             return json.load(f)
+
+    # Live fetch + polygon district-join is implemented for Haryana only. Other
+    # regions (e.g. Himachal/Chamba) ship a pre-built cache produced by their
+    # own build step; if it is missing we say so rather than silently fetching
+    # Haryana's whole-state feed under the wrong label.
+    if rid != "haryana":
+        raise FileNotFoundError(
+            f"Grid cache missing for region {rid!r}: {path}\n"
+            "Pre-built region caches are produced offline; restore this file."
+        )
 
     raw_features = _fetch_raw(year)
     index = _district_index()
@@ -247,10 +265,16 @@ def get_grids(
     year: str | None = None,
     district: str | None = None,
     force: bool = False,
+    region_id: str | None = None,
 ) -> dict[str, Any]:
-    """Return a FeatureCollection for the year, optionally filtered by district."""
+    """Return a FeatureCollection for the year, optionally filtered by district.
+
+    `region_id` defaults to the request-scoped current region (Haryana off the
+    web path), so existing call sites keep working unchanged.
+    """
     year = _normalize_year(year)
-    collection = build_collection(year, force=force)
+    rid = regions._norm(region_id) if region_id else regions.current_id()
+    collection = build_collection(year, force=force, region_id=rid)
     features = collection.get("features") or []
 
     if district:

@@ -4433,15 +4433,16 @@ function syncAmbDatasetChrome() {
   const note = $("amb-dataset-note");
   if (note) {
     note.innerHTML = isNew
-      ? `<b>142 ambulance sightings</b>, each stamped with one day and one time
-         period, road distances from OSRM. There are no vehicle types in this
+      ? `<b>Availability sample: 142 ambulance sightings</b> from the partner workbook, each
+         stamped with one day and one time period, road distances from OSRM. This
+         is a sample of when and where ambulances were seen, not the fleet. There are no vehicle types in this
          feed, so the ALS/BLS scope filter and the vehicle-type map rows do not
          apply and are hidden.
-         <br/><b>Not comparable with Old.</b> Old counts 569 vehicles treated as
+         <br/><b>Not comparable with the SQL fleet.</b> The SQL fleet counts 569 vehicles treated as
          always on station; this counts 142 point-in-time sightings. The higher
          gap figure here is mostly that difference, not a change on the ground.`
-      : `The fleet this tab was built on &mdash; <b>569 ambulances</b> with vehicle
-         types, unchanged. Deduplicated from 1,138 source rows, each of which
+      : `The fleet of record (geolocations SQL) &mdash; <b>569 ambulances</b> with vehicle
+         types. Deduplicated from 1,138 source rows, each of which
          appears exactly twice.`;
   }
   const exp = $("amb-export-note");
@@ -4721,9 +4722,18 @@ function wireEvents() {
     downloadExport(`/api/analytics/export/proximity-bundle.zip?${p}`);
   });
 
-  $("btn-export-gap-districts")?.addEventListener("click", () =>
-    downloadExport(`/api/analytics/export/gaps-districts.csv?${gapExportQuery()}`)
-  );
+  // Same query the "By district" chart was drawn from (level rule, or the
+  // facility-type segmentation when that view is active) — the old
+  // gapExportQuery() asked the legacy tier engine a different question.
+  $("btn-export-gap-districts")?.addEventListener("click", () => {
+    if (state.gapSegment === "type") {
+      const p = typeQuery();
+      p.set("segment", "type");
+      downloadExport(`/api/analytics/export/gaps-districts.csv?${p}`);
+    } else {
+      downloadExport(`/api/analytics/export/gaps-districts.csv?${levelQuery()}`);
+    }
+  });
   $("btn-export-gap-bundle")?.addEventListener("click", () => {
     const p = gapExportQuery();
     // Radii by L-name too: the bundle scopes each level with level_reach(),
@@ -5044,6 +5054,37 @@ async function init() {
       const sel = $(id);
       (m.districts || []).forEach((d) => sel.add(new Option(d, d)));
     });
+
+    // State selector (multi-state switch). Changing it reloads the page with
+    // the chosen state in the URL; apiUrl then carries it on every request and
+    // the whole page rebuilds from that region's meta. A reload is used
+    // deliberately — it guarantees every layer, filter and the map framing come
+    // up consistent with the new region instead of half-updated.
+    const stateSel = $("prox-state");
+    if (stateSel) {
+      (m.states && m.states.length ? m.states : [{ state: "Haryana" }]).forEach((s) =>
+        stateSel.add(new Option(s.state, s.state))
+      );
+      stateSel.value = m.state || "Haryana";
+      stateSel.addEventListener("change", (e) => {
+        const params = new URLSearchParams(location.search);
+        const v = e.target.value;
+        if (!v || v === "Haryana") params.delete("state");
+        else params.set("state", v);
+        const qs = params.toString();
+        location.search = qs ? "?" + qs : "";
+      });
+    }
+
+    // Open the map on the current region (centre of its bbox), so switching to
+    // Chamba lands on Chamba instead of staying over Haryana.
+    if (Array.isArray(m.map_center) && m.map_center.length === 2) {
+      try {
+        map.setView(m.map_center, m.map_zoom || 9);
+      } catch (e) {
+        /* map framing is best-effort */
+      }
+    }
 
     // Ships with meta, so the first district change zooms without a round trip.
     state.districtBounds = m.district_bounds || {};

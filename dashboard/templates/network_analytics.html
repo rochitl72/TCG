@@ -180,6 +180,13 @@
               <p class="panel-note" id="prox-level-note"></p>
             </div>
 
+            <label for="prox-state">State</label>
+            <select id="prox-state"></select>
+            <p class="panel-note" id="prox-state-note">
+              Switch state to load its data. <b>Haryana</b> shows all 22
+              districts; <b>Himachal Pradesh</b> currently covers <b>Chamba</b>.
+            </p>
+
             <label for="prox-district">District</label>
             <select id="prox-district"><option value="">All districts</option></select>
             <p class="panel-note" id="prox-district-note">
@@ -423,9 +430,9 @@
               <span>Split every table by district</span>
             </label>
             <p class="panel-note" id="prox-bundle-note">
-              On by default here: the hospital &rarr; grid table is ~1.48M rows for the
-              whole state and no spreadsheet opens that. Split, the largest piece is
-              about 46k rows.
+              On by default here: the hospital &rarr; grid table is ~539k rows for the
+              whole state (EP included) and is unwieldy in one sheet. Split, the largest
+              piece (Hisar) is about 59k rows.
             </p>
             <button type="button" class="btn-primary" id="btn-export-prox-bundle">
               Download everything on this tab &mdash; ZIP
@@ -809,10 +816,10 @@
             <label>Dataset</label>
             <div class="preset-row" id="amb-dataset">
               <button type="button" data-dataset="old" class="active">
-                Old<small>current fleet</small>
+                SQL fleet<small>569 vehicles (fleet of record)</small>
               </button>
               <button type="button" data-dataset="new">
-                New<small>filtered workbook</small>
+                Availability sample<small>142 sightings by day/time</small>
               </button>
             </div>
             <p class="panel-note" id="amb-dataset-note"></p>
@@ -1076,9 +1083,22 @@
        Defined here rather than in network_analytics.js because map_measure.js
        loads first and needs it too. */
     window.API_BASE_PATH = "{{ api_base_path }}";
+    // Multi-state: the selected state rides in the URL so a reload restores it
+    // before any fetch runs. Haryana is the default and is never appended, so
+    // Haryana request URLs are byte-for-byte what they always were.
+    try {
+      window.CURRENT_STATE = new URLSearchParams(location.search).get("state") || "Haryana";
+    } catch (e) {
+      window.CURRENT_STATE = "Haryana";
+    }
     window.apiUrl = function (path) {
       var base = (window.API_BASE_PATH || "").replace(/\/+$/, "");
-      return base && path.indexOf("/api/") === 0 ? base + path : path;
+      var url = base && path.indexOf("/api/") === 0 ? base + path : path;
+      var st = window.CURRENT_STATE;
+      if (st && st !== "Haryana" && url.indexOf("/api/") !== -1) {
+        url += (url.indexOf("?") === -1 ? "?" : "&") + "state=" + encodeURIComponent(st);
+      }
+      return url;
     };
   </script>
 

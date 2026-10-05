@@ -32,6 +32,7 @@ from typing import Any, Iterable
 import districts
 import rbg_grids
 import tpl as tpl_mod
+import regions
 
 DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data"))
 ANALYTICS_DIR = os.path.join(DATA_DIR, "analytics")
@@ -96,10 +97,16 @@ def haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
 # --------------------------------------------------------------------------
 # Inputs
 # --------------------------------------------------------------------------
-def load_grids(year: str = "2025") -> tuple[list[dict], dict]:
-    """Clean RBG grid cells for the year, plus a dropped-row report."""
-    collection = rbg_grids.get_grids(year=year)
-    lat_lo, lat_hi, lon_lo, lon_hi = HARYANA_BBOX
+def load_grids(year: str = "2025", region_id: str | None = None) -> tuple[list[dict], dict]:
+    """Clean RBG grid cells for the year, plus a dropped-row report.
+
+    `region_id` defaults to the request-scoped current region (Haryana off the
+    web path), so existing call sites keep working unchanged. The bounding box
+    and grid cache are the current region's.
+    """
+    rid = regions._norm(region_id) if region_id else regions.current_id()
+    collection = rbg_grids.get_grids(year=year, region_id=rid)
+    lat_lo, lat_hi, lon_lo, lon_hi = regions.get(rid)["bbox"]
     grids, dropped_blank, dropped_bbox = [], 0, 0
     seen: dict[Any, int] = {}       # grid_id -> index in `grids`
     duplicate_ids = 0
@@ -278,24 +285,33 @@ def load_bloodbanks() -> list[dict]:
 # The hospital table is small (1,208 rows) and changes only when the DB is
 # reloaded, but building it can mean parsing a 100 MB SQL dump. Cache it —
 # without this, every grid-detail click re-reads the file and the request hangs.
-_hospital_cache: list[dict] | None = None
+# Keyed by region id — Haryana and Himachal/Chamba are loaded from different
+# sources (Postgres vs a committed CSV) and must not share a cache slot.
+_hospital_cache: dict[str, list[dict]] = {}
 _hospital_cache_lock = __import__("threading").Lock()
 
 
 def invalidate_hospital_cache() -> None:
     global _hospital_cache
     with _hospital_cache_lock:
-        _hospital_cache = None
+        _hospital_cache = {}
 
 
-def load_hospitals() -> list[dict]:
-    """All hospitals with TPL score, tier and provenance attached (cached)."""
-    global _hospital_cache
+def load_hospitals(region_id: str | None = None) -> list[dict]:
+    """All hospitals with TPL score, tier and provenance attached (cached).
+
+    `region_id` defaults to the request-scoped current region (Haryana off the
+    web path). Haryana loads from Postgres `haryana_hosp` (+ SQL fallback) as
+    before; other regions load from the committed CSV named in regions.py.
+    """
+    rid = regions._norm(region_id) if region_id else regions.current_id()
     with _hospital_cache_lock:
-        if _hospital_cache is not None:
-            return _hospital_cache
-        _hospital_cache = _load_hospitals_uncached()
-        return _hospital_cache
+        cached = _hospital_cache.get(rid)
+        if cached is not None:
+            return cached
+        loaded = _load_hospitals_uncached(rid)
+        _hospital_cache[rid] = loaded
+        return loaded
 
 
 def _tpl_only_hospitals(known: set[str]) -> list[dict]:
@@ -326,7 +342,101 @@ def _tpl_only_hospitals(known: set[str]) -> list[dict]:
     return extra
 
 
-def _load_hospitals_uncached() -> list[dict]:
+def _relabel_private_by_coordinates(hospitals: list[dict]) -> None:
+    """Set each empanelled private hospital's district from its coordinates.
+
+    In the source SQL 445 of the 614 EP rows carry a district label that
+    disagrees with where their coordinates fall (often by 100+ km), so a
+    label-based district table contradicts the map. The map, reach and gap
+    numbers are all coordinate-based; this makes the district label agree.
+    Applies to EP rows only: for the public hospitals whose GPS is known-wrong
+    (Hisar and Rohtak DCH) the label is the correct field.
+
+    The original is kept in district_label_source. Rows whose coordinates are
+    shared by several EP hospitals are placeholder points and cannot place any
+    of them, so they keep their label and are flagged unverified.
+    """
+    from collections import Counter
+
+    ep = [h for h in hospitals if h.get("hosp_type") == PRIVATE_TYPE]
+    shared = Counter((round(h["latitude"], 6), round(h["longitude"], 6)) for h in ep)
+    for h in ep:
+        h["district_label_source"] = h["district_name"]
+        key = (round(h["latitude"], 6), round(h["longitude"], 6))
+        if shared[key] > 1:
+            h["district_basis"] = "label"
+            if h.get("coord_status", "ok") == "ok":
+                h["coord_status"] = "unverified"
+                h["coord_note"] = (
+                    f"Coordinates are shared by {shared[key]} unrelated hospitals "
+                    "in the source data (placeholder point). District kept as "
+                    "labelled; location pending verification."
+                )
+            continue
+        inside = districts.district_at(h["latitude"], h["longitude"])
+        if inside:
+            h["district_name"] = inside
+            h["district_basis"] = "coordinates"
+        else:
+            h["district_basis"] = "label"
+
+
+def _load_hospitals_from_csv(rel_path: str) -> list[dict]:
+    """Load a region's hospitals from a committed CSV (used for regions that
+    are not in the Postgres haryana_hosp table — e.g. Himachal/Chamba).
+
+    The CSV is self-contained: it carries hospital_name, hosp_type, lat/lon AND
+    the TPL fields (tpl_total, tpl_source, tier, hosp_level, level_source,
+    coord_status), so no DB and no separate hospital_tpl.csv join is needed.
+    """
+    path = os.path.join(DATA_DIR, rel_path)
+    hospitals: list[dict] = []
+    if not os.path.exists(path):
+        return hospitals
+    with open(path, encoding="utf-8-sig", newline="") as fh:
+        for r in csv.DictReader(fh):
+            try:
+                lat, lon = float(r["latitude"]), float(r["longitude"])
+            except (TypeError, ValueError, KeyError):
+                continue
+
+            def _num(v):
+                try:
+                    return float(v)
+                except (TypeError, ValueError):
+                    return None
+
+            h = {
+                "s_no": str(r.get("s_no", "")).lstrip("﻿").strip(),
+                "hospital_name": (r.get("hospital_name") or "").strip(),
+                "district_name": (r.get("district_name") or "").strip(),
+                "hosp_type": (r.get("hosp_type") or "").strip(),
+                "latitude": lat,
+                "longitude": lon,
+                "tpl_total": _num(r.get("tpl_total")),
+                "tpl_source": (r.get("tpl_source") or "unknown").strip(),
+                "tier": (r.get("tier") or "").strip(),
+                "hosp_level": (r.get("hosp_level") or "").strip(),
+                "level_source": (r.get("level_source") or "").strip(),
+                "coord_status": (r.get("coord_status") or "ok").strip(),
+                "coord_note": (r.get("coord_note") or "").strip(),
+            }
+            h["is_private"] = h["hosp_type"] == PRIVATE_TYPE
+            h["district_norm"] = districts.normalize(h["district_name"]) or h["district_name"].upper()
+            if not h.get("tier"):
+                h["tier"] = tpl_mod.tier_of(h)
+            hospitals.append(h)
+    return hospitals
+
+
+def _load_hospitals_uncached(region_id: str | None = None) -> list[dict]:
+    rid = regions._norm(region_id) if region_id else regions.current_id()
+    source = regions.get(rid)["hospital_source"]
+
+    # Non-DB regions ship a self-contained CSV with TPL baked in.
+    if source.startswith("csv:"):
+        return _load_hospitals_from_csv(source[len("csv:"):])
+
     try:
         from db import fetch_all
 
@@ -364,6 +474,7 @@ def _load_hospitals_uncached() -> list[dict]:
     hospitals.extend(_tpl_only_hospitals({h["s_no"] for h in hospitals}))
 
     tpl_mod.attach(hospitals)
+    _relabel_private_by_coordinates(hospitals)
     for h in hospitals:
         h["is_private"] = h["hosp_type"] == PRIVATE_TYPE
         # haryana_hosp holds 44 spellings for 22 districts (private rows are
@@ -379,17 +490,20 @@ def _load_hospitals_uncached() -> list[dict]:
 # --------------------------------------------------------------------------
 # Cached proximity artifact
 # --------------------------------------------------------------------------
-def artifact_path(year: str) -> str:
-    return os.path.join(ANALYTICS_DIR, f"grid_hospital_{year}.json")
+def artifact_path(year: str, region_id: str | None = None) -> str:
+    rid = regions._norm(region_id) if region_id else regions.current_id()
+    suffix = regions.get(rid)["artifact_suffix"]
+    return os.path.join(ANALYTICS_DIR, f"grid_hospital{suffix}_{year}.json")
 
 
 # The artifact is ~18 MB of JSON. Parsing it per request would dominate every
 # response, so keep it in memory and reload only when the file changes on disk.
-_proximity_cache: dict[str, tuple[float, dict]] = {}
+_proximity_cache: dict[tuple, tuple[float, dict]] = {}
 
 
-def load_proximity(year: str = "2025") -> dict:
-    path = artifact_path(year)
+def load_proximity(year: str = "2025", region_id: str | None = None) -> dict:
+    rid = regions._norm(region_id) if region_id else regions.current_id()
+    path = artifact_path(year, rid)
     if not os.path.exists(path):
         raise FileNotFoundError(
             f"Proximity cache missing: {path}\n"
@@ -401,34 +515,67 @@ def load_proximity(year: str = "2025") -> dict:
     # cache key covers BOTH files and the facts are re-merged on load.
     # Without this, editing the level mapping would silently do nothing until
     # someone re-ran an hour-long precompute.
-    mtime = (os.path.getmtime(path), _tpl_mtime())
-    hit = _proximity_cache.get(year)
+    mtime = (os.path.getmtime(path), _tpl_mtime(rid))
+    key = (rid, year)
+    hit = _proximity_cache.get(key)
     if hit and hit[0] == mtime:
         return hit[1]
     with open(path) as f:
         payload = json.load(f)
-    _merge_hospital_facts(payload)
-    _proximity_cache[year] = (mtime, payload)
+    _merge_hospital_facts(payload, rid)
+    _proximity_cache[key] = (mtime, payload)
     return payload
 
 
-def _tpl_mtime() -> float:
-    path = os.path.join(DATA_DIR, "hospital_tpl.csv")
+def region_tpl_summary(region_id: str | None = None) -> dict:
+    """TPL provenance/coverage badge for a CSV-sourced region (e.g. Chamba).
+
+    Mirrors tpl.summary()'s shape so the frontend badge renders identically,
+    but reads the region's own hospitals instead of Haryana's hospital_tpl.csv.
+    """
+    rid = regions._norm(region_id) if region_id else regions.current_id()
+    hosp = load_hospitals(rid)
+    from collections import Counter
+
+    src = Counter((h.get("tpl_source") or "unknown") for h in hosp)
+    tier = Counter((h.get("tier") or "") for h in hosp)
+    scores = [h["tpl_total"] for h in hosp if h.get("tpl_total") is not None]
+    src_file = regions.get(rid)["hospital_source"]
+    src_file = src_file.split("/")[-1] if "/" in src_file else src_file
+    return {
+        "available": bool(hosp),
+        "total": len(hosp),
+        "real": src.get("real", 0),
+        "estimated": src.get("estimated", 0),
+        "by_tier": {t: tier.get(t, 0) for t in ("Tertiary", "Secondary", "Primary")},
+        "mean_tpl": round(sum(scores) / len(scores), 2) if scores else None,
+        "source_file": src_file,
+    }
+
+
+def _tpl_mtime(region_id: str | None = None) -> float:
+    # Haryana's facts come from hospital_tpl.csv; a CSV-sourced region's facts
+    # live in its own hospital file, so key the cache on that file's mtime.
+    rid = regions._norm(region_id) if region_id else regions.current_id()
+    source = regions.get(rid)["hospital_source"]
+    if source.startswith("csv:"):
+        path = os.path.join(DATA_DIR, source[len("csv:"):])
+    else:
+        path = os.path.join(DATA_DIR, "hospital_tpl.csv")
     return os.path.getmtime(path) if os.path.exists(path) else 0.0
 
 
-def _merge_hospital_facts(payload: dict) -> None:
-    """Refresh the artifact's hospital dict from the current TPL table.
+def _merge_hospital_facts(payload: dict, region_id: str | None = None) -> None:
+    """Refresh the artifact's hospital dict from the current hospital table.
 
     Adds hosp_level (absent from older artifacts) and any hospital the matrix
-    predates. (Until 20 Aug 2026 this was mainly the six mocked MCH rows,
-    merged in by a now-retired scripts/add_mch_distances.py — real hospitals
-    added since then go through the normal precompute like everything else.)
+    predates. Region-aware: a Chamba artifact re-merges Chamba's hospitals, not
+    Haryana's, so levels/TPL stay consistent with the region actually loaded.
     """
     hospitals = payload.get("hospitals")
     if not isinstance(hospitals, dict):
         return
-    for h in load_hospitals():
+    for h in load_hospitals(region_id):
         cur = hospitals.get(h["s_no"])
         fresh = {
             "hospital_name": h["hospital_name"],
@@ -476,31 +623,35 @@ def _candidate_filter(
 # it serves within 60 km". Built by the same OSRM pass but stored untruncated
 # and indexed by hospital, because the grid-centric artifact keeps only the
 # nearest N per type per grid and therefore loses most pairs.
-_hospital_grid_cache: dict[str, tuple[float, dict]] = {}
+_hospital_grid_cache: dict[tuple, tuple[float, dict]] = {}
 
 
-def hospital_grid_path(year: str) -> str:
-    return os.path.join(ANALYTICS_DIR, f"hospital_grid_{year}.json")
+def hospital_grid_path(year: str, region_id: str | None = None) -> str:
+    rid = regions._norm(region_id) if region_id else regions.current_id()
+    suffix = regions.get(rid)["artifact_suffix"]
+    return os.path.join(ANALYTICS_DIR, f"hospital_grid{suffix}_{year}.json")
 
 
-def load_hospital_grid(year: str = "2025") -> dict:
-    path = hospital_grid_path(year)
+def load_hospital_grid(year: str = "2025", region_id: str | None = None) -> dict:
+    rid = regions._norm(region_id) if region_id else regions.current_id()
+    path = hospital_grid_path(year, rid)
     if not os.path.exists(path):
         raise FileNotFoundError(
             f"Hospital-grid cache missing: {path}\n"
             "Run:  python3 scripts/precompute_network_analytics.py --year " + year
         )
     # Same reasoning as load_proximity: the artifact's hospital facts are
-    # frozen at matrix-build time, but levels change with hospital_tpl.csv.
+    # frozen at matrix-build time, but levels change with the hospital table.
     # Key on both files and re-merge on load.
-    mtime = (os.path.getmtime(path), _tpl_mtime())
-    hit = _hospital_grid_cache.get(year)
+    mtime = (os.path.getmtime(path), _tpl_mtime(rid))
+    key = (rid, year)
+    hit = _hospital_grid_cache.get(key)
     if hit and hit[0] == mtime:
         return hit[1]
     with open(path) as f:
         payload = json.load(f)
-    _merge_hospital_facts(payload)
-    _hospital_grid_cache[year] = (mtime, payload)
+    _merge_hospital_facts(payload, rid)
+    _hospital_grid_cache[key] = (mtime, payload)
     return payload
 
 
@@ -776,6 +927,8 @@ def hospital_grid_rows(
 # 40 km yields 2 grids, 20 km yields 41, 10 km yields 450. PHC density is the
 # binding constraint (median grid is 6.6 km from one).
 PUBLIC_TIER_BY_TYPE = {
+    "MCH": "Tertiary",
+    "SSH": "Tertiary",
     "DCH": "Tertiary",
     "CH_SDH": "Secondary",
     "CHC": "Secondary",
@@ -884,7 +1037,11 @@ LEVEL_NOTE = {
 # Flagged for the team lead rather than silently resolved.
 # None of these four types is an MCH or an SSH, which is exactly why L1 is
 # empty — the state simply operates no facility at that tier in this data.
-PUBLIC_LEVEL_TYPES = {"DCH", "CH_SDH", "CHC", "PHC"}
+# MCH (medical college) and SSH (super-speciality) are the spec's L1 types.
+# Haryana's data contains ZERO such public rows, so adding them here is a no-op
+# for Haryana; Himachal/Chamba HAS a public medical college, so its MCH row
+# must be recognised as a public L1 provider.
+PUBLIC_LEVEL_TYPES = {"DCH", "CH_SDH", "CHC", "PHC", "MCH", "SSH"}
 
 
 def eligible_at_level(h: dict, lv: str) -> bool:
@@ -1271,6 +1428,8 @@ def level_rows(payload: dict, which: str = "out_reach") -> list[dict]:
 # here (unlike the level pass, which is public-only) because "what changes if
 # we count empanelled private" is a question worth being able to ask.
 TYPE_RADII = {
+    "MCH": 60.0,
+    "SSH": 60.0,
     "DCH": 60.0,
     "CH_SDH": 30.0,
     "CHC": 20.0,
@@ -1530,6 +1689,29 @@ def district_bounds(year: str = "2025") -> dict:
     }
 
 
+def _tss_grids(year: str) -> list[dict]:
+    """Grids (district + severity_score) for TSS, without touching the network.
+
+    The proximity cache (data/analytics/grid_hospital_<year>.json) is committed
+    and carries exactly the cleaned 6,862-cell set with the same district labels
+    and severity the RBG feed gave — verified identical to load_grids() for
+    2025 (all 22 districts, cell counts and TSS sums). load_grids() itself needs
+    data/rbg_grids/haryana_<year>.json, which is gitignored: on a server without
+    it the call falls through to a live fetch of rbg.iitm.ac.in, hangs until the
+    worker is killed (~30 s) and surfaces as an HTTP 500. The live feed stays as
+    the fallback for years the cache does not cover.
+    """
+    try:
+        cached = load_proximity(year).get("grids") or []
+        if cached and all("district" in g and "severity_score" in g for g in cached[:5]):
+            return [{"district": g["district"],
+                     "severity_score": g.get("severity_score") or 0.0} for g in cached]
+    except FileNotFoundError:
+        pass
+    grids, _ = load_grids(year)
+    return grids
+
+
 def district_tss(year: str = "2025") -> dict:
     """TSS — Total Severity Score — per district.
 
@@ -1543,7 +1725,7 @@ def district_tss(year: str = "2025") -> dict:
     cells; Panchkula has 112 cells but a high severity per cell. Presenting the
     total alone would conflate "large" with "dangerous".
     """
-    grids, _ = load_grids(year)
+    grids = _tss_grids(year)
     agg: dict[str, dict] = {}
     for g in grids:
         d = agg.setdefault(

@@ -23,9 +23,23 @@ import grid_ambulance
 import network_analytics
 import rbg_live
 import reach_pipeline
+import regions
 import tpl
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
+
+
+@app.before_request
+def _select_region():
+    """Pick the data region for this request from the ?state query param.
+
+    The whole multi-state switch funnels through here: the data loaders in
+    network_analytics / rbg_grids default their region to regions.current(),
+    which this sets per request. No state (or Haryana) -> the original Haryana
+    behaviour, unchanged. The district query param still filters WITHIN the
+    region exactly as before.
+    """
+    regions.set_current(regions.resolve_from_state(request.args.get("state")))
 
 # Sits behind the nginx "frontend" container / any edge proxy in front of it
 # (docker-compose.yml, nginx/nginx.conf) when deployed at tcg.coers.in. Without
@@ -420,10 +434,42 @@ def network_analytics_view(sub: str | None = None):
 
 
 _DISTRICT_SHAPES: dict | None = None
+_REGION_DISTRICT_SHAPES: dict[str, dict] = {}
 
 
 @app.route("/api/districts/boundaries")
 def district_boundaries():
+    """District outlines for the current region.
+
+    Haryana keeps its original 22-feature path (below). A district-scoped
+    region such as Himachal/Chamba serves its own committed boundary file,
+    memoised per region.
+    """
+    rid = regions.current_id()
+    if rid != "haryana":
+        cached = _REGION_DISTRICT_SHAPES.get(rid)
+        if cached is None:
+            path = regions.boundary_path(rid)
+            if not os.path.exists(path):
+                return jsonify({"error": f"boundary file missing for {rid}", "features": []}), 404
+            with open(path, "r", encoding="utf-8") as fh:
+                raw = json.load(fh)
+            feats = []
+            for f in raw.get("features", []):
+                props = f.get("properties") or {}
+                name = (props.get("district") or props.get("DISTRICT") or "").strip()
+                if not name:
+                    continue
+                feats.append(
+                    {"type": "Feature", "properties": {"district": name}, "geometry": f.get("geometry")}
+                )
+            cached = {"type": "FeatureCollection", "features": feats}
+            _REGION_DISTRICT_SHAPES[rid] = cached
+        return jsonify(cached)
+    return _haryana_district_boundaries()
+
+
+def _haryana_district_boundaries():
     """Haryana district outlines, for highlighting the selected district.
 
     `data/districts.geojson` is the all-India admin boundary file — 840 features
@@ -439,7 +485,12 @@ def district_boundaries():
     """
     global _DISTRICT_SHAPES
     if _DISTRICT_SHAPES is None:
-        path = os.path.join(DATA_DIR, "districts.geojson")
+        # haryana_districts.geojson is the 22 Haryana features cut out of the
+        # 11 MB all-India file. It is committed, so a fresh clone/deploy has it;
+        # districts.geojson is gitignored and never reaches a server.
+        path = os.path.join(DATA_DIR, "haryana_districts.geojson")
+        if not os.path.exists(path):
+            path = os.path.join(DATA_DIR, "districts.geojson")
         if not os.path.exists(path):
             return jsonify({"error": "districts.geojson not found.", "features": []}), 404
         with open(path, "r", encoding="utf-8") as fh:
@@ -468,9 +519,21 @@ def district_boundaries():
 def analytics_meta():
     """Everything the page needs to render its controls and data-quality badges."""
     year = request.args.get("year") or "2025"
+    rid = regions.current_id()
     payload = {
         "year": year,
-        "tpl": tpl.summary(),
+        # The state dropdown is built from this; districts for a whole-state
+        # region are filled from `districts` below as before.
+        "states": regions.list_states(),
+        "state": regions.current()["state_name"],
+        "region": rid,
+        # Where the map should open for this region (centre of its bbox).
+        "map_center": [
+            (regions.current()["bbox"][0] + regions.current()["bbox"][1]) / 2.0,
+            (regions.current()["bbox"][2] + regions.current()["bbox"][3]) / 2.0,
+        ],
+        "map_zoom": 8 if rid == "haryana" else 9,
+        "tpl": tpl.summary() if rid == "haryana" else network_analytics.region_tpl_summary(rid),
         "defaults": {
             "spec_km": network_analytics.SPEC_KM,
             "distance_km": network_analytics.DEFAULT_KM,
@@ -757,8 +820,8 @@ def analytics_export_proximity_bundle():
     """Everything on the Proximity tab, under the district filter in force.
 
     Includes the full hospital -> grid table (every hospital paired with every
-    grid inside its radius). Unsplit that is ~1.48 M rows and no spreadsheet
-    opens it, which is why split=district is the default here and not on the
+    grid inside its radius, at the per-level radii). Unsplit that is ~539 k
+    rows (2025, EP included) and no spreadsheet opens it comfortably, which is why split=district is the default here and not on the
     other bundles: for this table the split is what makes it usable at all.
     """
     year = request.args.get("year") or "2025"
@@ -888,21 +951,44 @@ def analytics_export_gaps_bundle():
 
 @app.route("/api/analytics/export/gaps-districts.csv")
 def analytics_export_gaps_districts():
-    year = request.args.get("year") or "2025"
-    district = request.args.get("district") or None
+    """Out-of-reach grids per district — the SAME numbers the "By district" chart draws.
+
+    This used to call strict_tier_gaps() (the legacy tier engine: a grid counts
+    only if ALL of Tertiary/Secondary/Primary are out of range, public only),
+    while the tab's headline and chart come from level_reach() (the L1/L2/L3
+    rule, complement mode by default). At the default radii the two disagreed
+    by three orders of magnitude — 4 grids in the CSV against 6,862 on screen —
+    so the download contradicted the panel it sits under. It now reads the same
+    payload the panel does, honouring mode / radii / include_ep / levels, or the
+    facility-type segmentation when the tab is in that view (segment=type).
+    """
     try:
-        strict = network_analytics.strict_tier_gaps(
-            year=year, thresholds=_tier_thresholds(), district=district
-        )
+        if (request.args.get("segment") or "level").lower() == "type":
+            payload = _type_payload()
+            basis = "facility-type segmentation"
+        else:
+            payload = _level_payload()
+            basis = "L1/L2/L3 level rule"
     except FileNotFoundError as exc:
         return jsonify({"error": str(exc), "needs_precompute": True}), 503
-    counts: dict[str, int] = {}
-    for g in strict.get("grids", []):
-        counts[g.get("district", "")] = counts.get(g.get("district", ""), 0) + 1
-    rows = [{"district": k, "grids_in_gap": v}
-            for k, v in sorted(counts.items(), key=lambda kv: -kv[1])]
-    return _csv_or_zip_response(rows, "gaps_by_district",
-                                {"year": year, "district": district or "all"})
+    rows = []
+    for d in payload.get("by_district", []):
+        out_n, in_n = int(d.get("out_reach", 0)), int(d.get("in_reach", 0))
+        tot = out_n + in_n
+        rows.append({
+            "district": d.get("district", ""),
+            "out_of_reach_grids": out_n,
+            "in_reach_grids": in_n,
+            "total_grids": tot,
+            "pct_out_of_reach": round(100.0 * out_n / tot, 1) if tot else 0.0,
+        })
+    rows.sort(key=lambda r: (-r["out_of_reach_grids"], r["district"]))
+    return _csv_or_zip_response(
+        rows, "gaps_by_district",
+        {"year": payload.get("year", ""), "rule": basis,
+         "mode": payload.get("mode", ""),
+         "district": request.args.get("district") or "all"},
+    )
 
 
 @app.route("/api/analytics/export/tier-gaps.csv")
@@ -1589,7 +1675,7 @@ def analytics_ambulance_positions():
     # well as relocations — GURGAON -> GURUGRAM and MEWAT -> NUH are the same
     # place under two names, and 136 of its 136 "relabelled" rows are mostly
     # that. Only a row whose NORMALISED label still disagrees with where it
-    # sits is a real fault worth putting in front of a reader, and there are 31
+    # sits is a real fault worth putting in front of a reader, and there are 29
     # of those. Anything else would make the popup shout "recorded as GURGAON"
     # at 31 Gurugram ambulances.
     for a in fleet:
@@ -1794,9 +1880,22 @@ def _build_grid_stats() -> dict:
     HASH = 0.02
     index: dict[tuple[int, int], list] = defaultdict(list)
     for f in grids:
-        ring = f["geometry"]["coordinates"][0]
-        xs = [c[0] for c in ring]
-        ys = [c[1] for c in ring]
+        # Polygon -> coordinates[ring][pt]; MultiPolygon -> [poly][ring][pt].
+        # Taking coordinates[0] as "the ring" is only right for Polygon: on the
+        # 15 MultiPolygon cells (some of the highest-severity ones) it hands back
+        # a list of rings, c[0] is then a list, and min() raises TypeError —
+        # which made EVERY grid's statistics popup fail, since the join is built
+        # once for all cells. Flatten to points first so both shapes work.
+        def _pts(node):
+            if node and isinstance(node[0], (int, float)):
+                yield node
+            else:
+                for child in node:
+                    yield from _pts(child)
+
+        pts = list(_pts(f["geometry"]["coordinates"]))
+        xs = [c[0] for c in pts]
+        ys = [c[1] for c in pts]
         box = (str(f["properties"]["grid_id"]), min(xs), max(xs), min(ys), max(ys))
         for gx in range(int(box[1] / HASH), int(box[2] / HASH) + 1):
             for gy in range(int(box[3] / HASH), int(box[4] / HASH) + 1):
@@ -1873,7 +1972,18 @@ def analytics_grid_stats(grid_id: str):
     one; ours defaults to all so the popup is never mysteriously empty.
     """
     year = (request.args.get("year") or "all").strip()
-    stats = _grid_stats()
+    try:
+        stats = _grid_stats()
+    except (FileNotFoundError, OSError) as exc:
+        # The stats join needs data/rbg_grids/haryana_2025.json AND the accident
+        # CSV under latest data/. Both are deploy-time files; if either is
+        # missing the honest answer is a 503 the popup can show, not a 500.
+        return jsonify({
+            "error": "Accident statistics are unavailable: "
+                     f"{os.path.basename(getattr(exc, 'filename', '') or str(exc))} "
+                     "is not present on this server.",
+            "grid_id": grid_id,
+        }), 503
     cell = stats["cells"].get(str(grid_id))
 
     if not cell:
@@ -2198,7 +2308,7 @@ def _stamp(rows: list[dict], meta: dict) -> list[dict]:
 def _amb_v2_meta(p: dict) -> dict:
     """Filter provenance stamped into every v2 export."""
     return {
-        "dataset": "v2 (partner filtered workbook)",
+        "dataset": "availability sample (partner workbook, 142 sightings)",
         "year": p["year"],
         "distance_mode": p["mode"],
         "threshold_km": p["threshold_km"],
@@ -2234,7 +2344,7 @@ def analytics_export_ambulance_v2_stations():
     except FileNotFoundError as exc:
         return jsonify({"error": str(exc)}), 503
     meta = {
-        "dataset": "v2 (partner filtered workbook)",
+        "dataset": "availability sample (partner workbook, 142 sightings)",
         "days": ", ".join(a["days"] or []) or "all",
         "periods": ", ".join(a["periods"] or []) or "all",
         "district": a["district"] or "all",
@@ -2304,7 +2414,7 @@ def analytics_export_ambulance_bundle():
     except FileNotFoundError as exc:
         return jsonify({"error": str(exc)}), 503
     meta = {
-        "dataset": "old (current fleet)",
+        "dataset": "SQL fleet (569 vehicles)",
         "threshold_km": str(payload["threshold_km"]),
         "position_source": str(payload["source"]),
         "district": request.args.get("district") or "all",
