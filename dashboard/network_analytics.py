@@ -2169,7 +2169,10 @@ def build_hospital_grid_bundle(
 
 def _bundle_readme(payload: dict, manifest: list[dict], split_by: str, top: int | None) -> str:
     largest = max(manifest, key=lambda m: m["rows"]) if manifest else {"file": "-", "rows": 0}
-    return f"""HOSPITAL -> GRID COVERAGE, HARYANA {payload.get('year')}
+    region_label = str(regions.current().get("state_name", "Haryana")).upper()
+    if regions.current_id() != "haryana":
+        region_label += " (" + ", ".join(sorted(regions.current().get("district_scope") or [])) + ")"
+    return f"""HOSPITAL -> GRID COVERAGE, {region_label} {payload.get('year')}
 Every accident grid within {payload.get('radius_km')} km BY ROAD of each hospital.
 
 WHY MULTIPLE FILES

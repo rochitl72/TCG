@@ -1284,13 +1284,23 @@ function viewFromUrl() {
    client, because a stale bookmark should still open the view. */
 function routeFromUrl() {
   const parts = window.location.pathname.split("/").filter(Boolean);
-  const view = PATH_TO_VIEW["/" + (parts[0] || "")] || "proximity";
+  let view = PATH_TO_VIEW["/" + (parts[0] || "")] || "proximity";
+  // Ambulance/blood-bank data exist for Haryana only; another state's
+  // /ambulances link lands on Proximity instead of an empty view.
+  if (view === "ambulance" && !haryanaOnlyDataAvailable()) view = "proximity";
   const sub = SUBS.includes(parts[1]) ? parts[1] : "controls";
   return { view, sub };
 }
 
+/* True only for Haryana: ambulance and blood-bank layers are Haryana-only
+   data, and the server refuses those endpoints for any other state. */
+function haryanaOnlyDataAvailable() {
+  return (window.CURRENT_STATE || "Haryana") === "Haryana";
+}
+
 function showTab(name, opts = {}) {
   if (!VIEWS[name]) name = "proximity";
+  if (name === "ambulance" && !haryanaOnlyDataAvailable()) name = "proximity";
   // Leaving a view: bank the section you were on, so coming back to Gaps puts
   // you back on the Gaps chart you were reading, not at its Controls.
   if (state.tab && state.tab !== name) captureSubMap(state.tab, currentSub(state.tab));
@@ -5060,8 +5070,11 @@ async function init() {
     // the whole page rebuilds from that region's meta. A reload is used
     // deliberately — it guarantees every layer, filter and the map framing come
     // up consistent with the new region instead of half-updated.
-    const stateSel = $("prox-state");
-    if (stateSel) {
+    // The same selector appears on the Proximity and Gaps controls; both drive
+    // the one ?state= param, so they always agree.
+    ["prox-state", "gap-state"].forEach((id) => {
+      const stateSel = $(id);
+      if (!stateSel) return;
       (m.states && m.states.length ? m.states : [{ state: "Haryana" }]).forEach((s) =>
         stateSel.add(new Option(s.state, s.state))
       );
@@ -5074,6 +5087,29 @@ async function init() {
         const qs = params.toString();
         location.search = qs ? "?" + qs : "";
       });
+    });
+
+    // Haryana-only layers (ambulance view, blood storage) are hidden for any
+    // other state rather than shown empty or, worse, with Haryana's rows.
+    if (!haryanaOnlyDataAvailable()) {
+      document
+        .querySelectorAll('.rail-btn[data-tab="ambulance"]')
+        .forEach((el) => (el.style.display = "none"));
+      ["btn-export-bs"].forEach((id) => {
+        if ($(id)) $(id).style.display = "none";
+      });
+      const bs = $("layer-bloodbanks");
+      if (bs) {
+        bs.checked = false;
+        const lbl = bs.closest("label");
+        if (lbl) lbl.style.display = "none";
+      }
+      const gapAmb = $("gap-layer-ambulances");
+      if (gapAmb) {
+        gapAmb.checked = false;
+        const lbl = gapAmb.closest("label");
+        if (lbl) lbl.style.display = "none";
+      }
     }
 
     // Open the map on the current region (centre of its bbox), so switching to

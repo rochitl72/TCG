@@ -48,6 +48,9 @@ REGIONS: dict[str, dict] = {
         "state_name": "Himachal Pradesh",
         "state_code": "12",
         "district_scope": {"CHAMBA"},   # only Chamba is onboarded for HP
+        # Partner (RBG) district codes for the live proxy; Haryana keeps
+        # rbg_live.DISTRICT_CODES. Chamba = 243 (confirmed via get_layer).
+        "rbg_district_codes": {"CHAMBA": "243"},
         # Chamba district envelope (a little margin around the real extent).
         "bbox": (32.00, 33.30, 75.40, 77.10),
         "grid_cache_basename": "himachal_chamba",   # data/rbg_grids/himachal_chamba_<year>.json

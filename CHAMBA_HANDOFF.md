@@ -111,3 +111,36 @@ docker rm -f osrm-chamba
 `osrm-data/` is gitignored; the server does not need the graph, only the two
 committed JSON artifacts. The precompute's OSRM health check now probes a point
 inside the region being computed (Haryana's probe point is unchanged).
+
+## State switch on Gaps, exports, and Haryana-only layers
+
+- The **State** dropdown now appears on both the Proximity and Gaps controls;
+  both drive the same `?state=` param, which survives switching views.
+- **Ambulance and blood-bank data are Haryana-only.** For any other state the
+  server refuses those endpoints (JSON and CSV/ZIP) with a clear 404 message
+  instead of returning Haryana rows, and the UI hides the Ambulance rail button,
+  the Blood storage layer and its CSV button.
+- The live partner proxy (`/api/rbg/<name>`) now uses the region's own partner
+  codes: Chamba = state 12, district 243 (Haryana unchanged: 13 + its table).
+  This fixes the Chamba district outline and live grid severity, which were
+  being asked of Haryana.
+- The offline grid-stats popup fallback returns "unavailable" for non-Haryana
+  cells instead of a false "No accidents recorded"; the live `grid_data` path
+  serves Chamba cells.
+- Chamba district names are upper-case (`CHAMBA`) everywhere, matching
+  Haryana's convention (`AMBALA`), so filters and exports never mix spellings.
+- The hospital->grid ZIP is named and titled for its region
+  (`hospital-grid-proximity-60km-himachal_chamba.zip`, README "HIMACHAL PRADESH (CHAMBA)").
+
+### Re-verify all downloads
+
+```
+python3 scripts/verify_exports.py                      # in-process
+python3 scripts/verify_exports.py --base http://127.0.0.1:5050   # against a running server
+```
+It requests every export button's URL (same query the JS builds) for Haryana
+(all + one district) and Himachal (all + Chamba), with EP on and off, and
+cross-checks each file against the on-screen numbers (out/in counts, district
+sums, grid counts, hospital-grid pairs, ZIP parts vs single CSV), checks no
+file contains another state's districts, and that Haryana-only exports refuse
+for Himachal. Output goes to `export_check/` (gitignored).

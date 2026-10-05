@@ -39,7 +39,40 @@ def _select_region():
     behaviour, unchanged. The district query param still filters WITHIN the
     region exactly as before.
     """
-    regions.set_current(regions.resolve_from_state(request.args.get("state")))
+    rid = regions.set_current(regions.resolve_from_state(request.args.get("state")))
+
+    # Ambulance and blood-bank data exist only for Haryana. Every one of those
+    # endpoints reads Haryana-only sources that are not region-aware, so for any
+    # other state they would silently return HARYANA rows. Refuse instead, with
+    # a message the UI shows as-is (getJSON / downloadExport surface `error`).
+    if rid != "haryana" and _is_haryana_only_path(request.path):
+        st = regions.current().get("state_name", "this state")
+        return (
+            jsonify(
+                {
+                    "error": f"Ambulance and blood-bank data are not available for {st}"
+                    " - only grids and hospitals are onboarded for it.",
+                    "region": rid,
+                    "count": 0,
+                }
+            ),
+            404,
+        )
+
+
+_HARYANA_ONLY_PREFIXES = (
+    "/api/analytics/ambulance",  # ambulances, ambulance-gaps, ambulance-v2/*, ambulance/<id>/grids
+    "/api/analytics/bloodbanks",
+    "/api/analytics/export/ambulance",  # ambulance-gaps.csv, ambulance-v2-*.csv, ambulance-bundle.zip
+    "/api/analytics/export/bloodbanks",
+)
+
+
+def _is_haryana_only_path(path: str) -> bool:
+    if path.startswith(_HARYANA_ONLY_PREFIXES):
+        return True
+    # /api/analytics/grid/<id>/ambulances
+    return path.startswith("/api/analytics/grid/") and path.endswith("/ambulances")
 
 # Sits behind the nginx "frontend" container / any edge proxy in front of it
 # (docker-compose.yml, nginx/nginx.conf) when deployed at tcg.coers.in. Without
@@ -1972,6 +2005,16 @@ def analytics_grid_stats(grid_id: str):
     one; ours defaults to all so the popup is never mysteriously empty.
     """
     year = (request.args.get("year") or "all").strip()
+    if regions.current_id() != "haryana":
+        # The offline stats join reads Haryana's grid cache and accident CSV
+        # only. Answering "no accidents" for another state's cell would be a
+        # false statement, so say it is unavailable; the popup's live partner
+        # path (grid_data) serves these cells.
+        return jsonify({
+            "error": "Offline accident statistics are stored for Haryana only - "
+                     "turn on live partner data to see this cell's crashes.",
+            "grid_id": grid_id,
+        }), 503
     try:
         stats = _grid_stats()
     except (FileNotFoundError, OSError) as exc:
@@ -2077,9 +2120,24 @@ def rbg_proxy(name: str):
     """
     body = request.get_json(silent=True) or {}
     district = body.pop("district_name", None)
-    if district is not None:
-        body["district"] = rbg_live.district_code(district)
-    body.setdefault("state", rbg_live.STATE_CODE)
+    if regions.current_id() == "haryana":
+        # Original Haryana path, unchanged.
+        if district is not None:
+            body["district"] = rbg_live.district_code(district)
+        body.setdefault("state", rbg_live.STATE_CODE)
+    else:
+        # Other regions: their own partner state code, and their own district
+        # codes. "All districts" means the onboarded district(s), never the
+        # whole partner state - otherwise a Chamba request would pull every
+        # Himachal district (and get_layer would outline the wrong one).
+        reg = regions.current()
+        codes = reg.get("rbg_district_codes") or {}
+        if district is not None:
+            code = codes.get(str(district).strip().upper(), "")
+            if not code and len(codes) == 1:
+                code = next(iter(codes.values()))
+            body["district"] = code
+        body.setdefault("state", reg.get("state_code", rbg_live.STATE_CODE))
 
     # get_layer is the odd one out: it spells the key `dist`, not `district`.
     # Their own file does this one line apart from the others.
@@ -2204,7 +2262,11 @@ def analytics_export_hospital_grids_bundle():
     except Exception as exc:  # noqa: BLE001 — surface failures to the UI
         return jsonify({"error": f"Bundle build failed: {exc}"}), 500
 
-    scope = request.args.get("district") or "haryana"
+    # Whole-region download is named after the region (unchanged "haryana"
+    # for Haryana), so a Chamba ZIP is never labelled haryana.
+    scope = request.args.get("district") or (
+        "haryana" if regions.current_id() == "haryana" else regions.current_id()
+    )
     return send_file(
         tmp_path,
         mimetype="application/zip",

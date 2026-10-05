@@ -73,3 +73,6 @@ hospital_grid_coverage_*.csv*
 /data/rbg_probe/
 /data/regrid_*.log
 /faridabad_ambulance_old_vs_new.csv
+
+# scripts/verify_exports.py output
+/export_check/
